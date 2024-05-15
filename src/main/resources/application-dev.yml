@@ -1,0 +1,5 @@
+#DATASOURCE
+USER_NAME: postgres
+PASSWORD: Luudinhkien_2003
+URL: jdbc:postgresql://localhost:5432/groupweb2
+DRIVER: org.postgresql.Driver

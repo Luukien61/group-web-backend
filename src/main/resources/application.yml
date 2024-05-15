@@ -1,0 +1,19 @@
+spring:
+    profiles:
+        active: dev
+    application:
+        name: groupweb2
+    datasource:
+        username: ${USER_NAME}
+        password: ${PASSWORD}
+        url: ${URL}
+        driver-class-name: ${DRIVER}
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+server:
+    port: 8088
+
