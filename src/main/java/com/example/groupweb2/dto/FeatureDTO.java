@@ -19,7 +19,7 @@ public class FeatureDTO extends BaseDTO {
     private List<MemoryDTO> memory;
     private String OS;
     private int battery;
-    //private Date madeTime;
+    private Date madeTime;
     private String chip;
 
 }

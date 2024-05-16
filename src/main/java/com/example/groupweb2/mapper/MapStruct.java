@@ -44,6 +44,7 @@ public interface MapStruct {
 
     List<ProductEntity> toListProductEntity(List<ProductDTO> items);
 
+
     //    List<DescriptionDTO> toListDescriptionDTO(List<DescriptionEntity> items);
 //    List<DescriptionEntity> toListDescriptionEntity(List<DescriptionDTO> items);
 //    List<FeatureDTO> toListFeatureDTO(List<FeatureEntity> items);

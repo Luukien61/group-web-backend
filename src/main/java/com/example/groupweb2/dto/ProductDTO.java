@@ -11,7 +11,8 @@ import java.util.List;
 @Setter
 @Builder
 @AllArgsConstructor
-public class ProductDTO extends BaseDTO {
+public class ProductDTO {
+    private String id ;
     private String name;
     private List<MemoryDTO> price;
     private FeatureDTO features;
@@ -19,5 +20,4 @@ public class ProductDTO extends BaseDTO {
     private List<ColorDTO> color;
     private List<String> imgs;
     private CategoryDTO category;
-
 }

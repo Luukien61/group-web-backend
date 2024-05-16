@@ -22,7 +22,7 @@ public class SecurityConfiguration {
                 .formLogin(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((request)-> request
                         .requestMatchers("/product").permitAll()
-                        .requestMatchers("/product/*").permitAll()
+                        .requestMatchers("/product/**").permitAll()
                 )
                 ;
         return http.build();

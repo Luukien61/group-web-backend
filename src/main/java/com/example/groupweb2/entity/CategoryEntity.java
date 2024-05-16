@@ -1,5 +1,6 @@
 package com.example.groupweb2.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -17,9 +18,8 @@ public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @Column(unique = true)
     String category;
-
     @OneToMany(mappedBy = "category")
+    @JsonBackReference
     List<ProductEntity> product;
 }

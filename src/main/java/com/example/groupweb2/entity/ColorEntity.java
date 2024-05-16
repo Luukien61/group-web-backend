@@ -1,5 +1,6 @@
 package com.example.groupweb2.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -19,5 +20,6 @@ public class ColorEntity {
     String link;
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @JsonBackReference
     ProductEntity product;
 }

@@ -1,5 +1,6 @@
 package com.example.groupweb2.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -21,9 +22,11 @@ public class MemoryEntity {
     long previousPrice;
     @ManyToOne
     @JoinColumn(name = "feature_id", referencedColumnName = "id")
+    @JsonBackReference
     FeatureEntity feature;
 
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @JsonBackReference
     ProductEntity product;
 }

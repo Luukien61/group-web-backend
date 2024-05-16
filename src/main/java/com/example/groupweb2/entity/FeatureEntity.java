@@ -1,5 +1,7 @@
 package com.example.groupweb2.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -30,12 +32,14 @@ public class FeatureEntity {
     String OS;
     int battery;
     String chip;
-   // Date madeTime;
+    Date madeTime;
     @OneToMany(mappedBy = "feature", fetch = FetchType.EAGER)
+    @JsonManagedReference
     List<MemoryEntity> memory;
 
     @OneToOne
     @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @JsonBackReference
     ProductEntity product;
 
 }
