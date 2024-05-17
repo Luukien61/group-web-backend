@@ -16,7 +16,7 @@ public class FeatureDTO extends BaseDTO {
     private String screen;
     private List<Integer> rearCamera;
     private List<Integer> frontCamera;
-    private List<MemoryDTO> memory;
+    private List<PriceDTO> memory;
     private String OS;
     private int battery;
     private Date madeTime;

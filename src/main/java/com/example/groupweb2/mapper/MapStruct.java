@@ -24,9 +24,9 @@ public interface MapStruct {
 
     FeatureEntity toFeatureEntity(FeatureDTO item);
 
-    MemoryDTO toMemoryDTO(MemoryEntity item);
+    PriceDTO toPriceDTO(PriceEntity item);
 
-    MemoryEntity toMemoryEntity(MemoryDTO item);
+    PriceEntity toPriceEntity(PriceDTO item);
 
     ProductDTO toProductDTO(ProductEntity item);
 
@@ -36,9 +36,9 @@ public interface MapStruct {
 
     List<ColorEntity> toListColorEntity(List<ColorDTO> items);
 
-    List<MemoryDTO> toListMemoryDTO(List<MemoryEntity> items);
+    List<PriceDTO> toListPriceDTO(List<PriceEntity> items);
 
-    List<MemoryEntity> toListMemoryEntity(List<MemoryDTO> items);
+    List<PriceEntity> toListPriceEntity(List<PriceDTO> items);
 
     List<ProductDTO> toListProductDTO(List<ProductEntity> items);
 

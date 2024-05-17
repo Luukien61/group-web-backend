@@ -14,7 +14,7 @@ import java.util.List;
 public class ProductDTO {
     private String id ;
     private String name;
-    private List<MemoryDTO> price;
+    private List<PriceDTO> price;
     private FeatureDTO features;
     private DescriptionDTO description;
     private List<ColorDTO> color;

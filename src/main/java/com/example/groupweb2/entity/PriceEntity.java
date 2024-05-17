@@ -12,7 +12,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Table(name = "Memory")
-public class MemoryEntity {
+public class PriceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;

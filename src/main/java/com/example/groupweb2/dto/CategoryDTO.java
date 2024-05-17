@@ -5,10 +5,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
+
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
-public class CategoryDTO extends BaseDTO {
-    private String category;
+public class CategoryDTO implements Serializable {
+    private Long id;
+    private String name;
 }

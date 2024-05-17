@@ -3,7 +3,7 @@ package com.example.groupweb2.service.implement;
 import com.example.groupweb2.dto.ProductDTO;
 import com.example.groupweb2.entity.CategoryEntity;
 import com.example.groupweb2.entity.ColorEntity;
-import com.example.groupweb2.entity.MemoryEntity;
+import com.example.groupweb2.entity.PriceEntity;
 import com.example.groupweb2.entity.ProductEntity;
 import com.example.groupweb2.mapper.MapStruct;
 import com.example.groupweb2.repository.ProductRepository;
@@ -62,7 +62,7 @@ public class ProductService implements IProductService {
         }
         description.setProduct(productEntity);
         feature.setProduct(productEntity);
-        for(MemoryEntity item : memories){
+        for(PriceEntity item : memories){
             item.setProduct(productEntity);
             item.setFeature(feature);
         }
@@ -70,7 +70,7 @@ public class ProductService implements IProductService {
 
     private void persistCategory(CategoryEntity category, ProductEntity product) {
         try{
-            var existCategory = categoryService.findCategoryByName(category.getCategory());
+            var existCategory = categoryService.findCategoryByName(category.getName());
             product.setCategory(existCategory);
         }catch (RuntimeException ignored){}
     }

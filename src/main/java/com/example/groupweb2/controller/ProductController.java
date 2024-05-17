@@ -18,8 +18,6 @@ public class ProductController {
 
     private IProductService productService;
 
-    private MapStruct mapper;
-
     @PostMapping()
     public ResponseEntity<?> insertNewProduct(@RequestBody ProductDTO item) {
         try {

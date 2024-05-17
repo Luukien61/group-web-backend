@@ -18,7 +18,7 @@ public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String category;
+    String name;
     @OneToMany(mappedBy = "category")
     @JsonBackReference
     List<ProductEntity> product;

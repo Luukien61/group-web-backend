@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Builder
 @AllArgsConstructor
-public class MemoryDTO extends BaseDTO {
+public class PriceDTO extends BaseDTO {
     int ram;
     int rom;
     long currentPrice;

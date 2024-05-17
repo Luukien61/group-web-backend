@@ -26,7 +26,7 @@ public class ProductEntity {
     List<String> imgs;
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference
-    List<MemoryEntity> price;
+    List<PriceEntity> price;
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference
     List<ColorEntity> color;

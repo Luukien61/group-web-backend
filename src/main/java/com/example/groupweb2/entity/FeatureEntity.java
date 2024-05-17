@@ -35,7 +35,7 @@ public class FeatureEntity {
     Date madeTime;
     @OneToMany(mappedBy = "feature", fetch = FetchType.EAGER)
     @JsonManagedReference
-    List<MemoryEntity> memory;
+    List<PriceEntity> memory;
 
     @OneToOne
     @JoinColumn(name = "product_id", referencedColumnName = "id")
