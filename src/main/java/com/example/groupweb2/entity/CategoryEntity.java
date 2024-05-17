@@ -19,7 +19,7 @@ public class CategoryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String name;
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category",cascade = CascadeType.MERGE)
     @JsonBackReference
     List<ProductEntity> product;
 }

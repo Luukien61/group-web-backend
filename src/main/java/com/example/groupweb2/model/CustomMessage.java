@@ -7,6 +7,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum CustomMessage {
     CREATED("Created"),
-    SUCCESS("Success");
+    UPDATED("Updated"),
+    SUCCESS("Success"),
+    DELETED("Deleted");
     private final String message;
 }

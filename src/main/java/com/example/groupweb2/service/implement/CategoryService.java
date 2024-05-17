@@ -13,11 +13,12 @@ import org.springframework.stereotype.Service;
 public class CategoryService implements ICategoryService {
     private CategoryRepository categoryRepository;
     private MapStruct mapper;
-
+    private final String NOT_EXIST = "The category does not exist";
+    private final String ALREDY_EXIST = "The category already exists";
     @Override
     public CategoryEntity findCategoryByName(String name) {
         return categoryRepository.findAllByNameIgnoreCase(name)
-                .orElseThrow(() -> new RuntimeException("The category does not exist"));
+                .orElseThrow(() -> new RuntimeException(NOT_EXIST));
     }
 
     @Override
@@ -26,7 +27,7 @@ public class CategoryService implements ICategoryService {
         if(exitsCategory.isEmpty()){
             categoryRepository.save(category);
         }else {
-            throw new RuntimeException("The category already exists");
+            throw new RuntimeException(ALREDY_EXIST);
         }
     }
 
@@ -37,5 +38,13 @@ public class CategoryService implements ICategoryService {
         category.setName(completeCategory);
         var categoryEntity = mapper.toCategoryEntity(category);
         saveNewCategory(categoryEntity);
+    }
+
+    @Override
+    public void updateCategory(CategoryDTO category, Long id) {
+        var existCategory = categoryRepository.findAllById(id)
+                .orElseThrow(()->new RuntimeException(NOT_EXIST));
+        existCategory.setName(category.getName());
+        categoryRepository.save(existCategory);
     }
 }

@@ -7,4 +7,5 @@ public interface ICategoryService {
     CategoryEntity findCategoryByName(String name);
     void saveNewCategory(CategoryEntity category);
     void saveNewCategory(CategoryDTO category);
+    void updateCategory(CategoryDTO category, Long id);
 }
