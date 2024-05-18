@@ -40,6 +40,7 @@ public class ProductService implements IProductService {
         if (existProduct.isEmpty()) {
             var productEntity = mapper.toProductEntity(item);
             persistChildren(productEntity);
+           // persistProducerAndCategory(productEntity.getProducer(),productEntity.getCategory(),productEntity);
             productRepository.save(productEntity);
         } else throw new RuntimeException(EXISTED);
 
@@ -69,6 +70,7 @@ public class ProductService implements IProductService {
         existProduct.setProducer(newProduct.getProducer());
         existProduct.setCategory(newProduct.getCategory());
         persistChildren(existProduct);
+        //persistProducerAndCategoryForUpdate(existProduct.getProducer(),existProduct.getCategory(),existProduct);
         productRepository.save(existProduct);
     }
 
@@ -120,7 +122,7 @@ public class ProductService implements IProductService {
             item.setProduct(productEntity);
             item.setFeature(feature);
         }
-        persistProducerAndCategory(producer,category,productEntity);
+        persistProducerAndCategoryForUpdate(producer,category,productEntity);
     }
 
     private void persistProducerAndCategory(ProducerEntity producer, CategoryEntity category, ProductEntity productEntity) {
@@ -160,5 +162,26 @@ public class ProductService implements IProductService {
         } catch (RuntimeException ignored) {
         }
     }
+
+    private void persistProducerAndCategoryForUpdate(ProducerEntity producer, CategoryEntity category, ProductEntity productEntity) {
+        try {
+
+            var existProducer = producerService.findProducerByNameOPtional(producer.getName())
+                    .orElse(producer);
+            var existCategory = categoryService.findCategoryByNameOptional(category.getName())
+                    .orElse(category);
+
+            var categoryProducers = existCategory.getProducers();
+            categoryProducers.add(existProducer);
+            existCategory.setProducers(categoryProducers);
+            var producerCategories = existProducer.getCategories();
+            producerCategories.add(existCategory);
+            existProducer.setCategories(producerCategories);
+            productEntity.setCategory(existCategory);
+            productEntity.setProducer(existProducer);
+        } catch (RuntimeException ignored) {
+        }
+    }
+
 
 }

@@ -6,6 +6,7 @@ import com.example.groupweb2.model.CustomMessage;
 import com.example.groupweb2.model.ResponseModel;
 import com.example.groupweb2.service.IProductService;
 import com.example.groupweb2.util.ControllerUtil;
+import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,11 +62,13 @@ public class ProductController {
     @GetMapping()
     public ResponseEntity<?> getProductsByProducer(
             @RequestParam("category") String category,
-            @RequestParam("producer") String producer){
+            @RequestParam("producer")@Nullable String producer){
+        List<ProductEntity> result;
         if(producer==null){
-            var result = productService.findProductsByCategory(category);
+            result = productService.findProductsByCategory(category);
+        }else {
+            result= productService.findAllProductByCategoryAndProducer(producer,category);
         }
-        var result= productService.findAllProductByCategoryAndProducer(producer,category);
         if (result.isEmpty()) return ControllerUtil
                 .response(CustomMessage.NOT_FOUND.getMessage(), HttpStatus.NOT_FOUND.value());
         return ResponseEntity.ok(result);
