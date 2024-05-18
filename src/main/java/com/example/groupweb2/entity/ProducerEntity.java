@@ -24,7 +24,7 @@ public class ProducerEntity {
 
     @OneToMany(mappedBy = "producer", cascade = CascadeType.MERGE)
     @JsonBackReference
-    Set<ProductEntity> products;
+    List<ProductEntity> products;
 
     @ManyToMany
     @JoinTable(

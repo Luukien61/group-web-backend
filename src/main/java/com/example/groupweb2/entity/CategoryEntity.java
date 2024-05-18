@@ -23,7 +23,7 @@ public class CategoryEntity {
     String name;
     @OneToMany(mappedBy = "category",cascade = CascadeType.MERGE)
     @JsonBackReference
-    Set<ProductEntity> product;
+    List<ProductEntity> product;
 
     @ManyToMany(mappedBy = "categories", cascade = {CascadeType.MERGE})
     @JsonManagedReference
