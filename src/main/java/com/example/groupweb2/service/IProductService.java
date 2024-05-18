@@ -13,4 +13,5 @@ public interface IProductService {
     void updateProduct(ProductDTO product,String productId );
     void deleteProduct(String productId);
     ProductEntity findProductById(String id);
+    List<ProductEntity> findProductsByCategory(String category);
 }

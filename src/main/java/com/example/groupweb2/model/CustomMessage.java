@@ -9,6 +9,7 @@ public enum CustomMessage {
     CREATED("Created"),
     UPDATED("Updated"),
     SUCCESS("Success"),
+    NOT_FOUND("Not found"),
     DELETED("Deleted");
     private final String message;
 }

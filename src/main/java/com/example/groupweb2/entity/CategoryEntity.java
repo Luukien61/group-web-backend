@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -22,4 +23,7 @@ public class CategoryEntity {
     @OneToMany(mappedBy = "category",cascade = CascadeType.MERGE)
     @JsonBackReference
     List<ProductEntity> product;
+
+    @ManyToMany(mappedBy = "categories", cascade = {CascadeType.MERGE})
+    Set<ProducerEntity> producers;
 }

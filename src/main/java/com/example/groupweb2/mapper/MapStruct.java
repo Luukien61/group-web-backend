@@ -32,6 +32,10 @@ public interface MapStruct {
 
     ProductEntity toProductEntity(ProductDTO item);
 
+    ProducerEntity toProducerEntity(ProducerDTO item);
+
+    ProducerDTO toProducerDTO(ProducerEntity item);
+
     List<ColorDTO> toListColorDTO(List<ColorEntity> items);
 
     List<ColorEntity> toListColorEntity(List<ColorDTO> items);

@@ -20,4 +20,5 @@ public class ProductDTO {
     private List<ColorDTO> color;
     private List<String> imgs;
     private CategoryDTO category;
+    private ProducerDTO producer;
 }

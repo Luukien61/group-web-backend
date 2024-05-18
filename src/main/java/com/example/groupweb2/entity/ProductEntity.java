@@ -18,8 +18,8 @@ public class ProductEntity {
     @Id
     String id;
     String name;
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "category_name", referencedColumnName = "name")
     @JsonManagedReference
     CategoryEntity category;
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
@@ -36,4 +36,9 @@ public class ProductEntity {
     @OneToOne(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference
     DescriptionEntity description;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @JoinColumn(name = "producer_name", referencedColumnName = "name")
+    @JsonManagedReference
+    ProducerEntity producer;
 }

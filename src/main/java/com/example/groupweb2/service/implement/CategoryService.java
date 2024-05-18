@@ -8,6 +8,8 @@ import com.example.groupweb2.service.ICategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class CategoryService implements ICategoryService {
@@ -46,5 +48,10 @@ public class CategoryService implements ICategoryService {
                 .orElseThrow(()->new RuntimeException(NOT_EXIST));
         existCategory.setName(category.getName());
         categoryRepository.save(existCategory);
+    }
+
+    @Override
+    public Optional<CategoryEntity> findCategoryByNameOptional(String name) {
+        return categoryRepository.findAllByNameIgnoreCase(name);
     }
 }

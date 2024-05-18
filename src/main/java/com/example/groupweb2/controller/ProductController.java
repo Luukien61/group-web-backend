@@ -57,4 +57,12 @@ public class ProductController {
         }
     }
 
+    @GetMapping()
+    public ResponseEntity<?> getProductsByCategory(@RequestParam("category") String category) {
+        var result = productService.findProductsByCategory(category);
+        if (result.isEmpty()) return ControllerUtil
+                .response(CustomMessage.NOT_FOUND.getMessage(), HttpStatus.NOT_FOUND.value());
+        return ResponseEntity.ok(result);
+    }
+
 }
