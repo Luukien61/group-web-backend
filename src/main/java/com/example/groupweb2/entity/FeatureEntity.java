@@ -24,9 +24,13 @@ public class FeatureEntity {
 
     String screen;
     @ElementCollection(targetClass = Integer.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "feature_rear_camera", joinColumns = @JoinColumn(name = "feature_id"))
+    @Column(name = "rear_camera")
     List<Integer> rearCamera;
 
     @ElementCollection(targetClass = Integer.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "feature_front_camera", joinColumns = @JoinColumn(name = "feature_id"))
+    @Column(name = "front_camera")
     List<Integer> frontCamera;
 
     String OS;

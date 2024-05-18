@@ -18,11 +18,13 @@ public class ProductEntity {
     @Id
     String id;
     String name;
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "category_name", referencedColumnName = "name")
     @JsonManagedReference
     CategoryEntity category;
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "product_images", joinColumns = @JoinColumn(name = "product_id"))
+    @Column(name = "image_url")
     List<String> imgs;
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -37,7 +39,7 @@ public class ProductEntity {
     @JsonManagedReference
     DescriptionEntity description;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "producer_name", referencedColumnName = "name")
     @JsonManagedReference
     ProducerEntity producer;

@@ -109,7 +109,7 @@ public class ProductService implements IProductService {
                     .orElse(producer);
             var producerItems = existProducer.getProducts();
             if (producerItems ==null) {
-                producerItems = new ArrayList<>();
+                producerItems = new HashSet<>();
             }
             producerItems.add(productEntity);
             existProducer.setProducts(producerItems);
@@ -118,7 +118,7 @@ public class ProductService implements IProductService {
                     .orElse(category);
             var categoryItems = existCategory.getProduct();
             if (categoryItems == null) {
-                categoryItems = new ArrayList<>();
+                categoryItems = new HashSet<>();
             }
             categoryItems.add(productEntity);
             existCategory.setProduct(categoryItems);

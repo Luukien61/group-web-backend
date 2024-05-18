@@ -24,7 +24,7 @@ public class ProducerEntity {
 
     @OneToMany(mappedBy = "producer", cascade = CascadeType.MERGE)
     @JsonBackReference
-    List<ProductEntity> products;
+    Set<ProductEntity> products;
 
     @ManyToMany
     @JoinTable(
@@ -32,5 +32,6 @@ public class ProducerEntity {
             joinColumns = @JoinColumn(name = "producer", referencedColumnName = "name"),
             inverseJoinColumns = @JoinColumn(name = "category", referencedColumnName = "name")
     )
+    @JsonBackReference
     Set<CategoryEntity> categories;
 }
