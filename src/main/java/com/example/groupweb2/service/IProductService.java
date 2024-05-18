@@ -14,4 +14,7 @@ public interface IProductService {
     void deleteProduct(String productId);
     ProductEntity findProductById(String id);
     List<ProductEntity> findProductsByCategory(String category);
+    List<ProductEntity> findAllProductByProducer(String producer);
+    List<ProductEntity> findAllProductByCategoryAndProducer(String producer, String category);
+
 }

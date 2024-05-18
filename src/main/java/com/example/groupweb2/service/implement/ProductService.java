@@ -60,9 +60,16 @@ public class ProductService implements IProductService {
         var existProduct = productRepository.findAllById(productId)
                 .orElseThrow(() -> new RuntimeException(NOT_EXIST));
         var newProduct = mapper.toProductEntity(product);
-        newProduct.setId(existProduct.getId());
-        persistChildren(newProduct);
-        productRepository.save(newProduct);
+        existProduct.setImgs(newProduct.getImgs());
+        existProduct.setPrice(newProduct.getPrice());
+        existProduct.setFeatures(newProduct.getFeatures());
+        existProduct.setColor(newProduct.getColor());
+        existProduct.setName(newProduct.getName());
+        existProduct.setDescription(newProduct.getDescription());
+        existProduct.setProducer(newProduct.getProducer());
+        existProduct.setCategory(newProduct.getCategory());
+        persistChildren(existProduct);
+        productRepository.save(existProduct);
     }
 
     @Override
@@ -81,6 +88,19 @@ public class ProductService implements IProductService {
     public List<ProductEntity> findProductsByCategory(String category) {
         category = UppercaseUtil.toFirstUppercase(category);
         return productRepository.findAllByCategory(category);
+    }
+
+    @Override
+    public List<ProductEntity> findAllProductByProducer(String producer) {
+        producer=UppercaseUtil.toFirstUppercase(producer);
+        return productRepository.findAllByProducer(producer);
+    }
+
+    @Override
+    public List<ProductEntity> findAllProductByCategoryAndProducer(String producer, String category) {
+        category = UppercaseUtil.toFirstUppercase(category);
+        producer=UppercaseUtil.toFirstUppercase(producer);
+        return productRepository.findAllByCategoryAndProducer(producer,category);
     }
 
     private void persistChildren(ProductEntity productEntity) {

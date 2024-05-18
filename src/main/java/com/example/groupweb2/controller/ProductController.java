@@ -57,9 +57,15 @@ public class ProductController {
         }
     }
 
+
     @GetMapping()
-    public ResponseEntity<?> getProductsByCategory(@RequestParam("category") String category) {
-        var result = productService.findProductsByCategory(category);
+    public ResponseEntity<?> getProductsByProducer(
+            @RequestParam("category") String category,
+            @RequestParam("producer") String producer){
+        if(producer==null){
+            var result = productService.findProductsByCategory(category);
+        }
+        var result= productService.findAllProductByCategoryAndProducer(producer,category);
         if (result.isEmpty()) return ControllerUtil
                 .response(CustomMessage.NOT_FOUND.getMessage(), HttpStatus.NOT_FOUND.value());
         return ResponseEntity.ok(result);

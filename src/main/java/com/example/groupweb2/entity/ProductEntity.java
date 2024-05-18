@@ -18,7 +18,7 @@ public class ProductEntity {
     @Id
     String id;
     String name;
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     @JoinColumn(name = "category_name", referencedColumnName = "name")
     @JsonManagedReference
     CategoryEntity category;
@@ -39,7 +39,7 @@ public class ProductEntity {
     @JsonManagedReference
     DescriptionEntity description;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "producer_name", referencedColumnName = "name")
     @JsonManagedReference
     ProducerEntity producer;
