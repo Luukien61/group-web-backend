@@ -132,6 +132,8 @@ public class ProductService implements IProductService {
             }
             return findAllProductByCategoryPriceMinMax(category,start,end);
         }
+        producer=UppercaseUtil.toFirstUppercase(producer);
+        category=UppercaseUtil.toFirstUppercase(category);
         if(end==null){
             return productRepository.findAllByCategoryAndProducerAndPriceMin(category,producer,start);
         }

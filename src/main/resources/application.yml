@@ -17,6 +17,7 @@ spring:
                 event:
                     merge:
                         entity_copy_observer: allow
+                show_sql: true
     jackson:
         date-format: yyyy-MM-dd
         time-zone: Asia/Ho_Chi_Minh
