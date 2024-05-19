@@ -11,7 +11,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
-@Table(name = "Memory")
+@Table(name = "Price")
 public class PriceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

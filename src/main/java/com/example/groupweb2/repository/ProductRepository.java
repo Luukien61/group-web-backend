@@ -29,5 +29,31 @@ public interface ProductRepository extends JpaRepository<ProductEntity, String> 
             @Param("producer") String producer,
             @Param("category") String category);
 
+
+    @Query("select p from ProductEntity p join p.price pr where p.category.name= :category and pr.currentPrice between :start and :end")
+    List<ProductEntity> findAllByCategoryAndPriceMinMax(
+            @Param("category") String category,
+            @Param("start") Long start,
+            @Param("end") Long end);
+
+    @Query("select p from ProductEntity p join p.price pr where p.category.name= :category and pr.currentPrice >= :start")
+    List<ProductEntity> findAllByCategoryAndPriceMin(
+            @Param("category") String category,
+            @Param("start") Long start);
+
+    @Query("select p from ProductEntity p join p.price pr where p.producer.name= :producer " +
+            "and p.category.name= :category and pr.currentPrice between :start and :end")
+    List<ProductEntity> findAllByCategoryAndProducerAndPriceMinMax(
+            @Param("category") String category,
+            @Param("producer") String producer,
+            @Param("start") Long start,
+            @Param("end") Long end);
+
+    @Query("select p from ProductEntity p join p.price pr where p.producer.name= :producer " +
+            "and p.category.name= :category and pr.currentPrice > :start")
+    List<ProductEntity> findAllByCategoryAndProducerAndPriceMin(
+            @Param("category") String category,
+            @Param("producer") String producer,
+            @Param("start") Long start);
 }
 

@@ -8,6 +8,7 @@ import com.example.groupweb2.service.ICategoryService;
 import com.example.groupweb2.service.IProducerService;
 import com.example.groupweb2.service.IProductService;
 import com.example.groupweb2.util.UppercaseUtil;
+import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +41,6 @@ public class ProductService implements IProductService {
         if (existProduct.isEmpty()) {
             var productEntity = mapper.toProductEntity(item);
             persistChildren(productEntity);
-           // persistProducerAndCategory(productEntity.getProducer(),productEntity.getCategory(),productEntity);
             productRepository.save(productEntity);
         } else throw new RuntimeException(EXISTED);
 
@@ -70,7 +70,6 @@ public class ProductService implements IProductService {
         existProduct.setProducer(newProduct.getProducer());
         existProduct.setCategory(newProduct.getCategory());
         persistChildren(existProduct);
-        //persistProducerAndCategoryForUpdate(existProduct.getProducer(),existProduct.getCategory(),existProduct);
         productRepository.save(existProduct);
     }
 
@@ -94,15 +93,49 @@ public class ProductService implements IProductService {
 
     @Override
     public List<ProductEntity> findAllProductByProducer(String producer) {
-        producer=UppercaseUtil.toFirstUppercase(producer);
+        producer = UppercaseUtil.toFirstUppercase(producer);
         return productRepository.findAllByProducer(producer);
     }
 
     @Override
     public List<ProductEntity> findAllProductByCategoryAndProducer(String producer, String category) {
         category = UppercaseUtil.toFirstUppercase(category);
-        producer=UppercaseUtil.toFirstUppercase(producer);
-        return productRepository.findAllByCategoryAndProducer(producer,category);
+        producer = UppercaseUtil.toFirstUppercase(producer);
+        return productRepository.findAllByCategoryAndProducer(producer, category);
+    }
+
+
+
+    @Override
+    public List<ProductEntity> findAllProductByCategoryPriceMinMax(String category, Long start, Long end) {
+        category = UppercaseUtil.toFirstUppercase(category);
+        return productRepository.findAllByCategoryAndPriceMinMax(category,start,end);
+    }
+
+    @Override
+    public List<ProductEntity> findAllProductByCategoryPriceMin(String category, Long start) {
+        category = UppercaseUtil.toFirstUppercase(category);
+        return productRepository.findAllByCategoryAndPriceMin(category,start);
+    }
+
+    @Override
+    public List<ProductEntity> findAllProductByCategoryAndProducerAndPrice(String category, @Nullable String producer, @Nullable Long start, @Nullable Long end) {
+        if(producer==null && start==null){
+            return findProductsByCategory(category);
+        }
+        if(start==null){
+            return findAllProductByCategoryAndProducer(producer,category);
+        }
+        if(producer==null){
+            if(end==null){
+                return findAllProductByCategoryPriceMin(category,start);
+            }
+            return findAllProductByCategoryPriceMinMax(category,start,end);
+        }
+        if(end==null){
+            return productRepository.findAllByCategoryAndProducerAndPriceMin(category,producer,start);
+        }
+        return productRepository.findAllByCategoryAndProducerAndPriceMinMax(category, producer, start, end);
     }
 
     private void persistChildren(ProductEntity productEntity) {
@@ -122,7 +155,7 @@ public class ProductService implements IProductService {
             item.setProduct(productEntity);
             item.setFeature(feature);
         }
-        persistProducerAndCategoryForUpdate(producer,category,productEntity);
+        persistProducerAndCategory(producer,category,productEntity);
     }
 
     private void persistProducerAndCategory(ProducerEntity producer, CategoryEntity category, ProductEntity productEntity) {
@@ -162,26 +195,4 @@ public class ProductService implements IProductService {
         } catch (RuntimeException ignored) {
         }
     }
-
-    private void persistProducerAndCategoryForUpdate(ProducerEntity producer, CategoryEntity category, ProductEntity productEntity) {
-        try {
-
-            var existProducer = producerService.findProducerByNameOPtional(producer.getName())
-                    .orElse(producer);
-            var existCategory = categoryService.findCategoryByNameOptional(category.getName())
-                    .orElse(category);
-
-            var categoryProducers = existCategory.getProducers();
-            categoryProducers.add(existProducer);
-            existCategory.setProducers(categoryProducers);
-            var producerCategories = existProducer.getCategories();
-            producerCategories.add(existCategory);
-            existProducer.setCategories(producerCategories);
-            productEntity.setCategory(existCategory);
-            productEntity.setProducer(existProducer);
-        } catch (RuntimeException ignored) {
-        }
-    }
-
-
 }
