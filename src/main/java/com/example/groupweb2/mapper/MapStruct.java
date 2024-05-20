@@ -36,6 +36,9 @@ public interface MapStruct {
 
     ProducerDTO toProducerDTO(ProducerEntity item);
 
+    CarouselEntity toCarouselEntity(CarouselDTO carouselDTO);
+    CarouselDTO toCarouselDTO(CarouselEntity carouselEntity);
+
     List<ColorDTO> toListColorDTO(List<ColorEntity> items);
 
     List<ColorEntity> toListColorEntity(List<ColorDTO> items);

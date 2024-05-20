@@ -1,26 +1,29 @@
 spring:
-    profiles:
-        active: dev
-    application:
-        name: groupweb2
-    datasource:
-        username: ${USER_NAME}
-        password: ${PASSWORD}
-        url: ${URL}
-        driver-class-name: ${DRIVER}
-    jpa:
-        hibernate:
-            ddl-auto: update
-        properties:
-            hibernate:
-                dialect: ${DIALECT}
-                event:
-                    merge:
-                        entity_copy_observer: allow
-                show_sql: true
-    jackson:
-        date-format: yyyy-MM-dd
-        time-zone: Asia/Ho_Chi_Minh
+  profiles:
+    active: dev
+  application:
+    name: groupweb2
+  datasource:
+    username: ${USER_NAME}
+    password: ${PASSWORD}
+    url: ${URL}
+    driver-class-name: ${DRIVER}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: ${DIALECT}
+        event:
+          merge:
+            entity_copy_observer: allow
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: Asia/Ho_Chi_Minh
 server:
-    port: 8088
+  port: 8088
+
+app:
+  cors:
+    allowOrigins: ${FRONT_END_URL}
 

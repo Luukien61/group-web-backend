@@ -10,6 +10,10 @@ import com.example.groupweb2.service.IProductService;
 import com.example.groupweb2.util.UppercaseUtil;
 import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -86,115 +90,137 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public List<ProductEntity> findProductsByCategory(String category) {
+    public Page<ProductEntity> findProductsByCategory(String category, int page, int size, String sortBy) {
         category = UppercaseUtil.toFirstUppercase(category);
-        return productRepository.findAllByCategory(category);
+        Pageable pageable = getPage(page, size, sortBy);
+        return productRepository.findAllByCategory(category, pageable);
     }
 
     @Override
-    public List<ProductEntity> findAllProductByProducer(String producer) {
+    public Page<ProductEntity> findAllProductByProducer(String producer, int page, int size, String sortBy) {
         producer = UppercaseUtil.toFirstUppercase(producer);
-        return productRepository.findAllByProducer(producer);
+        Pageable pageable = getPage(page, size, sortBy);
+        return productRepository.findAllByProducer(producer, pageable);
     }
 
     @Override
-    public List<ProductEntity> findAllProductByCategoryAndProducer(String producer, String category) {
+    public Page<ProductEntity> findAllProductByCategoryAndProducer(String producer, String category, int page, int size, String sortBy) {
         category = UppercaseUtil.toFirstUppercase(category);
         producer = UppercaseUtil.toFirstUppercase(producer);
-        return productRepository.findAllByCategoryAndProducer(producer, category);
+        Pageable pageable = getPage(page, size, sortBy);
+        return productRepository.findAllByCategoryAndProducer(producer, category, pageable);
     }
 
 
-
     @Override
-    public List<ProductEntity> findAllProductByCategoryPriceMinMax(String category, Long start, Long end) {
+    public Page<ProductEntity> findAllProductByCategoryPriceMinMax(String category, Long start, Long end, int page, int size, String sortBy) {
         category = UppercaseUtil.toFirstUppercase(category);
-        return productRepository.findAllByCategoryAndPriceMinMax(category,start,end);
+        Pageable pageable = getPage(page, size, sortBy);
+        return productRepository.findAllByCategoryAndPriceMinMax(category, start, end, pageable);
     }
 
     @Override
-    public List<ProductEntity> findAllProductByCategoryPriceMin(String category, Long start) {
+    public Page<ProductEntity> findAllProductByCategoryPriceMin(String category, Long start, int page, int size, String sortBy) {
         category = UppercaseUtil.toFirstUppercase(category);
-        return productRepository.findAllByCategoryAndPriceMin(category,start);
+        Pageable pageable = getPage(page, size, sortBy);
+        return productRepository.findAllByCategoryAndPriceMin(category, start, pageable);
     }
 
     @Override
-    public List<ProductEntity> findAllProductByCategoryAndProducerAndPrice(String category, @Nullable String producer, @Nullable Long start, @Nullable Long end) {
-        if(producer==null && start==null){
-            return findProductsByCategory(category);
+    public Page<ProductEntity> findAllProductByCategoryAndProducerAndPrice(
+            String category,
+            @Nullable String producer,
+            @Nullable Long start,
+            @Nullable Long end,
+            int page,
+            int size,
+            String sortBy
+    ) {
+        if(!sortBy.equals("name")){
+            sortBy="features."+sortBy;
         }
-        if(start==null){
-            return findAllProductByCategoryAndProducer(producer,category);
+        if (producer == null && start == null) {
+            return findProductsByCategory(category,page,size,sortBy);
         }
-        if(producer==null){
-            if(end==null){
-                return findAllProductByCategoryPriceMin(category,start);
+        if (start == null) {
+            return findAllProductByCategoryAndProducer(producer, category,page,size,sortBy);
+        }
+        if (producer == null) {
+            if (end == null) {
+                return findAllProductByCategoryPriceMin(category, start,page,size,sortBy);
             }
-            return findAllProductByCategoryPriceMinMax(category,start,end);
+            return findAllProductByCategoryPriceMinMax(category, start, end,page,size,sortBy);
         }
-        producer=UppercaseUtil.toFirstUppercase(producer);
-        category=UppercaseUtil.toFirstUppercase(category);
-        if(end==null){
-            return productRepository.findAllByCategoryAndProducerAndPriceMin(category,producer,start);
+        producer = UppercaseUtil.toFirstUppercase(producer);
+        category = UppercaseUtil.toFirstUppercase(category);
+        Pageable pageable = getPage(page,size,sortBy);
+        if (end == null) {
+            return productRepository.findAllByCategoryAndProducerAndPriceMin(category, producer, start,pageable);
         }
-        return productRepository.findAllByCategoryAndProducerAndPriceMinMax(category, producer, start, end);
+        return productRepository.findAllByCategoryAndProducerAndPriceMinMax(category, producer, start, end,pageable);
     }
 
-    private void persistChildren(ProductEntity productEntity) {
-        var category = productEntity.getCategory();
-        var colors = productEntity.getColor();
-        var description = productEntity.getDescription();
-        var feature = productEntity.getFeatures();
-        var memories = productEntity.getPrice();
-        var producer = productEntity.getProducer();
 
-        for (ColorEntity item : colors) {
-            item.setProduct(productEntity);
-        }
-        description.setProduct(productEntity);
-        feature.setProduct(productEntity);
-        for (PriceEntity item : memories) {
-            item.setProduct(productEntity);
-            item.setFeature(feature);
-        }
-        persistProducerAndCategory(producer,category,productEntity);
+private void persistChildren(ProductEntity productEntity) {
+    var category = productEntity.getCategory();
+    var colors = productEntity.getColor();
+    var description = productEntity.getDescription();
+    var feature = productEntity.getFeatures();
+    var memories = productEntity.getPrice();
+    var producer = productEntity.getProducer();
+
+    for (ColorEntity item : colors) {
+        item.setProduct(productEntity);
     }
-
-    private void persistProducerAndCategory(ProducerEntity producer, CategoryEntity category, ProductEntity productEntity) {
-        try {
-            var existProducer = producerService.findProducerByNameOPtional(producer.getName())
-                    .orElse(producer);
-            var producerItems = existProducer.getProducts();
-            if (producerItems ==null) {
-                producerItems = new ArrayList<>();
-            }
-            producerItems.add(productEntity);
-            existProducer.setProducts(producerItems);
-
-            var existCategory = categoryService.findCategoryByNameOptional(category.getName())
-                    .orElse(category);
-            var categoryItems = existCategory.getProduct();
-            if (categoryItems == null) {
-                categoryItems = new ArrayList<>();
-            }
-            categoryItems.add(productEntity);
-            existCategory.setProduct(categoryItems);
-
-            var categoryProducers = existCategory.getProducers();
-            if(categoryProducers==null){
-                categoryProducers = new HashSet<>();
-            }
-            categoryProducers.add(existProducer);
-            existCategory.setProducers(categoryProducers);
-            var producerCategories = existProducer.getCategories();
-            if(producerCategories==null){
-                producerCategories=new HashSet<>();
-            }
-            producerCategories.add(existCategory);
-            existProducer.setCategories(producerCategories);
-            productEntity.setCategory(existCategory);
-            productEntity.setProducer(existProducer);
-        } catch (RuntimeException ignored) {
-        }
+    description.setProduct(productEntity);
+    feature.setProduct(productEntity);
+    for (PriceEntity item : memories) {
+        item.setProduct(productEntity);
+        item.setFeature(feature);
     }
+    persistProducerAndCategory(producer, category, productEntity);
+}
+
+private void persistProducerAndCategory(ProducerEntity producer, CategoryEntity category, ProductEntity productEntity) {
+    try {
+        var existProducer = producerService.findProducerByNameOptional(producer.getName())
+                .orElse(producer);
+        var producerItems = existProducer.getProducts();
+        if (producerItems == null) {
+            producerItems = new ArrayList<>();
+        }
+        producerItems.add(productEntity);
+        existProducer.setProducts(producerItems);
+
+        var existCategory = categoryService.findCategoryByNameOptional(category.getName())
+                .orElse(category);
+        var categoryItems = existCategory.getProduct();
+        if (categoryItems == null) {
+            categoryItems = new ArrayList<>();
+        }
+        categoryItems.add(productEntity);
+        existCategory.setProduct(categoryItems);
+
+        var categoryProducers = existCategory.getProducers();
+        if (categoryProducers == null) {
+            categoryProducers = new HashSet<>();
+        }
+        categoryProducers.add(existProducer);
+        existCategory.setProducers(categoryProducers);
+        var producerCategories = existProducer.getCategories();
+        if (producerCategories == null) {
+            producerCategories = new HashSet<>();
+        }
+        producerCategories.add(existCategory);
+        existProducer.setCategories(producerCategories);
+        productEntity.setCategory(existCategory);
+        productEntity.setProducer(existProducer);
+    } catch (RuntimeException ignored) {
+    }
+}
+
+private Pageable getPage(int page, int size, String sortBy) {
+    Sort sort = Sort.by(sortBy).descending();
+    return PageRequest.of(page, size, sort);
+}
 }

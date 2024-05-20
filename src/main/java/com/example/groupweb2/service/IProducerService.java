@@ -10,5 +10,8 @@ public interface IProducerService {
     List<String> findAllProducerByCategory(String category);
     void saveNewProducer(ProducerDTO producerDTO);
     ProducerEntity findProducerByName(String name);
-    Optional<ProducerEntity> findProducerByNameOPtional(String name);
+    Optional<ProducerEntity> findProducerByNameOptional(String name);
+    void updateProducer(ProducerDTO producerDTO, Long producerId);
+    void deleteProducer(ProducerDTO producer);
+
 }

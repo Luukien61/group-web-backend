@@ -26,7 +26,7 @@ public class ProducerEntity {
     @JsonBackReference
     List<ProductEntity> products;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     @JoinTable(
             name = "producer_category",
             joinColumns = @JoinColumn(name = "producer", referencedColumnName = "name"),

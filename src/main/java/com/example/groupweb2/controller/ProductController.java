@@ -8,6 +8,7 @@ import com.example.groupweb2.service.IProductService;
 import com.example.groupweb2.util.ControllerUtil;
 import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -64,13 +65,20 @@ public class ProductController {
             @RequestParam("category") String category,
             @RequestParam("producer") @Nullable String producer,
             @RequestParam("minPrice") @Nullable Long minPrice,
-            @RequestParam("maxPrice") @Nullable Long maxPrice
+            @RequestParam("maxPrice") @Nullable Long maxPrice,
+            @RequestParam(value = "page",defaultValue = "0") int page,
+            @RequestParam(value = "size",defaultValue = "20") int size,
+            @RequestParam(value = "sort",defaultValue = "madeTime") String sort
     ) {
-        List<ProductEntity> result=productService
-                .findAllProductByCategoryAndProducerAndPrice(category,producer,minPrice,maxPrice);
-        if (result.isEmpty()) return ControllerUtil
-                .response(CustomMessage.NOT_FOUND.getMessage(), HttpStatus.NOT_FOUND.value());
-        return ResponseEntity.ok(result);
+        try{
+            Page<ProductEntity> result=productService
+                    .findAllProductByCategoryAndProducerAndPrice(category,producer,minPrice,maxPrice,page,size,sort);
+            if (result.isEmpty()) return ControllerUtil
+                    .response(CustomMessage.NOT_FOUND.getMessage(), HttpStatus.NOT_FOUND.value());
+            return ResponseEntity.ok(result);
+        }catch (RuntimeException e){
+            return ControllerUtil.response(e.getMessage(), HttpStatus.NOT_FOUND.value());
+        }
     }
 
 }

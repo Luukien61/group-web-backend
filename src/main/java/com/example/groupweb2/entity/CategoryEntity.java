@@ -25,7 +25,7 @@ public class CategoryEntity {
     @JsonBackReference
     List<ProductEntity> product;
 
-    @ManyToMany(mappedBy = "categories", cascade = {CascadeType.MERGE})
+    @ManyToMany(mappedBy = "categories", cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     @JsonManagedReference
     Set<ProducerEntity> producers;
 }
