@@ -8,6 +8,7 @@ import com.example.groupweb2.service.ICategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -53,5 +54,10 @@ public class CategoryService implements ICategoryService {
     @Override
     public Optional<CategoryEntity> findCategoryByNameOptional(String name) {
         return categoryRepository.findAllByNameIgnoreCase(name);
+    }
+
+    @Override
+    public List<CategoryEntity> findAllCategory() {
+        return categoryRepository.findAll();
     }
 }

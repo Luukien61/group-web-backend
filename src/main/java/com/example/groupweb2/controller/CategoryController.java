@@ -4,6 +4,7 @@ import com.example.groupweb2.dto.CategoryDTO;
 import com.example.groupweb2.model.CustomMessage;
 import com.example.groupweb2.service.ICategoryService;
 import com.example.groupweb2.util.ControllerUtil;
+import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +27,14 @@ public class CategoryController {
     }
 
     @GetMapping()
-    public ResponseEntity<?> getCategory(@RequestParam(name = "name") String name){
+    public ResponseEntity<?> getCategory(
+            @RequestParam(name = "name") @Nullable String name
+    ){
         try{
+            if(name==null){
+                var result = categoryService.findAllCategory();
+                return ResponseEntity.ok(result);
+            }
             var category = categoryService.findCategoryByName(name);
             return ResponseEntity.status(HttpStatus.FOUND).body(category);
         }catch (RuntimeException e){
