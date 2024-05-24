@@ -16,10 +16,10 @@ public interface IProductService {
     void deleteProduct(String productId);
     ProductEntity findProductById(String id);
     Page<ProductEntity> findProductsByCategory(String category, int page, int size , String sortBy);
-    Page<ProductEntity> findAllProductByProducer(String producer, int page, int size , String sortBy);
-    Page<ProductEntity> findAllProductByCategoryAndProducer(String producer, String category, int page, int size , String sortBy);
+    Page<ProductEntity> findAllProductByProducer(List<String> producer, int page, int size , String sortBy);
+    Page<ProductEntity> findAllProductByCategoryAndProducer(List<String> producer, String category, int page, int size , String sortBy);
 
     Page<ProductEntity> findAllProductByCategoryPriceMinMax(String category, Long start, Long end, int page, int size , String sortBy);
     Page<ProductEntity> findAllProductByCategoryPriceMin(String category, Long start, int page, int size , String sortBy);
-    Page<ProductEntity> findAllProductByCategoryAndProducerAndPrice(String category, @Nullable String producer, @Nullable Long start, @Nullable Long end,int page, int size, String sortBy);
+    Page<ProductEntity> findAllProductByCategoryAndProducerAndPrice(String category, @Nullable List<String> producer, @Nullable Long start, @Nullable Long end,int page, int size, String sortBy);
 }

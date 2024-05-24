@@ -21,16 +21,16 @@ public interface ProductRepository extends JpaRepository<ProductEntity, String> 
     @Query("select products from ProductEntity products where products.category.name= :category")
     Page<ProductEntity> findAllByCategory(@Param("category") String category, Pageable pageable);
 
-    @Query("select products from ProductEntity products where products.producer.name= :producer")
-    Page<ProductEntity> findAllByProducer(@Param("producer") String producer,Pageable pageable);
+    @Query("select products from ProductEntity products where products.producer.name in :producer")
+    Page<ProductEntity> findAllByProducer(@Param("producer") List<String> producer,Pageable pageable);
 
     @Query("select products from ProductEntity products where products.producer.name= :producer")
     List<ProductEntity> findAllByProducer(@Param("producer") String producer);
 
-    @Query("select products from ProductEntity products where products.producer.name= :producer " +
+    @Query("select products from ProductEntity products where products.producer.name in :producer " +
             "and products.category.name= :category")
     Page<ProductEntity> findAllByCategoryAndProducer(
-            @Param("producer") String producer,
+            @Param("producer") List<String> producer,
             @Param("category") String category,
             Pageable pageable);
 
@@ -48,20 +48,29 @@ public interface ProductRepository extends JpaRepository<ProductEntity, String> 
             @Param("start") Long start,
             Pageable pageable);
 
-    @Query("select p from ProductEntity p join p.price pr where p.producer.name= :producer " +
+    @Query("select p from ProductEntity p join p.price pr where p.producer.name in :producer " +
             "and p.category.name= :category and pr.currentPrice between :start and :end")
     Page<ProductEntity> findAllByCategoryAndProducerAndPriceMinMax(
             @Param("category") String category,
-            @Param("producer") String producer,
+            @Param("producer") List<String> producer,
             @Param("start") Long start,
             @Param("end") Long end,
             Pageable pageable);
 
-    @Query("select p from ProductEntity p join p.price pr where p.producer.name= :producer " +
+    @Query("select p from ProductEntity p join p.price pr where p.producer.name in :producers " +
+            "and p.category.name= :category and pr.currentPrice between :start and :end")
+    Page<ProductEntity> findAllByCategoryAndProducersAndPriceMinMax(
+            @Param("category") String category,
+            @Param("producer") List<String> producers,
+            @Param("start") Long start,
+            @Param("end") Long end,
+            Pageable pageable);
+
+    @Query("select p from ProductEntity p join p.price pr where p.producer.name in :producer " +
             "and p.category.name= :category and pr.currentPrice > :start")
     Page<ProductEntity> findAllByCategoryAndProducerAndPriceMin(
             @Param("category") String category,
-            @Param("producer") String producer,
+            @Param("producer") List<String> producer,
             @Param("start") Long start,
             Pageable pageable);
 

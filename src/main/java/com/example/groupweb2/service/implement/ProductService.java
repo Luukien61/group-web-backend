@@ -97,16 +97,16 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Page<ProductEntity> findAllProductByProducer(String producer, int page, int size, String sortBy) {
-        producer = UppercaseUtil.toFirstUppercase(producer);
+    public Page<ProductEntity> findAllProductByProducer(List<String> producer, int page, int size, String sortBy) {
+        producer = producer.stream().map(UppercaseUtil::toFirstUppercase).toList();
         Pageable pageable = getPage(page, size, sortBy);
         return productRepository.findAllByProducer(producer, pageable);
     }
 
     @Override
-    public Page<ProductEntity> findAllProductByCategoryAndProducer(String producer, String category, int page, int size, String sortBy) {
+    public Page<ProductEntity> findAllProductByCategoryAndProducer(List<String> producer, String category, int page, int size, String sortBy) {
         category = UppercaseUtil.toFirstUppercase(category);
-        producer = UppercaseUtil.toFirstUppercase(producer);
+        producer = producer.stream().map(UppercaseUtil::toFirstUppercase).toList();
         Pageable pageable = getPage(page, size, sortBy);
         return productRepository.findAllByCategoryAndProducer(producer, category, pageable);
     }
@@ -129,7 +129,7 @@ public class ProductService implements IProductService {
     @Override
     public Page<ProductEntity> findAllProductByCategoryAndProducerAndPrice(
             String category,
-            @Nullable String producer,
+            @Nullable List<String> producer,
             @Nullable Long start,
             @Nullable Long end,
             int page,
@@ -139,7 +139,7 @@ public class ProductService implements IProductService {
         if(!sortBy.equals("name")){
             sortBy="features."+sortBy;
         }
-        if (producer == null && start == null) {
+        if (producer == null  && start == null) {
             return findProductsByCategory(category,page,size,sortBy);
         }
         if (start == null) {
@@ -151,7 +151,7 @@ public class ProductService implements IProductService {
             }
             return findAllProductByCategoryPriceMinMax(category, start, end,page,size,sortBy);
         }
-        producer = UppercaseUtil.toFirstUppercase(producer);
+        producer = producer.stream().map(UppercaseUtil::toFirstUppercase).toList();
         category = UppercaseUtil.toFirstUppercase(category);
         Pageable pageable = getPage(page,size,sortBy);
         if (end == null) {

@@ -63,7 +63,7 @@ public class ProductController {
     @GetMapping()
     public ResponseEntity<?> getProductsByProducer(
             @RequestParam("category") String category,
-            @RequestParam("producer") @Nullable String producer,
+            @RequestParam("producer") @Nullable List<String> producer,
             @RequestParam("minPrice") @Nullable Long minPrice,
             @RequestParam("maxPrice") @Nullable Long maxPrice,
             @RequestParam(value = "page",defaultValue = "0") int page,
@@ -73,8 +73,8 @@ public class ProductController {
         try{
             Page<ProductEntity> result=productService
                     .findAllProductByCategoryAndProducerAndPrice(category,producer,minPrice,maxPrice,page,size,sort);
-            if (result.isEmpty()) return ControllerUtil
-                    .response(CustomMessage.NOT_FOUND.getMessage(), HttpStatus.NOT_FOUND.value());
+//            if (result.isEmpty()) return ControllerUtil
+//                    .response(CustomMessage.NOT_FOUND.getMessage(), HttpStatus.NOT_FOUND.value());
             return ResponseEntity.ok(result);
         }catch (RuntimeException e){
             return ControllerUtil.response(e.getMessage(), HttpStatus.NOT_FOUND.value());
