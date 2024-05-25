@@ -14,7 +14,7 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, String> {
     Optional<ProductEntity> findAllByName(String name);
-    List<ProductEntity> findAllByNameContaining(String name);
+    List<ProductEntity> findAllByNameContainingIgnoreCase(String name);
     List<ProductEntity> findAllByIdContaining(String id);
     Optional<ProductEntity> findAllById(String productId);
 
@@ -57,15 +57,6 @@ public interface ProductRepository extends JpaRepository<ProductEntity, String> 
             @Param("end") Long end,
             Pageable pageable);
 
-    @Query("select p from ProductEntity p join p.price pr where p.producer.name in :producers " +
-            "and p.category.name= :category and pr.currentPrice between :start and :end")
-    Page<ProductEntity> findAllByCategoryAndProducersAndPriceMinMax(
-            @Param("category") String category,
-            @Param("producer") List<String> producers,
-            @Param("start") Long start,
-            @Param("end") Long end,
-            Pageable pageable);
-
     @Query("select p from ProductEntity p join p.price pr where p.producer.name in :producer " +
             "and p.category.name= :category and pr.currentPrice > :start")
     Page<ProductEntity> findAllByCategoryAndProducerAndPriceMin(
@@ -74,13 +65,5 @@ public interface ProductRepository extends JpaRepository<ProductEntity, String> 
             @Param("start") Long start,
             Pageable pageable);
 
-    @Query("select products from ProductEntity products where products.category.name= :category")
-    Page<ProductEntity> findAllByCategoryIgnoreCasePage(@Param("category") String category, Pageable pageable);
-
-    @Query("select products from ProductEntity products where products.category.name= :category and products.producer.name= :producer")
-    Page<ProductEntity> findAllByCategoryAndProducerIgnoreCasePage(
-            @Param("category") String category,
-            @Param("producer") String producer,
-            Pageable pageable);
 }
 

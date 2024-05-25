@@ -81,4 +81,14 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/searching/{productName}")
+    public ResponseEntity<?> getProductByNameSearching(@PathVariable String productName){
+        try{
+            var result = productService.searchProductsByName(productName);
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        }catch (RuntimeException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+
 }
