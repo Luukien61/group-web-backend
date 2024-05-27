@@ -38,6 +38,16 @@ public class ProductController {
         if (!result.isEmpty()) return ResponseEntity.status(HttpStatus.FOUND).body(result);
         else return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
+    @GetMapping("/product-id/{productId}")
+    public ResponseEntity<?> findProductById(@PathVariable String productId){
+        try{
+            var result = productService.findProductById(productId);
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        }catch (RuntimeException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+
+    }
 
     @PutMapping("/{productId}")
     public ResponseEntity<ResponseModel> updateProduct(@PathVariable String productId, @RequestBody ProductDTO productDTO) {
