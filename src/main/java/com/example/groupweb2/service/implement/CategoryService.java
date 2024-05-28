@@ -6,6 +6,7 @@ import com.example.groupweb2.mapper.MapStruct;
 import com.example.groupweb2.repository.CategoryRepository;
 import com.example.groupweb2.service.ICategoryService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

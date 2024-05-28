@@ -21,7 +21,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((request)-> request
-                        .requestMatchers("/product","/category", "/producer").permitAll()
+                        .requestMatchers("/product","/category", "/producer","/mail/*").permitAll()
                         .requestMatchers("/carousel").permitAll()
                         .requestMatchers("/product/**").permitAll()
                 )
