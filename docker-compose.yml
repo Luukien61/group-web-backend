@@ -1,0 +1,67 @@
+services:
+  db:
+    image: postgres:15.7-alpine
+    volumes:
+      - postgres-groupweb:/var/lib/postgresql/data/ #(1)
+    restart: always
+    networks:
+      - my-web-network #(2)
+    environment:
+      POSTGRES_PASSWORD: Luudinhkien_2003
+      POSTGRES_USER: postgres
+      POSTGRES_DB: groupweb2
+    ports:
+      - "5433:5432"
+    container_name: postgres-groupweb
+
+  app:
+    image: luukien/group-web-backend:v1
+    restart: always
+    build: #(4)
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - my-web-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod #(3)
+    ports:
+      - "8088:8088"
+    container_name: groupweb
+    depends_on:
+      - db
+volumes:
+  postgres-groupweb:
+networks:
+  my-web-network:
+    driver: bridge
+
+
+# (1): map a volume in local to the container's directory. All data in these directory will
+# be store in the volume therefore container's data won't lose each time re-run.
+
+# (2): specify the container's network it involves in. In this case is a custom network named
+# my-web-network with bridge driver. Bridge drive is the default of network in docker,
+# any service within this network can communicate with each others.
+# If others service in another network, it won't able to connect with those services.
+
+# (3) : this environment variable used to specify the active profile when run a spring boot image.
+
+#        build:
+#            context: docker-message-server
+#            dockerfile: Dockerfile
+#        ports:
+#            - 18888:8888
+
+#build: If given, docker-compose is able to build an image from a Dockerfile
+#context: If given, it specifies the build-directory, where the Dockerfile is looked-up.
+#dockerfile: If given, it sets an alternate name for a Dockerfile.
+#ports: if use set a range of host's port to an image exposed port, docker will pick one to map.
+# the purpose of using a range of port is for scaling.
+# To scale our services, we can run the following command:
+#         docker-compose up -d --build --scale service-one=3 --scale server-second=2
+
+#So basically docker-compose build will read your docker-compose.yml,
+#look for all services containing the build: statement and run a docker build for each one.
+#Each build can specify a Dockerfile, a context and args to pass to docker.
+# (4): to let docker re-build image using --build in docker compose command and
+# specify the build stage in docker compose file to let docker know how to re-build
