@@ -5,7 +5,3 @@ URL: jdbc:postgresql://db:5432/groupweb2
 DRIVER: org.postgresql.Driver
 DIALECT: org.hibernate.dialect.PostgreSQLDialect
 FRONT_END_URL: http://localhost:4003
-
-#Gmail
-GMAIL_USERNAME: kienluu61@gmail.com
-GMAIL_PASSWORD: abc

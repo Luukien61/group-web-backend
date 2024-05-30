@@ -17,20 +17,7 @@ spring:
         event:
           merge:
             entity_copy_observer: allow
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: ${GMAIL_USERNAME}
-    password: ${GMAIL_PASSWORD}
-    properties:
-      mail:
-        smtp:
-          sasl:
-            enable: true
-            mechanisms: XOAUTH2
-          starttls:
-            enable: true
-            required: true
+
 
 
   jackson:
