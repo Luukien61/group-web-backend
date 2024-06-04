@@ -38,12 +38,13 @@ public class ProductController {
         if (!result.isEmpty()) return ResponseEntity.status(HttpStatus.FOUND).body(result);
         else return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
+
     @GetMapping("/product-id/{productId}")
-    public ResponseEntity<?> findProductById(@PathVariable String productId){
-        try{
+    public ResponseEntity<?> findProductById(@PathVariable String productId) {
+        try {
             var result = productService.findProductById(productId);
             return ResponseEntity.status(HttpStatus.OK).body(result);
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
 
@@ -76,28 +77,47 @@ public class ProductController {
             @RequestParam("producer") @Nullable List<String> producer,
             @RequestParam("minPrice") @Nullable Long minPrice,
             @RequestParam("maxPrice") @Nullable Long maxPrice,
-            @RequestParam(value = "page",defaultValue = "0") int page,
-            @RequestParam(value = "size",defaultValue = "20") int size,
-            @RequestParam(value = "sort",defaultValue = "madeTime") String sort
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "20") int size,
+            @RequestParam(value = "sort", defaultValue = "madeTime") String sort
     ) {
-        try{
-            Page<ProductEntity> result=productService
-                    .findAllProductByCategoryAndProducerAndPrice(category,producer,minPrice,maxPrice,page,size,sort);
+        try {
+            Page<ProductEntity> result = productService
+                    .findAllProductByCategoryAndProducerAndPrice(category, producer, minPrice, maxPrice, page, size, sort);
 //            if (result.isEmpty()) return ControllerUtil
 //                    .response(CustomMessage.NOT_FOUND.getMessage(), HttpStatus.NOT_FOUND.value());
             return ResponseEntity.ok(result);
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             return ControllerUtil.response(e.getMessage(), HttpStatus.NOT_FOUND.value());
         }
     }
 
     @GetMapping("/searching/{productName}")
-    public ResponseEntity<?> getProductByNameSearching(@PathVariable String productName){
-        try{
+    public ResponseEntity<?> getProductByNameSearching(@PathVariable String productName) {
+        try {
             var result = productService.searchProductsByName(productName);
             return ResponseEntity.status(HttpStatus.OK).body(result);
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+
+
+    @GetMapping("/home")
+    public ResponseEntity<?> getConnection() {
+        return ResponseEntity.ok("Connected");
+    }
+
+
+    @GetMapping("/quantity/{category}")
+    public ResponseEntity<?> getProductQuantityByCategory(@PathVariable String category) {
+        try {
+            var quantity = productService.getProductQuantityByCategory(category);
+            return ResponseEntity.status(200).body(quantity);
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(ControllerUtil.response(e.getMessage(), HttpStatus.BAD_REQUEST.value()));
         }
     }
 

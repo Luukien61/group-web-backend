@@ -65,5 +65,8 @@ public interface ProductRepository extends JpaRepository<ProductEntity, String> 
             @Param("start") Long start,
             Pageable pageable);
 
+    @Query("select count(p) from ProductEntity p where p.category.name= :category")
+    int countAllByCategory(@Param("category") String category);
+
 }
 

@@ -24,6 +24,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/product","/category", "/producer","/mail/*").permitAll()
                         .requestMatchers("/carousel").permitAll()
                         .requestMatchers("/product/**").permitAll()
+                        .requestMatchers("/actuator/**").permitAll()
                 )
                 ;
         return http.build();

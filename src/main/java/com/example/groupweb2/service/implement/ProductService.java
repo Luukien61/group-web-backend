@@ -228,4 +228,14 @@ public class ProductService implements IProductService {
     public List<ProductEntity> searchProductsByName(String name) {
         return productRepository.findAllByNameContainingIgnoreCase(name);
     }
+
+    @Override
+    public int getProductQuantityByCategory(String category) {
+        category=UppercaseUtil.toFirstUppercase(category);
+        try {
+            return productRepository.countAllByCategory(category);
+        }catch (RuntimeException e){
+            throw new RuntimeException("En error occurred");
+        }
+    }
 }
