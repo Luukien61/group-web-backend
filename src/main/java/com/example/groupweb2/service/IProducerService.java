@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IProducerService {
-    List<String> findAllProducerByCategory(String category);
+    List<ProducerEntity> findAllProducerByCategory(String category, boolean fetchProducts);
     void saveNewProducer(ProducerDTO producerDTO);
     ProducerEntity findProducerByName(String name);
     Optional<ProducerEntity> findProducerByNameOptional(String name);

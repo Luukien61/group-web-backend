@@ -7,9 +7,10 @@ import com.example.groupweb2.repository.ProducerRepository;
 import com.example.groupweb2.repository.ProductRepository;
 import com.example.groupweb2.service.ICategoryService;
 import com.example.groupweb2.service.IProducerService;
-import com.example.groupweb2.service.IProductService;
 import com.example.groupweb2.util.UppercaseUtil;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,9 +28,15 @@ public class ProducerService implements IProducerService {
 
 
     @Override
-    public List<String> findAllProducerByCategory(String category) {
+    @Transactional
+    public List<ProducerEntity> findAllProducerByCategory(String category, boolean fetchProducts) {
         category = UppercaseUtil.toFirstUppercase(category);
-        return producerRepository.findAllByCategories(category);
+        var categoryEntity= categoryService.findCategoryByName(category);
+        var producers = categoryEntity.getProducers();
+        if(fetchProducts && !producers.isEmpty()){
+            producers.forEach(producerEntity -> Hibernate.initialize(producerEntity.getProducts()));
+        }
+        return producers.stream().toList();
     }
 
     @Override
@@ -78,4 +85,6 @@ public class ProducerService implements IProducerService {
             throw new RuntimeException(PRODUCT_EXIST);
         }
     }
+
+
 }

@@ -18,6 +18,8 @@ public class ProductEntity {
     @Id
     String id;
     String name;
+    Integer available;
+    Integer ordering;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     @JoinColumn(name = "category_name", referencedColumnName = "name")
     @JsonManagedReference
