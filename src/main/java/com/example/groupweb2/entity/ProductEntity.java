@@ -20,6 +20,7 @@ public class ProductEntity {
     String name;
     Integer available;
     Integer ordering;
+    Integer totalQuantity;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     @JoinColumn(name = "category_name", referencedColumnName = "name")
     @JsonManagedReference
@@ -45,4 +46,14 @@ public class ProductEntity {
     @JoinColumn(name = "producer_name", referencedColumnName = "name")
     @JsonManagedReference
     ProducerEntity producer;
+
+    @PrePersist
+    public void prePersist(){
+        if(ordering==null){
+            ordering=0;
+        }
+        if(available==null){
+            available=totalQuantity;
+        }
+    }
 }
