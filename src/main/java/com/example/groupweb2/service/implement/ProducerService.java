@@ -1,6 +1,7 @@
 package com.example.groupweb2.service.implement;
 
 import com.example.groupweb2.dto.ProducerDTO;
+import com.example.groupweb2.entity.CategoryEntity;
 import com.example.groupweb2.entity.ProducerEntity;
 import com.example.groupweb2.mapper.MapStruct;
 import com.example.groupweb2.repository.ProducerRepository;
@@ -13,8 +14,10 @@ import lombok.AllArgsConstructor;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -29,22 +32,54 @@ public class ProducerService implements IProducerService {
 
     @Override
     @Transactional
-    public List<ProducerEntity> findAllProducerByCategory(String category, boolean fetchProducts) {
+    public Set<ProducerEntity> findAllProducerByCategory(String category, boolean fetchProducts) {
         category = UppercaseUtil.toFirstUppercase(category);
-        var categoryEntity= categoryService.findCategoryByName(category);
+        var categoryEntity = categoryService.findCategoryByName(category);
         var producers = categoryEntity.getProducers();
-        if(fetchProducts && !producers.isEmpty()){
+        if (fetchProducts && !producers.isEmpty()) {
             producers.forEach(producerEntity -> Hibernate.initialize(producerEntity.getProducts()));
         }
-        return producers.stream().toList();
+        return producers;
     }
 
     @Override
-    public void saveNewProducer(ProducerDTO producerDTO) {
-        var existProducer = producerRepository.findAllByNameIgnoreCase(producerDTO.getName());
-        if (existProducer.isPresent()) throw new RuntimeException(EXISTED);
+    public void saveNewProducer(ProducerDTO producerDTO, String category) {
+        var producerName = producerDTO.getName();
+        producerName = UppercaseUtil.toFirstUppercase(producerName);
+        category = UppercaseUtil.toFirstUppercase(category);
+        producerDTO.setName(producerName);
         var newProducer = mapper.toProducerEntity(producerDTO);
+        persistCategory(newProducer, category);
+
+    }
+
+    private void persistCategory(ProducerEntity newProducer, String category) {
+        var existCategory = categoryService.findCategoryByName(category);
+        if (existCategory == null) {
+            throw new RuntimeException("Please add the new category first");
+        }
+        var exist = producerRepository.findAllByNameIgnoreCaseAndCategoris(newProducer.getName(), category);
+        if (exist > 0) {
+            throw new RuntimeException(EXISTED);
+        }
+        var producers = existCategory.getProducers();
+        Set<CategoryEntity> categories = new HashSet<>();
+        var existProducerOptional = producerRepository.findAllByNameIgnoreCase(newProducer.getName());
+        if (existProducerOptional.isPresent()) {
+            newProducer = existProducerOptional.get();
+            categories = newProducer.getCategories();
+        }
+        producers.add(newProducer);
+        existCategory.setProducers(producers);
+        categories.add(existCategory);
+        newProducer.setCategories(categories);
         producerRepository.save(newProducer);
+    }
+
+    @Override
+    @Transactional
+    public void saveProducers(List<ProducerDTO> items, String category) {
+        items.forEach(producerDTO -> saveNewProducer(producerDTO, category));
     }
 
     @Override
@@ -73,7 +108,7 @@ public class ProducerService implements IProducerService {
     @Override
     public void deleteProducer(ProducerDTO producer) {
         String producerName = producer.getName();
-        producerName=UppercaseUtil.toFirstUppercase(producerName);
+        producerName = UppercaseUtil.toFirstUppercase(producerName);
         var exitsProducer = producerRepository
                 .findAllByNameIgnoreCase(producerName)
                 .orElseThrow(() -> new RuntimeException(NOT_EXIST));

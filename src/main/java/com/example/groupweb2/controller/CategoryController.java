@@ -22,7 +22,7 @@ public class CategoryController {
             categoryService.saveNewCategory(category);
             return ControllerUtil.response(CustomMessage.CREATED.getMessage(), HttpStatus.CREATED.value());
         } catch (RuntimeException e) {
-            return ControllerUtil.response(e.getMessage(),HttpStatus.CONTINUE.value());
+            return ControllerUtil.response(e.getMessage(),HttpStatus.BAD_REQUEST.value());
         }
     }
 

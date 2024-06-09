@@ -10,16 +10,28 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/producer")
 @AllArgsConstructor
 public class ProducerController {
     private IProducerService producerService;
 
-    @PostMapping()
-    public ResponseEntity<?> insertNewProducer(@RequestBody ProducerDTO producer) {
+    @PostMapping("/one/{category}")
+    public ResponseEntity<?> insertNewProducer(@RequestBody ProducerDTO producer, @PathVariable String category) {
         try {
-            producerService.saveNewProducer(producer);
+            producerService.saveNewProducer(producer,category);
+            return ControllerUtil.response(CustomMessage.CREATED.getMessage(), HttpStatus.CREATED.value());
+        } catch (RuntimeException e) {
+            return ControllerUtil.response(e.getMessage(), HttpStatus.NOT_MODIFIED.value());
+        }
+    }
+
+    @PostMapping("/many/{category}")
+    public ResponseEntity<?> insertProducers(@RequestBody List<ProducerDTO> producers,@PathVariable String category) {
+        try {
+            producerService.saveProducers(producers, category);
             return ControllerUtil.response(CustomMessage.CREATED.getMessage(), HttpStatus.CREATED.value());
         } catch (RuntimeException e) {
             return ControllerUtil.response(e.getMessage(), HttpStatus.NOT_MODIFIED.value());

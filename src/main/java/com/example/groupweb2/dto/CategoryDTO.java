@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Set;
 
 
 @Getter
@@ -15,4 +16,5 @@ import java.io.Serializable;
 public class CategoryDTO implements Serializable {
     private Long id;
     private String name;
+    private Set<ProducerDTO> producers;
 }
