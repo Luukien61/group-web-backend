@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "StaffUser")
+@Table(name = "staff_user")
 public class UserEntity {
     @Id
     private Long staffID;

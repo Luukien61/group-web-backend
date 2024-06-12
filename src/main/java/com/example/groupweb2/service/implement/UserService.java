@@ -15,7 +15,7 @@ public class UserService implements IUserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
-    private MapStruct mapper;
+    private final MapStruct mapper;
 
     public UserService(UserRepository userRepository, MapStruct mapper) {
         this.userRepository = userRepository;
