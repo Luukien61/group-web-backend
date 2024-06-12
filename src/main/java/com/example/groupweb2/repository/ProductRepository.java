@@ -17,6 +17,7 @@ public interface ProductRepository extends JpaRepository<ProductEntity, String> 
     List<ProductEntity> findAllByNameContainingIgnoreCase(String name);
     List<ProductEntity> findAllByIdContaining(String id);
     Optional<ProductEntity> findAllById(String productId);
+    
 
     @Query("select products from ProductEntity products where products.category.name= :category")
     Page<ProductEntity> findAllByCategory(@Param("category") String category, Pageable pageable);

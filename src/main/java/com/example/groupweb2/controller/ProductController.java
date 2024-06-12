@@ -56,7 +56,7 @@ public class ProductController {
             productService.updateProduct(productDTO, productId);
             return ControllerUtil.response(CustomMessage.UPDATED.getMessage(), HttpStatus.OK.value());
         } catch (RuntimeException e) {
-            return ControllerUtil.response(e.getMessage(), HttpStatus.NOT_MODIFIED.value());
+            return ControllerUtil.response(e.getMessage(), HttpStatus.BAD_REQUEST.value());
         }
     }
 
@@ -66,11 +66,9 @@ public class ProductController {
             productService.deleteProduct(productId);
             return ControllerUtil.response(CustomMessage.DELETED.getMessage(), HttpStatus.OK.value());
         } catch (RuntimeException e) {
-            return ControllerUtil.response(e.getMessage(), HttpStatus.NOT_MODIFIED.value());
+            return ControllerUtil.response(e.getMessage(), HttpStatus.BAD_REQUEST.value());
         }
     }
-
-
     @GetMapping()
     public ResponseEntity<?> getProductsByProducer(
             @RequestParam("category") String category,

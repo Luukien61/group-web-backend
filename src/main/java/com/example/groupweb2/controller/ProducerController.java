@@ -24,7 +24,7 @@ public class ProducerController {
             producerService.saveNewProducer(producer,category);
             return ControllerUtil.response(CustomMessage.CREATED.getMessage(), HttpStatus.CREATED.value());
         } catch (RuntimeException e) {
-            return ControllerUtil.response(e.getMessage(), HttpStatus.NOT_MODIFIED.value());
+            return ControllerUtil.response(e.getMessage(), HttpStatus.BAD_REQUEST.value());
         }
     }
 
@@ -34,7 +34,7 @@ public class ProducerController {
             producerService.saveProducers(producers, category);
             return ControllerUtil.response(CustomMessage.CREATED.getMessage(), HttpStatus.CREATED.value());
         } catch (RuntimeException e) {
-            return ControllerUtil.response(e.getMessage(), HttpStatus.NOT_MODIFIED.value());
+            return ControllerUtil.response(e.getMessage(), HttpStatus.BAD_REQUEST.value());
         }
     }
 
@@ -48,7 +48,7 @@ public class ProducerController {
             producerService.updateProducer(producerDTO,producerId);
             return ControllerUtil.response(CustomMessage.UPDATED.getMessage(), HttpStatus.OK.value());
         } catch (RuntimeException e) {
-            return ControllerUtil.response(e.getMessage(), HttpStatus.NOT_MODIFIED.value());
+            return ControllerUtil.response(e.getMessage(), HttpStatus.BAD_REQUEST.value());
         }
     }
 
@@ -60,7 +60,7 @@ public class ProducerController {
             producerService.deleteProducer(producerDTO);
             return ControllerUtil.response(CustomMessage.DELETED.getMessage(), HttpStatus.OK.value());
         } catch (RuntimeException e) {
-            return ControllerUtil.response(e.getMessage(), HttpStatus.NOT_MODIFIED.value());
+            return ControllerUtil.response(e.getMessage(), HttpStatus.BAD_REQUEST.value());
         }
     }
 

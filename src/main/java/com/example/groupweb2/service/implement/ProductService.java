@@ -10,25 +10,53 @@ import com.example.groupweb2.service.IProductService;
 import com.example.groupweb2.util.UppercaseUtil;
 import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.web.header.Header;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestClient;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 @AllArgsConstructor
+@RequiredArgsConstructor
 public class ProductService implements IProductService {
+    @Autowired
     private MapStruct mapper;
+    @Autowired
     private ProductRepository productRepository;
+    @Autowired
     private ICategoryService categoryService;
+    @Autowired
     private IProducerService producerService;
     private final String NOT_EXIST = "The product does not exist";
     private final String EXISTED = "The product already exists";
+    @Autowired
+    private RestClient restClient;
+
+    @Value("${cloudinary.api-secret}")
+    private String API_SECRET ;
+    @Value("${cloudinary.cloud-name}")
+    private String CLOUD_NAME ;
+    @Value("${cloudinary.api-key}")
+    private String API_KEY ;
 
     @Override
     public void saveNewProduct(ProductEntity item) {
@@ -65,11 +93,12 @@ public class ProductService implements IProductService {
         var existProduct = productRepository.findAllById(productId)
                 .orElseThrow(() -> new RuntimeException(NOT_EXIST));
         var newProduct = mapper.toProductEntity(product);
+        existProduct.setName(newProduct.getName());
+
         existProduct.setImgs(newProduct.getImgs());
         existProduct.setPrice(newProduct.getPrice());
         existProduct.setFeatures(newProduct.getFeatures());
         existProduct.setColor(newProduct.getColor());
-        existProduct.setName(newProduct.getName());
         existProduct.setDescription(newProduct.getDescription());
         existProduct.setProducer(newProduct.getProducer());
         existProduct.setCategory(newProduct.getCategory());
@@ -80,6 +109,10 @@ public class ProductService implements IProductService {
     @Override
     public void deleteProduct(String productId) {
         var existProduct = findProductById(productId);
+//        var urls = existProduct.getImgs();
+//        var colorUrls = existProduct.getColor().stream().map(ColorEntity::getLink).toList();
+//        urls.addAll(colorUrls);
+//        urls.forEach(this::deleteImages);
         productRepository.delete(existProduct);
     }
 
@@ -237,5 +270,50 @@ public class ProductService implements IProductService {
         }catch (RuntimeException e){
             throw new RuntimeException("En error occurred");
         }
+    }
+
+    private String getPublicId(String imageUrl){
+        Pattern pattern = Pattern.compile("v[0-9]+\\/[A-z0-9]+\\.\\w{3,4}$");
+        Matcher matcher = pattern.matcher(imageUrl);
+        List<String> matchs= new ArrayList<>();
+        if(matcher.find()){
+            matchs.add(matcher.group());
+        }
+        var rawID = matchs.getLast();
+        var ids=rawID.split("/")[1];
+        return ids.split("\\.")[0];
+    }
+
+    private String calculateSignature(String params) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-1");
+            byte[] hashBytes = digest.digest((params + API_SECRET).getBytes());
+            return Base64.getUrlEncoder().withoutPadding().encodeToString(hashBytes);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error calculating Cloudinary signature", e);
+        }
+    }
+
+
+    public void deleteImages(String imageUrl) {
+        String publicId = getPublicId(imageUrl);
+        String timestamp = String.valueOf(Math.round((float) System.currentTimeMillis() /1000));
+        String signature = calculateSignature("public_id=" + publicId + "&timestamp=" + timestamp);
+        String url = "https://api.cloudinary.com/v1_1/" + CLOUD_NAME + "/image/destroy";
+        MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
+        formData.add("public_id", publicId);
+        formData.add("signature", signature);
+        formData.add("api_key", API_KEY);
+        formData.add("timestamp", timestamp);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(formData,headers);
+        ResponseEntity<Void> response = restClient.post()
+                .uri(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(request)
+                .retrieve()
+                .toBodilessEntity();
+        System.out.println("Response: "+ response);
     }
 }
