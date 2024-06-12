@@ -6,6 +6,7 @@ import com.example.groupweb2.mapper.MapStruct;
 import com.example.groupweb2.repository.CarouselRepository;
 import com.example.groupweb2.service.ICarouselService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
