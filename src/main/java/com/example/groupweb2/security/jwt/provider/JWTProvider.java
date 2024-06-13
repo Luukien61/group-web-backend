@@ -95,13 +95,13 @@ public class JWTProvider implements IJWTProvider{
     public TokenResponse generateTokenResponse(UserDetails userDetails){
 
         String accessToken = generateAccessToken(userDetails);
+        var localDate = expireDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
         String refreshToken = generateRefreshToken(userDetails);
-
         return TokenResponse.builder()
                 .token_type(AppConst.BEARER)
                 .access_token(accessToken)
                 .refresh_token(refreshToken)
-                .expires_in(expireDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime())
+                .expires_in(localDate)
                 .build();
     }
     @Override
