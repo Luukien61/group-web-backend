@@ -12,10 +12,8 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Table(name = "Description")
-public class DescriptionEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+public class DescriptionEntity extends  BaseEntity {
+
     @Column(columnDefinition = "TEXT")
     String title;
     @Column(columnDefinition = "TEXT")

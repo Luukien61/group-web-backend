@@ -32,7 +32,7 @@ public class ProductEntity {
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference
     List<PriceEntity> price;
-    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL,orphanRemoval = true)
     @JsonManagedReference
     List<ColorEntity> color;
     @OneToOne(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -55,5 +55,14 @@ public class ProductEntity {
         if(available==null){
             available=totalQuantity;
         }
+    }
+    public void addColor(ColorEntity newColor) {
+        color.add(newColor);
+        newColor.setProduct(this);
+    }
+
+    public void removeColor(ColorEntity oldColor) {
+        color.remove(oldColor);
+        oldColor.setProduct(null);
     }
 }

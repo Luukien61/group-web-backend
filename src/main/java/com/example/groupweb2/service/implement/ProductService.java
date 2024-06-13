@@ -3,6 +3,7 @@ package com.example.groupweb2.service.implement;
 import com.example.groupweb2.dto.ProductDTO;
 import com.example.groupweb2.entity.*;
 import com.example.groupweb2.mapper.MapStruct;
+import com.example.groupweb2.repository.ColorRepository;
 import com.example.groupweb2.repository.ProductRepository;
 import com.example.groupweb2.service.ICategoryService;
 import com.example.groupweb2.service.IProducerService;
@@ -21,12 +22,10 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.web.header.Header;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClient;
-import org.springframework.web.client.RestTemplate;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -43,6 +42,8 @@ public class ProductService implements IProductService {
     @Autowired
     private ProductRepository productRepository;
     @Autowired
+    private ColorRepository colorRepository;
+    @Autowired
     private ICategoryService categoryService;
     @Autowired
     private IProducerService producerService;
@@ -52,11 +53,11 @@ public class ProductService implements IProductService {
     private RestClient restClient;
 
     @Value("${cloudinary.api-secret}")
-    private String API_SECRET ;
+    private String API_SECRET;
     @Value("${cloudinary.cloud-name}")
-    private String CLOUD_NAME ;
+    private String CLOUD_NAME;
     @Value("${cloudinary.api-key}")
-    private String API_KEY ;
+    private String API_KEY;
 
     @Override
     public void saveNewProduct(ProductEntity item) {
@@ -93,26 +94,51 @@ public class ProductService implements IProductService {
         var existProduct = productRepository.findAllById(productId)
                 .orElseThrow(() -> new RuntimeException(NOT_EXIST));
         var newProduct = mapper.toProductEntity(product);
-        existProduct.setName(newProduct.getName());
+        /*
+        remove color by yourself
 
-        existProduct.setImgs(newProduct.getImgs());
-        existProduct.setPrice(newProduct.getPrice());
-        existProduct.setFeatures(newProduct.getFeatures());
+        List<ColorEntity> deletedColors = mergeChildList(existProduct.getColor(), newProduct.getColor());
+        for(ColorEntity item : deletedColors){
+            existProduct.removeColor(item);
+            colorRepository.delete(item);
+        }
+
         existProduct.setColor(newProduct.getColor());
+         */
+
+        existProduct.getColor().clear();
+        existProduct.getColor().addAll(newProduct.getColor());
+
+        existProduct.setName(newProduct.getName());
+        existProduct.setImgs(newProduct.getImgs());
+
+        existProduct.setTotalQuantity(newProduct.getTotalQuantity());
+        existProduct.setPrice(newProduct.getPrice());
+
         existProduct.setDescription(newProduct.getDescription());
         existProduct.setProducer(newProduct.getProducer());
         existProduct.setCategory(newProduct.getCategory());
+        existProduct.setFeatures(newProduct.getFeatures());
         persistChildren(existProduct);
         productRepository.save(existProduct);
+    }
+
+    private <T extends BaseEntity, S> List<T> mergeChildList(List<T> oldChild, List<T> newChild) {
+        int dummyValue = 1;
+        List<T> deletedRecord = new ArrayList<>();
+        Map<Long, Integer> newIdMap = new HashMap<>();
+        newChild.forEach(t -> newIdMap.put(t.getId(), dummyValue));
+        for (T item : oldChild) {
+            if (!newIdMap.containsKey(item.getId())) {
+                deletedRecord.add(item);
+            }
+        }
+        return deletedRecord;
     }
 
     @Override
     public void deleteProduct(String productId) {
         var existProduct = findProductById(productId);
-//        var urls = existProduct.getImgs();
-//        var colorUrls = existProduct.getColor().stream().map(ColorEntity::getLink).toList();
-//        urls.addAll(colorUrls);
-//        urls.forEach(this::deleteImages);
         productRepository.delete(existProduct);
     }
 
@@ -264,23 +290,23 @@ public class ProductService implements IProductService {
 
     @Override
     public int getProductQuantityByCategory(String category) {
-        category=UppercaseUtil.toFirstUppercase(category);
+        category = UppercaseUtil.toFirstUppercase(category);
         try {
             return productRepository.countAllByCategory(category);
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             throw new RuntimeException("En error occurred");
         }
     }
 
-    private String getPublicId(String imageUrl){
+    private String getPublicId(String imageUrl) {
         Pattern pattern = Pattern.compile("v[0-9]+\\/[A-z0-9]+\\.\\w{3,4}$");
         Matcher matcher = pattern.matcher(imageUrl);
-        List<String> matchs= new ArrayList<>();
-        if(matcher.find()){
+        List<String> matchs = new ArrayList<>();
+        if (matcher.find()) {
             matchs.add(matcher.group());
         }
         var rawID = matchs.getLast();
-        var ids=rawID.split("/")[1];
+        var ids = rawID.split("/")[1];
         return ids.split("\\.")[0];
     }
 
@@ -297,7 +323,7 @@ public class ProductService implements IProductService {
 
     public void deleteImages(String imageUrl) {
         String publicId = getPublicId(imageUrl);
-        String timestamp = String.valueOf(Math.round((float) System.currentTimeMillis() /1000));
+        String timestamp = String.valueOf(Math.round((float) System.currentTimeMillis() / 1000));
         String signature = calculateSignature("public_id=" + publicId + "&timestamp=" + timestamp);
         String url = "https://api.cloudinary.com/v1_1/" + CLOUD_NAME + "/image/destroy";
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
@@ -307,13 +333,13 @@ public class ProductService implements IProductService {
         formData.add("timestamp", timestamp);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(formData,headers);
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(formData, headers);
         ResponseEntity<Void> response = restClient.post()
                 .uri(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(request)
                 .retrieve()
                 .toBodilessEntity();
-        System.out.println("Response: "+ response);
+        System.out.println("Response: " + response);
     }
 }

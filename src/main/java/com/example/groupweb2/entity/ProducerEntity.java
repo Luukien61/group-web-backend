@@ -16,10 +16,8 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "Producer")
-public class ProducerEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+public class ProducerEntity extends  BaseEntity{
+
     String name;
 
     @OneToMany(mappedBy = "producer", cascade = CascadeType.MERGE)
