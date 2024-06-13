@@ -18,4 +18,9 @@ public class UserDTO {
     private UserRole role;
     private String phone;
     private boolean activeState;
+
+
+//    public void setRole(String role) {
+//        this.role= UserRole.fromString(role);
+//    }
 }

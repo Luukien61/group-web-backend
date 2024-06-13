@@ -15,10 +15,12 @@ import lombok.Setter;
 @Table(name = "staff_user")
 public class UserEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long staffID;
     private String fullName;
     private String email;
     private String password;
+    @Enumerated(EnumType.STRING)
     private UserRole role;
     private String phone;
     private boolean activeState;

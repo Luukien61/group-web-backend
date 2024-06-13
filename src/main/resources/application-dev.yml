@@ -1,6 +1,6 @@
 #DATASOURCE
 USER_NAME: postgres
-PASSWORD: vuong2003
+PASSWORD: Luudinhkien_2003
 URL: jdbc:postgresql://localhost:5432/groupweb2
 DRIVER: org.postgresql.Driver
 DIALECT: org.hibernate.dialect.PostgreSQLDialect

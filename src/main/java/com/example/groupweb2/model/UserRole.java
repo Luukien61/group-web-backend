@@ -6,8 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum UserRole {
-    ADMIN("Quản lý"),
-    USER("Nhân viên");
+    ADMIN("Admin"),
+    USER("Staff");
 
     private final String role;
 
@@ -15,4 +15,14 @@ public enum UserRole {
     public String toString() {
         return this.getRole();
     }
+
+    public static UserRole fromString(String role) {
+        for (UserRole userRole : UserRole.values()) {
+            if (userRole.getRole().equalsIgnoreCase(role)) {
+                return userRole;
+            }
+        }
+        throw new IllegalArgumentException("No UserRole with text " + role + " found");
+    }
+
 }
