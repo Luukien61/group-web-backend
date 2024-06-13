@@ -2,7 +2,9 @@ package com.example.groupweb2.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor(force = true)
 @AllArgsConstructor
 @Getter
 public enum UserRole {
