@@ -7,15 +7,18 @@ import com.example.groupweb2.util.ControllerUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
     private final UserService userService;
+    private AuthenticationManager authenticationManager;
 
     @PostMapping
     public  ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
@@ -34,15 +37,7 @@ public class UserController {
         return new ResponseEntity<>(userDTOS, HttpStatus.OK);
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginUser requestUser){
-        try{
-            var user = userService.findUserByEmailAndPass(requestUser);
-            return ResponseEntity.ok(user);
-        }catch (Exception e){
-            return ControllerUtil.response(e.getMessage(),HttpStatus.BAD_REQUEST.value());
-        }
-    }
+
     @PutMapping("/user-id/{userId}")
     public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDTO, @PathVariable Long userId) {
         return ResponseEntity.ok(userService.updateUser(userDTO, userId));
@@ -68,4 +63,35 @@ public class UserController {
         return ResponseEntity.ok("User Deleted Successfully!");
     }
 
+    @PostMapping("/authenticate")
+    public ResponseEntity<?> authenticate(@RequestBody LoginUser user){
+        try{
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(user.getEmail(),user.getPassword()));
+            return ResponseEntity.ok("Authenticated");
+        }catch (Exception e){
+            return ControllerUtil.response("Authentication failed",HttpStatus.FORBIDDEN.value());
+        }
+
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody UserDTO userDTO){
+        try{
+            var tokenResponse = userService.registerNewUser(userDTO);
+            return ResponseEntity.ok(tokenResponse);
+        }catch (Exception e){
+            return ControllerUtil.response(e.getMessage(),HttpStatus.FORBIDDEN.value());
+        }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginUser requestUser){
+        try{
+            var token = userService.login(requestUser);
+            return ResponseEntity.ok(token);
+        }catch (Exception e){
+            return ControllerUtil.response(e.getMessage(),HttpStatus.BAD_REQUEST.value());
+        }
+    }
 }

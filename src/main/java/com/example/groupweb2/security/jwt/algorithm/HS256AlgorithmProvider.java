@@ -3,12 +3,14 @@ package com.example.groupweb2.security.jwt.algorithm;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.Getter;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 @Getter
+@Component
 public class HS256AlgorithmProvider implements IAlgorithmProvider{
 
     private final SecretAlgorithm algorithm =SecretAlgorithm.HmacSHA256;

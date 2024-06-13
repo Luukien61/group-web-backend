@@ -6,6 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,6 +29,10 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     private UserRole role;
     private String phone;
-    private boolean activeState = true ;
+    private boolean activeState = true;
+
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_"+this.role.getRole()));
+    }
 
 }

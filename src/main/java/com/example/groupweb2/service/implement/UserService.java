@@ -4,10 +4,19 @@ import com.example.groupweb2.dto.UserDTO;
 import com.example.groupweb2.entity.UserEntity;
 import com.example.groupweb2.mapper.MapStruct;
 import com.example.groupweb2.model.LoginUser;
+import com.example.groupweb2.model.TokenResponse;
+import com.example.groupweb2.model.UserPrincipal;
 import com.example.groupweb2.model.UserRole;
 import com.example.groupweb2.repository.UserRepository;
+import com.example.groupweb2.security.jwt.provider.IJWTProvider;
 import com.example.groupweb2.service.IUserService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +25,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class UserService implements IUserService {
+public class UserService implements IUserService, UserDetailsService {
 
     public static final String DOESNT_EXIST = "The user doesn't exist";
     public static final String ALREADY_EXIST = "The user already exist";
@@ -24,18 +33,21 @@ public class UserService implements IUserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final MapStruct mapper;
+    private final IJWTProvider jwtProvider;
+
 
     @Override
-    public void saveNewUser(UserDTO userDTO)  {
+    public TokenResponse saveNewUser(UserDTO userDTO) {
         var existUser = userRepository.findByEmail(userDTO.getEmail());
         if (existUser.isPresent()) {
             throw new RuntimeException(ALREADY_EXIST);
-        } else {
-            String encodePass = passwordEncoder.encode(userDTO.getPassword().trim());
-            userDTO.setPassword(encodePass);
-            UserEntity save = mapper.toUserEntity(userDTO);
-            userRepository.save(save);
         }
+        String encodePass = passwordEncoder.encode(userDTO.getPassword().trim());
+        userDTO.setPassword(encodePass);
+        UserEntity user = mapper.toUserEntity(userDTO);
+        user = userRepository.save(user);
+        var userPrincipal = UserPrincipal.create(user);
+        return jwtProvider.generateTokenResponse(userPrincipal);
     }
 
     @Override
@@ -53,15 +65,17 @@ public class UserService implements IUserService {
 
     @Override
     public UserEntity findUserByEmailAndPass(LoginUser requestUser) {
-        var email=requestUser.getEmail().trim();
-        var password= requestUser.getPassword().trim();
+        var email = requestUser.getEmail().trim();
+        var password = requestUser.getPassword().trim();
         var existUserOptional = userRepository.findByEmailAndActiveState(email);
-        if(existUserOptional.isEmpty()) throw new RuntimeException("This email does not exist.\n Please sign up first.");
-        var existUser= existUserOptional.get();
+        if (existUserOptional.isEmpty())
+            throw new RuntimeException("This email does not exist.\n Please sign up first.");
+        var existUser = existUserOptional.get();
         var isMatch = passwordEncoder.matches(password, existUser.getPassword());
-        if(!isMatch) throw new RuntimeException(PASSWORD_DOES_NOT_MATCH);
+        if (!isMatch) throw new RuntimeException(PASSWORD_DOES_NOT_MATCH);
         return existUser;
     }
+
     @Override
     public List<UserDTO> findAllUsersByRole(UserRole role) {
         if (role == null) {
@@ -112,4 +126,37 @@ public class UserService implements IUserService {
         userRepository.delete(userEntity);
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        var userOptional = userRepository.findByEmail(username);
+        if (userOptional.isEmpty()) throw new UsernameNotFoundException("This email hasn't been registered yet");
+        var user = userOptional.get();
+        return UserPrincipal.create(user);
+    }
+
+    @Override
+    public String generateToken(UserDetails user) {
+        return jwtProvider.generateAccessToken(user);
+    }
+
+    @Override
+    public String generateToken(UserDetails user, String refreshToken) {
+        if (jwtProvider.isTokenValid(refreshToken, user)) {
+            return jwtProvider.generateAccessToken(user);
+        } else {
+            throw new RuntimeException("Authentication failed") ;
+        }
+    }
+
+    @Override
+    public TokenResponse registerNewUser(UserDTO userDTO) {
+        return saveNewUser(userDTO);
+    }
+
+    @Override
+    public TokenResponse login(LoginUser user) {
+        var existUser = findUserByEmailAndPass(user);
+        var userPrincipal = UserPrincipal.create(existUser);
+        return jwtProvider.generateTokenResponse(userPrincipal);
+    }
 }

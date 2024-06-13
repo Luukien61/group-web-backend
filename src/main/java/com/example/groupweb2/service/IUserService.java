@@ -3,12 +3,14 @@ package com.example.groupweb2.service;
 import com.example.groupweb2.dto.UserDTO;
 import com.example.groupweb2.entity.UserEntity;
 import com.example.groupweb2.model.LoginUser;
+import com.example.groupweb2.model.TokenResponse;
 import com.example.groupweb2.model.UserRole;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
 public interface IUserService {
-    void saveNewUser(UserDTO userDTO);
+    TokenResponse saveNewUser(UserDTO userDTO);
 
     UserDTO findAllUserByStaffId(Long id);
 
@@ -28,4 +30,9 @@ public interface IUserService {
     UserEntity deactiveUser(Long id);
 
     void deleteUser(Long id);
+    String generateToken(UserDetails user);
+    String generateToken(UserDetails user, String refreshToken);
+    TokenResponse registerNewUser(UserDTO userDTO);
+    //void authenticate(LoginUser user);
+    TokenResponse login(LoginUser user);
 }

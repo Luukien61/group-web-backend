@@ -1,4 +1,4 @@
-package com.example.groupweb2.security.jwt.provider;
+package com.example.groupweb2.security.jwt.secret;
 
 import com.example.groupweb2.security.jwt.algorithm.IAlgorithmProvider;
 import lombok.Getter;
@@ -33,13 +33,17 @@ public abstract class BaseSecretProvider {
         }
     }
 
-    void printFile(String content){
+    void printFile(List<String> contents){
         try{
             var fileWriter = new FileWriter(path,false);
             var printer = new PrintWriter(fileWriter);
-
+            for (String content: contents ){
+                printer.println(content);
+            }
+            printer.close();
+            fileWriter.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Unable to write to file");
         }
     }
 

@@ -1,0 +1,18 @@
+package com.example.groupweb2.model;
+
+import lombok.*;
+
+import java.time.LocalDateTime;
+import java.util.Date;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class TokenResponse {
+    private String access_token;
+    private String token_type;
+    private LocalDateTime expires_in;
+    private String refresh_token;
+}

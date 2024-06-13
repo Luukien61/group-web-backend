@@ -27,6 +27,10 @@ server:
 app:
   cors:
     allowOrigins: ${FRONT_END_URL}
+secret:
+  secretPath: src/main/resources/security/security.txt
+  accessTokenExpireTime: ${ACCESS_TOKEN_EXPIRE_TIME}
+  refreshTokenExpireTime: ${REFRESH_TOKEN_EXPIRE_TIME}
 
 cloudinary:
   cloud-name: ${CLOUDINARY_CLOUD_NAME}
