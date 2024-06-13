@@ -29,8 +29,6 @@ public class UserService implements IUserService {
         if (existUser.isPresent()) {
             throw new RuntimeException("The user already exist");
         } else {
-//            System.out.println(userDTO.getStaffID());
-//            System.out.println(userDTO.getPassword());
             String encodePass = passwordEncoder.encode(userDTO.getPassword());
             userDTO.setPassword(encodePass);
             UserEntity save = mapper.toUserEntity(userDTO);
