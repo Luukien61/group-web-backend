@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -88,8 +89,12 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginUser requestUser){
         try{
-            var token = userService.login(requestUser);
-            return ResponseEntity.ok(token);
+            var authentication = SecurityContextHolder.getContext().getAuthentication();
+            if(authentication==null || !authentication.isAuthenticated()){
+                var token = userService.login(requestUser);
+                return ResponseEntity.ok(token);
+            }
+            return ResponseEntity.ok("You have been authenticated");
         }catch (Exception e){
             return ControllerUtil.response(e.getMessage(),HttpStatus.BAD_REQUEST.value());
         }

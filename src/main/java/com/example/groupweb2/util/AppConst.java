@@ -1,4 +1,4 @@
-package com.example.groupweb2.security.jwt;
+package com.example.groupweb2.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

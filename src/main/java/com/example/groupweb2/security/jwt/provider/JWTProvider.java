@@ -1,7 +1,7 @@
 package com.example.groupweb2.security.jwt.provider;
 
 import com.example.groupweb2.model.TokenResponse;
-import com.example.groupweb2.security.jwt.AppConst;
+import com.example.groupweb2.util.AppConst;
 import com.example.groupweb2.security.jwt.algorithm.HS256AlgorithmProvider;
 import com.example.groupweb2.security.jwt.algorithm.SecretAlgorithm;
 import com.example.groupweb2.security.jwt.secret.BaseSecretProvider;
@@ -16,8 +16,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
-import java.time.Duration;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
 import java.util.function.Function;
