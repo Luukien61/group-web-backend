@@ -1,4 +1,4 @@
-package com.example.groupweb2.security.handler;
+package com.example.groupweb2.exception.handler;
 
 import com.example.groupweb2.util.ControllerUtil;
 import jakarta.servlet.ServletException;

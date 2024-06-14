@@ -3,7 +3,6 @@ package com.example.groupweb2.model;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Getter
 @Setter

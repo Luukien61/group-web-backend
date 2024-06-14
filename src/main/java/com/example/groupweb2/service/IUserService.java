@@ -2,6 +2,7 @@ package com.example.groupweb2.service;
 
 import com.example.groupweb2.dto.UserDTO;
 import com.example.groupweb2.entity.UserEntity;
+import com.example.groupweb2.model.LoginResponse;
 import com.example.groupweb2.model.LoginUser;
 import com.example.groupweb2.model.TokenResponse;
 import com.example.groupweb2.model.UserRole;
@@ -34,7 +35,7 @@ public interface IUserService {
     String generateToken(UserDetails user, String refreshToken);
     TokenResponse registerNewUser(UserDTO userDTO);
     //void authenticate(LoginUser user);
-    TokenResponse login(LoginUser user);
+    LoginResponse login(LoginUser user);
 
     TokenResponse refreshToken(String refreshToken, Long userID);
 }

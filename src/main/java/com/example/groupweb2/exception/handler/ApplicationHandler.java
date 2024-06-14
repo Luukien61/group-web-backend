@@ -1,8 +1,6 @@
-package com.example.groupweb2.security.handler;
+package com.example.groupweb2.exception.handler;
 
-import com.example.groupweb2.model.ResponseModel;
 import com.example.groupweb2.util.ControllerUtil;
-import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -11,8 +9,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import java.util.Date;
 
 @RestControllerAdvice
 public class ApplicationHandler {
@@ -28,21 +24,15 @@ public class ApplicationHandler {
         return ControllerUtil.response(ex.getMessage(),HttpStatus.UNAUTHORIZED.value());
     }
 
-    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ExceptionHandler(HttpMessageNotReadableException.class) //(1)
     public ResponseEntity<?> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
-        String errorMessage = "Unable to map your modal: " + ex.getMessage();
-        var responseModel = ResponseModel.builder()
-                .message(errorMessage)
-                .statusCode(HttpStatus.BAD_REQUEST.value())
-                .timestamp(new Date().toString())
-                .build();
-        return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(responseModel);
+        String errorMessage = "Unable to map your request: " + ex.getMessage();
+        return ControllerUtil.response(errorMessage,HttpStatus.BAD_REQUEST.value());
     }
-
 }
 /*
 @RestControllerAdvice chủ yếu được sử dụng để xử lý các ngoại lệ được ném ra
 từ các phương thức trong các @Controller và @RestController
+
+(1): handle when Json library can not map Json request body into object in your controllers.
  */

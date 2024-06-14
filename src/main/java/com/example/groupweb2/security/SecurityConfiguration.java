@@ -31,13 +31,14 @@ public class SecurityConfiguration {
             "/carousel",
             "/actuator/**",
             "/login",
+            "/auth/authenticate"
     };
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors(corsConfigurer -> corsConfigurer.configurationSource(corsConfigurationSource))
-                .csrf(AbstractHttpConfigurer::disable)
+                .csrf(AbstractHttpConfigurer::disable) // (1)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((request) -> request
                         .requestMatchers(PUBLIC_ENDPOINTS).permitAll()
@@ -56,3 +57,9 @@ public class SecurityConfiguration {
         return http.build();
     }
 }
+/*
+(1): Browsers send cookies along with all requests, CSRF attacks depend upon this behavior.
+If you do not use cookies, and don't rely on cookies for authentication,
+then there is absolutely no room for CSRF attacks, and no reason to put in CSRF protection.
+If you have cookies, especially if you use them for authentication, then you need CSRF protection.
+ */

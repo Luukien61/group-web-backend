@@ -3,10 +3,7 @@ package com.example.groupweb2.service.implement;
 import com.example.groupweb2.dto.UserDTO;
 import com.example.groupweb2.entity.UserEntity;
 import com.example.groupweb2.mapper.MapStruct;
-import com.example.groupweb2.model.LoginUser;
-import com.example.groupweb2.model.TokenResponse;
-import com.example.groupweb2.model.UserPrincipal;
-import com.example.groupweb2.model.UserRole;
+import com.example.groupweb2.model.*;
 import com.example.groupweb2.repository.UserRepository;
 import com.example.groupweb2.security.jwt.provider.IJWTProvider;
 import com.example.groupweb2.service.IUserService;
@@ -67,7 +64,7 @@ public class UserService implements IUserService, UserDetailsService {
         var password = requestUser.getPassword().trim();
         var existUserOptional = userRepository.findByEmailAndActiveState(email);
         if (existUserOptional.isEmpty())
-            throw new RuntimeException("This email does not exist.\n Please sign up first.");
+            throw new RuntimeException("This email does not exist.\nPlease sign up first.");
         var existUser = existUserOptional.get();
         var isMatch = passwordEncoder.matches(password, existUser.getPassword());
         if (!isMatch) throw new RuntimeException(PASSWORD_DOES_NOT_MATCH);
@@ -152,11 +149,15 @@ public class UserService implements IUserService, UserDetailsService {
     }
 
     @Override
-    public TokenResponse login(LoginUser user) {
-
+    public LoginResponse login(LoginUser user) {
         var existUser = findUserByEmailAndPass(user);
         var userPrincipal = UserPrincipal.create(existUser);
-        return jwtProvider.generateTokenResponse(userPrincipal);
+        var tokenResponse = jwtProvider.generateTokenResponse(userPrincipal);
+        return LoginResponse.builder()
+                .tokenResponse(tokenResponse)
+                .message("Login successfully")
+                .user(mapper.toUserResponse(existUser))
+                .build();
     }
 
     @Override

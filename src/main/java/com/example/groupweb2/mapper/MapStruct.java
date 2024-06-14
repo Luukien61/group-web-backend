@@ -2,6 +2,7 @@ package com.example.groupweb2.mapper;
 
 import com.example.groupweb2.dto.*;
 import com.example.groupweb2.entity.*;
+import com.example.groupweb2.model.UserResponse;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -37,10 +38,14 @@ public interface MapStruct {
     ProducerDTO toProducerDTO(ProducerEntity item);
 
     CarouselEntity toCarouselEntity(CarouselDTO carouselDTO);
+
     CarouselDTO toCarouselDTO(CarouselEntity carouselEntity);
 
     UserDTO toUserDTO(UserEntity item);
+
     UserEntity toUserEntity(UserDTO item);
+
+    UserResponse toUserResponse(UserEntity userEntity);
 
     List<ColorDTO> toListColorDTO(List<ColorEntity> items);
 

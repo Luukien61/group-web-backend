@@ -1,7 +1,6 @@
-package com.example.groupweb2.security.handler;
+package com.example.groupweb2.exception.handler;
 
 import com.example.groupweb2.model.ResponseModel;
-import com.example.groupweb2.util.ControllerUtil;
 import com.example.groupweb2.util.JsonUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,10 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 import java.util.Date;
-
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @Component
@@ -30,5 +27,6 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         var body = JsonUtil.generateJson(responseModel);
         response.getWriter().write(body);
         response.setStatus(UNAUTHORIZED.value());
+        //response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized: Authentication token was either missing or invalid.");
     }
 }

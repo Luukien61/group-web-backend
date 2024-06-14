@@ -1,6 +1,5 @@
 package com.example.groupweb2.controller;
 
-import com.example.groupweb2.model.LoginUser;
 import com.example.groupweb2.model.RefreshTokenRequest;
 import com.example.groupweb2.service.implement.UserService;
 import com.example.groupweb2.util.ControllerUtil;
@@ -8,12 +7,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/auth")
 @RestController
@@ -21,20 +19,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final UserService userService;
-    private AuthenticationManager authenticationManager;
 
-    @PostMapping("/authenticate")
-    public ResponseEntity<?> authenticate(@RequestBody LoginUser user){
+    @GetMapping("/authenticate")
+    public ResponseEntity<?> authenticate(){
         try{
-            var authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(user.getEmail(),user.getPassword()));
-            if(authentication==null || !authentication.isAuthenticated()) throw new RuntimeException();
-            return ResponseEntity.ok("Authenticated");
+            var authentication = SecurityContextHolder.getContext().getAuthentication();
+            if(authentication instanceof UsernamePasswordAuthenticationToken) {
+               return ResponseEntity.ok("Authenticated");
+            }
+            return ControllerUtil.response("Unauthenticated", HttpStatus.UNAUTHORIZED.value());
         }catch (Exception e){
-            throw new AccessDeniedException("Access denied");
+            return ControllerUtil.response(e.getMessage(), HttpStatus.BAD_REQUEST.value());
         }
-
     }
+
 
     @PostMapping("/refresh-token")
     public ResponseEntity<?> refreshToken(@RequestBody RefreshTokenRequest request){
