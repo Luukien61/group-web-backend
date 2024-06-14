@@ -29,10 +29,21 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     private UserRole role;
     private String phone;
-    private boolean activeState = true;
+    private Boolean activeState = true;
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_"+this.role.getRole()));
     }
 
+    @PrePersist  // (1)
+    public void persistDefaultActiveState(){
+        if(activeState==null){
+            this.activeState=true;
+        }
+    }
 }
+/*
+ @PrePersist chỉ được gọi khi một entity mới được lưu vào cơ sở dữ liệu lần đầu tiên.
+ Khi một entity đã tồn tại trong cơ sở dữ liệu và được cập nhật,
+ @PreUpdate sẽ được gọi thay vì @PrePersist
+ */

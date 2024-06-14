@@ -1,15 +1,13 @@
 package com.example.groupweb2.controller;
 
 import com.example.groupweb2.dto.UserDTO;
-import com.example.groupweb2.model.LoginUser;
 import com.example.groupweb2.service.implement.UserService;
 import com.example.groupweb2.util.ControllerUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +17,6 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
-    private AuthenticationManager authenticationManager;
 
     @PostMapping
     public  ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
@@ -64,39 +61,5 @@ public class UserController {
         return ResponseEntity.ok("User Deleted Successfully!");
     }
 
-    @PostMapping("/authenticate")
-    public ResponseEntity<?> authenticate(@RequestBody LoginUser user){
-        try{
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(user.getEmail(),user.getPassword()));
-            return ResponseEntity.ok("Authenticated");
-        }catch (Exception e){
-            return ControllerUtil.response("Authentication failed",HttpStatus.FORBIDDEN.value());
-        }
 
-    }
-
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody UserDTO userDTO){
-        try{
-            var tokenResponse = userService.registerNewUser(userDTO);
-            return ResponseEntity.ok(tokenResponse);
-        }catch (Exception e){
-            return ControllerUtil.response(e.getMessage(),HttpStatus.FORBIDDEN.value());
-        }
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginUser requestUser){
-        try{
-            var authentication = SecurityContextHolder.getContext().getAuthentication();
-            if(authentication==null || !authentication.isAuthenticated()){
-                var token = userService.login(requestUser);
-                return ResponseEntity.ok(token);
-            }
-            return ResponseEntity.ok("You have been authenticated");
-        }catch (Exception e){
-            return ControllerUtil.response(e.getMessage(),HttpStatus.BAD_REQUEST.value());
-        }
-    }
 }

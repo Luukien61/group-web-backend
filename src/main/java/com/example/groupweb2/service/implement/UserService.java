@@ -10,10 +10,8 @@ import com.example.groupweb2.model.UserRole;
 import com.example.groupweb2.repository.UserRepository;
 import com.example.groupweb2.security.jwt.provider.IJWTProvider;
 import com.example.groupweb2.service.IUserService;
+import com.example.groupweb2.util.AppConst;
 import lombok.AllArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -91,7 +89,7 @@ public class UserService implements IUserService, UserDetailsService {
         UserEntity existUser = userRepository.findByStaffID(userId).orElseThrow(
                 () -> new RuntimeException(DOESNT_EXIST));
         existUser.setFullName(userDTO.getFullName());
-        existUser.setActiveState(userDTO.isActiveState());
+        existUser.setActiveState(userDTO.getActiveState());
         existUser.setEmail(userDTO.getEmail());
         existUser.setRole(userDTO.getRole());
         existUser.setPhone(userDTO.getPhone());
@@ -159,5 +157,16 @@ public class UserService implements IUserService, UserDetailsService {
         var existUser = findUserByEmailAndPass(user);
         var userPrincipal = UserPrincipal.create(existUser);
         return jwtProvider.generateTokenResponse(userPrincipal);
+    }
+
+    @Override
+    public TokenResponse refreshToken(String refreshToken, Long userID) {
+        var existUserOptional = userRepository.findByStaffID(userID);
+        if(existUserOptional.isEmpty()) throw new RuntimeException(DOESNT_EXIST);
+        var userEntity = existUserOptional.get();
+        var userDetail = UserPrincipal.create(userEntity);
+        var isValid = jwtProvider.isTokenValid(refreshToken,userDetail);
+        if(!isValid) throw new RuntimeException("The refresh token is invalid");
+        return jwtProvider.generateTokenResponse(userDetail,refreshToken);
     }
 }

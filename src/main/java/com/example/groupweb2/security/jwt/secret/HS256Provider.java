@@ -22,7 +22,7 @@ public class HS256Provider extends BaseSecretProvider{
         for (String i : result) {
             if (i.startsWith(JWT)) {
                 i=i.substring(JWT.length());
-                byte[] decoded = Base64.getDecoder().decode(i);
+                byte[] decoded = Base64.getDecoder().decode(i); //(1)
                 keys.add(new SecretKeySpec(
                         decoded,
                         0,
@@ -37,7 +37,7 @@ public class HS256Provider extends BaseSecretProvider{
 
     @Override
     List<String> generateJWTSecretKey() {
-        Key secretKey = provider.generate().getFirst();
+        Key secretKey = provider.generate().getFirst(); //(2)
         String encoded = Base64.getEncoder().encodeToString(secretKey.getEncoded());
         List<String> result = new ArrayList<>();
         if (encoded != null) {
@@ -48,3 +48,9 @@ public class HS256Provider extends BaseSecretProvider{
         return result;
     }
 }
+/*
+(1): after being decoded, the byte array is just raw data.
+ So we need to convert it into SecretKey
+
+(2): the key is byte format, so we need to encode it into string for storing.
+ */

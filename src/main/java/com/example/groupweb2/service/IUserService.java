@@ -35,4 +35,6 @@ public interface IUserService {
     TokenResponse registerNewUser(UserDTO userDTO);
     //void authenticate(LoginUser user);
     TokenResponse login(LoginUser user);
+
+    TokenResponse refreshToken(String refreshToken, Long userID);
 }

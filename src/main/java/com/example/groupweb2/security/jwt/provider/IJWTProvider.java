@@ -11,6 +11,7 @@ public interface IJWTProvider {
     String generateAccessToken(UserDetails userDetails);
     String generateRefreshToken(UserDetails userDetails);
     TokenResponse generateTokenResponse(UserDetails userDetails);
+    TokenResponse generateTokenResponse(UserDetails userDetails, String refreshToken);
     String generateAccessToken(UserDetails userDetails, Map<String,Object> claims);
     String generateAccessToken(UserDetails userDetails, Collection<? extends GrantedAuthority> claims, String agent);
     String generateAccessToken(UserDetails userDetails, Collection<? extends GrantedAuthority> claims);

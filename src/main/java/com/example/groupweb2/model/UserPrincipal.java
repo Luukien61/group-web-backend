@@ -27,7 +27,13 @@ public class UserPrincipal implements UserDetails {
     }
 
     public static UserPrincipal create(UserEntity user){
-        return new UserPrincipal(user.getStaffID(), user.getEmail(), user.getPassword(), user.getAuthorities(), user.isActiveState());
+        return new UserPrincipal(
+                user.getStaffID(),
+                user.getEmail(),
+                user.getPassword(),
+                user.getAuthorities(),
+                user.getActiveState()
+        );
     }
 
 

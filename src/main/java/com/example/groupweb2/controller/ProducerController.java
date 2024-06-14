@@ -8,6 +8,7 @@ import jakarta.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
 public class ProducerController {
     private IProducerService producerService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/one/{category}")
     public ResponseEntity<?> insertNewProducer(@RequestBody ProducerDTO producer, @PathVariable String category) {
         try {
@@ -28,6 +30,7 @@ public class ProducerController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/many/{category}")
     public ResponseEntity<?> insertProducers(@RequestBody List<ProducerDTO> producers,@PathVariable String category) {
         try {
@@ -38,7 +41,7 @@ public class ProducerController {
         }
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{producerId}")
     public ResponseEntity<?> updateProducer(
             @RequestBody ProducerDTO producerDTO,
@@ -52,6 +55,7 @@ public class ProducerController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping()
     public ResponseEntity<?> deleteProducer(
             @RequestBody ProducerDTO producerDTO
