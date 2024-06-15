@@ -7,7 +7,6 @@ import com.example.groupweb2.model.*;
 import com.example.groupweb2.repository.UserRepository;
 import com.example.groupweb2.security.jwt.provider.IJWTProvider;
 import com.example.groupweb2.service.IUserService;
-import com.example.groupweb2.util.AppConst;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -46,10 +45,10 @@ public class UserService implements IUserService, UserDetailsService {
     }
 
     @Override
-    public UserDTO findAllUserByStaffId(Long id) {
+    public UserResponse findAllUserByStaffId(Long id) {
         UserEntity userEntity = userRepository.findAllByStaffID(id).orElseThrow(
                 () -> new RuntimeException(DOESNT_EXIST));
-        return mapper.toUserDTO(userEntity);
+        return mapper.toUserResponse(userEntity);
     }
 
     @Override
@@ -161,8 +160,9 @@ public class UserService implements IUserService, UserDetailsService {
     }
 
     @Override
-    public TokenResponse refreshToken(String refreshToken, Long userID) {
-        var existUserOptional = userRepository.findByStaffID(userID);
+    public TokenResponse refreshToken(String refreshToken) {
+        var userEmail = jwtProvider.exactUserName(refreshToken);
+        var existUserOptional = userRepository.findByEmailAndActiveState(userEmail);
         if(existUserOptional.isEmpty()) throw new RuntimeException(DOESNT_EXIST);
         var userEntity = existUserOptional.get();
         var userDetail = UserPrincipal.create(userEntity);

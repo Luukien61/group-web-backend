@@ -37,7 +37,7 @@ public class AuthController {
     @PostMapping("/refresh-token")
     public ResponseEntity<?> refreshToken(@RequestBody RefreshTokenRequest request){
         try{
-            var tokenResponse = userService.refreshToken(request.getRefreshToken(),request.getUserId());
+            var tokenResponse = userService.refreshToken(request.getRefreshToken());
             return ResponseEntity.ok(tokenResponse);
         }catch (Exception e){
             return ControllerUtil.response(e.getMessage(),HttpStatus.FORBIDDEN.value());

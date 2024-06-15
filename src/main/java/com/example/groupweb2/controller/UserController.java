@@ -23,11 +23,11 @@ public class UserController {
     }
 
     @GetMapping("/user-id/{userId}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable Long userId) {
+    public ResponseEntity<?> getUserById(@PathVariable Long userId) {
         return ResponseEntity.ok(userService.findAllUserByStaffId(userId));
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         List<UserDTO> userDTOS = userService.findAllUsers();
         return new ResponseEntity<>(userDTOS, HttpStatus.OK);
