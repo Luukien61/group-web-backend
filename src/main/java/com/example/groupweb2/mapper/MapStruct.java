@@ -4,10 +4,11 @@ import com.example.groupweb2.dto.*;
 import com.example.groupweb2.entity.*;
 import com.example.groupweb2.model.UserResponse;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper
+@Mapper(uses = MapperHelper.class)
 public interface MapStruct {
     CategoryDTO toCategoryDTO(CategoryEntity item);
 
@@ -58,6 +59,13 @@ public interface MapStruct {
     List<ProductDTO> toListProductDTO(List<ProductEntity> items);
 
     List<ProductEntity> toListProductEntity(List<ProductDTO> items);
+
+
+    @Mapping(target = "productId", source = "product", qualifiedByName = "getProductId")
+    OrderDTO toOrderDTO(OrderEntity orderEntity);
+    @Mapping(source = "productId", target = "product", ignore = true)
+    OrderEntity toOrderEntity(OrderDTO orderDTO);
+
 
 
     //    List<DescriptionDTO> toListDescriptionDTO(List<DescriptionEntity> items);

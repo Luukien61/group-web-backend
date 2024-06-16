@@ -31,7 +31,8 @@ public class SecurityConfiguration {
             "/carousel",
             "/actuator/**",
             "/login",
-            "/auth/authenticate"
+            "/auth/authenticate",
+            "/order/**"
     };
 
     @Bean

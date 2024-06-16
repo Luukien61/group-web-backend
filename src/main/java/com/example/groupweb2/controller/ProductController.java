@@ -82,8 +82,6 @@ public class ProductController {
         try {
             Page<ProductEntity> result = productService
                     .findAllProductByCategoryAndProducerAndPrice(category, producer, minPrice, maxPrice, page, size, sort);
-//            if (result.isEmpty()) return ControllerUtil
-//                    .response(CustomMessage.NOT_FOUND.getMessage(), HttpStatus.NOT_FOUND.value());
             return ResponseEntity.ok(result);
         } catch (RuntimeException e) {
             return ControllerUtil.response(e.getMessage(), HttpStatus.NOT_FOUND.value());
@@ -118,5 +116,6 @@ public class ProductController {
                     .body(ControllerUtil.response(e.getMessage(), HttpStatus.BAD_REQUEST.value()));
         }
     }
+
 
 }

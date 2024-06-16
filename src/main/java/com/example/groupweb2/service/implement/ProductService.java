@@ -27,6 +27,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClient;
 
+import java.security.InvalidParameterException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
@@ -340,6 +341,12 @@ public class ProductService implements IProductService {
                 .body(request)
                 .retrieve()
                 .toBodilessEntity();
-        System.out.println("Response: " + response);
+    }
+
+
+    private ProductEntity getExistProduct(String productId){
+        var productOptional = productRepository.findAllById(productId.trim().toLowerCase());
+        if(productOptional.isEmpty()) throw new InvalidParameterException(NOT_EXIST);
+        return productOptional.get();
     }
 }
