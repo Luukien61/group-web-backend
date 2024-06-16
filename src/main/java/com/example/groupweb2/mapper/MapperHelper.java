@@ -13,4 +13,14 @@ public class MapperHelper {
         return product.getId();
     }
 
+    @Named("getProductName")
+    public String getProductName(@NonNull ProductEntity product){
+        return product.getName();
+    }
+
+    @Named("getCategory")
+    public String getCategory(@NonNull ProductEntity product){
+        return product.getCategory().getName();
+    }
+
 }

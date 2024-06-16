@@ -43,7 +43,7 @@ public class LogInController {
             }
             return ResponseEntity.ok("You have been authenticated");
         }catch (Exception e){
-            return ControllerUtil.response(e.getMessage(),HttpStatus.BAD_REQUEST.value());
+            return ControllerUtil.response(e.getMessage(),HttpStatus.NOT_FOUND.value());
         }
     }
 }

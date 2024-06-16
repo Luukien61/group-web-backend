@@ -47,7 +47,8 @@ public class ProductEntity {
     @JsonManagedReference
     ProducerEntity producer;
 
-    @OneToMany(mappedBy = "product",cascade = {CascadeType.REMOVE,CascadeType.PERSIST,CascadeType.MERGE})
+    @OneToMany(mappedBy = "product",cascade = {CascadeType.REMOVE,CascadeType.PERSIST,CascadeType.MERGE},fetch = FetchType.LAZY)
+    @JsonManagedReference
     List<OrderEntity> orders;
 
     @PrePersist

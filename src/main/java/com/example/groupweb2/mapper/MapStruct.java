@@ -48,20 +48,18 @@ public interface MapStruct {
 
     UserResponse toUserResponse(UserEntity userEntity);
 
-    List<ColorDTO> toListColorDTO(List<ColorEntity> items);
-
-    List<ColorEntity> toListColorEntity(List<ColorDTO> items);
-
-    List<PriceDTO> toListPriceDTO(List<PriceEntity> items);
-
-    List<PriceEntity> toListPriceEntity(List<PriceDTO> items);
-
-    List<ProductDTO> toListProductDTO(List<ProductEntity> items);
-
-    List<ProductEntity> toListProductEntity(List<ProductDTO> items);
-
+//    List<ColorDTO> toListColorDTO(List<ColorEntity> items);
+//
+//    List<ColorEntity> toListColorEntity(List<ColorDTO> items);
+//
+//    List<PriceDTO> toListPriceDTO(List<PriceEntity> items);
+//
+//    List<PriceEntity> toListPriceEntity(List<PriceDTO> items);
+//
 
     @Mapping(target = "productId", source = "product", qualifiedByName = "getProductId")
+    @Mapping(target = "productName",source = "product",qualifiedByName = "getProductName")
+    @Mapping(target = "category",source = "product" ,qualifiedByName = "getCategory")
     OrderDTO toOrderDTO(OrderEntity orderEntity);
     @Mapping(source = "productId", target = "product", ignore = true)
     OrderEntity toOrderEntity(OrderDTO orderDTO);
