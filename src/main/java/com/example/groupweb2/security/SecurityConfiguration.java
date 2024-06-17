@@ -31,7 +31,7 @@ public class SecurityConfiguration {
             "/carousel",
             "/actuator/**",
             "/login",
-            "/auth/authenticate",
+            "/auth/refresh-token",
             "/order/**"
     };
 

@@ -29,7 +29,7 @@ public class AuthController {
             }
             return ControllerUtil.response("Unauthenticated", HttpStatus.UNAUTHORIZED.value());
         }catch (Exception e){
-            return ControllerUtil.response(e.getMessage(), HttpStatus.BAD_REQUEST.value());
+            return ControllerUtil.response(e.getMessage(), HttpStatus.UNAUTHORIZED.value());
         }
     }
 
