@@ -4,7 +4,6 @@ import com.example.groupweb2.dto.ProducerDTO;
 import com.example.groupweb2.model.CustomMessage;
 import com.example.groupweb2.service.IProducerService;
 import com.example.groupweb2.util.ControllerUtil;
-import jakarta.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

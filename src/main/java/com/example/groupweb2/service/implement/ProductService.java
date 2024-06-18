@@ -300,7 +300,7 @@ public class ProductService implements IProductService {
     }
 
     private String getPublicId(String imageUrl) {
-        Pattern pattern = Pattern.compile("v[0-9]+\\/[A-z0-9]+\\.\\w{3,4}$");
+        Pattern pattern = Pattern.compile("v[0-9]+/[A-z0-9]+\\.\\w{3,4}$");
         Matcher matcher = pattern.matcher(imageUrl);
         List<String> matchs = new ArrayList<>();
         if (matcher.find()) {
