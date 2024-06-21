@@ -20,7 +20,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         response.setHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE);
         var responseModel = ResponseModel.builder()
-                .message("Unauthorized request")
+                .message(authException.getMessage())
                 .statusCode(HttpStatus.UNAUTHORIZED.value())
                 .timestamp(new Date().toString())
                 .build();

@@ -28,7 +28,7 @@ app:
   cors:
     allowOrigins: ${FRONT_END_URL}
 secret:
-  secretPath: src/main/resources/static/security.txt
+  secretPath: ${SECRET_PATH}
   accessTokenExpireTime: ${ACCESS_TOKEN_EXPIRE_TIME}
   refreshTokenExpireTime: ${REFRESH_TOKEN_EXPIRE_TIME}
 
