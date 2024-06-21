@@ -14,18 +14,19 @@ public interface IUserService {
 
     List<UserDTO> findAllUsers();
 
+    List<UserDTO> findAllUsersByRole(String role);
+
     UserEntity findUserByEmailAndPass(LoginUser requestUser);
 
 //    UserDTO updateUser(UserDTO userDTO, Long userId);
 //
 //    void deleteUser(UserDTO userDTO);
-    List<UserDTO> findAllUsersByRole(UserRole role);
 
     UserDTO updateUser(UserDTO userDTO, Long userId);
 
     UserDTO activeUser(Long id);
 
-    UserEntity deactiveUser(Long id);
+    UserEntity inActiveUser(Long id);
 
     void deleteUser(Long id);
     String generateToken(UserDetails user);
@@ -35,4 +36,5 @@ public interface IUserService {
     LoginResponse login(LoginUser user);
 
     TokenResponse refreshToken(String refreshToken);
+
 }

@@ -71,11 +71,12 @@ public class UserService implements IUserService, UserDetailsService {
     }
 
     @Override
-    public List<UserDTO> findAllUsersByRole(UserRole role) {
+    public List<UserDTO> findAllUsersByRole(String role) {
         if (role == null) {
             throw new RuntimeException("Role is required");
         }
-        List<UserEntity> users = userRepository.findAllByRole(role);
+        UserRole userRole = UserRole.fromString(role);
+        List<UserEntity> users = userRepository.findAllByRole(userRole);
         return users.stream().map(mapper::toUserDTO).toList();
     }
 
@@ -105,7 +106,7 @@ public class UserService implements IUserService, UserDetailsService {
     }
 
     @Override
-    public UserEntity deactiveUser(Long id) {
+    public UserEntity inActiveUser(Long id) {
         UserEntity userEntity = userRepository.findByStaffID(id).orElseThrow(
                 () -> new RuntimeException(DOESNT_EXIST));
         userEntity.setActiveState(false);

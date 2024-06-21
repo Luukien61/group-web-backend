@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:15.7-alpine
+    image: luukien/postgres-data:v1
 #    volumes:
 #      - postgres-groupweb:/var/lib/postgresql/data/ #(1)
     restart: always
@@ -48,6 +48,7 @@ services:
       - my-web-network
     ports:
       - "8087:8087"
+      - "8887:8887"
     container_name: mail-server
 
 volumes:
