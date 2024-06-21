@@ -299,49 +299,49 @@ public class ProductService implements IProductService {
         }
     }
 
-    private String getPublicId(String imageUrl) {
-        Pattern pattern = Pattern.compile("v[0-9]+/[A-z0-9]+\\.\\w{3,4}$");
-        Matcher matcher = pattern.matcher(imageUrl);
-        List<String> matchs = new ArrayList<>();
-        if (matcher.find()) {
-            matchs.add(matcher.group());
-        }
-        var rawID = matchs.getLast();
-        var ids = rawID.split("/")[1];
-        return ids.split("\\.")[0];
-    }
-
-    private String calculateSignature(String params) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-1");
-            byte[] hashBytes = digest.digest((params + API_SECRET).getBytes());
-            return Base64.getUrlEncoder().withoutPadding().encodeToString(hashBytes);
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Error calculating Cloudinary signature", e);
-        }
-    }
-
-
-    public void deleteImages(String imageUrl) {
-        String publicId = getPublicId(imageUrl);
-        String timestamp = String.valueOf(Math.round((float) System.currentTimeMillis() / 1000));
-        String signature = calculateSignature("public_id=" + publicId + "&timestamp=" + timestamp);
-        String url = "https://api.cloudinary.com/v1_1/" + CLOUD_NAME + "/image/destroy";
-        MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
-        formData.add("public_id", publicId);
-        formData.add("signature", signature);
-        formData.add("api_key", API_KEY);
-        formData.add("timestamp", timestamp);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(formData, headers);
-        ResponseEntity<Void> response = restClient.post()
-                .uri(url)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(request)
-                .retrieve()
-                .toBodilessEntity();
-    }
+//    private String getPublicId(String imageUrl) {
+//        Pattern pattern = Pattern.compile("v[0-9]+/[A-z0-9]+\\.\\w{3,4}$");
+//        Matcher matcher = pattern.matcher(imageUrl);
+//        List<String> matchs = new ArrayList<>();
+//        if (matcher.find()) {
+//            matchs.add(matcher.group());
+//        }
+//        var rawID = matchs.getLast();
+//        var ids = rawID.split("/")[1];
+//        return ids.split("\\.")[0];
+//    }
+//
+//    private String calculateSignature(String params) {
+//        try {
+//            MessageDigest digest = MessageDigest.getInstance("SHA-1");
+//            byte[] hashBytes = digest.digest((params + API_SECRET).getBytes());
+//            return Base64.getUrlEncoder().withoutPadding().encodeToString(hashBytes);
+//        } catch (NoSuchAlgorithmException e) {
+//            throw new RuntimeException("Error calculating Cloudinary signature", e);
+//        }
+//    }
+//
+//
+//    public void deleteImages(String imageUrl) {
+//        String publicId = getPublicId(imageUrl);
+//        String timestamp = String.valueOf(Math.round((float) System.currentTimeMillis() / 1000));
+//        String signature = calculateSignature("public_id=" + publicId + "&timestamp=" + timestamp);
+//        String url = "https://api.cloudinary.com/v1_1/" + CLOUD_NAME + "/image/destroy";
+//        MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
+//        formData.add("public_id", publicId);
+//        formData.add("signature", signature);
+//        formData.add("api_key", API_KEY);
+//        formData.add("timestamp", timestamp);
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(formData, headers);
+//        ResponseEntity<Void> response = restClient.post()
+//                .uri(url)
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .body(request)
+//                .retrieve()
+//                .toBodilessEntity();
+//    }
 
 
     private ProductEntity getExistProduct(String productId){

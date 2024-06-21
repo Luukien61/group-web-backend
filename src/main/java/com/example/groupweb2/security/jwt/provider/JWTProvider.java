@@ -50,7 +50,7 @@ public class JWTProvider implements IJWTProvider {
         this.refreshTokenExpire = refreshTime;
         BaseSecretProvider provider = new HS256Provider(path, hs256AlgorithmProvider);
         this.algorithm = provider.getProvider().getAlgorithm();
-        this.secretKey = provider.getKey().getFirst();
+        this.secretKey = provider.getKey().get(0);
     }
 
     private String createToken(Map<String, Object> map, String subject, Long expiration) {

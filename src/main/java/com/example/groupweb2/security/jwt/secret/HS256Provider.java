@@ -37,7 +37,7 @@ public class HS256Provider extends BaseSecretProvider{
 
     @Override
     List<String> generateJWTSecretKey() {
-        Key secretKey = provider.generate().getFirst(); //(2)
+        Key secretKey = provider.generate().get(0); //(2)
         String encoded = Base64.getEncoder().encodeToString(secretKey.getEncoded());
         List<String> result = new ArrayList<>();
         if (encoded != null) {

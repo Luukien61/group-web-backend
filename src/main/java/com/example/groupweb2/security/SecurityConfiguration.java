@@ -4,6 +4,7 @@ import com.example.groupweb2.security.filter.JWTAuthenticationFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -28,7 +29,6 @@ public class SecurityConfiguration {
             "/product/**",
             "/category",
             "/producer/**",
-            "/carousel",
             "/actuator/**",
             "/login",
             "/auth/refresh-token",
@@ -42,9 +42,10 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable) // (1)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((request) -> request
+                        .requestMatchers(HttpMethod.GET,"/carousel").permitAll()
                         .requestMatchers(PUBLIC_ENDPOINTS).permitAll()
                         .requestMatchers("/user/user-id/*").hasAnyRole("ADMIN","STAFF")
-                        .requestMatchers("/user/**", "register").hasRole("ADMIN")
+                        .requestMatchers("register").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session-> session

@@ -20,7 +20,7 @@ public class CarouselController {
     @PostMapping()
     public ResponseEntity<?> insertImages(@RequestBody List<CarouselDTO> items){
         try{
-            carouselService.saveManyItems(items);
+            carouselService.refreshCarousel(items);
             return ControllerUtil.response(CustomMessage.CREATED.getMessage(), HttpStatus.CREATED.value());
         }catch (RuntimeException e){
             return ControllerUtil.response(e.getMessage(), HttpStatus.NOT_MODIFIED.value());
