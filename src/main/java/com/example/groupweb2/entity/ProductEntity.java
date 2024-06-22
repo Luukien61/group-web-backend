@@ -51,6 +51,10 @@ public class ProductEntity {
     @JsonManagedReference
     List<OrderEntity> orders;
 
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    RatingEntity rating;
+
     @PrePersist
     public void prePersist(){
         if(ordering==null){

@@ -228,6 +228,7 @@ public class ProductService implements IProductService {
         var feature = productEntity.getFeatures();
         var memories = productEntity.getPrice();
         var producer = productEntity.getProducer();
+        var rating = productEntity.getRating();
 
         for (ColorEntity item : colors) {
             item.setProduct(productEntity);
@@ -238,6 +239,11 @@ public class ProductService implements IProductService {
             item.setProduct(productEntity);
             item.setFeature(feature);
         }
+        if(rating==null){
+            rating=new RatingEntity();
+            productEntity.setRating(rating);
+        }
+        rating.setProduct(productEntity);
         persistProducerAndCategory(producer, category, productEntity);
     }
 
@@ -299,7 +305,16 @@ public class ProductService implements IProductService {
         }
     }
 
-//    private String getPublicId(String imageUrl) {
+    @Override
+    public ProductEntity ratingProduct(String productId, int value) {
+        var existProduct = getExistProduct(productId);
+        var productRating = existProduct.getRating();
+        productRating.insertNewRating(value);
+        existProduct.setRating(productRating);
+        productRepository.save(existProduct);
+        return existProduct;
+    }
+    //    private String getPublicId(String imageUrl) {
 //        Pattern pattern = Pattern.compile("v[0-9]+/[A-z0-9]+\\.\\w{3,4}$");
 //        Matcher matcher = pattern.matcher(imageUrl);
 //        List<String> matchs = new ArrayList<>();
@@ -345,8 +360,7 @@ public class ProductService implements IProductService {
 
 
     private ProductEntity getExistProduct(String productId){
-        var productOptional = productRepository.findAllById(productId.trim().toLowerCase());
-        if(productOptional.isEmpty()) throw new InvalidParameterException(NOT_EXIST);
-        return productOptional.get();
+       return productRepository.findAllById(productId.trim().toLowerCase())
+               .orElseThrow(()-> new InvalidParameterException(NOT_EXIST));
     }
 }

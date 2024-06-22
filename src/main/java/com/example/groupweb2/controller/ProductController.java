@@ -3,6 +3,7 @@ package com.example.groupweb2.controller;
 import com.example.groupweb2.dto.ProductDTO;
 import com.example.groupweb2.entity.ProductEntity;
 import com.example.groupweb2.model.CustomMessage;
+import com.example.groupweb2.model.RatingRequest;
 import com.example.groupweb2.model.ResponseModel;
 import com.example.groupweb2.service.IProductService;
 import com.example.groupweb2.util.ControllerUtil;
@@ -120,5 +121,14 @@ public class ProductController {
         }
     }
 
+    @PostMapping("/rating/{productId}")
+    public ResponseEntity<?> ratingProduct(@PathVariable String productId, @RequestBody RatingRequest request){
+        try{
+            var result = productService.ratingProduct(productId, request.getRate());
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        }catch (RuntimeException e) {
+            return ControllerUtil.response(e.getMessage(), HttpStatus.BAD_REQUEST.value());
+        }
+    }
 
 }
