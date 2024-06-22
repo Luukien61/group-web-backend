@@ -1,6 +1,7 @@
 package com.example.groupweb2.controller;
 
 import com.example.groupweb2.dto.UserDTO;
+import com.example.groupweb2.model.LoginUser;
 import com.example.groupweb2.service.IUserService;
 import com.example.groupweb2.util.ControllerUtil;
 import lombok.AllArgsConstructor;
@@ -17,10 +18,15 @@ import java.util.List;
 public class UserController {
     private final IUserService userService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public  ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
-        userService.saveNewUser(userDTO);
-        return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
+    public  ResponseEntity<?> createUser(@RequestBody UserDTO userDTO) {
+        try {
+            userService.saveNewUser(userDTO);
+            return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
+        }catch (Exception e){
+            return ControllerUtil.response(e.getMessage(),HttpStatus.BAD_REQUEST.value());
+        }
     }
 
     @GetMapping("/user-id/{userId}")
@@ -67,5 +73,23 @@ public class UserController {
         return ResponseEntity.ok("User Deleted Successfully!");
     }
 
+    @PostMapping("/reset-password")
+    public ResponseEntity<?> resetPassword(@RequestBody LoginUser user){
+        try{
+            var response = userService.resetPassword(user);
+            return ResponseEntity.ok(response);
+        }catch (Exception e){
+            return ControllerUtil.response(e.getMessage(),HttpStatus.UNAUTHORIZED.value());
+        }
+    }
 
+    @PostMapping("/email")
+    public ResponseEntity<?> getUserByEmail(@RequestBody LoginUser user){
+        try{
+            var response = userService.findUserByEmail(user.getEmail());
+            return ResponseEntity.ok(response);
+        }catch (Exception e){
+            return ControllerUtil.response(e.getMessage(),HttpStatus.BAD_REQUEST.value());
+        }
+    }
 }

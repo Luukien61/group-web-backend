@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -20,6 +22,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
+@EnableMethodSecurity
 public class SecurityConfiguration {
     private CorsConfigurationSource corsConfigurationSource;
     private JWTAuthenticationFilter jwtAuthenticationFilter;
@@ -31,6 +34,8 @@ public class SecurityConfiguration {
             "/producer/**",
             "/actuator/**",
             "/login",
+            "/user/email",
+            "/user/reset-password",
             "/auth/refresh-token",
             "/order/**"
     };
@@ -43,9 +48,10 @@ public class SecurityConfiguration {
                 .formLogin(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((request) -> request
                         .requestMatchers(HttpMethod.GET,"/carousel").permitAll()
-                        .requestMatchers(PUBLIC_ENDPOINTS).permitAll()
                         .requestMatchers("/user/user-id/*").hasAnyRole("ADMIN","STAFF")
                         .requestMatchers("register").hasRole("ADMIN")
+                        //.requestMatchers(HttpMethod.DELETE,"product/*").hasRole("ADMIN")
+                        .requestMatchers(PUBLIC_ENDPOINTS).permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session-> session

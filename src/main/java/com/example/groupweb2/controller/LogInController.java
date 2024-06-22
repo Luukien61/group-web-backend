@@ -23,8 +23,8 @@ public class LogInController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserDTO userDTO){
         try{
-            var tokenResponse = userService.registerNewUser(userDTO);
-            return ResponseEntity.ok(tokenResponse);
+             userService.registerNewUser(userDTO);
+            return ResponseEntity.ok("CREATED");
         }catch (Exception e){
             return ControllerUtil.response(e.getMessage(), HttpStatus.FORBIDDEN.value());
         }

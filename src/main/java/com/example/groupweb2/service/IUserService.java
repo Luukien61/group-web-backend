@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.List;
 
 public interface IUserService {
-    TokenResponse saveNewUser(UserDTO userDTO);
+    void saveNewUser(UserDTO userDTO);
 
     UserResponse findAllUserByStaffId(Long id);
 
@@ -17,6 +17,7 @@ public interface IUserService {
     List<UserDTO> findAllUsersByRole(String role);
 
     UserEntity findUserByEmailAndPass(LoginUser requestUser);
+    UserResponse findUserByEmail(String email);
 
 //    UserDTO updateUser(UserDTO userDTO, Long userId);
 //
@@ -31,10 +32,12 @@ public interface IUserService {
     void deleteUser(Long id);
     String generateToken(UserDetails user);
     String generateToken(UserDetails user, String refreshToken);
-    TokenResponse registerNewUser(UserDTO userDTO);
+    void registerNewUser(UserDTO userDTO);
     //void authenticate(LoginUser user);
     LoginResponse login(LoginUser user);
 
     TokenResponse refreshToken(String refreshToken);
+
+    LoginResponse resetPassword(LoginUser user);
 
 }

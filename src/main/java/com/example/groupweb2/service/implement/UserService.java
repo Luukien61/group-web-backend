@@ -31,7 +31,7 @@ public class UserService implements IUserService, UserDetailsService {
 
 
     @Override
-    public TokenResponse saveNewUser(UserDTO userDTO) {
+    public void saveNewUser(UserDTO userDTO) {
         var existUser = userRepository.findByEmail(userDTO.getEmail());
         if (existUser.isPresent()) {
             throw new RuntimeException(ALREADY_EXIST);
@@ -39,9 +39,9 @@ public class UserService implements IUserService, UserDetailsService {
         String encodePass = passwordEncoder.encode(userDTO.getPassword().trim());
         userDTO.setPassword(encodePass);
         UserEntity user = mapper.toUserEntity(userDTO);
-        user = userRepository.save(user);
-        var userPrincipal = UserPrincipal.create(user);
-        return jwtProvider.generateTokenResponse(userPrincipal);
+        userRepository.save(user);
+//        var userPrincipal = UserPrincipal.create(user);
+//        return jwtProvider.generateTokenResponse(userPrincipal);
     }
 
     @Override
@@ -68,6 +68,12 @@ public class UserService implements IUserService, UserDetailsService {
         var isMatch = passwordEncoder.matches(password, existUser.getPassword());
         if (!isMatch) throw new RuntimeException(PASSWORD_DOES_NOT_MATCH);
         return existUser;
+    }
+
+    @Override
+    public UserResponse findUserByEmail(String email) {
+        return mapper.toUserResponse(userRepository.findByEmail(email.trim())
+                .orElseThrow(() -> new RuntimeException(DOESNT_EXIST)));
     }
 
     @Override
@@ -139,18 +145,44 @@ public class UserService implements IUserService, UserDetailsService {
         if (jwtProvider.isTokenValid(refreshToken, user)) {
             return jwtProvider.generateAccessToken(user);
         } else {
-            throw new RuntimeException("Authentication failed") ;
+            throw new RuntimeException("Authentication failed");
         }
     }
 
     @Override
-    public TokenResponse registerNewUser(UserDTO userDTO) {
-        return saveNewUser(userDTO);
+    public void registerNewUser(UserDTO userDTO) {
+        saveNewUser(userDTO);
     }
 
     @Override
     public LoginResponse login(LoginUser user) {
         var existUser = findUserByEmailAndPass(user);
+        return createLoginResponse(existUser);
+    }
+
+    @Override
+    public TokenResponse refreshToken(String refreshToken) {
+        var userEmail = jwtProvider.exactUserName(refreshToken);
+        var existUserOptional = userRepository.findByEmailAndActiveState(userEmail);
+        if (existUserOptional.isEmpty()) throw new RuntimeException(DOESNT_EXIST);
+        var userEntity = existUserOptional.get();
+        var userDetail = UserPrincipal.create(userEntity);
+        var isValid = jwtProvider.isTokenValid(refreshToken, userDetail);
+        if (!isValid) throw new RuntimeException("The refresh token is invalid");
+        return jwtProvider.generateTokenResponse(userDetail, refreshToken);
+    }
+
+    @Override
+    public LoginResponse resetPassword(LoginUser user) {
+        var existUser = userRepository.findByEmailAndActiveState(user.getEmail().trim())
+                .orElseThrow(() -> new RuntimeException(DOESNT_EXIST));
+        var newPassword = passwordEncoder.encode(user.getPassword());
+        existUser.setPassword(newPassword);
+        userRepository.save(existUser);
+        return createLoginResponse(existUser);
+    }
+
+    private LoginResponse createLoginResponse(UserEntity existUser) {
         var userPrincipal = UserPrincipal.create(existUser);
         var tokenResponse = jwtProvider.generateTokenResponse(userPrincipal);
         return LoginResponse.builder()
@@ -158,17 +190,5 @@ public class UserService implements IUserService, UserDetailsService {
                 .message("Login successfully")
                 .user(mapper.toUserResponse(existUser))
                 .build();
-    }
-
-    @Override
-    public TokenResponse refreshToken(String refreshToken) {
-        var userEmail = jwtProvider.exactUserName(refreshToken);
-        var existUserOptional = userRepository.findByEmailAndActiveState(userEmail);
-        if(existUserOptional.isEmpty()) throw new RuntimeException(DOESNT_EXIST);
-        var userEntity = existUserOptional.get();
-        var userDetail = UserPrincipal.create(userEntity);
-        var isValid = jwtProvider.isTokenValid(refreshToken,userDetail);
-        if(!isValid) throw new RuntimeException("The refresh token is invalid");
-        return jwtProvider.generateTokenResponse(userDetail,refreshToken);
     }
 }
