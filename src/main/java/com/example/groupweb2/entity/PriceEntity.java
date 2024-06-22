@@ -12,10 +12,8 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Table(name = "Price")
-public class PriceEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+public class PriceEntity extends  BaseEntity{
+
     int ram;
     int rom;
     long currentPrice;

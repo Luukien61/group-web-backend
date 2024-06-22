@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -56,21 +57,21 @@ public class ProductController {
             productService.updateProduct(productDTO, productId);
             return ControllerUtil.response(CustomMessage.UPDATED.getMessage(), HttpStatus.OK.value());
         } catch (RuntimeException e) {
-            return ControllerUtil.response(e.getMessage(), HttpStatus.NOT_MODIFIED.value());
+            return ControllerUtil.response(e.getMessage(), HttpStatus.BAD_REQUEST.value());
         }
     }
 
+
     @DeleteMapping("/{productId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ResponseModel> deleteProduct(@PathVariable String productId) {
         try {
             productService.deleteProduct(productId);
             return ControllerUtil.response(CustomMessage.DELETED.getMessage(), HttpStatus.OK.value());
         } catch (RuntimeException e) {
-            return ControllerUtil.response(e.getMessage(), HttpStatus.NOT_MODIFIED.value());
+            return ControllerUtil.response(e.getMessage(), HttpStatus.BAD_REQUEST.value());
         }
     }
-
-
     @GetMapping()
     public ResponseEntity<?> getProductsByProducer(
             @RequestParam("category") String category,
@@ -84,8 +85,6 @@ public class ProductController {
         try {
             Page<ProductEntity> result = productService
                     .findAllProductByCategoryAndProducerAndPrice(category, producer, minPrice, maxPrice, page, size, sort);
-//            if (result.isEmpty()) return ControllerUtil
-//                    .response(CustomMessage.NOT_FOUND.getMessage(), HttpStatus.NOT_FOUND.value());
             return ResponseEntity.ok(result);
         } catch (RuntimeException e) {
             return ControllerUtil.response(e.getMessage(), HttpStatus.NOT_FOUND.value());
@@ -120,5 +119,6 @@ public class ProductController {
                     .body(ControllerUtil.response(e.getMessage(), HttpStatus.BAD_REQUEST.value()));
         }
     }
+
 
 }

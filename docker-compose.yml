@@ -1,8 +1,8 @@
 services:
   db:
-    image: postgres:15.7-alpine
-    volumes:
-      - postgres-groupweb:/var/lib/postgresql/data/ #(1)
+    image: luukien/postgres-data:v1
+#    volumes:
+#      - postgres-groupweb:/var/lib/postgresql/data/ #(1)
     restart: always
     networks:
       - my-web-network #(2)
@@ -12,11 +12,11 @@ services:
       POSTGRES_DB: groupweb2
     ports:
       - "5433:5432"
-    container_name: postgres-groupweb
+    container_name: postgres-data
 
   app:
-    image: luukien/group-web-backend:v1
-    restart: always
+    image: luukien/backend:v1
+    restart: on-failure
     build: #(4)
       context: .
       dockerfile: Dockerfile
@@ -26,9 +26,31 @@ services:
       - SPRING_PROFILES_ACTIVE=prod #(3)
     ports:
       - "8088:8088"
-    container_name: groupweb
+    container_name: backend
     depends_on:
       - db
+
+  frontend:
+    image: luukien/frontend:v1
+    restart: on-failure
+    networks:
+      - my-web-network
+    ports:
+      - "4003:80"
+    depends_on:
+      - app
+    container_name: frontend
+
+  mail-sever:
+    image: luukien/mail-server:v1
+    restart: always
+    networks:
+      - my-web-network
+    ports:
+      - "8087:8087"
+      - "8887:8887"
+    container_name: mail-server
+
 volumes:
   postgres-groupweb:
 networks:

@@ -1,13 +1,11 @@
 package com.example.groupweb2.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 public class ColorDTO extends BaseDTO {
     private String color;

@@ -10,4 +10,6 @@ public interface ICarouselService {
     void saveAnItem(CarouselDTO carouselDTO);
     void saveManyItems(List<CarouselDTO> items);
     void deleteAll();
+
+    void refreshCarousel(List<CarouselDTO> items);
 }

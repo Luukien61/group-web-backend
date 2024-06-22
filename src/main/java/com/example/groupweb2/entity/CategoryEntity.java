@@ -16,10 +16,8 @@ import java.util.Set;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Table(name = "Category")
-public class CategoryEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+public class CategoryEntity extends  BaseEntity {
+
     String name;
     @OneToMany(mappedBy = "category",cascade = CascadeType.MERGE)
     @JsonBackReference

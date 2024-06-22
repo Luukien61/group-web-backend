@@ -2,11 +2,13 @@ package com.example.groupweb2.mapper;
 
 import com.example.groupweb2.dto.*;
 import com.example.groupweb2.entity.*;
+import com.example.groupweb2.model.UserResponse;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper
+@Mapper(uses = MapperHelper.class)
 public interface MapStruct {
     CategoryDTO toCategoryDTO(CategoryEntity item);
 
@@ -37,19 +39,31 @@ public interface MapStruct {
     ProducerDTO toProducerDTO(ProducerEntity item);
 
     CarouselEntity toCarouselEntity(CarouselDTO carouselDTO);
+
     CarouselDTO toCarouselDTO(CarouselEntity carouselEntity);
 
-    List<ColorDTO> toListColorDTO(List<ColorEntity> items);
+    UserDTO toUserDTO(UserEntity item);
 
-    List<ColorEntity> toListColorEntity(List<ColorDTO> items);
+    UserEntity toUserEntity(UserDTO item);
 
-    List<PriceDTO> toListPriceDTO(List<PriceEntity> items);
+    UserResponse toUserResponse(UserEntity userEntity);
 
-    List<PriceEntity> toListPriceEntity(List<PriceDTO> items);
+//    List<ColorDTO> toListColorDTO(List<ColorEntity> items);
+//
+//    List<ColorEntity> toListColorEntity(List<ColorDTO> items);
+//
+//    List<PriceDTO> toListPriceDTO(List<PriceEntity> items);
+//
+//    List<PriceEntity> toListPriceEntity(List<PriceDTO> items);
+//
 
-    List<ProductDTO> toListProductDTO(List<ProductEntity> items);
+    @Mapping(target = "productId", source = "product", qualifiedByName = "getProductId")
+    @Mapping(target = "productName",source = "product",qualifiedByName = "getProductName")
+    @Mapping(target = "category",source = "product" ,qualifiedByName = "getCategory")
+    OrderDTO toOrderDTO(OrderEntity orderEntity);
+    @Mapping(source = "productId", target = "product", ignore = true)
+    OrderEntity toOrderEntity(OrderDTO orderDTO);
 
-    List<ProductEntity> toListProductEntity(List<ProductDTO> items);
 
 
     //    List<DescriptionDTO> toListDescriptionDTO(List<DescriptionEntity> items);

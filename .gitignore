@@ -38,3 +38,4 @@ out/
 !**/src/main/resources/application-dev.yml
 tokens/
 src/main/resources/credentials.json
+src/main/resources/static

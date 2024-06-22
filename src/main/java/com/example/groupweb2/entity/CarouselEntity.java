@@ -12,10 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "carousel")
-public class CarouselEntity{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class CarouselEntity extends  BaseEntity{
     private String imageUrl;
     private String targetUrl;
     private String title;

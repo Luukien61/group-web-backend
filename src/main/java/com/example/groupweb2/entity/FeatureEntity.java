@@ -16,11 +16,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Table(name = "Feature")
-public class FeatureEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+public class FeatureEntity extends  BaseEntity {
 
     String screen;
     @ElementCollection(targetClass = Integer.class, fetch = FetchType.EAGER)
@@ -37,7 +33,7 @@ public class FeatureEntity {
     int battery;
     String chip;
     Date madeTime;
-    @OneToMany(mappedBy = "feature", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "feature", fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
     @JsonManagedReference
     List<PriceEntity> memory;
 

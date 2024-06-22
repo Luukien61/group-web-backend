@@ -36,4 +36,10 @@ public class CarouselService implements ICarouselService {
     public void deleteAll() {
         carouselRepository.deleteAll();
     }
+
+    @Override
+    public void refreshCarousel(List<CarouselDTO> items) {
+        deleteAll();
+        saveManyItems(items);
+    }
 }
