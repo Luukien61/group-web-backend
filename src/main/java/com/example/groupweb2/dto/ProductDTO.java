@@ -25,4 +25,5 @@ public class ProductDTO {
     private CategoryDTO category;
     private ProducerDTO producer;
     private List<OrderDTO> orders;
+    private RatingDTO rating;
 }

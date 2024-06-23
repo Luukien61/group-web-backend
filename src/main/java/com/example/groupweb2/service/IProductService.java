@@ -24,4 +24,5 @@ public interface IProductService {
     Page<ProductEntity> findAllProductByCategoryAndProducerAndPrice(String category, @Nullable List<String> producer, @Nullable Long start, @Nullable Long end,int page, int size, String sortBy);
     List<ProductEntity> searchProductsByName(String name);
     int getProductQuantityByCategory(String category);
+    ProductEntity ratingProduct(String productId, int value);
 }

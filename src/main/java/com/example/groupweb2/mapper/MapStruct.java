@@ -64,6 +64,9 @@ public interface MapStruct {
     @Mapping(source = "productId", target = "product", ignore = true)
     OrderEntity toOrderEntity(OrderDTO orderDTO);
 
+    RatingEntity toRatingEntity(RatingDTO ratingDTO);
+    RatingDTO toRatingDTO(RatingEntity rating);
+
 
 
     //    List<DescriptionDTO> toListDescriptionDTO(List<DescriptionEntity> items);
