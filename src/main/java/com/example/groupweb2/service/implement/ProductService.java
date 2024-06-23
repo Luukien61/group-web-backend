@@ -3,7 +3,6 @@ package com.example.groupweb2.service.implement;
 import com.example.groupweb2.dto.ProductDTO;
 import com.example.groupweb2.entity.*;
 import com.example.groupweb2.mapper.MapStruct;
-import com.example.groupweb2.repository.ColorRepository;
 import com.example.groupweb2.repository.ProductRepository;
 import com.example.groupweb2.service.ICategoryService;
 import com.example.groupweb2.service.IProducerService;
@@ -13,26 +12,14 @@ import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestClient;
 
 import java.security.InvalidParameterException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Service
 @AllArgsConstructor
@@ -42,23 +29,14 @@ public class ProductService implements IProductService {
     private MapStruct mapper;
     @Autowired
     private ProductRepository productRepository;
-    @Autowired
-    private ColorRepository colorRepository;
+
     @Autowired
     private ICategoryService categoryService;
     @Autowired
     private IProducerService producerService;
     private final String NOT_EXIST = "The product does not exist";
     private final String EXISTED = "The product already exists";
-    @Autowired
-    private RestClient restClient;
 
-    @Value("${cloudinary.api-secret}")
-    private String API_SECRET;
-    @Value("${cloudinary.cloud-name}")
-    private String CLOUD_NAME;
-    @Value("${cloudinary.api-key}")
-    private String API_KEY;
 
     @Override
     public void saveNewProduct(ProductEntity item) {
@@ -196,8 +174,11 @@ public class ProductService implements IProductService {
             int size,
             String sortBy
     ) {
-        if (!sortBy.equals("name")) {
+        if (sortBy.equalsIgnoreCase("madeTime")) {
             sortBy = "features." + sortBy;
+        }
+        if(sortBy.equalsIgnoreCase("rating")){
+            sortBy="rating.average";
         }
         if (producer == null && start == null) {
             return findProductsByCategory(category, page, size, sortBy);
@@ -239,8 +220,8 @@ public class ProductService implements IProductService {
             item.setProduct(productEntity);
             item.setFeature(feature);
         }
-        if(rating==null){
-            rating=new RatingEntity();
+        if (rating == null) {
+            rating = new RatingEntity();
             productEntity.setRating(rating);
         }
         rating.setProduct(productEntity);
@@ -359,8 +340,8 @@ public class ProductService implements IProductService {
 //    }
 
 
-    private ProductEntity getExistProduct(String productId){
-       return productRepository.findAllById(productId.trim().toLowerCase())
-               .orElseThrow(()-> new InvalidParameterException(NOT_EXIST));
+    private ProductEntity getExistProduct(String productId) {
+        return productRepository.findAllById(productId.trim().toLowerCase())
+                .orElseThrow(() -> new InvalidParameterException(NOT_EXIST));
     }
 }
