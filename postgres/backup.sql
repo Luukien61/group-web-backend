@@ -349,6 +349,45 @@ CREATE TABLE public.product_images (
 ALTER TABLE public.product_images OWNER TO postgres;
 
 --
+-- Name: rating; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.rating (
+    id bigint NOT NULL,
+    average real,
+    five_starts integer,
+    four_starts integer,
+    one_start integer,
+    three_starts integer,
+    two_starts integer,
+    product_id character varying(255)
+);
+
+
+ALTER TABLE public.rating OWNER TO postgres;
+
+--
+-- Name: rating_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.rating_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.rating_id_seq OWNER TO postgres;
+
+--
+-- Name: rating_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.rating_id_seq OWNED BY public.rating.id;
+
+
+--
 -- Name: staff_user; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -437,6 +476,13 @@ ALTER TABLE ONLY public.producer ALTER COLUMN id SET DEFAULT nextval('public.pro
 
 
 --
+-- Name: rating id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.rating ALTER COLUMN id SET DEFAULT nextval('public.rating_id_seq'::regclass);
+
+
+--
 -- Name: staff_user staffid; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -493,22 +539,14 @@ COPY public.color (id, color, link, product_id) FROM stdin;
 19	Purple	https://i.pinimg.com/564x/0a/50/6a/0a506a1be9c2c4f8509fae1e78d83cc2.jpg	vivo-v15
 20	Blue	https://i.pinimg.com/564x/0a/50/6a/0a506a1be9c2c4f8509fae1e78d83cc2.jpg	vivo-v15
 21	Cream	https://i.pinimg.com/564x/0a/50/6a/0a506a1be9c2c4f8509fae1e78d83cc2.jpg	vivo-v15
-22	Purple	https://i.pinimg.com/564x/0a/50/6a/0a506a1be9c2c4f8509fae1e78d83cc2.jpg	realme-c33
-23	Blue	https://i.pinimg.com/564x/0a/50/6a/0a506a1be9c2c4f8509fae1e78d83cc2.jpg	realme-c33
-24	Cream	https://i.pinimg.com/564x/0a/50/6a/0a506a1be9c2c4f8509fae1e78d83cc2.jpg	realme-c33
 25	Purple	https://i.pinimg.com/564x/0a/50/6a/0a506a1be9c2c4f8509fae1e78d83cc2.jpg	oppo-reno11f-5g
 26	Blue	https://i.pinimg.com/564x/0a/50/6a/0a506a1be9c2c4f8509fae1e78d83cc2.jpg	oppo-reno11f-5g
 34	Purple	https://i.pinimg.com/564x/0a/50/6a/0a506a1be9c2c4f8509fae1e78d83cc2.jpg	iphone-15-promax
 35	Blue	https://i.pinimg.com/564x/0a/50/6a/0a506a1be9c2c4f8509fae1e78d83cc2.jpg	iphone-15-promax
 36	Cream	https://i.pinimg.com/564x/0a/50/6a/0a506a1be9c2c4f8509fae1e78d83cc2.jpg	iphone-15-promax
-37	Purple	https://i.pinimg.com/564x/0a/50/6a/0a506a1be9c2c4f8509fae1e78d83cc2.jpg	vivo-y100
-38	Blue	https://i.pinimg.com/564x/0a/50/6a/0a506a1be9c2c4f8509fae1e78d83cc2.jpg	vivo-y100
 40	Purple	https://i.pinimg.com/564x/0a/50/6a/0a506a1be9c2c4f8509fae1e78d83cc2.jpg	samsung-m54
 41	Blue	https://i.pinimg.com/564x/0a/50/6a/0a506a1be9c2c4f8509fae1e78d83cc2.jpg	samsung-m54
 42	Cream	https://i.pinimg.com/564x/0a/50/6a/0a506a1be9c2c4f8509fae1e78d83cc2.jpg	samsung-m54
-43	Purple	https://i.pinimg.com/564x/0a/50/6a/0a506a1be9c2c4f8509fae1e78d83cc2.jpg	redmi-13c
-44	Blue	https://i.pinimg.com/564x/0a/50/6a/0a506a1be9c2c4f8509fae1e78d83cc2.jpg	redmi-13c
-45	Cream	https://i.pinimg.com/564x/0a/50/6a/0a506a1be9c2c4f8509fae1e78d83cc2.jpg	redmi-13c
 46	red	https://res.cloudinary.com/dmi3xizxq/image/upload/v1717844135/b5qeilwrbl2myoamhjqn.jpg	xiaomi-16
 47	blue	https://res.cloudinary.com/dmi3xizxq/image/upload/v1717844135/apry267fudm3fyfwlgfz.jpg	xiaomi-16
 48	red	https://res.cloudinary.com/dmi3xizxq/image/upload/v1717844135/b5qeilwrbl2myoamhjqn.jpg	xiaomi-17
@@ -518,6 +556,12 @@ COPY public.color (id, color, link, product_id) FROM stdin;
 61	gray	https://res.cloudinary.com/dmi3xizxq/image/upload/v1718208022/hz3akmxk6alcvi9kmyiw.jpg	dell-laptitude
 62	gray	https://res.cloudinary.com/dmi3xizxq/image/upload/v1718208301/q0evx6b6sehh88rjss26.png	dell-baa
 63	black	https://res.cloudinary.com/dmi3xizxq/image/upload/v1718683157/nd73lhaskm8u88cmnekp.png	sony-x12
+64	blue	https://res.cloudinary.com/dmi3xizxq/image/upload/v1719060602/smixajhvxtib1ekumxcx.png	iphone-11
+65	black	https://res.cloudinary.com/dmi3xizxq/image/upload/v1719060602/ad97idvlp64vwnpgizsk.png	iphone-11
+66	gray	https://res.cloudinary.com/dmi3xizxq/image/upload/v1719060602/hlxugkyo9jkvrpgsjyrf.png	iphone-11
+67	blue	https://res.cloudinary.com/dmi3xizxq/image/upload/v1719072189/wb1bispxlhdkyoofo1qn.png	iphone-13
+68	blue	https://res.cloudinary.com/dmi3xizxq/image/upload/v1719072403/xvlbjgjgosou5g7wgrjx.png	abc
+69	blue	https://res.cloudinary.com/dmi3xizxq/image/upload/v1719072882/w3aafwwiayvlhu84sq7h.png	iphone-77
 \.
 
 
@@ -532,13 +576,10 @@ COPY public.description (id, content, title, product_id) FROM stdin;
 5	Tuyệt tác sắc màu thiên nhiên\n Sự kết hợp giữa sắc màu thiên nhiên và công nghệ chế tác vượt trội, viền siêu mỏng, khung kim loại bo cong sang trọng, Samsung Galaxy S23 Plus đạt chuẩn điện thoại cao cấp với nét đẹp tinh tế và cuốn hút trong từng chi tiết. Các màu sắc này còn thể hiện đúng tinh thần xanh của điện thoại Galaxy S 2023 series bao gồm: Kem Cotton, Xanh Botanic, Tím Lilac và Đen Phantom, mang tới sức sống tràn đầy cảm hứng nhưng vẫn đảm bảo tính hiện đại, sang trọng cho tổng thể. Thiết kế vì hành tinh xanh\nXây dựng hành tinh xanh từ những thay đổi nhỏ, Samsung góp phần bảo vệ môi trường khi sử dụng linh kiện từ vật liệu tái chế cho Galaxy S23 Plus. Ngay khi mở hộp, bạn sẽ thấy sự đổi thay bởi bao bì cùng màng bảo vệ từ giấy tái chế, màu nhuộm nguồn gốc tự nhiên và  lớp phim phủ PET tái chế. Đối với lớp kính bảo vệ, Samsung sử dụng Gorilla Glass Victus 2, vừa đảm bảo sự bền bỉ, vừa bảo vệ môi trường với 22% chất liệu thủy tinh tái chế. Tất cả hòa hợp, gói gọn trong siêu phẩm cao cấp, bền vững và đáng tin cậy, khẳng định tuyên ngôn sống xanh và thân thiện với hành tinh.	Khám phá những công nghệ tiên tiến nhất trên thiết bị Galaxy S23 Plus, bạn sẽ có trải nghiệm toàn năng từ thiết kế bền vững, camera Mắt thần bóng đêm cao cấp, bộ vi xử lý Snapdragon 8 Gen 2 for Galaxy mạnh mẽ đến viên pin bền bỉ và màn hình lớn sắc nét. Một sự kết hợp hoàn hảo, hội tụ mọi điểm ấn tượng trên thế hệ di động thông minh 2023.	asus-x415
 6	Tuyệt tác sắc màu thiên nhiên\n Sự kết hợp giữa sắc màu thiên nhiên và công nghệ chế tác vượt trội, viền siêu mỏng, khung kim loại bo cong sang trọng, Samsung Galaxy S23 Plus đạt chuẩn điện thoại cao cấp với nét đẹp tinh tế và cuốn hút trong từng chi tiết. Các màu sắc này còn thể hiện đúng tinh thần xanh của điện thoại Galaxy S 2023 series bao gồm: Kem Cotton, Xanh Botanic, Tím Lilac và Đen Phantom, mang tới sức sống tràn đầy cảm hứng nhưng vẫn đảm bảo tính hiện đại, sang trọng cho tổng thể. Thiết kế vì hành tinh xanh\nXây dựng hành tinh xanh từ những thay đổi nhỏ, Samsung góp phần bảo vệ môi trường khi sử dụng linh kiện từ vật liệu tái chế cho Galaxy S23 Plus. Ngay khi mở hộp, bạn sẽ thấy sự đổi thay bởi bao bì cùng màng bảo vệ từ giấy tái chế, màu nhuộm nguồn gốc tự nhiên và  lớp phim phủ PET tái chế. Đối với lớp kính bảo vệ, Samsung sử dụng Gorilla Glass Victus 2, vừa đảm bảo sự bền bỉ, vừa bảo vệ môi trường với 22% chất liệu thủy tinh tái chế. Tất cả hòa hợp, gói gọn trong siêu phẩm cao cấp, bền vững và đáng tin cậy, khẳng định tuyên ngôn sống xanh và thân thiện với hành tinh.	Khám phá những công nghệ tiên tiến nhất trên thiết bị Galaxy S23 Plus, bạn sẽ có trải nghiệm toàn năng từ thiết kế bền vững, camera Mắt thần bóng đêm cao cấp, bộ vi xử lý Snapdragon 8 Gen 2 for Galaxy mạnh mẽ đến viên pin bền bỉ và màn hình lớn sắc nét. Một sự kết hợp hoàn hảo, hội tụ mọi điểm ấn tượng trên thế hệ di động thông minh 2023.	iphone-14
 7	Tuyệt tác sắc màu thiên nhiên\n Sự kết hợp giữa sắc màu thiên nhiên và công nghệ chế tác vượt trội, viền siêu mỏng, khung kim loại bo cong sang trọng, Samsung Galaxy S23 Plus đạt chuẩn điện thoại cao cấp với nét đẹp tinh tế và cuốn hút trong từng chi tiết. Các màu sắc này còn thể hiện đúng tinh thần xanh của điện thoại Galaxy S 2023 series bao gồm: Kem Cotton, Xanh Botanic, Tím Lilac và Đen Phantom, mang tới sức sống tràn đầy cảm hứng nhưng vẫn đảm bảo tính hiện đại, sang trọng cho tổng thể. Thiết kế vì hành tinh xanh\nXây dựng hành tinh xanh từ những thay đổi nhỏ, Samsung góp phần bảo vệ môi trường khi sử dụng linh kiện từ vật liệu tái chế cho Galaxy S23 Plus. Ngay khi mở hộp, bạn sẽ thấy sự đổi thay bởi bao bì cùng màng bảo vệ từ giấy tái chế, màu nhuộm nguồn gốc tự nhiên và  lớp phim phủ PET tái chế. Đối với lớp kính bảo vệ, Samsung sử dụng Gorilla Glass Victus 2, vừa đảm bảo sự bền bỉ, vừa bảo vệ môi trường với 22% chất liệu thủy tinh tái chế. Tất cả hòa hợp, gói gọn trong siêu phẩm cao cấp, bền vững và đáng tin cậy, khẳng định tuyên ngôn sống xanh và thân thiện với hành tinh.	Khám phá những công nghệ tiên tiến nhất trên thiết bị Galaxy S23 Plus, bạn sẽ có trải nghiệm toàn năng từ thiết kế bền vững, camera Mắt thần bóng đêm cao cấp, bộ vi xử lý Snapdragon 8 Gen 2 for Galaxy mạnh mẽ đến viên pin bền bỉ và màn hình lớn sắc nét. Một sự kết hợp hoàn hảo, hội tụ mọi điểm ấn tượng trên thế hệ di động thông minh 2023.	vivo-v15
-8	Tuyệt tác sắc màu thiên nhiên\n Sự kết hợp giữa sắc màu thiên nhiên và công nghệ chế tác vượt trội, viền siêu mỏng, khung kim loại bo cong sang trọng, Samsung Galaxy S23 Plus đạt chuẩn điện thoại cao cấp với nét đẹp tinh tế và cuốn hút trong từng chi tiết. Các màu sắc này còn thể hiện đúng tinh thần xanh của điện thoại Galaxy S 2023 series bao gồm: Kem Cotton, Xanh Botanic, Tím Lilac và Đen Phantom, mang tới sức sống tràn đầy cảm hứng nhưng vẫn đảm bảo tính hiện đại, sang trọng cho tổng thể. Thiết kế vì hành tinh xanh\nXây dựng hành tinh xanh từ những thay đổi nhỏ, Samsung góp phần bảo vệ môi trường khi sử dụng linh kiện từ vật liệu tái chế cho Galaxy S23 Plus. Ngay khi mở hộp, bạn sẽ thấy sự đổi thay bởi bao bì cùng màng bảo vệ từ giấy tái chế, màu nhuộm nguồn gốc tự nhiên và  lớp phim phủ PET tái chế. Đối với lớp kính bảo vệ, Samsung sử dụng Gorilla Glass Victus 2, vừa đảm bảo sự bền bỉ, vừa bảo vệ môi trường với 22% chất liệu thủy tinh tái chế. Tất cả hòa hợp, gói gọn trong siêu phẩm cao cấp, bền vững và đáng tin cậy, khẳng định tuyên ngôn sống xanh và thân thiện với hành tinh.	Khám phá những công nghệ tiên tiến nhất trên thiết bị Galaxy S23 Plus, bạn sẽ có trải nghiệm toàn năng từ thiết kế bền vững, camera Mắt thần bóng đêm cao cấp, bộ vi xử lý Snapdragon 8 Gen 2 for Galaxy mạnh mẽ đến viên pin bền bỉ và màn hình lớn sắc nét. Một sự kết hợp hoàn hảo, hội tụ mọi điểm ấn tượng trên thế hệ di động thông minh 2023.	realme-c33
 9	Tuyệt tác sắc màu thiên nhiên\n Sự kết hợp giữa sắc màu thiên nhiên và công nghệ chế tác vượt trội, viền siêu mỏng, khung kim loại bo cong sang trọng, Samsung Galaxy S23 Plus đạt chuẩn điện thoại cao cấp với nét đẹp tinh tế và cuốn hút trong từng chi tiết. Các màu sắc này còn thể hiện đúng tinh thần xanh của điện thoại Galaxy S 2023 series bao gồm: Kem Cotton, Xanh Botanic, Tím Lilac và Đen Phantom, mang tới sức sống tràn đầy cảm hứng nhưng vẫn đảm bảo tính hiện đại, sang trọng cho tổng thể. Thiết kế vì hành tinh xanh\nXây dựng hành tinh xanh từ những thay đổi nhỏ, Samsung góp phần bảo vệ môi trường khi sử dụng linh kiện từ vật liệu tái chế cho Galaxy S23 Plus. Ngay khi mở hộp, bạn sẽ thấy sự đổi thay bởi bao bì cùng màng bảo vệ từ giấy tái chế, màu nhuộm nguồn gốc tự nhiên và  lớp phim phủ PET tái chế. Đối với lớp kính bảo vệ, Samsung sử dụng Gorilla Glass Victus 2, vừa đảm bảo sự bền bỉ, vừa bảo vệ môi trường với 22% chất liệu thủy tinh tái chế. Tất cả hòa hợp, gói gọn trong siêu phẩm cao cấp, bền vững và đáng tin cậy, khẳng định tuyên ngôn sống xanh và thân thiện với hành tinh.	Khám phá những công nghệ tiên tiến nhất trên thiết bị Galaxy S23 Plus, bạn sẽ có trải nghiệm toàn năng từ thiết kế bền vững, camera Mắt thần bóng đêm cao cấp, bộ vi xử lý Snapdragon 8 Gen 2 for Galaxy mạnh mẽ đến viên pin bền bỉ và màn hình lớn sắc nét. Một sự kết hợp hoàn hảo, hội tụ mọi điểm ấn tượng trên thế hệ di động thông minh 2023.	oppo-reno11f-5g
 10	Tuyệt tác sắc màu thiên nhiên\n Sự kết hợp giữa sắc màu thiên nhiên và công nghệ chế tác vượt trội, viền siêu mỏng, khung kim loại bo cong sang trọng, Samsung Galaxy S23 Plus đạt chuẩn điện thoại cao cấp với nét đẹp tinh tế và cuốn hút trong từng chi tiết. Các màu sắc này còn thể hiện đúng tinh thần xanh của điện thoại Galaxy S 2023 series bao gồm: Kem Cotton, Xanh Botanic, Tím Lilac và Đen Phantom, mang tới sức sống tràn đầy cảm hứng nhưng vẫn đảm bảo tính hiện đại, sang trọng cho tổng thể. Thiết kế vì hành tinh xanh\nXây dựng hành tinh xanh từ những thay đổi nhỏ, Samsung góp phần bảo vệ môi trường khi sử dụng linh kiện từ vật liệu tái chế cho Galaxy S23 Plus. Ngay khi mở hộp, bạn sẽ thấy sự đổi thay bởi bao bì cùng màng bảo vệ từ giấy tái chế, màu nhuộm nguồn gốc tự nhiên và  lớp phim phủ PET tái chế. Đối với lớp kính bảo vệ, Samsung sử dụng Gorilla Glass Victus 2, vừa đảm bảo sự bền bỉ, vừa bảo vệ môi trường với 22% chất liệu thủy tinh tái chế. Tất cả hòa hợp, gói gọn trong siêu phẩm cao cấp, bền vững và đáng tin cậy, khẳng định tuyên ngôn sống xanh và thân thiện với hành tinh.	Khám phá những công nghệ tiên tiến nhất trên thiết bị Galaxy S23 Plus, bạn sẽ có trải nghiệm toàn năng từ thiết kế bền vững, camera Mắt thần bóng đêm cao cấp, bộ vi xử lý Snapdragon 8 Gen 2 for Galaxy mạnh mẽ đến viên pin bền bỉ và màn hình lớn sắc nét. Một sự kết hợp hoàn hảo, hội tụ mọi điểm ấn tượng trên thế hệ di động thông minh 2023.	samsung-a55-5g
 12	Tuyệt tác sắc màu thiên nhiên\n Sự kết hợp giữa sắc màu thiên nhiên và công nghệ chế tác vượt trội, viền siêu mỏng, khung kim loại bo cong sang trọng, Samsung Galaxy S23 Plus đạt chuẩn điện thoại cao cấp với nét đẹp tinh tế và cuốn hút trong từng chi tiết. Các màu sắc này còn thể hiện đúng tinh thần xanh của điện thoại Galaxy S 2023 series bao gồm: Kem Cotton, Xanh Botanic, Tím Lilac và Đen Phantom, mang tới sức sống tràn đầy cảm hứng nhưng vẫn đảm bảo tính hiện đại, sang trọng cho tổng thể. Thiết kế vì hành tinh xanh\nXây dựng hành tinh xanh từ những thay đổi nhỏ, Samsung góp phần bảo vệ môi trường khi sử dụng linh kiện từ vật liệu tái chế cho Galaxy S23 Plus. Ngay khi mở hộp, bạn sẽ thấy sự đổi thay bởi bao bì cùng màng bảo vệ từ giấy tái chế, màu nhuộm nguồn gốc tự nhiên và  lớp phim phủ PET tái chế. Đối với lớp kính bảo vệ, Samsung sử dụng Gorilla Glass Victus 2, vừa đảm bảo sự bền bỉ, vừa bảo vệ môi trường với 22% chất liệu thủy tinh tái chế. Tất cả hòa hợp, gói gọn trong siêu phẩm cao cấp, bền vững và đáng tin cậy, khẳng định tuyên ngôn sống xanh và thân thiện với hành tinh.	Khám phá những công nghệ tiên tiến nhất trên thiết bị Galaxy S23 Plus, bạn sẽ có trải nghiệm toàn năng từ thiết kế bền vững, camera Mắt thần bóng đêm cao cấp, bộ vi xử lý Snapdragon 8 Gen 2 for Galaxy mạnh mẽ đến viên pin bền bỉ và màn hình lớn sắc nét. Một sự kết hợp hoàn hảo, hội tụ mọi điểm ấn tượng trên thế hệ di động thông minh 2023.	iphone-15-promax
-13	Tuyệt tác sắc màu thiên nhiên\n Sự kết hợp giữa sắc màu thiên nhiên và công nghệ chế tác vượt trội, viền siêu mỏng, khung kim loại bo cong sang trọng, Samsung Galaxy S23 Plus đạt chuẩn điện thoại cao cấp với nét đẹp tinh tế và cuốn hút trong từng chi tiết. Các màu sắc này còn thể hiện đúng tinh thần xanh của điện thoại Galaxy S 2023 series bao gồm: Kem Cotton, Xanh Botanic, Tím Lilac và Đen Phantom, mang tới sức sống tràn đầy cảm hứng nhưng vẫn đảm bảo tính hiện đại, sang trọng cho tổng thể. Thiết kế vì hành tinh xanh\nXây dựng hành tinh xanh từ những thay đổi nhỏ, Samsung góp phần bảo vệ môi trường khi sử dụng linh kiện từ vật liệu tái chế cho Galaxy S23 Plus. Ngay khi mở hộp, bạn sẽ thấy sự đổi thay bởi bao bì cùng màng bảo vệ từ giấy tái chế, màu nhuộm nguồn gốc tự nhiên và  lớp phim phủ PET tái chế. Đối với lớp kính bảo vệ, Samsung sử dụng Gorilla Glass Victus 2, vừa đảm bảo sự bền bỉ, vừa bảo vệ môi trường với 22% chất liệu thủy tinh tái chế. Tất cả hòa hợp, gói gọn trong siêu phẩm cao cấp, bền vững và đáng tin cậy, khẳng định tuyên ngôn sống xanh và thân thiện với hành tinh.	Khám phá những công nghệ tiên tiến nhất trên thiết bị Galaxy S23 Plus, bạn sẽ có trải nghiệm toàn năng từ thiết kế bền vững, camera Mắt thần bóng đêm cao cấp, bộ vi xử lý Snapdragon 8 Gen 2 for Galaxy mạnh mẽ đến viên pin bền bỉ và màn hình lớn sắc nét. Một sự kết hợp hoàn hảo, hội tụ mọi điểm ấn tượng trên thế hệ di động thông minh 2023.	vivo-y100
 14	Tuyệt tác sắc màu thiên nhiên\n Sự kết hợp giữa sắc màu thiên nhiên và công nghệ chế tác vượt trội, viền siêu mỏng, khung kim loại bo cong sang trọng, Samsung Galaxy S23 Plus đạt chuẩn điện thoại cao cấp với nét đẹp tinh tế và cuốn hút trong từng chi tiết. Các màu sắc này còn thể hiện đúng tinh thần xanh của điện thoại Galaxy S 2023 series bao gồm: Kem Cotton, Xanh Botanic, Tím Lilac và Đen Phantom, mang tới sức sống tràn đầy cảm hứng nhưng vẫn đảm bảo tính hiện đại, sang trọng cho tổng thể. Thiết kế vì hành tinh xanh\nXây dựng hành tinh xanh từ những thay đổi nhỏ, Samsung góp phần bảo vệ môi trường khi sử dụng linh kiện từ vật liệu tái chế cho Galaxy S23 Plus. Ngay khi mở hộp, bạn sẽ thấy sự đổi thay bởi bao bì cùng màng bảo vệ từ giấy tái chế, màu nhuộm nguồn gốc tự nhiên và  lớp phim phủ PET tái chế. Đối với lớp kính bảo vệ, Samsung sử dụng Gorilla Glass Victus 2, vừa đảm bảo sự bền bỉ, vừa bảo vệ môi trường với 22% chất liệu thủy tinh tái chế. Tất cả hòa hợp, gói gọn trong siêu phẩm cao cấp, bền vững và đáng tin cậy, khẳng định tuyên ngôn sống xanh và thân thiện với hành tinh.	Khám phá những công nghệ tiên tiến nhất trên thiết bị Galaxy S23 Plus, bạn sẽ có trải nghiệm toàn năng từ thiết kế bền vững, camera Mắt thần bóng đêm cao cấp, bộ vi xử lý Snapdragon 8 Gen 2 for Galaxy mạnh mẽ đến viên pin bền bỉ và màn hình lớn sắc nét. Một sự kết hợp hoàn hảo, hội tụ mọi điểm ấn tượng trên thế hệ di động thông minh 2023.	samsung-m54
-15	Tuyệt tác sắc màu thiên nhiên\n Sự kết hợp giữa sắc màu thiên nhiên và công nghệ chế tác vượt trội, viền siêu mỏng, khung kim loại bo cong sang trọng, Samsung Galaxy S23 Plus đạt chuẩn điện thoại cao cấp với nét đẹp tinh tế và cuốn hút trong từng chi tiết. Các màu sắc này còn thể hiện đúng tinh thần xanh của điện thoại Galaxy S 2023 series bao gồm: Kem Cotton, Xanh Botanic, Tím Lilac và Đen Phantom, mang tới sức sống tràn đầy cảm hứng nhưng vẫn đảm bảo tính hiện đại, sang trọng cho tổng thể. Thiết kế vì hành tinh xanh\nXây dựng hành tinh xanh từ những thay đổi nhỏ, Samsung góp phần bảo vệ môi trường khi sử dụng linh kiện từ vật liệu tái chế cho Galaxy S23 Plus. Ngay khi mở hộp, bạn sẽ thấy sự đổi thay bởi bao bì cùng màng bảo vệ từ giấy tái chế, màu nhuộm nguồn gốc tự nhiên và  lớp phim phủ PET tái chế. Đối với lớp kính bảo vệ, Samsung sử dụng Gorilla Glass Victus 2, vừa đảm bảo sự bền bỉ, vừa bảo vệ môi trường với 22% chất liệu thủy tinh tái chế. Tất cả hòa hợp, gói gọn trong siêu phẩm cao cấp, bền vững và đáng tin cậy, khẳng định tuyên ngôn sống xanh và thân thiện với hành tinh.	Khám phá những công nghệ tiên tiến nhất trên thiết bị Galaxy S23 Plus, bạn sẽ có trải nghiệm toàn năng từ thiết kế bền vững, camera Mắt thần bóng đêm cao cấp, bộ vi xử lý Snapdragon 8 Gen 2 for Galaxy mạnh mẽ đến viên pin bền bỉ và màn hình lớn sắc nét. Một sự kết hợp hoàn hảo, hội tụ mọi điểm ấn tượng trên thế hệ di động thông minh 2023.	redmi-13c
 16		Hello i'm kien	xiaomi-16
 17		Hello i'm kien	xiaomi-17
 18	Hello this is my content \n\nAbc\n\nabc\n\n	student	iphone-5
@@ -547,6 +588,10 @@ COPY public.description (id, content, title, product_id) FROM stdin;
 29	Hello this is my content \n\nAbc\n\nabc\n\n	student	dell-baa
 3	Tuyệt tác sắc màu thiên nhiên\n Sự kết hợp giữa sắc màu thiên nhiên và công nghệ chế tác vượt trội, viền siêu mỏng, khung kim loại bo cong sang trọng, Samsung Galaxy S23 Plus đạt chuẩn điện thoại cao cấp với nét đẹp tinh tế và cuốn hút trong từng chi tiết. Các màu sắc này còn thể hiện đúng tinh thần xanh của điện thoại Galaxy S 2023 series bao gồm: Kem Cotton, Xanh Botanic, Tím Lilac và Đen Phantom, mang tới sức sống tràn đầy cảm hứng nhưng vẫn đảm bảo tính hiện đại, sang trọng cho tổng thể. Thiết kế vì hành tinh xanh\nXây dựng hành tinh xanh từ những thay đổi nhỏ, Samsung góp phần bảo vệ môi trường khi sử dụng linh kiện từ vật liệu tái chế cho Galaxy S23 Plus. Ngay khi mở hộp, bạn sẽ thấy sự đổi thay bởi bao bì cùng màng bảo vệ từ giấy tái chế, màu nhuộm nguồn gốc tự nhiên và  lớp phim phủ PET tái chế. Đối với lớp kính bảo vệ, Samsung sử dụng Gorilla Glass Victus 2, vừa đảm bảo sự bền bỉ, vừa bảo vệ môi trường với 22% chất liệu thủy tinh tái chế. Tất cả hòa hợp, gói gọn trong siêu phẩm cao cấp, bền vững và đáng tin cậy, khẳng định tuyên ngôn sống xanh và thân thiện với hành tinh.	Khám phá những công nghệ tiên tiến nhất trên thiết bị Xiaomi 14 Ultra, bạn sẽ có trải nghiệm toàn năng từ thiết kế bền vững, camera Mắt thần bóng đêm cao cấp, bộ vi xử lý Snapdragon 8 Gen 2 for Galaxy mạnh mẽ đến viên pin bền bỉ và màn hình lớn sắc nét. Một sự kết hợp hoàn hảo, hội tụ mọi điểm ấn tượng trên thế hệ di động thông minh 2023.	xiaomi-mi14
 30	Hello this is my content \n\nAbc\n\nabc\n\n	Sony X12 	sony-x12
+31	//--Phần phân tích cú pháp\n\nvoid program_declaration(void)\n\n {\n\n   printf("program_declaration\\n");\n\n   block();\n\n   if (look_ahead==period_token) next_token();\n\n }\n\n\n\nvoid block(void)\n\n {\n\n   printf("block\\n");\n\n   if (look_ahead==begin_token) next_token();\n\n   declaration_part();\n\n   statement_part();\n\n   if (look_ahead==end_token) next_token();\n\n }\n\nvoid declaration_part(void)\n\n {\n\n   printf("declaration_part\\n");\n\n   while (look_ahead==int_token || look_ahead==var_token)\n\n     {\n\n       if (look_ahead==int_token)\n\n         constant_declaration();\n\n       else if (look_ahead==var_token)\n\n         variable_declaration();\n\n     }\n\n   while (look_ahead==procedure_token)\n\n     procedure_declaration();\n\n }\n\nvoid constant_declaration(void)\n\n {\n\n   printf("constant_declaration\\n");\n\n   type_declarer();\n\n   if (look_ahead==ident_token) next_token();\n\n   if (look_ahead==equal_token) next_token();\n\n   if (look_ahead==num_token) next_token();\n\n   while (look_ahead==list_token)\n\n     {\n\n       if (look_ahead==list_token) next_token();\n\n       if (look_ahead==ident_token) next_token();\n\n       if (look_ahead==equal_token) next_token();\n\n       if (look_ahead==num_token) next_token();\n\n     }\n\n   if (look_ahead==separator_token) next_token();\n\n }\n\nvoid type_declarer(void)\n\n {\n\n   printf("type_declarer\\n");\n\n   if (look_ahead==int_token) next_token();\n\n }\n\nvoid variable_declaration(void)\n\n {\n\n   printf("variable_declaration\\n");\n\n   if (look_ahead==var_token) next_token();\n\n   type_declarer();\n\n   if (look_ahead==ident_token) next_token();\n\n   while (look_ahead==list_token)\n\n     {\n\n       if (look_ahead==list_token) next_token();\n\n       if (look_ahead==ident_token) next_token();\n\n     }\n\n   if (look_ahead==separator_token) next_token();\n\n }\n\nvoid procedure_declaration(void)\n\n {\n\n   printf("procedure_declaration\\n");\n\n   if (look_ahead==procedure_token) next_token();\n\n   if (look_ahead==ident_token) next_token();\n\n   block();\n\n   if (look_ahead==separator_token) next_token();\n\n }\n\nvoid statement_part(void)\n\n {\n\n   printf("statement_part\\n");\n\n   statement();\n\n   while (look_ahead==separator_token)\n\n     {\n\n       if (look_ahead==separator_token) next_token();\n\n       statement();\n\n     }\n\n }\n\nvoid statement(void)\n\n {\n\n   printf("statement\\n");\n\n   if (look_ahead==ident_token) assignment_statement();\n\n   else if (look_ahead==if_token) if_statement();\n\n   else if (look_ahead==while_token) while_statement();\n\n   else if (look_ahead==call_token) call_statement();\n\n   else if (look_ahead==read_token) read_statement();\n\n   else if (look_ahead==write_token) write_statement();\n\n }\n\nvoid assignment_statement(void)\n\n {\n\n   printf("assignment_statement\\n");\n\n   left_part();\n\n   if (look_ahead==become_token) next_token();\n\n   expression();\n\n }\n\nvoid left_part(void)\n\n {\n\n   printf("left_part\\n");\n\n   if (look_ahead==ident_token) next_token();\n\n }\n\nvoid if_statement(void)\n\n {\n\n   printf("if_statement\\n");\n\n   if (look_ahead==if_token) next_token();\n\n   relation();\n\n   if (look_ahead==then_token) next_token();\n\n   statement_part();\n\n   if (look_ahead==else_token)\n\n     {\n\n       if (look_ahead==else_token) next_token();\n\n         statement_part();\n\n     }\n\n   if (look_ahead==fi_token) next_token();\n\n }\n\nvoid while_statement(void)\n\n {\n\n   printf("while_statement\\n");\n\n   if (look_ahead==while_token) next_token();\n\n   relation();\n\n   if (look_ahead==do_token) next_token();\n\n   statement_part();\n\n   if (look_ahead==od_token) next_token();\n\n }\n\nvoid call_statement(void)\n\n {\n\n   printf("call_statement\\n");\n\n   if (look_ahead==call_token) next_token();\n\n   if (look_ahead==ident_token) next_token();\n\n }\n\nvoid read_statement(void)\n\n {\n\n   printf("read_statement\\n");\n\n   if (look_ahead==read_token) next_token();\n\n   if (look_ahead==open_token) next_token();\n\n   if (look_ahead==ident_token) next_token();\n\n   while (look_ahead==list_token)\n\n     {\n\n       if (look_ahead==list_token) next_token();\n\n       if (look_ahead==ident_token) next_token();\n\n     }\n\n   if (look_ahead==close_token) next_token();\n\n }\n\nvoid write_statement(void)\n\n {\n\n   printf("write_statement\\n");\n\n   if (look_ahead==write_token) next_token();\n\n   if (look_ahead==open_token) next_token();\n\n   expression();\n\n   while (look_ahead==list_token)\n\n     {\n\n       if (look_ahead==list_token) next_token();\n\n       expression();\n\n     }\n\n   if (look_ahead==close_token) next_token();\n\n }\n\nvoid expression(void)\n\n {\n\n   printf("expression\\n");\n\n   term();\n\n   while (look_ahead==minus_token|| look_ahead==plus_token)\n\n     {\n\n       add_operator();\n\n       term();\n\n     }\n\n }\n\nvoid term(void)\n\n {\n\n   printf("term\\n");\n\n   factor();\n\n   while (look_ahead==modulo_token|| look_ahead==over_token||\n\n          look_ahead==times_token)\n\n     {\n\n       multiply_operator();\n\n       factor();\n\n     }\n\n }\n\nvoid factor(void)\n\n {\n\n   printf("factor\\n");\n\n   while (look_ahead==absolute_token|| look_ahead==negate_token)\n\n     unary_operator();\n\n   operand();\n\n }\n\nvoid operand(void)\n\n {\n\n   printf("operand\\n");\n\n   if (look_ahead==ident_token) next_token();\n\n   else if (look_ahead==num_token) next_token();\n\n   else if (look_ahead==open_token)\n\n     {\n\n       if (look_ahead==open_token) next_token();\n\n       expression();\n\n       if (look_ahead==close_token);\n\n     }\n\n }\n\nvoid add_operator(void)\n\n {\n\n   printf("add_operator\\n");\n\n   if (look_ahead==plus_token) next_token();\n\n   else if (look_ahead==minus_token) next_token();\n\n }\n\nvoid multiply_operator(void)\n\n {\n\n   printf("multiply_operator\\n");\n\n   if (look_ahead==times_token) next_token();\n\n   else if (look_ahead==over_token) next_token();\n\n   else if (look_ahead==modulo_token) next_token();\n\n }\n\nvoid unary_operator(void)\n\n {\n\n   printf("unary_operator\\n");\n\n   if (look_ahead==negate_token) next_token();\n\n   else if (look_ahead==absolute_token) next_token();\n\n }\n\nvoid relation(void)\n\n {\n\n   printf("relation\\n");\n\n   expression();\n\n   relation_operator();\n\n   expression();\n\n\n\n }\n\n\n\n	Khám phá những công nghệ tiên tiến nhất trên thiết bị Galaxy S23 Plus, bạn sẽ có trải nghiệm toàn năng từ thiết kế bền vững, camera Mắt thần bóng đêm cao cấp, bộ vi xử lý Snapdragon 8 Gen 2 for Galaxy mạnh mẽ đến viên pin bền bỉ và màn hình lớn sắc nét. Một sự kết hợp hoàn hảo, hội tụ mọi điểm ấn tượng trên thế hệ di động thông minh 2023.	iphone-11
+32	//--Phần phân tích cú pháp\n\nvoid program_declaration(void)\n\n {\n\n   printf("program_declaration\\n");\n\n   block();\n\n   if (look_ahead==period_token) next_token();\n\n }\n\n\n\nvoid block(void)\n\n {\n\n   printf("block\\n");\n\n   if (look_ahead==begin_token) next_token();\n\n   declaration_part();\n\n   statement_part();\n\n   if (look_ahead==end_token) next_token();\n\n }\n\nvoid declaration_part(void)\n\n {\n\n   printf("declaration_part\\n");\n\n   while (look_ahead==int_token || look_ahead==var_token)\n\n     {\n\n       if (look_ahead==int_token)\n\n         constant_declaration();\n\n       else if (look_ahead==var_token)\n\n         variable_declaration();\n\n     }\n\n   while (look_ahead==procedure_token)\n\n     procedure_declaration();\n\n }\n\nvoid constant_declaration(void)\n\n {\n\n   printf("constant_declaration\\n");\n\n   type_declarer();\n\n   if (look_ahead==ident_token) next_token();\n\n   if (look_ahead==equal_token) next_token();\n\n   if (look_ahead==num_token) next_token();\n\n   while (look_ahead==list_token)\n\n     {\n\n       if (look_ahead==list_token) next_token();\n\n       if (look_ahead==ident_token) next_token();\n\n       if (look_ahead==equal_token) next_token();\n\n       if (look_ahead==num_token) next_token();\n\n     }\n\n   if (look_ahead==separator_token) next_token();\n\n }\n\nvoid type_declarer(void)\n\n {\n\n   printf("type_declarer\\n");\n\n   if (look_ahead==int_token) next_token();\n\n }\n\nvoid variable_declaration(void)\n\n {\n\n   printf("variable_declaration\\n");\n\n   if (look_ahead==var_token) next_token();\n\n   type_declarer();\n\n   if (look_ahead==ident_token) next_token();\n\n   while (look_ahead==list_token)\n\n     {\n\n       if (look_ahead==list_token) next_token();\n\n       if (look_ahead==ident_token) next_token();\n\n     }\n\n   if (look_ahead==separator_token) next_token();\n\n }\n\nvoid procedure_declaration(void)\n\n {\n\n   printf("procedure_declaration\\n");\n\n   if (look_ahead==procedure_token) next_token();\n\n   if (look_ahead==ident_token) next_token();\n\n   block();\n\n   if (look_ahead==separator_token) next_token();\n\n }\n\nvoid statement_part(void)\n\n {\n\n   printf("statement_part\\n");\n\n   statement();\n\n   while (look_ahead==separator_token)\n\n     {\n\n       if (look_ahead==separator_token) next_token();\n\n       statement();\n\n     }\n\n }\n\nvoid statement(void)\n\n {\n\n   printf("statement\\n");\n\n   if (look_ahead==ident_token) assignment_statement();\n\n   else if (look_ahead==if_token) if_statement();\n\n   else if (look_ahead==while_token) while_statement();\n\n   else if (look_ahead==call_token) call_statement();\n\n   else if (look_ahead==read_token) read_statement();\n\n   else if (look_ahead==write_token) write_statement();\n\n }\n\nvoid assignment_statement(void)\n\n {\n\n   printf("assignment_statement\\n");\n\n   left_part();\n\n   if (look_ahead==become_token) next_token();\n\n   expression();\n\n }\n\nvoid left_part(void)\n\n {\n\n   printf("left_part\\n");\n\n   if (look_ahead==ident_token) next_token();\n\n }\n\nvoid if_statement(void)\n\n {\n\n   printf("if_statement\\n");\n\n   if (look_ahead==if_token) next_token();\n\n   relation();\n\n   if (look_ahead==then_token) next_token();\n\n   statement_part();\n\n   if (look_ahead==else_token)\n\n     {\n\n       if (look_ahead==else_token) next_token();\n\n         statement_part();\n\n     }\n\n   if (look_ahead==fi_token) next_token();\n\n }\n\nvoid while_statement(void)\n\n {\n\n   printf("while_statement\\n");\n\n   if (look_ahead==while_token) next_token();\n\n   relation();\n\n   if (look_ahead==do_token) next_token();\n\n   statement_part();\n\n   if (look_ahead==od_token) next_token();\n\n }\n\nvoid call_statement(void)\n\n {\n\n   printf("call_statement\\n");\n\n   if (look_ahead==call_token) next_token();\n\n   if (look_ahead==ident_token) next_token();\n\n }\n\nvoid read_statement(void)\n\n {\n\n   printf("read_statement\\n");\n\n   if (look_ahead==read_token) next_token();\n\n   if (look_ahead==open_token) next_token();\n\n   if (look_ahead==ident_token) next_token();\n\n   while (look_ahead==list_token)\n\n     {\n\n       if (look_ahead==list_token) next_token();\n\n       if (look_ahead==ident_token) next_token();\n\n     }\n\n   if (look_ahead==close_token) next_token();\n\n }\n\nvoid write_statement(void)\n\n {\n\n   printf("write_statement\\n");\n\n   if (look_ahead==write_token) next_token();\n\n   if (look_ahead==open_token) next_token();\n\n   expression();\n\n   while (look_ahead==list_token)\n\n     {\n\n       if (look_ahead==list_token) next_token();\n\n       expression();\n\n     }\n\n   if (look_ahead==close_token) next_token();\n\n }\n\nvoid expression(void)\n\n {\n\n   printf("expression\\n");\n\n   term();\n\n   while (look_ahead==minus_token|| look_ahead==plus_token)\n\n     {\n\n       add_operator();\n\n       term();\n\n     }\n\n }\n\nvoid term(void)\n\n {\n\n   printf("term\\n");\n\n   factor();\n\n   while (look_ahead==modulo_token|| look_ahead==over_token||\n\n          look_ahead==times_token)\n\n     {\n\n       multiply_operator();\n\n       factor();\n\n     }\n\n }\n\nvoid factor(void)\n\n {\n\n   printf("factor\\n");\n\n   while (look_ahead==absolute_token|| look_ahead==negate_token)\n\n     unary_operator();\n\n   operand();\n\n }\n\nvoid operand(void)\n\n {\n\n   printf("operand\\n");\n\n   if (look_ahead==ident_token) next_token();\n\n   else if (look_ahead==num_token) next_token();\n\n   else if (look_ahead==open_token)\n\n     {\n\n       if (look_ahead==open_token) next_token();\n\n       expression();\n\n       if (look_ahead==close_token);\n\n     }\n\n }\n\nvoid add_operator(void)\n\n {\n\n   printf("add_operator\\n");\n\n   if (look_ahead==plus_token) next_token();\n\n   else if (look_ahead==minus_token) next_token();\n\n }\n\nvoid multiply_operator(void)\n\n {\n\n   printf("multiply_operator\\n");\n\n   if (look_ahead==times_token) next_token();\n\n   else if (look_ahead==over_token) next_token();\n\n   else if (look_ahead==modulo_token) next_token();\n\n }\n\nvoid unary_operator(void)\n\n {\n\n   printf("unary_operator\\n");\n\n   if (look_ahead==negate_token) next_token();\n\n   else if (look_ahead==absolute_token) next_token();\n\n }\n\nvoid relation(void)\n\n {\n\n   printf("relation\\n");\n\n   expression();\n\n   relation_operator();\n\n   expression();\n\n\n\n }\n\n\n\n	Khám phá những công nghệ tiên tiến nhất trên thiết bị Galaxy S23 Plus, bạn sẽ có trải nghiệm toàn năng từ thiết kế bền vững, camera Mắt thần bóng đêm cao cấp, bộ vi xử lý Snapdragon 8 Gen 2 for Galaxy mạnh mẽ đến viên pin bền bỉ và màn hình lớn sắc nét. Một sự kết hợp hoàn hảo, hội tụ mọi điểm ấn tượng trên thế hệ di động thông minh 2023.	iphone-13
+33	//--Phần phân tích cú pháp\n\nvoid program_declaration(void)\n\n {\n\n   printf("program_declaration\\n");\n\n   block();\n\n   if (look_ahead==period_token) next_token();\n\n }\n\n\n\nvoid block(void)\n\n {\n\n   printf("block\\n");\n\n   if (look_ahead==begin_token) next_token();\n\n   declaration_part();\n\n   statement_part();\n\n   if (look_ahead==end_token) next_token();\n\n }\n\nvoid declaration_part(void)\n\n {\n\n   printf("declaration_part\\n");\n\n   while (look_ahead==int_token || look_ahead==var_token)\n\n     {\n\n       if (look_ahead==int_token)\n\n         constant_declaration();\n\n       else if (look_ahead==var_token)\n\n         variable_declaration();\n\n     }\n\n   while (look_ahead==procedure_token)\n\n     procedure_declaration();\n\n }\n\nvoid constant_declaration(void)\n\n {\n\n   printf("constant_declaration\\n");\n\n   type_declarer();\n\n   if (look_ahead==ident_token) next_token();\n\n   if (look_ahead==equal_token) next_token();\n\n   if (look_ahead==num_token) next_token();\n\n   while (look_ahead==list_token)\n\n     {\n\n       if (look_ahead==list_token) next_token();\n\n       if (look_ahead==ident_token) next_token();\n\n       if (look_ahead==equal_token) next_token();\n\n       if (look_ahead==num_token) next_token();\n\n     }\n\n   if (look_ahead==separator_token) next_token();\n\n }\n\nvoid type_declarer(void)\n\n {\n\n   printf("type_declarer\\n");\n\n   if (look_ahead==int_token) next_token();\n\n }\n\nvoid variable_declaration(void)\n\n {\n\n   printf("variable_declaration\\n");\n\n   if (look_ahead==var_token) next_token();\n\n   type_declarer();\n\n   if (look_ahead==ident_token) next_token();\n\n   while (look_ahead==list_token)\n\n     {\n\n       if (look_ahead==list_token) next_token();\n\n       if (look_ahead==ident_token) next_token();\n\n     }\n\n   if (look_ahead==separator_token) next_token();\n\n }\n\nvoid procedure_declaration(void)\n\n {\n\n   printf("procedure_declaration\\n");\n\n   if (look_ahead==procedure_token) next_token();\n\n   if (look_ahead==ident_token) next_token();\n\n   block();\n\n   if (look_ahead==separator_token) next_token();\n\n }\n\nvoid statement_part(void)\n\n {\n\n   printf("statement_part\\n");\n\n   statement();\n\n   while (look_ahead==separator_token)\n\n     {\n\n       if (look_ahead==separator_token) next_token();\n\n       statement();\n\n     }\n\n }\n\nvoid statement(void)\n\n {\n\n   printf("statement\\n");\n\n   if (look_ahead==ident_token) assignment_statement();\n\n   else if (look_ahead==if_token) if_statement();\n\n   else if (look_ahead==while_token) while_statement();\n\n   else if (look_ahead==call_token) call_statement();\n\n   else if (look_ahead==read_token) read_statement();\n\n   else if (look_ahead==write_token) write_statement();\n\n }\n\nvoid assignment_statement(void)\n\n {\n\n   printf("assignment_statement\\n");\n\n   left_part();\n\n   if (look_ahead==become_token) next_token();\n\n   expression();\n\n }\n\nvoid left_part(void)\n\n {\n\n   printf("left_part\\n");\n\n   if (look_ahead==ident_token) next_token();\n\n }\n\nvoid if_statement(void)\n\n {\n\n   printf("if_statement\\n");\n\n   if (look_ahead==if_token) next_token();\n\n   relation();\n\n   if (look_ahead==then_token) next_token();\n\n   statement_part();\n\n   if (look_ahead==else_token)\n\n     {\n\n       if (look_ahead==else_token) next_token();\n\n         statement_part();\n\n     }\n\n   if (look_ahead==fi_token) next_token();\n\n }\n\nvoid while_statement(void)\n\n {\n\n   printf("while_statement\\n");\n\n   if (look_ahead==while_token) next_token();\n\n   relation();\n\n   if (look_ahead==do_token) next_token();\n\n   statement_part();\n\n   if (look_ahead==od_token) next_token();\n\n }\n\nvoid call_statement(void)\n\n {\n\n   printf("call_statement\\n");\n\n   if (look_ahead==call_token) next_token();\n\n   if (look_ahead==ident_token) next_token();\n\n }\n\nvoid read_statement(void)\n\n {\n\n   printf("read_statement\\n");\n\n   if (look_ahead==read_token) next_token();\n\n   if (look_ahead==open_token) next_token();\n\n   if (look_ahead==ident_token) next_token();\n\n   while (look_ahead==list_token)\n\n     {\n\n       if (look_ahead==list_token) next_token();\n\n       if (look_ahead==ident_token) next_token();\n\n     }\n\n   if (look_ahead==close_token) next_token();\n\n }\n\nvoid write_statement(void)\n\n {\n\n   printf("write_statement\\n");\n\n   if (look_ahead==write_token) next_token();\n\n   if (look_ahead==open_token) next_token();\n\n   expression();\n\n   while (look_ahead==list_token)\n\n     {\n\n       if (look_ahead==list_token) next_token();\n\n       expression();\n\n     }\n\n   if (look_ahead==close_token) next_token();\n\n }\n\nvoid expression(void)\n\n {\n\n   printf("expression\\n");\n\n   term();\n\n   while (look_ahead==minus_token|| look_ahead==plus_token)\n\n     {\n\n       add_operator();\n\n       term();\n\n     }\n\n }\n\nvoid term(void)\n\n {\n\n   printf("term\\n");\n\n   factor();\n\n   while (look_ahead==modulo_token|| look_ahead==over_token||\n\n          look_ahead==times_token)\n\n     {\n\n       multiply_operator();\n\n       factor();\n\n     }\n\n }\n\nvoid factor(void)\n\n {\n\n   printf("factor\\n");\n\n   while (look_ahead==absolute_token|| look_ahead==negate_token)\n\n     unary_operator();\n\n   operand();\n\n }\n\nvoid operand(void)\n\n {\n\n   printf("operand\\n");\n\n   if (look_ahead==ident_token) next_token();\n\n   else if (look_ahead==num_token) next_token();\n\n   else if (look_ahead==open_token)\n\n     {\n\n       if (look_ahead==open_token) next_token();\n\n       expression();\n\n       if (look_ahead==close_token);\n\n     }\n\n }\n\nvoid add_operator(void)\n\n {\n\n   printf("add_operator\\n");\n\n   if (look_ahead==plus_token) next_token();\n\n   else if (look_ahead==minus_token) next_token();\n\n }\n\nvoid multiply_operator(void)\n\n {\n\n   printf("multiply_operator\\n");\n\n   if (look_ahead==times_token) next_token();\n\n   else if (look_ahead==over_token) next_token();\n\n   else if (look_ahead==modulo_token) next_token();\n\n }\n\nvoid unary_operator(void)\n\n {\n\n   printf("unary_operator\\n");\n\n   if (look_ahead==negate_token) next_token();\n\n   else if (look_ahead==absolute_token) next_token();\n\n }\n\nvoid relation(void)\n\n {\n\n   printf("relation\\n");\n\n   expression();\n\n   relation_operator();\n\n   expression();\n\n\n\n }\n\n\n\n	Khám phá những công nghệ tiên tiến nhất trên thiết bị Galaxy S23 Plus, bạn sẽ có trải nghiệm toàn năng từ thiết kế bền vững, camera Mắt thần bóng đêm cao cấp, bộ vi xử lý Snapdragon 8 Gen 2 for Galaxy mạnh mẽ đến viên pin bền bỉ và màn hình lớn sắc nét. Một sự kết hợp hoàn hảo, hội tụ mọi điểm ấn tượng trên thế hệ di động thông minh 2023.	abc
+34	//--Phần phân tích cú pháp\n\nvoid program_declaration(void)\n\n {\n\n   printf("program_declaration\\n");\n\n   block();\n\n   if (look_ahead==period_token) next_token();\n\n }\n\n\n\nvoid block(void)\n\n {\n\n   printf("block\\n");\n\n   if (look_ahead==begin_token) next_token();\n\n   declaration_part();\n\n   statement_part();\n\n   if (look_ahead==end_token) next_token();\n\n }\n\nvoid declaration_part(void)\n\n {\n\n   printf("declaration_part\\n");\n\n   while (look_ahead==int_token || look_ahead==var_token)\n\n     {\n\n       if (look_ahead==int_token)\n\n         constant_declaration();\n\n       else if (look_ahead==var_token)\n\n         variable_declaration();\n\n     }\n\n   while (look_ahead==procedure_token)\n\n     procedure_declaration();\n\n }\n\nvoid constant_declaration(void)\n\n {\n\n   printf("constant_declaration\\n");\n\n   type_declarer();\n\n   if (look_ahead==ident_token) next_token();\n\n   if (look_ahead==equal_token) next_token();\n\n   if (look_ahead==num_token) next_token();\n\n   while (look_ahead==list_token)\n\n     {\n\n       if (look_ahead==list_token) next_token();\n\n       if (look_ahead==ident_token) next_token();\n\n       if (look_ahead==equal_token) next_token();\n\n       if (look_ahead==num_token) next_token();\n\n     }\n\n   if (look_ahead==separator_token) next_token();\n\n }\n\nvoid type_declarer(void)\n\n {\n\n   printf("type_declarer\\n");\n\n   if (look_ahead==int_token) next_token();\n\n }\n\nvoid variable_declaration(void)\n\n {\n\n   printf("variable_declaration\\n");\n\n   if (look_ahead==var_token) next_token();\n\n   type_declarer();\n\n   if (look_ahead==ident_token) next_token();\n\n   while (look_ahead==list_token)\n\n     {\n\n       if (look_ahead==list_token) next_token();\n\n       if (look_ahead==ident_token) next_token();\n\n     }\n\n   if (look_ahead==separator_token) next_token();\n\n }\n\nvoid procedure_declaration(void)\n\n {\n\n   printf("procedure_declaration\\n");\n\n   if (look_ahead==procedure_token) next_token();\n\n   if (look_ahead==ident_token) next_token();\n\n   block();\n\n   if (look_ahead==separator_token) next_token();\n\n }\n\nvoid statement_part(void)\n\n {\n\n   printf("statement_part\\n");\n\n   statement();\n\n   while (look_ahead==separator_token)\n\n     {\n\n       if (look_ahead==separator_token) next_token();\n\n       statement();\n\n     }\n\n }\n\nvoid statement(void)\n\n {\n\n   printf("statement\\n");\n\n   if (look_ahead==ident_token) assignment_statement();\n\n   else if (look_ahead==if_token) if_statement();\n\n   else if (look_ahead==while_token) while_statement();\n\n   else if (look_ahead==call_token) call_statement();\n\n   else if (look_ahead==read_token) read_statement();\n\n   else if (look_ahead==write_token) write_statement();\n\n }\n\nvoid assignment_statement(void)\n\n {\n\n   printf("assignment_statement\\n");\n\n   left_part();\n\n   if (look_ahead==become_token) next_token();\n\n   expression();\n\n }\n\nvoid left_part(void)\n\n {\n\n   printf("left_part\\n");\n\n   if (look_ahead==ident_token) next_token();\n\n }\n\nvoid if_statement(void)\n\n {\n\n   printf("if_statement\\n");\n\n   if (look_ahead==if_token) next_token();\n\n   relation();\n\n   if (look_ahead==then_token) next_token();\n\n   statement_part();\n\n   if (look_ahead==else_token)\n\n     {\n\n       if (look_ahead==else_token) next_token();\n\n         statement_part();\n\n     }\n\n   if (look_ahead==fi_token) next_token();\n\n }\n\nvoid while_statement(void)\n\n {\n\n   printf("while_statement\\n");\n\n   if (look_ahead==while_token) next_token();\n\n   relation();\n\n   if (look_ahead==do_token) next_token();\n\n   statement_part();\n\n   if (look_ahead==od_token) next_token();\n\n }\n\nvoid call_statement(void)\n\n {\n\n   printf("call_statement\\n");\n\n   if (look_ahead==call_token) next_token();\n\n   if (look_ahead==ident_token) next_token();\n\n }\n\nvoid read_statement(void)\n\n {\n\n   printf("read_statement\\n");\n\n   if (look_ahead==read_token) next_token();\n\n   if (look_ahead==open_token) next_token();\n\n   if (look_ahead==ident_token) next_token();\n\n   while (look_ahead==list_token)\n\n     {\n\n       if (look_ahead==list_token) next_token();\n\n       if (look_ahead==ident_token) next_token();\n\n     }\n\n   if (look_ahead==close_token) next_token();\n\n }\n\nvoid write_statement(void)\n\n {\n\n   printf("write_statement\\n");\n\n   if (look_ahead==write_token) next_token();\n\n   if (look_ahead==open_token) next_token();\n\n   expression();\n\n   while (look_ahead==list_token)\n\n     {\n\n       if (look_ahead==list_token) next_token();\n\n       expression();\n\n     }\n\n   if (look_ahead==close_token) next_token();\n\n }\n\nvoid expression(void)\n\n {\n\n   printf("expression\\n");\n\n   term();\n\n   while (look_ahead==minus_token|| look_ahead==plus_token)\n\n     {\n\n       add_operator();\n\n       term();\n\n     }\n\n }\n\nvoid term(void)\n\n {\n\n   printf("term\\n");\n\n   factor();\n\n   while (look_ahead==modulo_token|| look_ahead==over_token||\n\n          look_ahead==times_token)\n\n     {\n\n       multiply_operator();\n\n       factor();\n\n     }\n\n }\n\nvoid factor(void)\n\n {\n\n   printf("factor\\n");\n\n   while (look_ahead==absolute_token|| look_ahead==negate_token)\n\n     unary_operator();\n\n   operand();\n\n }\n\nvoid operand(void)\n\n {\n\n   printf("operand\\n");\n\n   if (look_ahead==ident_token) next_token();\n\n   else if (look_ahead==num_token) next_token();\n\n   else if (look_ahead==open_token)\n\n     {\n\n       if (look_ahead==open_token) next_token();\n\n       expression();\n\n       if (look_ahead==close_token);\n\n     }\n\n }\n\nvoid add_operator(void)\n\n {\n\n   printf("add_operator\\n");\n\n   if (look_ahead==plus_token) next_token();\n\n   else if (look_ahead==minus_token) next_token();\n\n }\n\nvoid multiply_operator(void)\n\n {\n\n   printf("multiply_operator\\n");\n\n   if (look_ahead==times_token) next_token();\n\n   else if (look_ahead==over_token) next_token();\n\n   else if (look_ahead==modulo_token) next_token();\n\n }\n\nvoid unary_operator(void)\n\n {\n\n   printf("unary_operator\\n");\n\n   if (look_ahead==negate_token) next_token();\n\n   else if (look_ahead==absolute_token) next_token();\n\n }\n\nvoid relation(void)\n\n {\n\n   printf("relation\\n");\n\n   expression();\n\n   relation_operator();\n\n   expression();\n\n\n\n }\n\n\n\n	Khám phá những công nghệ tiên tiến nhất trên thiết bị Galaxy S23 Plus, bạn sẽ có trải nghiệm toàn năng từ thiết kế bền vững, camera Mắt thần bóng đêm cao cấp, bộ vi xử lý Snapdragon 8 Gen 2 for Galaxy mạnh mẽ đến viên pin bền bỉ và màn hình lớn sắc nét. Một sự kết hợp hoàn hảo, hội tụ mọi điểm ấn tượng trên thế hệ di động thông minh 2023.	iphone-77
 \.
 
 
@@ -558,10 +603,8 @@ COPY public.feature (id, os, battery, chip, made_time, screen, product_id) FROM 
 2	Android 14	5160	Exynos 2200	2021-04-12 00:00:00	6.4 inch, FHD+, Dynamic AMOLED 2X, 1080 x 2340 Pixels	samsung-s24
 5	Window 11	5160	Intel core I5 11th	2021-04-12 00:00:00	14 inch, FHD+, IPS-LCD, 1080 x 2340 Pixels	asus-x415
 7	Android 14	5160	Snapdragon 888	2021-04-12 00:00:00	14 inch, FHD+, IPS-LCD, 1080 x 2340 Pixels	vivo-v15
-8	Android 14	5160	Snapdragon 888	2021-04-12 00:00:00	14 inch, FHD+, IPS-LCD, 1080 x 2340 Pixels	realme-c33
 11	IOS 17.5	5160	A bionic 13	2021-04-12 00:00:00	14 inch, FHD+, IPS-LCD, 1080 x 2340 Pixels	iphone-15-promax
 13	Android 14	5160	Snapdragon 675	2021-04-12 00:00:00	14 inch, FHD+, IPS-LCD, 1080 x 2340 Pixels	samsung-m54
-14	Android 14	5160	Snapdragon 675	2021-04-12 00:00:00	14 inch, FHD+, IPS-LCD, 1080 x 2340 Pixels	redmi-13c
 15	Android	5160	Snapdragon 860	2021-01-10 00:00:00	6.4 inch	xiaomi-16
 16	Android	5160	Snapdragon 860	2021-01-10 00:00:00	6.4 inch	xiaomi-17
 17	Android	5160	Abionic 14	2021-01-10 00:00:00	6.4 inch	iphone-5
@@ -569,13 +612,16 @@ COPY public.feature (id, os, battery, chip, made_time, screen, product_id) FROM 
 26	MAC OS	5160	Intel Core i7	2021-01-10 00:00:00	6.4 inch	dell-baa
 25	Windows	7000	Intel Core i7	2018-12-31 00:00:00	16 inch	dell-laptitude
 10	Android	5160	Snapdragon 888	2017-12-31 00:00:00	14 inch, FHD+, IPS-LCD, 1080 x 2340 Pixels	samsung-a55-5g
-12	Android 14	5160	Snapdragon 675	2021-01-03 00:00:00	14 inch, FHD+, IPS-LCD, 1080 x 2340 Pixels	vivo-y100
 9	Android 14	5160	Snapdragon 888	2021-01-03 00:00:00	14 inch, FHD+, IPS-LCD, 1080 x 2340 Pixels	oppo-reno11f-5g
 3	Android	5160	Snapdragon 860	2021-01-11 00:00:00	6.4 inch, FHD+, Dynamic AMOLED 2X, 1080 x 2340 Pixels	xiaomi-mi14
 4	Android 14	5160	Exynos 2200	2021-01-03 00:00:00	6.4 inch, FHD+, Dynamic AMOLED 2X, 1080 x 2340 Pixels	xiaomi-mi11t
 1	Android 14	5160	Exynos 2200	2021-01-03 00:00:00	6.4 inch, FHD+, Dynamic AMOLED 2X, 1080 x 2340 Pixels	iphone-15
 6	Window 11	5160	Intel I5 11th	2021-01-03 00:00:00	14 inch, FHD+, IPS-LCD, 1080 x 2340 Pixels	iphone-14
 27		5160	Snapdragon 860	2019-01-09 00:00:00	4 inch	sony-x12
+28	IOS	5160	Abionic 15	2021-01-10 00:00:00	14 inch, FHD+, IPS-LCD, 1080 x 2340 Pixels	iphone-11
+29	Android	7000	Abionic 14	2022-01-03 00:00:00	6.4 inch	iphone-13
+30	Android	5160	Abionic 14	2021-01-10 00:00:00	14 inch, FHD+, IPS-LCD, 1080 x 2340 Pixels	abc
+31	Android	5160	Abionic 14	2022-01-03 00:00:00	14 inch, FHD+, IPS-LCD, 1080 x 2340 Pixels	iphone-77
 \.
 
 
@@ -587,23 +633,24 @@ COPY public.feature_front_camera (feature_id, front_camera) FROM stdin;
 2	12
 5	12
 7	12
-8	12
 11	12
 13	12
 15	20
 16	20
 17	20
-14	12
 18	20
 26	20
 25	2
 10	12
-12	12
 9	12
 3	12
 4	12
 1	12
 6	12
+28	20
+29	20
+30	20
+31	20
 \.
 
 
@@ -631,6 +678,10 @@ COPY public.feature_rear_camera (feature_id, rear_camera) FROM stdin;
 1	12
 1	8
 27	64
+28	64
+29	64
+30	64
+31	64
 \.
 
 
@@ -643,6 +694,7 @@ y7fiV9ui4k	t	jisooconan@gmail.com	0353795729	2024-06-16 21:09:18.123	samsung-sj
 bMT2JYMbo3	t	jisooconan@gmail.com	0353795729	2024-06-16 21:20:36.58	xiaomi-mi14
 V8mdY1W1Tb	t	jisooconan@gmail.com	0353795729	2024-06-17 13:18:00.437	vivo-v15
 9V7kHjFN1x	f	jisooconan@gmail.com	0353795729	2024-06-18 08:49:52.581	vivo-v15
+iih4CG52yz	f	jisooconan@gmail.com	0353795729	2024-06-22 14:02:54.73	xiaomi-mi14
 \.
 
 
@@ -659,12 +711,9 @@ COPY public.price (id, current_price, previous_price, ram, rom, feature_id, prod
 9	13000000	13000000	8	512	5	asus-x415
 10	13000000	13000000	8	512	6	iphone-14
 11	13000000	13000000	8	512	7	vivo-v15
-12	13000000	13000000	8	512	8	realme-c33
 13	13000000	13000000	8	512	9	oppo-reno11f-5g
 15	13000000	13000000	8	512	11	iphone-15-promax
-16	13000000	13000000	8	512	12	vivo-y100
 17	13000000	13000000	8	512	13	samsung-m54
-18	13000000	13000000	8	512	14	redmi-13c
 19	12000000	15000000	8	256	15	xiaomi-16
 20	12000000	15000000	8	256	16	xiaomi-17
 21	12000000	15000000	8	64	17	iphone-5
@@ -676,6 +725,14 @@ COPY public.price (id, current_price, previous_price, ram, rom, feature_id, prod
 2	11990000	23990000	12	512	1	iphone-15
 26	14990000	15000000	8	128	\N	\N
 27	14990000	15000000	8	128	27	sony-x12
+28	0	15000000	6	64	\N	\N
+29	0	15000000	6	64	28	iphone-11
+30	0	15000000	8	1024	\N	\N
+31	0	15000000	8	1024	29	iphone-13
+32	0	15000000	8	32	\N	\N
+33	0	15000000	8	32	30	abc
+34	0	15000000	8	1024	\N	\N
+35	0	15000000	8	1024	31	iphone-77
 \.
 
 
@@ -743,24 +800,25 @@ Dell	Laptop
 --
 
 COPY public.product (id, name, category_name, producer_name, available, ordering, total_quantity) FROM stdin;
-xiaomi-mi14	Xiaomi Mi14 Ultra	Phone	Xiaomi	762	347	1000
 iphone-15-promax	Iphone 15 Promax	Phone	Apple	45	42	\N
 iphone-15	iPhone 15	Phone	Apple	100	50	\N
 iphone-14	IPhone 14	Phone	Apple	0	0	\N
-redmi-13c	Xiaomi Redmi 13C	Phone	Xiaomi	234	121	\N
 oppo-reno11f-5g	Oppo Reno11F 5G	Phone	Oppo	1243	344	\N
 samsung-s24	Samsung S24	Phone	Samsung	43	37	\N
 samsung-m54	Samsung Galaxy M54 5G	Phone	Samsung	1233	234	\N
-vivo-y100	Vivo Y100	Phone	Vivo	167	123	\N
 asus-x415	Asus X415	Laptop	Asus	123	112	\N
 xiaomi-mi11t	Xiaomi Mi11T	Phone	Xiaomi	66	14	\N
-realme-c33	Realme C33	Phone	Realme	45	22	\N
 xiaomi-16	Xiaomi 16	Phone	Samsung	\N	0	\N
 vivo-v15	Vivo V15	Phone	Vivo	76	24	\N
 sony-x12	Sony-X12	Camera	Sony	560	0	1000
+xiaomi-mi14	Xiaomi Mi14 Ultra	Phone	Xiaomi	762	348	1000
+iphone-11	Iphone 11	Phone	Apple	560	0	1000
+iphone-13	Iphone 13	Phone	Apple	560	0	1000
 dell-baa	Dell baa	Laptop	Dell	560	0	1000
 dell-laptitude	Dell laptitude	Laptop	Dell	560	0	1000
 samsung-a55-5g	Samsung Galaxy A55 5G	Phone	Samsung	56	34	1000
+abc	abc	Phone	Nokia	560	0	1000
+iphone-77	Iphone 77	Phone	Nokia	560	0	1000
 iphone-5	Iphone 5	Phone	Apple	560	0	1000
 xiaomi-17	Xiaomi 17	Phone	Samsung	560	0	1000
 samsung-sj	samsung sj	Phone	Xiaomi	559	0	1000
@@ -773,18 +831,22 @@ samsung-sj	samsung sj	Phone	Xiaomi	559	0	1000
 
 COPY public.product_images (product_id, image_url) FROM stdin;
 sony-x12	https://res.cloudinary.com/dmi3xizxq/image/upload/v1718683158/kffsgcoc0h8kkkppo7cz.png
+iphone-11	https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/305658/s16/iphone-15-pro-max-blue-1-2-650x650.png
+iphone-11	https://res.cloudinary.com/dmi3xizxq/image/upload/v1719060604/czupmpdf9xr377oc1t6y.png
 samsung-s24	https://i.pinimg.com/564x/6f/03/08/6f0308c41401fe0633af1e2d898182a3.jpg
 samsung-s24	https://i.pinimg.com/736x/db/09/2a/db092a3fe925b8938b9118e5e419d857.jpg
 samsung-s24	https://i.pinimg.com/564x/48/36/d2/4836d2a498754ec71a1e5b2251308770.jpg
+iphone-11	https://res.cloudinary.com/dmi3xizxq/image/upload/v1719060603/b4tlg0kyomdrxfqd8pnd.png
+iphone-11	https://res.cloudinary.com/dmi3xizxq/image/upload/v1719060608/w15o9saqni5izawcjohs.png
+iphone-13	https://cdn.hoanghamobile.com/i/preview/Uploads/2023/09/13/iphone-15-blue-pure-back-iphone-15-blue-pure-front-2up-screen-usen.png
+abc	https://cdn.hoanghamobile.com/i/preview/Uploads/2023/09/13/iphone-15-blue-pure-back-iphone-15-blue-pure-front-2up-screen-usen.png
+iphone-77	https://cdn.hoanghamobile.com/i/preview/Uploads/2023/09/13/iphone-15-blue-pure-back-iphone-15-blue-pure-front-2up-screen-usen.png
 asus-x415	https://i.pinimg.com/564x/6f/03/08/6f0308c41401fe0633af1e2d898182a3.jpg
 asus-x415	https://i.pinimg.com/736x/db/09/2a/db092a3fe925b8938b9118e5e419d857.jpg
 asus-x415	https://i.pinimg.com/564x/48/36/d2/4836d2a498754ec71a1e5b2251308770.jpg
 vivo-v15	https://i.pinimg.com/564x/6f/03/08/6f0308c41401fe0633af1e2d898182a3.jpg
 vivo-v15	https://i.pinimg.com/736x/db/09/2a/db092a3fe925b8938b9118e5e419d857.jpg
 vivo-v15	https://i.pinimg.com/564x/48/36/d2/4836d2a498754ec71a1e5b2251308770.jpg
-realme-c33	https://i.pinimg.com/564x/6f/03/08/6f0308c41401fe0633af1e2d898182a3.jpg
-realme-c33	https://i.pinimg.com/736x/db/09/2a/db092a3fe925b8938b9118e5e419d857.jpg
-realme-c33	https://i.pinimg.com/564x/48/36/d2/4836d2a498754ec71a1e5b2251308770.jpg
 iphone-15-promax	https://i.pinimg.com/564x/6f/03/08/6f0308c41401fe0633af1e2d898182a3.jpg
 iphone-15-promax	https://i.pinimg.com/736x/db/09/2a/db092a3fe925b8938b9118e5e419d857.jpg
 iphone-15-promax	https://i.pinimg.com/564x/48/36/d2/4836d2a498754ec71a1e5b2251308770.jpg
@@ -796,18 +858,12 @@ xiaomi-16	https://res.cloudinary.com/dmi3xizxq/image/upload/v1717844136/td6aqfqw
 xiaomi-17	https://res.cloudinary.com/dmi3xizxq/image/upload/v1717844136/angqu30k2zjcsy2xj7km.jpg
 xiaomi-17	https://res.cloudinary.com/dmi3xizxq/image/upload/v1717844136/td6aqfqwm1ybsbfgqofl.png
 iphone-5	https://res.cloudinary.com/dmi3xizxq/image/upload/v1717846928/om3cdhv0bnaybyxpj3tv.jpg
-redmi-13c	https://i.pinimg.com/564x/6f/03/08/6f0308c41401fe0633af1e2d898182a3.jpg
-redmi-13c	https://i.pinimg.com/736x/db/09/2a/db092a3fe925b8938b9118e5e419d857.jpg
-redmi-13c	https://i.pinimg.com/564x/48/36/d2/4836d2a498754ec71a1e5b2251308770.jpg
 samsung-sj	https://res.cloudinary.com/dmi3xizxq/image/upload/v1717847045/i1wanuykoiogfswwefla.jpg
 dell-baa	https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-15-plus_1__1.png
 dell-laptitude	https://cdn.hoanghamobile.com/i/preview/Uploads/2023/09/13/iphone-15-blue-pure-back-iphone-15-blue-pure-front-2up-screen-usen.png
 samsung-a55-5g	https://i.pinimg.com/564x/6f/03/08/6f0308c41401fe0633af1e2d898182a3.jpg
 samsung-a55-5g	https://i.pinimg.com/736x/db/09/2a/db092a3fe925b8938b9118e5e419d857.jpg
 samsung-a55-5g	https://i.pinimg.com/564x/48/36/d2/4836d2a498754ec71a1e5b2251308770.jpg
-vivo-y100	https://i.pinimg.com/564x/6f/03/08/6f0308c41401fe0633af1e2d898182a3.jpg
-vivo-y100	https://i.pinimg.com/736x/db/09/2a/db092a3fe925b8938b9118e5e419d857.jpg
-vivo-y100	https://i.pinimg.com/564x/48/36/d2/4836d2a498754ec71a1e5b2251308770.jpg
 oppo-reno11f-5g	https://i.pinimg.com/564x/6f/03/08/6f0308c41401fe0633af1e2d898182a3.jpg
 oppo-reno11f-5g	https://i.pinimg.com/736x/db/09/2a/db092a3fe925b8938b9118e5e419d857.jpg
 oppo-reno11f-5g	https://i.pinimg.com/564x/48/36/d2/4836d2a498754ec71a1e5b2251308770.jpg
@@ -827,6 +883,36 @@ iphone-14	https://i.pinimg.com/564x/48/36/d2/4836d2a498754ec71a1e5b2251308770.jp
 
 
 --
+-- Data for Name: rating; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.rating (id, average, five_starts, four_starts, one_start, three_starts, two_starts, product_id) FROM stdin;
+0	0	0	0	0	0	0	iphone-15-promax
+2	0	0	0	0	0	0	iphone-15
+3	0	0	0	0	0	0	iphone-14
+4	0	0	0	0	0	0	oppo-reno11f-5g
+5	0	0	0	0	0	0	samsung-s24
+6	0	0	0	0	0	0	samsung-m54
+7	0	0	0	0	0	0	asus-x415
+8	0	0	0	0	0	0	xiaomi-mi11t
+9	0	0	0	0	0	0	xiaomi-16
+10	0	0	0	0	0	0	vivo-v15
+11	0	0	0	0	0	0	sony-x12
+15	0	0	0	0	0	0	dell-baa
+16	0	0	0	0	0	0	dell-laptitude
+17	0	0	0	0	0	0	samsung-a55-5g
+18	0	0	0	0	0	0	abc
+20	0	0	0	0	0	0	iphone-5
+21	0	0	0	0	0	0	xiaomi-17
+22	0	0	0	0	0	0	samsung-sj
+1	3.4	2	3	1	2	1	iphone-77
+14	3	0	0	0	1	0	iphone-13
+13	4.2	2	2	0	1	0	iphone-11
+12	3.4	1	1	0	2	1	xiaomi-mi14
+\.
+
+
+--
 -- Data for Name: staff_user; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -834,10 +920,17 @@ COPY public.staff_user (staffid, active_state, email, full_name, password, phone
 1	t	kien@gmail.com	Luu kien	$2a$10$Hey6xoV32721Nah2umTPiuqxgI3/4p5Gn4XNq/ghuCGBzaItXCmQW	035329	ADMIN
 2	t	abc@gmail.com	Kienluu	$2a$10$c0X1zOvP0dW8H6lRnj/2LuPw1/0GPJiXEnILylH4EvS4k5fLiK7EO	0233333	ADMIN
 3	t	bca@gmail.com	kien	$2a$10$89RxEbC6M2ONfYjejqpDPeTFYz0vYo64LKLPoyQ7WFZwTNXXqN2nC	09876	ADMIN
-4	t	bcad@gmail.com	kien	$2a$10$p2337Aj0FA4wERBI5YEL.O3/ZM9R/EFZijkUZoQK6y31tGOUrPU/e	09876	USER
-6	t	cbad@gmail.com	kien	$2a$10$SV5R9Ut0H0bbW7Q.B7BiVO01jjsCSRQR/BJ9oZFzLOhxAKviRuj.m	09876	USER
-7	t	cbae@gmail.com	kien	$2a$10$Y6bvYHNqdUkQBEsMOlCdoO8jo3f7IeHiXz0M2Lhwg1lpyt2Nkz3m.	09876	USER
+9	t	jisooconan@gmail.com	Lưu Kiên	$2a$10$9iGKuCuSOs8svEjnJLhGf.MjE2njc9oGt1ZzbesqqmU.O8sX7MnKa	0368052203	USER
+7	f	cbae@gmail.com	kien	$2a$10$Y6bvYHNqdUkQBEsMOlCdoO8jo3f7IeHiXz0M2Lhwg1lpyt2Nkz3m.	09876	USER
+10	f	CT060319@actvn.edu.vn	luukien	$2a$10$gMEdqo5Ws/joGmvs3dVMdeHJr9cLRlKP3d/n3/gWRUai/5.VPpV0i	0353795729	USER
+11	t	tieulachan2203@gmail.com	Thuy nga	$2a$10$XzOzv2BQr6cbpbEqleZoYe7J2u66lrVqQ7YVDZuZHP/dQSlrQggiu	0865034796	USER
+12	t	vuongnq@gmail.com	Ngô Vượng	$2a$10$Qc/eAlCn5kEO9h/AA/b6lO6/Z9N06USpbBqeO6T7goQx/Ag4/J5hm	0865034796	USER
+13	t	conanjisoo@gmail.com	Kiên Lưu	$2a$10$66C4lu8lTQN4ivFu1zUCKOjUQj3qlGltpb.O6vnZUu0AlkyOvkrCy	0353795729	ADMIN
+14	t	kienluu03@pitvncommunity.com	Kiên lưu	$2a$10$Bw73KHkyFA4eUkQR1Bw84ur9QegyXo.mV3KflIpqDCO9a85PvbZe6	0353795729	ADMIN
+15	t	cdnn@gmail.com	kien luu	$2a$10$XVGYCDQFcGku0BmClyMMyeJzZsipTHrXVrqbmU1fb2Da3xEYuTjDC	0353795729	USER
 8	t	cbaef@gmail.com	dinh kien	$2a$10$VtRnEFx6NlhY8EkeqcADFe.I5BPy3zeogGWL4UWPISTZwMtBFKOJm	0353795729	USER
+4	f	bcad@gmail.com	kien	$2a$10$p2337Aj0FA4wERBI5YEL.O3/ZM9R/EFZijkUZoQK6y31tGOUrPU/e	09876	USER
+6	f	cbad@gmail.com	kien	$2a$10$SV5R9Ut0H0bbW7Q.B7BiVO01jjsCSRQR/BJ9oZFzLOhxAKviRuj.m	09876	USER
 \.
 
 
@@ -859,28 +952,28 @@ SELECT pg_catalog.setval('public.category_id_seq', 15, true);
 -- Name: color_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.color_id_seq', 63, true);
+SELECT pg_catalog.setval('public.color_id_seq', 69, true);
 
 
 --
 -- Name: description_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.description_id_seq', 30, true);
+SELECT pg_catalog.setval('public.description_id_seq', 34, true);
 
 
 --
 -- Name: feature_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.feature_id_seq', 27, true);
+SELECT pg_catalog.setval('public.feature_id_seq', 31, true);
 
 
 --
 -- Name: price_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.price_id_seq', 27, true);
+SELECT pg_catalog.setval('public.price_id_seq', 35, true);
 
 
 --
@@ -891,10 +984,17 @@ SELECT pg_catalog.setval('public.producer_id_seq', 35, true);
 
 
 --
+-- Name: rating_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.rating_id_seq', 1, true);
+
+
+--
 -- Name: staff_user_staffid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.staff_user_staffid_seq', 8, true);
+SELECT pg_catalog.setval('public.staff_user_staffid_seq', 15, true);
 
 
 --
@@ -978,6 +1078,14 @@ ALTER TABLE ONLY public.product
 
 
 --
+-- Name: rating rating_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.rating
+    ADD CONSTRAINT rating_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: staff_user staff_user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -999,6 +1107,14 @@ ALTER TABLE ONLY public.feature
 
 ALTER TABLE ONLY public.description
     ADD CONSTRAINT uk_9pwx009hdvoqv908mviio74rr UNIQUE (product_id);
+
+
+--
+-- Name: rating uk_9xmokhsr5b19ci77c84gdo88w; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.rating
+    ADD CONSTRAINT uk_9xmokhsr5b19ci77c84gdo88w UNIQUE (product_id);
 
 
 --
@@ -1062,6 +1178,14 @@ ALTER TABLE ONLY public.price
 
 ALTER TABLE ONLY public.feature_front_camera
     ADD CONSTRAINT fkli5mywv1ibquq9ao8mk0imbr6 FOREIGN KEY (feature_id) REFERENCES public.feature(id);
+
+
+--
+-- Name: rating fklkuwie0au2dru36asng9nywmh; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.rating
+    ADD CONSTRAINT fklkuwie0au2dru36asng9nywmh FOREIGN KEY (product_id) REFERENCES public.product(id);
 
 
 --
