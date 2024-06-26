@@ -32,8 +32,6 @@ public class ProductService implements IProductService {
     @Autowired
     private ProductRepository productRepository;
     @Autowired
-    private ContentChildRepository contentChildRepository;
-    @Autowired
     private ICategoryService categoryService;
     @Autowired
     private IProducerService producerService;
@@ -141,7 +139,7 @@ public class ProductService implements IProductService {
 
     @Override
     public Page<ProductEntity> findAllProductByProducer(List<String> producer, int page, int size, String sortBy) {
-        producer = producer.stream().map(UppercaseUtil::toFirstUppercase).toList();
+        producer = producer.stream().map(String::toLowerCase).toList();
         Pageable pageable = getPage(page, size, sortBy);
         return productRepository.findAllByProducer(producer, pageable);
     }
@@ -149,7 +147,7 @@ public class ProductService implements IProductService {
     @Override
     public Page<ProductEntity> findAllProductByCategoryAndProducer(List<String> producer, String category, int page, int size, String sortBy) {
         category = UppercaseUtil.toFirstUppercase(category);
-        producer = producer.stream().map(UppercaseUtil::toFirstUppercase).toList();
+        producer = producer.stream().map(String::toLowerCase).toList();
         Pageable pageable = getPage(page, size, sortBy);
         return productRepository.findAllByCategoryAndProducer(producer, category, pageable);
     }
@@ -197,7 +195,7 @@ public class ProductService implements IProductService {
             }
             return findAllProductByCategoryPriceMinMax(category, start, end, page, size, sortBy);
         }
-        producer = producer.stream().map(UppercaseUtil::toFirstUppercase).toList();
+        producer = producer.stream().map(String::toLowerCase).toList();
         category = UppercaseUtil.toFirstUppercase(category);
         Pageable pageable = getPage(page, size, sortBy);
         if (end == null) {
@@ -229,6 +227,8 @@ public class ProductService implements IProductService {
             item.setProduct(productEntity);
             item.setFeature(feature);
         }
+        feature.setMemory(memories);
+        productEntity.setPrice(memories);
         if (rating == null) {
             rating = new RatingEntity();
             productEntity.setRating(rating);
