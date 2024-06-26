@@ -3,12 +3,14 @@ package com.example.groupweb2.service.implement;
 import com.example.groupweb2.dto.ProductDTO;
 import com.example.groupweb2.entity.*;
 import com.example.groupweb2.mapper.MapStruct;
+import com.example.groupweb2.repository.ContentChildRepository;
 import com.example.groupweb2.repository.ProductRepository;
 import com.example.groupweb2.service.ICategoryService;
 import com.example.groupweb2.service.IProducerService;
 import com.example.groupweb2.service.IProductService;
 import com.example.groupweb2.util.UppercaseUtil;
 import jakarta.annotation.Nullable;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,8 @@ public class ProductService implements IProductService {
     private MapStruct mapper;
     @Autowired
     private ProductRepository productRepository;
-
+    @Autowired
+    private ContentChildRepository contentChildRepository;
     @Autowired
     private ICategoryService categoryService;
     @Autowired
@@ -74,7 +77,7 @@ public class ProductService implements IProductService {
                 .orElseThrow(() -> new RuntimeException(NOT_EXIST));
         var newProduct = mapper.toProductEntity(product);
         /*
-        remove color by yourself
+
 
         List<ColorEntity> deletedColors = mergeChildList(existProduct.getColor(), newProduct.getColor());
         for(ColorEntity item : deletedColors){
@@ -93,8 +96,10 @@ public class ProductService implements IProductService {
 
         existProduct.setTotalQuantity(newProduct.getTotalQuantity());
         existProduct.setPrice(newProduct.getPrice());
-
-        existProduct.setDescription(newProduct.getDescription());
+        var description = existProduct.getDescription();
+        description.getContentChild().clear();
+        description.getContentChild().addAll(newProduct.getDescription().getContentChild());
+        existProduct.setDescription(description);
         existProduct.setProducer(newProduct.getProducer());
         existProduct.setCategory(newProduct.getCategory());
         existProduct.setFeatures(newProduct.getFeatures());
@@ -210,11 +215,15 @@ public class ProductService implements IProductService {
         var memories = productEntity.getPrice();
         var producer = productEntity.getProducer();
         var rating = productEntity.getRating();
-
+        var contentChildren = description.getContentChild();
+        for(ContentChildEntity item : contentChildren){
+            item.setDescription(description);
+        }
         for (ColorEntity item : colors) {
             item.setProduct(productEntity);
         }
         description.setProduct(productEntity);
+
         feature.setProduct(productEntity);
         for (PriceEntity item : memories) {
             item.setProduct(productEntity);

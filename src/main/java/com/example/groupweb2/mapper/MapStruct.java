@@ -48,14 +48,6 @@ public interface MapStruct {
 
     UserResponse toUserResponse(UserEntity userEntity);
 
-//    List<ColorDTO> toListColorDTO(List<ColorEntity> items);
-//
-//    List<ColorEntity> toListColorEntity(List<ColorDTO> items);
-//
-//    List<PriceDTO> toListPriceDTO(List<PriceEntity> items);
-//
-//    List<PriceEntity> toListPriceEntity(List<PriceDTO> items);
-//
 
     @Mapping(target = "productId", source = "product", qualifiedByName = "getProductId")
     @Mapping(target = "productName",source = "product",qualifiedByName = "getProductName")
@@ -66,13 +58,7 @@ public interface MapStruct {
 
     RatingEntity toRatingEntity(RatingDTO ratingDTO);
     RatingDTO toRatingDTO(RatingEntity rating);
+    ContentChildEntity toContentChildEntity(ContentChildDTO contentChildDTO);
+    ContentChildDTO toContentChildDTO(ContentChildEntity contentChild);
 
-
-
-    //    List<DescriptionDTO> toListDescriptionDTO(List<DescriptionEntity> items);
-//    List<DescriptionEntity> toListDescriptionEntity(List<DescriptionDTO> items);
-//    List<FeatureDTO> toListFeatureDTO(List<FeatureEntity> items);
-//    List<FeatureEntity> toListFeatureEntity(List<FeatureDTO> items);
-//    List<CategoryDTO> toListCategoryDTO(List<CategoryEntity> items);
-//    List<CategoryEntity> toListCategoryEntity(List<CategoryDTO> items);
 }

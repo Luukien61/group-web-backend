@@ -5,13 +5,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
+@Builder
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
-public class DescriptionDTO extends BaseDTO {
+public class ContentChildDTO extends BaseDTO {
     private String title;
-    private List<ContentChildDTO> contentChild;
+    private String content;
+    private String image;
 }
