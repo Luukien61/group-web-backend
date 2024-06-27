@@ -1,6 +1,7 @@
 package com.example.groupweb2.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -18,8 +19,10 @@ public class ProductEntity {
     @Id
     String id;
     String name;
+    @Nonnull
     Integer available;
     Integer ordering;
+    @Nonnull
     Integer totalQuantity;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     @JoinColumn(name = "category_name", referencedColumnName = "name")
@@ -32,7 +35,7 @@ public class ProductEntity {
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference
     List<PriceEntity> price;
-    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     List<ColorEntity> color;
     @OneToOne(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -47,7 +50,7 @@ public class ProductEntity {
     @JsonManagedReference
     ProducerEntity producer;
 
-    @OneToMany(mappedBy = "product",cascade = {CascadeType.REMOVE,CascadeType.PERSIST,CascadeType.MERGE},fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JsonManagedReference
     List<OrderEntity> orders;
 
@@ -56,14 +59,15 @@ public class ProductEntity {
     RatingEntity rating;
 
     @PrePersist
-    public void prePersist(){
-        if(ordering==null){
-            ordering=0;
+    public void prePersist() {
+        if (ordering == null) {
+            ordering = 0;
         }
-        if(available==null){
-            available=totalQuantity;
+        if (available == null) {
+            available = totalQuantity;
         }
     }
+
     public void addColor(ColorEntity newColor) {
         color.add(newColor);
         newColor.setProduct(this);

@@ -4,7 +4,7 @@ PASSWORD: Luudinhkien_2003
 URL: jdbc:postgresql://localhost:5432/groupweb2
 DRIVER: org.postgresql.Driver
 DIALECT: org.hibernate.dialect.PostgreSQLDialect
-FRONT_END_URL: http://localhost:4003, http://group-web.s3-website-us-east-1.amazonaws.com
+FRONT_END_URL: http://localhost:4003, http://frontend:4003
 SECRET_PATH: src/main/resources/static/security.txt
 
 CLOUDINARY_API_SECRET: UDQB-T_Rd9rqYc_XlRufz_qOu_c

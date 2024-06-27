@@ -1,5 +1,6 @@
 package com.example.groupweb2.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,6 +16,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class CategoryDTO implements Serializable {
     private Long id;
+    @NotBlank(message = "Category name must not be blank")
     private String name;
     private Set<ProducerDTO> producers;
 }

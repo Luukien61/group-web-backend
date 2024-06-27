@@ -1,5 +1,6 @@
 package com.example.groupweb2.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ProductDTO {
     private String id ;
+    @NotBlank(message = "Product name must not be blank")
     private String name;
     private Integer available;
     private Integer ordering;

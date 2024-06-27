@@ -1,6 +1,6 @@
 services:
   db:
-    image: luukien/postgres-data:v3
+    image: luukien/postgres-data:v4
 #    volumes:
 #      - postgres-groupweb:/var/lib/postgresql/data/ #(1)
     restart: always
@@ -15,7 +15,7 @@ services:
     container_name: postgres-data
 
   app:
-    image: luukien/backend:v3
+    image: luukien/backend:v4
     restart: on-failure
     build: #(4)
       context: .
@@ -31,7 +31,7 @@ services:
       - db
 
   frontend:
-    image: luukien/frontend:v4
+    image: luukien/frontend:v5
     restart: on-failure
     networks:
       - my-web-network
@@ -42,13 +42,15 @@ services:
     container_name: frontend
 
   mail-sever:
-    image: luukien/mail-server:v2
+    image: luukien/mail-server:v3
     restart: always
     networks:
       - my-web-network
     ports:
       - "8087:8087"
       - "8887:8887"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
     container_name: mail-server
 
 volumes:

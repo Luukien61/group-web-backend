@@ -8,6 +8,7 @@ import com.example.groupweb2.model.ResponseModel;
 import com.example.groupweb2.service.IProductService;
 import com.example.groupweb2.util.ControllerUtil;
 import jakarta.annotation.Nullable;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,7 @@ public class ProductController {
     private IProductService productService;
 
     @PostMapping()
-    public ResponseEntity<?> insertNewProduct(@RequestBody ProductDTO item) {
+    public ResponseEntity<?> insertNewProduct(@Valid @RequestBody ProductDTO item) {
         try {
             productService.saveNewProduct(item);
             return ControllerUtil.response(CustomMessage.CREATED.getMessage(), HttpStatus.CREATED.value());
@@ -53,7 +54,7 @@ public class ProductController {
     }
 
     @PutMapping("/{productId}")
-    public ResponseEntity<ResponseModel> updateProduct(@PathVariable String productId, @RequestBody ProductDTO productDTO) {
+    public ResponseEntity<ResponseModel> updateProduct(@PathVariable String productId, @Valid @RequestBody ProductDTO productDTO) {
         try {
             productService.updateProduct(productDTO, productId);
             return ControllerUtil.response(CustomMessage.UPDATED.getMessage(), HttpStatus.OK.value());
