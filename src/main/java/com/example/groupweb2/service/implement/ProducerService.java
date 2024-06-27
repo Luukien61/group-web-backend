@@ -14,10 +14,7 @@ import lombok.AllArgsConstructor;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -45,12 +42,14 @@ public class ProducerService implements IProducerService {
     @Override
     public void saveNewProducer(ProducerDTO producerDTO, String category) {
         var producerName = producerDTO.getName();
-        producerName = UppercaseUtil.toFirstUppercase(producerName);
-        category = UppercaseUtil.toFirstUppercase(category);
-        producerDTO.setName(producerName);
-        var newProducer = mapper.toProducerEntity(producerDTO);
-        persistCategory(newProducer, category);
-
+        if(!Objects.equals(producerName, "")){
+            producerName = UppercaseUtil.toFirstUppercase(producerName);
+            category = UppercaseUtil.toFirstUppercase(category);
+            producerDTO.setName(producerName);
+            var newProducer = mapper.toProducerEntity(producerDTO);
+            persistCategory(newProducer, category);
+        }
+        else throw new RuntimeException("Please enter a valid name");
     }
 
     private void persistCategory(ProducerEntity newProducer, String category) {
