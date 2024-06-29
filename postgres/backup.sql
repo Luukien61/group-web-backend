@@ -3,7 +3,7 @@
 --
 
 -- Dumped from database version 15.6
--- Dumped by pg_dump version 15.6
+-- Dumped by pg_dump version 16.3 (Ubuntu 16.3-1.pgdg22.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -46,7 +46,7 @@ CREATE SEQUENCE public.carousel_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.carousel_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.carousel_id_seq OWNER TO postgres;
 
 --
 -- Name: carousel_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -79,7 +79,7 @@ CREATE SEQUENCE public.category_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.category_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.category_id_seq OWNER TO postgres;
 
 --
 -- Name: category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -114,7 +114,7 @@ CREATE SEQUENCE public.color_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.color_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.color_id_seq OWNER TO postgres;
 
 --
 -- Name: color_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -150,7 +150,7 @@ CREATE SEQUENCE public.content_children_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.content_children_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.content_children_id_seq OWNER TO postgres;
 
 --
 -- Name: content_children_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -184,7 +184,7 @@ CREATE SEQUENCE public.description_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.description_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.description_id_seq OWNER TO postgres;
 
 --
 -- Name: description_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -234,7 +234,7 @@ CREATE SEQUENCE public.feature_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.feature_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.feature_id_seq OWNER TO postgres;
 
 --
 -- Name: feature_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -300,7 +300,7 @@ CREATE SEQUENCE public.price_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.price_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.price_id_seq OWNER TO postgres;
 
 --
 -- Name: price_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -345,7 +345,7 @@ CREATE SEQUENCE public.producer_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.producer_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.producer_id_seq OWNER TO postgres;
 
 --
 -- Name: producer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -413,7 +413,7 @@ CREATE SEQUENCE public.rating_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.rating_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.rating_id_seq OWNER TO postgres;
 
 --
 -- Name: rating_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -452,7 +452,7 @@ CREATE SEQUENCE public.staff_user_staffid_seq
     CACHE 1;
 
 
-ALTER TABLE public.staff_user_staffid_seq OWNER TO postgres;
+ALTER SEQUENCE public.staff_user_staffid_seq OWNER TO postgres;
 
 --
 -- Name: staff_user_staffid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -554,6 +554,7 @@ COPY public.category (id, name) FROM stdin;
 2	Laptop
 3	Camera
 4	Tablet
+5	Smartwatch
 \.
 
 
@@ -567,7 +568,6 @@ COPY public.color (id, color, link, product_id) FROM stdin;
 3	Titan đen	https://cdn.tgdd.vn/Products/Images/42/305658/iphone-15-pro-max-black-1-1.jpg	iphone-15-pro-max
 4	Titan xanh	https://cdn.tgdd.vn/Products/Images/42/305658/iphone-15-pro-max-blue-1-1.jpg	iphone-15-pro-max
 5	Titan tự nhiên	https://cdn.tgdd.vn/Products/Images/42/305658/iphone-15-pro-max-tu-nhien-1-1.jpg	iphone-15-pro-max
-6	Titan trắng	https://cdn.tgdd.vn/Products/Images/42/305658/iphone-15-pro-max-white-1-3.jpg	iphone-15-pro-max
 7	Ice Blue	https://product.hstatic.net/200000722513/product/ava_7a60a95da9ad4f79937195617962b252_grande.png	laptop-dell-inspiron-14-5440
 8	White	https://cdn.tgdd.vn/Products/Images/4728/235820/camera-ip-360-do-1080p-tp-link-tapo-tc70-trang-2-180x125.jpg	tp-link-tapo-tc70
 9	Cool Silver	https://product.hstatic.net/200000722513/product/vobook_14_oled_x1405v_m1405y_cool_silver_black_keyboard_13_fingerprint_6701c548b729416d90498bdac33dec13_grande.png	laptop-asus-vivobook-14-oled
@@ -597,14 +597,10 @@ COPY public.color (id, color, link, product_id) FROM stdin;
 42	Cloud Grey	https://product.hstatic.net/200000722513/product/1_43869d5811cb4ce08de070b738c4f786_grande.png	lenovo-ideapad-slim-5-16imh9
 43	Xanh lá nhạt	https://cdn.tgdd.vn/Products/Images/42/274018/samsung-galaxy-a24-xanh-5.jpg	samsung-galaxy-a24
 44	Đen	https://cdn.tgdd.vn/Products/Images/42/274018/samsung-galaxy-a24-den-5.jpg	samsung-galaxy-a24
-45	Xanh mint	https://cdn.tgdd.vn/Products/Images/42/299250/samsung-galaxy-zflip5-xanh-256gb-2.jpg	samsung-galaxy-z-flip5-5g
 38	Xanh	https://cdn.tgdd.vn/Products/Images/42/322096/samsung-galaxy-a55-5g-xanh-5-1.jpg	samsung-galaxy-a55-5g
 39	Tím	https://cdn.tgdd.vn/Products/Images/42/322096/samsung-galaxy-a55-5g-tim-2.jpg	samsung-galaxy-a55-5g
 40	Đen	https://cdn.tgdd.vn/Products/Images/42/322096/samsung-galaxy-a55-5g-den-2.jpg	samsung-galaxy-a55-5g
 41	Luna Grey	https://file.hstatic.net/200000722513/file/gearvn-laptop-lenovo-yoga-sim-7-14imh9-83cv001uvn-1_5934f0f1500c403187c7aa517e45b2c6.png	laptop-lenovo-yoga-slim-7
-46	Tím nhạt	https://cdn.tgdd.vn/Products/Images/42/299250/samsung-galaxy-zflip-5-tim-256gb-2.jpg	samsung-galaxy-z-flip5-5g
-47	Kem	https://cdn.tgdd.vn/Products/Images/42/299250/samsung-galaxy-zflip-5-kem-256gb-2.jpg	samsung-galaxy-z-flip5-5g
-48	Xám	https://cdn.tgdd.vn/Products/Images/42/299250/samsung-galaxy-zflip-5-xam-256gb-2.jpg	samsung-galaxy-z-flip5-5g
 49	Xanh da trời nhạt	https://cdn.tgdd.vn/Products/Images/42/301608/samsung-galaxy-zfold5-xanh-256gb-8.jpg	samsung-galaxy-z-fold5-5g
 50	Đen	https://cdn.tgdd.vn/Products/Images/42/301608/samsung-galaxy-zfold5-den-256gb-8.jpg	samsung-galaxy-z-fold5-5g
 51	Kem	https://cdn.tgdd.vn/Products/Images/42/301608/samsung-galaxy-zfold5-kem-256gb-8.jpg	samsung-galaxy-z-fold5-5g
@@ -693,6 +689,28 @@ COPY public.color (id, color, link, product_id) FROM stdin;
 136	Bạc	https://cdn.tgdd.vn/Products/Images/522/309818/samsung-galaxy-tab-s9-bac-5.jpg	samsung-galaxy-tab-s9-fe-wifi
 137	Tím	https://cdn.tgdd.vn/Products/Images/522/305838/oppo-pad-air-128gb-tim-2.jpg	oppo-pad-air-wifi
 138	Xanh	https://cdn.tgdd.vn/Products/Images/522/306923/lenovo-tab-m9-5-1.jpg	lenovo-tab-m9-4g
+139	Đen	https://cdn.tgdd.vn/Products/Images/522/320989/tcl-tab-10l-gen2-den-5.jpg	tcl-tab-10l-gen-2-wifi
+140	Xanh dương	https://res.cloudinary.com/dmi3xizxq/image/upload/v1719506231/nmbrojywqjra1ohhogj2.png	ipad-air-5-m1-5g
+141	Xám	https://res.cloudinary.com/dmi3xizxq/image/upload/v1719506231/lt5ltwgfs3pbaya7qkss.png	ipad-air-5-m1-5g
+142	Xám	https://cdn.tgdd.vn/Products/Images/522/322613/oppo-pad-neo-xam-5.jpg	oppo-pad-neo-wifi
+143	Đen	https://cdn.tgdd.vn/2024/05/campaign/Xam-1-600x600.png	xiaomi-redmi-pad-pro
+144	Xanh mint	https://cdn.tgdd.vn/2024/05/campaign/Xanh-la-1-600x600.png	xiaomi-redmi-pad-pro
+145	Xanh dương	https://cdn.tgdd.vn/2024/05/campaign/Xanh-1-600x600.png	xiaomi-redmi-pad-pro
+146	White 	https://cdn.tgdd.vn/Products/Images/7077/316007/apple-watch-se-2023-40mm-vien-nhom-day-silicone-trang-starlight-1.jpg	apple-watch-se-2023
+147	Black	https://cdn.tgdd.vn/Products/Images/7077/316007/2apple-watch-se-2023-40mm-vien-nhom-day-silicone-xanh-den-2.jpg	apple-watch-se-2023
+148	Gray	https://cdn.tgdd.vn/Products/Images/7077/316007/apple-watch-se-2023-40mm-vien-nhom-day-silicone-xanh-duong-nhat-1-1.jpg	apple-watch-se-2023
+154	Tím nhạt	https://cdn.hoanghamobile.com/i/preview/Uploads/2024/03/28/z-flip5-tim.png	samsung-galaxy-z-flip5-5g
+155	Kem	https://cdn.hoanghamobile.com/i/preview/Uploads/2024/03/28/z-flip5-kem.png	samsung-galaxy-z-flip5-5g
+156	Xám	https://cdn.hoanghamobile.com/i/preview/Uploads/2024/03/28/z-flip5-xam.png	samsung-galaxy-z-flip5-5g
+157	Xanh mint	https://cdn.hoanghamobile.com/i/preview/Uploads/2024/03/28/z-flip5-xanh.png	samsung-galaxy-z-flip5-5g
+158	Black	https://cdn.tgdd.vn/Products/Images/7077/314714/apple-watch-ultra-lte-49mm-vien-titanium-day-trail-size-m-l-den-101.jpg	apple-watch-ultra-2
+159	Pink	https://cdn.tgdd.vn/Products/Images/7077/248752/smartwatch-samsung-galaxy-watch-4-vang-hong-1.jpg	samsung-galaxy-watch4
+160	Black	https://cdn.tgdd.vn/Products/Images/7077/248752/smartwatch-samsung-galaxy-watch-4-1.jpg	samsung-galaxy-watch4
+161	Black	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-den-hc-1.jpg	huawei-watch-fit-3
+162	White	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-white-1.jpg	huawei-watch-fit-3
+163	Green	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-xanh-hc-1.jpg	huawei-watch-fit-3
+164	Pink	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-hong-hc-1.jpg	huawei-watch-fit-3
+165	Titan trắng	https://cdn.viettelstore.vn/Images/Product/ProductImage/1941091074.jpeg	iphone-15-pro-max
 \.
 
 
@@ -1151,7 +1169,6 @@ COPY public.content_children (id, content, image, title, description_id) FROM st
 469	Trong môi trường có đủ ánh sáng, điện thoại cho ra bức ảnh rõ ràng, màu sắc nịnh mắt và không có hiện tượng ám màu. Đặc biệt, tổng thể bức hình lấy nét đều chứ không chỉ tập trung vào mỗi vùng mình chạm lấy nét.	https://cdn.tgdd.vn/Products/42/321058/samsung-galaxy-s23-fe-5g-19-1020x570.jpg		55
 470	Viên pin lớn với dung lượng 4500 mAh đã được tối ưu hóa cho Galaxy S23 FE 5G, đảm bảo bạn có thể sử dụng chiếc điện thoại này suốt cả ngày mà không phải lo lắng về việc hết pin. Cho dù bạn đang làm việc, duyệt web, xem video hay chơi game, Galaxy S23 FE 5G sẽ là người bạn đồng hành đáng tin cậy trong mọi hoạt động hằng ngày.	https://cdn.tgdd.vn/Products/42/321058/samsung-galaxy-s23-fe-5g-18-1020x622.jpg	Cung cấp năng lượng vừa đủ cho một ngày sử dụng	55
 471	Tóm lại, Galaxy S23 FE 5G không chỉ là một chiếc điện thoại đẹp và thông minh mà còn là nguồn động viên cho người dùng với hiệu suất mạnh mẽ và khả năng chụp ảnh đẹp. Sự kết hợp này đảm bảo rằng bạn sẽ trải nghiệm điện thoại thông minh tốt nhất, đáp ứng mọi nhu cầu trong cả công việc và giải trí.			55
-472	https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/Uploads/images/2015/0511/acer-nitro-5-an515-tiger-2022-1.jpg			56
 473	Acer Nitro 5 Tiger AN515-58-52SP là một trong những chiếc laptop đầu tiên trên thị trường trang bị bộ vi xử lý Intel thế hệ thứ 12 Alder Lake mới nhất. Con chip Intel Core i5 12500H có sức mạnh khiến cả những chip Core i7 trước đây phải choáng ngợp với 12 lõi 16 luồng, tốc độ xung nhịp 3.3 – 4.5 GHz, 18 MB Intel Smart Cache. Với nhiều nhân hơn, tốc độ xung nhịp cao hơn, i5 12500H mang đến hiệu suất cực khủng để đáp ứng tốt những tựa game hiện đại hay các ứng dụng đòi hỏi cấu hình cao. Sức mạnh của chiếc laptop gaming này sẽ giúp bạn tự tin làm bất cứ công việc gì.	https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/Uploads/images/2015/0511/acer-nitro-5-an515-tiger-2022-2.jpg	Trải nghiệm sức mạnh đột phá từ CPU Intel Gen 12	56
 474	Được xây dựng với kiến trúc Ampere, card đồ họa RTX 3050 có thể chơi tốt hầu hết mọi tựa game ở thiết lập đồ họa Full HD. Ngoài ra, tính năng DLSS sẽ tăng hiệu suất, ổn định tốc độ khung hình nhờ trí tuệ nhân tạo AI. Trên laptop Acer Nitro, bạn sẽ được tận hưởng game với đồ họa chân thực, hiệu ứng đổ bóng tự nhiên, đồng thời tăng chất lượng khi vừa chơi game vừa livestream. Hơn nữa, RTX 3050 cũng rất lý tưởng khi làm việc với các phần mềm sáng tạo, chỉnh sửa ảnh, video, render 2D, 3D, …	https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/Uploads/images/2015/0511/acer-nitro-5-an515-tiger-2022-10.jpg	Chơi game chân thực với GPU RTX 30 series	56
 475	So với dòng Nitro 5 trước đây, Nitro 5 Tiger 2022 có một thiết kế hoàn toàn mới. Máy đi theo ngôn ngữ vuông vắn, hiện đại và gọn gàng hơn với viền màn hình siêu mỏng, bàn phím tràn sát ra cạnh bên máy. Các đường cắt cũng được làm khỏe khoắn, mạnh mẽ hơn. Đặc biệt, phần mặt lưng tạo điểm nhấn với những dải màu độc đáo, đậm chất gaming. Bạn sẽ có một chiếc laptop gaming vừa đẹp mạnh mẽ, lại vừa gọn gàng di động.	https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/Uploads/images/2015/0511/acer-nitro-5-an515-tiger-2022-8.jpg	Thiết kế mới, gọn gàng và thanh thoát hơn	56
@@ -1182,6 +1199,7 @@ COPY public.content_children (id, content, image, title, description_id) FROM st
 499	Laptop HP Pavilion 14-dv2073TU được trang bị màn hình 14 inch sử dụng tấm nền IPS mang lại góc nhìn rộng 178 độ và màu sắc tươi tắn, rực rỡ. Độ phân giải hình ảnh tối đa trên chiếc màn hình này là 1920 x 1080 pixels, đồng thời hỗ trợ tốc độ quét 60Hz. Bạn sẽ tận hưởng những khung hình sống động với chất lượng hiển thị tuyệt hảo khi xem phim, những bảng biểu tính toán hiển thị đầy đủ và rõ ràng các con số trong khi làm việc.	https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/Uploads/images/2015/VuTT29/HP%20Pavilion%2014-dv2073TU%202.png	Màn hình IPS mang đến chất lượng hiển thị tốt	60
 500	Viên pin mà hãng trang bị cho HP Pavilion 14-dv2073TU có dung lượng 43 Wh, hỗ trợ sạc nhanh. Thời lượng tối đa mà bạn có thể sử dụng trên máy là từ 7 đến 8 tiếng, khoảng thời gian này cũng đủ dài cho 1 ngày làm việc mà không cần phải sạc thêm. Nếu muốn nạp đầy năng lượng cho máy, bạn sẽ chỉ phải chờ khoảng 2 tiếng.	https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/Uploads/images/2015/VuTT29/HP%20Pavilion%2014-dv2073TU%203.png	Pin trâu, dùng được lâu	60
 501	Cấu hình của HP Pavilion 14-dv2073TU bao gồm CPU Intel Core i5-1235U 4.4GHz – 16GB RAM DDR4 3200MHz – 512GB SSD M.2 NVMe. Con chip Intel 1235U này thuộc thế hệ thứ 12, mang lại hiệu năng xử lí nhanh dù là chip dòng U chuyên dùng cho các công việc văn phòng nhẹ. Cộng thêm 16GB RAM để thoải mái chạy nhiều chương trình và ổ cứng SSD siêu tốc, những gì bạn muốn đều được thực hiện trong chớp mắt.	https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/Uploads/images/2015/VuTT29/HP%20Pavilion%2014-dv2073TU%204.png	Đa nhiệm tốt, xử lí nhanh	60
+617	Quá nhiều thứ hay ho cho một chiếc iPad Air 5 sẽ mang lại bạn những trải nghiệm mới nhất, mạnh mẽ và thoải mái nhất kể cả khi làm việc hay giải trí.			74
 502	Nokia 220 4G được thiết kế theo phong cách vuông vức, hiện đại, với chất liệu nhựa nhẹ nhàng, chỉ nặng 98 g. Điểm nhấn đặc biệt của máy là mặt lưng có hoạ tiết kẻ sọc, tạo cảm giác chắc chắn khi cầm nắm, không lo trơn trượt. Bàn phím dạng T9 truyền thống được làm phẳng hơn, mang lại cảm giác quen thuộc cho người sử dụng mặc dù có thể hơi khó khăn cho những ai quen dùng phím nổi.		Vẻ ngoài vừa hiện đại vừa truyền thống	61
 503	Màn hình 2.8 inch của Nokia 220 4G to rõ, dễ nhìn, đặc biệt hữu ích cho người lớn tuổi. Kích thước màn hình này giúp nội dung hiển thị rõ ràng, không cần căng mắt, mang lại trải nghiệm sử dụng thuận tiện và thoải mái.		Màn hình to 2.8 inch, dễ nhìn 	61
 504	Nokia 220 4G hỗ trợ 2 Nano SIM và công nghệ 4G VoLTE, đảm bảo chất lượng cuộc gọi to rõ, không nhiễu. Điều này giúp người dùng duy trì liên lạc hiệu quả, tiện lợi cho việc sử dụng số riêng cho công việc và gia đình.		Nghe gọi chất lượng cao với 4G VoLTE	61
@@ -1276,6 +1294,74 @@ COPY public.content_children (id, content, image, title, description_id) FROM st
 597	Tính năng chế độ đọc sẽ giúp cho trải nghiệm đọc sách hoặc lướt web trên máy tính bảng tốt hơn. Đồng thời sản phẩm cũng được chứng nhận chăm sóc mắt bởi TUV, điều này giúp bảo vệ đôi mắt của bạn một cách tốt hơn trước những tác hại của ánh sáng xanh.			72
 598	Cung cấp sức mạnh cho máy là con chip MediaTek Helio G80 đến từ nhà MediaTek với xung nhịp tối đa 2 GHz. Máy sẽ đáp ứng tốt các tác vụ như lướt web, xem phim hay chơi những tựa game nhẹ nhàng.	https://cdn.tgdd.vn/Products/Images/522/306923/lenovo-tab-m9-190623-040223.jpg	Ổn định với các tác vụ hằng ngày	72
 599	Lenovo trang bị cho máy tính bảng RAM 4 GB, bộ nhớ lưu trữ 64 GB kèm khả năng mở rộng lên đến 128 GB nhờ thẻ Micro SD. Giờ đây các tác vụ đa nhiệm cũng như khả năng lưu trữ sẽ được diễn ra tốt hơn.			72
+603	TCL Tab 10L Gen 2 có một thiết kế vuông vắn với hai mặt trước và sau được thiết kế phẳng, cách làm này đem đến cho máy một cái nhìn tinh tế đầy sang trọng và có tính xu hướng khi đây được xem là kiểu dáng thịnh hành trong vài năm qua.  Máy có độ mỏng 7.99 mm, một con số khá lý tưởng trên một chiếc máy tính bảng giá rẻ, mang đến cái nhìn thanh lịch cũng như tạo cảm giác cầm nắm được tốt hơn. Bên cạnh đó, tablet còn mang đến điểm nhấn khi kết hợp giữa khung viền nhựa nhẹ cùng mặt lưng kim loại cứng cáp.	https://cdn.tgdd.vn/Products/522/320989/tcl-tab-10l-gen-2-1-1020x570.jpg	Thiết kế phẳng và có mặt lưng làm từ kim loại	73
+604	Trải nghiệm giải trí trên TCL Tab 10L Gen 2 trở nên sống động hơn với hệ thống loa kép tích hợp, âm thanh mạnh mẽ và rõ ràng sẽ làm cho mọi hoạt động từ xem phim đến nghe nhạc trở nên trọn vẹn và thỏa mãn.  Ở mặt trước của máy tính bảng, TLC Tab 10L Gen 2 có một màn hình với các viền xung quanh được làm đều nhau, trông khá mỏng và cân đối. Phần viền này có ẩn chứa một camera selfie ở bên hông máy, điều này thuận tiện cho việc sử dụng máy tính bảng theo chiều ngang khi camera có thể tập trung chủ thể được tốt hơn.			73
+605	TCL Tab 10L Gen 2 sử dụng công nghệ IPS LCD cho phần màn hình, tấm nền này hiện đang khá phổ biến và xuất hiện nhiều trên các dòng máy tính bảng giá rẻ. Ưu điểm của tấm nền IPS LCD là khả năng tái hiện màu sắc được chân thực, góc nhìn rộng và giá thành hợp lý để nhà sản xuất tối ưu kinh phí khi sản xuất.	https://cdn.tgdd.vn/Products/522/320989/tcl-tab-10l-gen-2-2-1020x570.jpg	Màn hình lớn cho trải nghiệm sống động	73
+606	Điểm đáng chú ý tiếp theo ở máy tính bảng có lẽ là kích thước màn hình lớn lên đến 10.1 inch. Với kích thước màn hình lớn, chiếc máy tính bảng TCL này hoàn toàn có thể thỏa mãn nhu cầu giải trí của người dùng khi mọi thứ đều được tái hiện một cách to rõ. Ngoài ra, các công việc như soạn thảo văn bản hay chỉnh sửa bảng làm việc trên Google Sheet cũng trở nên dễ dàng và thuận tiện hơn.			73
+607	TCL Tab 10L Gen 2 là một chiếc máy tính bảng giá rẻ với camera 2 MP ở cả mặt trước và mặt sau, đủ để đáp ứng nhu cầu chụp ảnh cơ bản. Mặc dù không được nâng cấp mạnh mẽ so với mặt bằng chung trên thị trường, camera của nó vẫn tạo sự chú ý khi hỗ trợ khả năng quay video ở chất lượng Full HD. 	https://cdn.tgdd.vn/Products/522/320989/tcl-tab-10l-gen-2-3-1020x570.jpg	Camera đáp ứng nhu cầu chụp cơ bản	73
+608	TCL Tab 10L Gen 2 được trang bị con chip MediaTek MT8766, một vi xử lý chuyên dùng cho các dòng thiết bị di động giá rẻ. Chip nổi bật với cấu hình ổn định cũng như mức giá thành phải chăng, giúp cho các nhà sản xuất tối ưu được chi phí để đem đến một chiếc máy tính bảng dễ tiếp cận hơn về mặt kinh tế.  MediaTek MT8766 được ra mắt từ khá lâu, với 4 nhân hiệu suất bên trong và còn là mẫu chip sản xuất trên tiến trình 12 nm. Vì thế, cấu hình của TCL Tab 10L Gen 2 cũng chỉ có thể đáp ứng tốt nhu cầu giải trí thông thường như lướt web, xem phim, nghe gọi và trả lời tin nhắn thông thường.	https://cdn.tgdd.vn/Products/522/320989/tcl-tab-10l-gen-2-4-1020x570.jpg	Hiệu năng ổn, đủ dùng cho các tác vụ thông thường	73
+609	Bên cạnh đó, RAM 3 GB cũng được xem là một hạn chế nên người dùng lưu ý khi mở nhiều ứng dụng cùng lúc có thể sẽ gây nên giật lag. Còn về bộ nhớ trong thì sẽ là 32 GB, có hỗ trợ mở rộng thêm 1 TB từ thẻ Micro SD dành cho người dùng có nhu cầu lưu trữ nhiều nội dung.  TCL Tab 10L Gen 2 vẫn sẽ có hệ điều hành Android 13, tích hợp nhiều tính năng mới cũng như bản vá bảo mật từ Google, cùng với đó là giao diện dễ sử dụng giúp người dùng dễ làm quen với máy trong thời gian ngắn.			73
+610	Chiếc máy tính bảng này được trang bị viên pin có dung lượng 6000 mAh, một con số không quá cao trên một chiếc tablet hiện nay. Tuy có phần hạn hẹp về mặt năng lượng, thế nhưng con chip sử dụng có mức xung nhịp không quá cao cũng như không phải gánh một màn hình ngốn quá nhiều điện, điều này giúp cho tablet có thể hoạt động dài lâu hơn.	https://cdn.tgdd.vn/Products/522/320989/tcl-tab-10l-gen-2-5-1020x570.jpg	Trang bị pin 6000 mAh đủ dùng cho nhu cầu giải trí	73
+611	Vì đây là mẫu tablet giá rẻ, vì thế cũng không có gì bất ngờ nếu như em nó chỉ hỗ trợ sạc 10 W, một chuẩn khá thấp ở thời điểm hiện tại. Nhưng suy cho cùng, ở mức giá này thì đây có thể xem là điều có thể vi vu chấp nhận được.			73
+612	TCL Tab 10L Gen 2 có thể sẽ là lựa chọn phù hợp cho những khách hàng đang tìm mua một chiếc tablet giá rẻ, đặt mục tiêu tối ưu giá thành lên làm đầu. Bên cạnh mức giá, mẫu tablet này còn đáng chú ý khi có màn hình lớn, giúp các bậc phụ huynh lớn tuổi dễ dàng xem nội dung hay làm một thiết bị phụ để giải trí ở mức cơ bản.			73
+613	Máy tính bảng được trang bị một màn hình lớn lên đến 10.9 inch vừa đủ không quá to nhưng cũng không nhỏ cho bạn dễ dàng trải nghiệm, sử dụng. Đi kèm với đó chiếc màn hình Retina IPS LCD này sẽ mang lại cho bạn những trải nghiệm về màu sắc tốt hơn.	https://cdn.tgdd.vn/Products/Images/522/274155/ipad-air-5-m1-wifi-cellular-64gb-2.jpg	Màn hình to, xem phim, làm việc đã hơn	74
+614	Thiết kế gọn nhẹ và được Apple làm vuông vức ở các cạnh mang lại cảm giác sang trọng, đẳng cấp, nhiều người dùng rất thích điều này. Màu sắc đa dạng cũng sẽ giúp bạn có nhiều sự lựa chọn phù hợp để sử dụng hơn.	https://cdn.tgdd.vn/Products/Images/522/274155/ipad-air-5-m1-wifi-cellular-64gb-5.jpg	Thiết kế thời thượng	74
+615	Được cung cấp sức mạnh từ con chip Apple M1 và RAM 8 GB nên chiếc iPad Air 5 M1 WiFi Cellular này sẽ có một sức mạnh vô cùng kinh khủng. Nó mạnh hơn thế hệ tiền nhiệm lên đến 60% hứa hẹn sẽ cho bạn một khả năng xử lý, làm việc siêu tốc.	https://cdn.tgdd.vn/Products/Images/522/274155/ipad-air-5-m1-wifi-cellular-64gb-1.jpg	Hiệu năng mạnh mẽ	74
+616	Nhờ được chạy trên phiên bản phần mềm iPadOS 15 sẽ có rất nhiều tính năng hay cho bạn cũng như tối ưu hiệu suất máy. Có cả khả năng kết nối với bút Apple Pencil, Magic Keyboard,... với độ trễ cực thấp.			74
+618	OPPO Pad Neo WiFi có thiết kế mặt lưng được tạo từ chất liệu kính và nhôm cao cấp, mang lại độ bền cao cũng như sự tinh tế và sang trọng. Khi ánh sáng chiếu vào, mặt lưng này phản chiếu lại, tạo nên các hiệu ứng ánh sáng lạ mắt giúp mang đến cái nhìn thú vị hơn cho sản phẩm.  Đó chỉ là phần mặt sau, OPPO Pad Neo WiFi còn tiếp tục thu hút với khung viền bo cong được tạo từ kim loại, mang đến tổng thể hài hoà giữa sự mềm mại và cứng cáp. Cùng với độ mỏng ấn tượng chỉ 6.89 mm, chiếc máy tính bảng này không chỉ đóng vai trò như một công cụ hữu dụng mà còn là biểu tượng cho sự tinh tế.	https://cdn.tgdd.vn/Products/522/320992/oppo-pad-neo-1-1020x570.jpg	Tạo hình phẳng kết hợp cùng chất liệu cao cấp	75
+619	Màn hình 11.4 inch cùng chiều dài 255.12 mm, OPPO Pad Neo WiFi không chỉ giúp cải thiện trải nghiệm giải trí, mà còn thích hợp cho những công việc hằng ngày. Kích thước lớn của màn hình không chỉ nâng cao độ thẩm mỹ mà còn tăng tính thanh lịch, sự lựa chọn hoàn hảo để thể hiện đẳng cấp của một sản phẩm cao cấp.  Đồng thời, chiếc máy tính bảng OPPO này một thiết bị đáng chú ý trong lĩnh vực giải trí với bộ 4 loa, được tích hợp công nghệ âm thanh Dolby Atmos và Hi-res Audio. Chúng tạo nên âm thanh rõ ràng, sống động, làm cho tất cả các bản nhạc, phim ảnh và trò chơi trở nên chân thực nhất.	https://cdn.tgdd.vn/Products/522/320992/oppo-pad-neo-2-1020x570.jpg		75
+620	Một yếu tố đáng chú ý khác của thiết bị là máy chỉ hỗ trợ kết nối WiFi. Điều này có nghĩa là, người dùng cần có mạng WiFi để truy cập Internet, nó phù hợp với những người thường xuyên sử dụng thiết bị tại nhà hoặc văn phòng, nơi thường có mạng WiFi ổn định.			75
+621	OPPO Pad Neo WiFi được trang bị màn hình IPS LCD, nổi tiếng với khả năng cung cấp chất lượng hình ảnh ổn định trong phân khúc giá. Lựa chọn này đảm bảo mang đến hình ảnh chất lượng cao với độ nét không thể phủ nhận và màu sắc trung thực. Độ phân giải 1720 x 2408 pixels giúp mỗi chi tiết trở nên rõ ràng và sống động, tạo ra một trải nghiệm hấp dẫn không thể bỏ qua.	https://cdn.tgdd.vn/Products/522/320992/oppo-pad-neo-3-1020x570.jpg	Màn hình lớn cho trải nghiệm giải trí tốt hơn	75
+622	Tấm nền 90 Hz của OPPO Pad Neo WiFi là một lựa chọn an toàn nhưng hiệu quả, mang đến trải nghiệm mượt mà và nhạy bén. Với màn hình rộng lớn 11.4 inch, OPPO Pad Neo WiFi mang lại một không gian giải trí và làm việc lý tưởng, không khác gì khi sử dụng laptop, điều này hữu ích khi kết nối với những phụ kiện đi kèm như bàn phím, biến thiết bị trở thành một công cụ làm việc đáng tin cậy.	https://cdn.tgdd.vn/Products/522/320992/oppo-pad-neo-4-1020x570.jpg		75
+623	Nhưng không chỉ về chất lượng hình ảnh, OPPO Pad Neo WiFi còn mang tính năng thông minh với cảm biến nhiệt độ màu. Nó cho phép người dùng tùy chỉnh nhiệt độ màu của màn hình để phù hợp với điều kiện ánh sáng và thị lực cá nhân, giúp đôi mắt không bị mệt mỏi sau thời gian dài sử dụng.			75
+624	Camera trước của OPPO Pad Neo WiFi có độ phân giải 8 MP, cho phép bạn thực hiện cuộc gọi video chất lượng cao, sắc nét, không hề có hiện tượng mờ hay nhoè. Điều này vô cùng hữu ích khi bạn cần tham gia cuộc họp trực tuyến hoặc muốn kết nối với người thân yêu qua video call dù đang ở xa.	https://cdn.tgdd.vn/Products/522/320992/oppo-pad-neo-5-1020x570.jpg	Trang bị camera trước và sau 8 MP	75
+625	Được trang bị camera sau 8 MP, OPPO Pad Neo WiFi còn giúp bạn chụp tài liệu công việc với độ rõ nét và chi tiết cao. Từ đây, chiếc máy tính bảng của OPPO không chỉ là một phương tiện giải trí mà còn trở thành cộng sự đắc lực trong công việc của bạn.  Khả năng quay video Full HD của camera sau là một trong những điểm nhấn của OPPO Pad Neo WiFi. Điều này giúp bạn dễ dàng ghi lại những khoảnh khắc đặc biệt, từ những buổi tụ tập gia đình cho tới những quang cảnh yên bình của cuộc sống.			75
+626	Với con chip MediaTek Helio G99, OPPO Pad Neo WiFi không phải là một sản phẩm hướng đến tốc độ hoạt động nhanh chóng hay công suất khủng. Bù lại, nó là một công cụ hữu ích cung cấp đúng những gì người dùng cần từ việc duyệt web, soạn thảo văn bản đến việc họp trực tuyến một cách ổn định.	https://cdn.tgdd.vn/Products/522/320992/oppo-pad-neo-6-1020x570.jpg	Cấu hình đủ mạnh cho các tác vụ cơ bản	75
+627	Dù không là một siêu phẩm dành cho game thủ, nhưng OPPO Pad Neo WiFi vẫn đủ sức chinh phục được một số tựa game không quá nặng, biến máy thành một thiết bị giải trí đa dạng, từ đó tạo cơ hội cho người dùng có thể trải nghiệm và tận hưởng những phút giây thư giãn sau những giờ làm việc căng thẳng.	https://cdn.tgdd.vn/Products/522/320992/oppo-pad-neo-7-1020x570.jpg		75
+628	Bên cạnh đó, đây là chiếc máy tính bảng RAM 6 GB, OPPO Pad Neo WiFi hứa hẹn không để người dùng phải đối mặt với tình trạng gián đoạn hay trì trệ, cho phép người dùng thoải mái chuyển đổi giữa các ứng dụng một cách mượt mà.			75
+629	Sở hữu viên dung lượng khủng 8000 mAh, thiết bị là sự lựa chọn lý tưởng cho những ai mong muốn thưởng thức giải trí, thực hiện công việc hay học tập trong nhiều giờ liền. Với mức dung lượng cao, OPPO Pad Neo WiFi đem đến một thời gian sử dụng cả ngày dài mà không quá bận tâm về thời gian sạc.  Chưa hết, không chỉ chú trọng vào dung lượng pin, OPPO còn đặc biệt tập trung vào việc cải thiện khả năng sạc nhanh cho thiết bị của mình. Công nghệ sạc nhanh 33 W được tích hợp trong OPPO Pad Neo WiFi tạo ra khả năng sạc nhanh chóng, giúp người dùng tiết kiệm thời gian một cách tối đa.	https://cdn.tgdd.vn/Products/522/320992/oppo-pad-neo-8-1020x570.jpg	Tích hợp viên pin khủng lên đến 8000 mAh	75
+630	Tổng kết, OPPO Pad Neo WiFi là một sản phẩm mà hãng đã chuẩn bị công phu từ tất cả các khía cạnh. Nhờ đó, OPPO Pad Neo WiFi có khả năng đối đầu mạnh mẽ với các nhu cầu công việc văn phòng cơ bản đến cao cấp, đồng thời hỗ trợ việc tra cứu tài liệu nhanh chóng, dễ dàng trong quá trình học tập của người dùng.			75
+631	Redmi Pad Pro ghi điểm nhờ ngôn ngữ thiết kế mặt lưng phẳng với bốn góc bo cong mềm mại mang đến vẻ đẹp hiện đại và sang trọng. Được chế tác từ kim loại và trải qua quá trình gia công tỉ mỉ, tạo nên sự đồng nhất về mặt thẩm mỹ và độ hoàn thiện cao.   Mặt trước của máy được bảo vệ bởi lớp kính cường lực Corning Gorilla 3. Sản phẩm trải qua hơn 30 bài thử nghiệm chất lượng khắt khe để mang đến sự an tâm cho người dùng trong nhiều tình huống sử dụng thường ngày, biến Redmi Pad Pro trở thành một sản phẩm không chỉ đẹp mắt mà còn bền bỉ theo thời gian.	https://cdn.tgdd.vn/Products/Images/522/325988/xiaomi-redmi-pad-pro-6gb-128gb-bv-3.jpg	Thiết kế sang trọng, bền bỉ	76
+632	Màn hình có kích thước 12.1 inch của Redmi Pad cùng thiết kế bốn viền mỏng đều, giúp mở ra không gian giải trí rộng lớn, cho bạn thoải mái tận hưởng những bộ phim yêu thích hay chơi game giải trí. Không chỉ vậy, màn hình lớn còn biến thiết bị thành một công cụ làm việc hiệu quả, giúp bạn dễ dàng sáng tạo nội dung hay học tập trực tuyến.  Redmi Pad Pro ghi điểm với màn hình có độ phân giải 2.5K ấn tượng, mang đến hình ảnh sắc nét và chi tiết đến từng điểm ảnh. Tần số quét 120 Hz giúp cho mọi thao tác vuốt chạm trở nên trơn tru, khả năng tái hiện những khung hình tốc độ cao đầy mượt mà, đặc biệt là trong các bộ phim hành động hay game đua xe, bắn súng,...   Tấm nền IPS LCD cung cấp khả năng hiển thị màu sắc chân thật, độ tương phản tốt, bên cạnh đó cũng giúp tiết kiệm năng lượng hơn. Tỉ lệ màn hình 16:10 trên Redmi Pad Pro cũng được đánh giá cao bởi khả năng tối ưu hóa không gian hiển thị, đáp ứng hoàn hảo cho nhu cầu học tập và làm việc. 	https://cdn.tgdd.vn/Products/Images/522/325988/xiaomi-redmi-pad-pro-6gb-128gb-bv-1.jpg	Màn hình siêu nét 2.5K hỗ trợ tốc độ 120 Hz	76
+633	Hơn thế nữa, máy tính bảng Xiaomi cũng đạt chứng nhận mức ánh sáng xanh thấp, chứng nhận không nhấp nháy và chứng nhận thân thiện với đặc điểm sinh học của TUV Rheinland, với khả năng loại bỏ ánh sáng xanh hiệu quả, bảo vệ thị giác của bạn tốt hơn.  Bên cạnh trải nghiệm về thị giác, hãng cũng trang bị 4 loa Dolby Atmos ở các cạnh bên của máy, mang đến trải nghiệm âm thanh vòm sống động giúp người dùng đắm chìm trong thế giới giải trí với âm nhạc, phim ảnh và trò chơi.	https://cdn.tgdd.vn/Products/Images/522/325988/xiaomi-redmi-pad-pro-6gb-128gb-bv-7.jpg		76
+634	Mang trong mình CPU Snapdragon 7s Gen 2 8 nhân được sản xuất trên quy trình 4 nm hiện đại, có tốc độ tối đa 2.3 GHz giúp tăng hiệu suất xử lý nhưng vẫn giảm mức tiêu thụ điện, con chip này sẽ dễ dàng xử lý các tác vụ từ lướt web, xem video, đến các tác vụ nặng hơn như chỉnh sửa ảnh 2D, chơi game đồ họa trung bình,... mà không gặp quá nhiều trở ngại.  Là chiếc tablet RAM 6 GB, thiết bị sẽ là người bạn đồng hành đắc lực cho những người yêu thích sự đa nhiệm như mở đồng thời nhiều ứng dụng, duyệt web, lướt mạng xã hội,... mà không bị đơ máy hay tải lại trang.	https://cdn.tgdd.vn/Products/Images/522/325988/xiaomi-redmi-pad-pro-6gb-128gb-bv-5.jpg	Hiệu năng mạnh mẽ với “chip rồng” nhà Qualcomm	76
+635	Redmi Pad Pro sở hữu camera sau 8 MP, mặc dù độ phân giải không quá cao, camera vẫn cho khả năng chụp ảnh chi tiết và rõ ràng trong điều kiện đủ sáng. Nhờ vậy, bạn có thể dễ dàng ghi lại những khoảnh khắc cùng gia đình, bạn bè hay đơn giản là chụp tài liệu, hình ảnh học tập,...  Mặt trước của máy tính bảng cũng được tích hợp camera selfie 8 MP, giúp bạn tự tin hơn trong những bức ảnh tự chụp hoặc khi gọi video nhờ chất lượng hình ảnh rõ nét. Bên cạnh đó, camera cũng hỗ trợ quay phim với chất lượng HD, Full HD, đáp ứng tốt nhu cầu quay chụp cơ bản của người dùng.	https://cdn.tgdd.vn/Products/Images/522/325988/xiaomi-redmi-pad-pro-6gb-128gb-bv-6.jpg	Camera 8 MP rõ nét, vừa đủ dùng	76
+636	Cung cấp năng lượng cho Redmi Pad Pro là viên pin 10.000 mAh, cho phép bạn sử dụng liên tục cả ngày với các tác vụ thông thường như đọc sách, lướt web, xem phim,... trước khi phải sạc lại. Với các tác vụ nặng hơn như chơi game, sử dụng màn hình với độ sáng cao thì thời lượng dùng có thể ngắn hơn. Dù vậy, bạn cũng không cần quá lo lắng, công nghệ sạc nhanh 33 W sẽ giúp bạn rút ngắn thời gian chờ sạc lại thiết bị.	https://cdn.tgdd.vn/Products/Images/522/325988/xiaomi-redmi-pad-pro-6gb-128gb-bv-4.jpg	Thời lượng pin khủng đi kèm sạc nhanh 33 W	76
+637	Mang một thiết kế đẹp, thời thượng nhưng không kém phần bền bỉ, màn hình 2.5K sắc nét, tần số làm mới 120 Hz mượt mà, hiệu năng mạnh mẽ cùng một viên pin khủng, Redmi Pad Pro 6GB/128GB sẽ là một chiếc máy tính bảng đáng trải nghiệm trong phân khúc dưới 10 triệu dành cho người dùng.			76
+472		https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/Uploads/images/2015/0511/acer-nitro-5-an515-tiger-2022-1.jpg		56
+638	Xét về mặt thiết kế thì Apple Watch SE 2023 không có nhiều sự khác biệt so với các phiên bản đã ra mắt trước đó. Mặt đồng hồ được bo cong 4 góc tạo nên sự liền mạch, mang đến cảm giác hiện đại và sang trọng. Khung viền bằng hợp kim nhôm vừa chắc chắn vừa có khối lượng nhẹ, thoải mái hơn trong quá trình sử dụng.	https://cdn.tgdd.vn/Products/Images/7077/316007/apple-watch-se-2023-40mm-vien-nhom-day-silicone-bv-1.jpg	Thiết kế quen thuộc với độ nhận diện cao	77
+639	Kích thước mặt 40 mm cung cấp một không gian hiển thị vừa đủ dùng. Với phiên bản này thì dây đeo đi cùng là phần dây ngắn với 7 nút gài. Kích thước cổ tay mình là 14 cm, đây cũng là kích thước cổ tay trung bình của đại đa số con gái châu Á nên cảm giác khi đeo lên tay rất vừa vặn gọn gàng.	https://cdn.tgdd.vn/Products/Images/7077/316007/apple-watch-se-2023-40mm-vien-nhom-day-silicone-bv-2.jpg		77
+640	Chất liệu dây bằng silicone nền bề mặt rất mềm mịn. Dây đồng hồ có thể tháo rời nên bạn hoàn toàn có thể thay đổi nhiều loại dây khác để phù hợp với các loại trang phục khác nhau, tạo sự đa dạng trong phong cách.  Về cảm nhận của mình khi đeo, đó là dù dây rất là mềm mại, cảm giác đeo cũng rất thoải mái và không có bất kỳ sự cản trở nào trong hoạt động hàng ngày, nhưng nếu đeo liên tục nhiều giờ thì nó sẽ khá bí và đổ mồ hôi, nên phần da tay của bạn nào nhạy cảm thì nó sẽ khá ngứa và hơi khó chịu một chút. Do đó chúng ta nên thường xuyên tháo ra để cho cổ tay thông thoáng và không bị ngứa.	https://cdn.tgdd.vn/Products/Images/7077/316007/apple-watch-se-2023-40mm-vien-nhom-day-silicone-bv-14.jpg		77
+641	Apple Watch sở hữu màn hình OLED với độ phân giải 324 x 394 pixels mang đến những nội dung chi tiết nhất, còn màu sắc thì vô cùng chân thật. Màn hình được bảo vệ bởi một lớp kính cường lực Ion-X có độ cứng cao, hạn chế tối đa những vết nứt khi vô tình va chạm trong quá trình sử dụng.  Một điểm đáng tiếc là chiếc Apple Watch SE 2023 này vẫn chưa được trang bị tính năng Always On Display (Màn hình luôn sáng), dù vậy thì đồng hồ vẫn hỗ trợ tính năng Nâng cổ tay sáng màn hình, khi mình dùng thì thấy đồng hồ phản hồi rất nhanh chỉ với thao tác nhấc nhẹ cổ tay, ngoài ra cũng giúp tiết kiệm pin hơn.	https://cdn.tgdd.vn/Products/Images/7077/316007/apple-watch-se-2023-40mm-vien-nhom-day-silicone-bv-4.jpg		77
+642	Ở thế hệ 2023 thì Apple Watch SE được trang bị bộ vi xử lý Apple S8 SiP được sản xuất trên quy trình 7 nm của TSMC, mang đến hiệu suất ổn định và trải nghiệm mượt mà, cảm giác vuốt chạm cực kỳ thích. Cho dù chúng ta có thao tác ra vào ứng dụng liên tục trên màn hình thì cũng không xảy ra tình trạng đơ máy hay là giật lag, đây cũng là một trong những điểm mạnh nhất của các thiết bị nhà Apple.  Apple Watch chạy trên hệ điều hành WatchOS 10 (tại thời điểm ra mắt) với các ứng dụng được thiết kế mới, nhiều kiểu mặt đồng hồ hơn, vùng hiển thị thông tin mở rộng,... Một điều cần lưu ý là Apple Watch SE 2023 chỉ tương thích iPhone Xs trở lên và sử dụng phiên bản hệ điều hành mới nhất.	https://cdn.tgdd.vn/Products/Images/7077/316007/apple-watch-se-2023-40mm-vien-nhom-day-silicone-bv-7.jpg	Hệ điều hành thế hệ mới, CPU mạnh mẽ	77
+643	Apple Watch SE 2023 được trang bị cảm biến nhịp tim quang học thứ 2, giúp đo nhịp tim một cách chính xác và liên tục. Đồng hồ cũng có thể phát hiện nhịp tim cao, thấp bất thường và gửi cảnh báo cho chúng ta kịp thời.  Bên cạnh đó đồng hồ thông minh đa tiện ích của Apple có các chức năng sức khỏe khác như: Theo dõi giấc ngủ, tính lượng calories tiêu thụ, theo dõi chu kỳ kinh nguyệt, mức độ stress,... thông qua đó giúp ta thấu hiểu cơ thể hơn.	https://cdn.tgdd.vn/Products/Images/7077/316007/apple-watch-se-2023-40mm-vien-nhom-day-silicone-bv-9.jpg	Trợ lý sức khỏe đa năng	77
+644	Nếu bạn là một người yêu thích việc tập luyện thể thao, rèn luyện sức khỏe ở mức cơ bản, thì chiếc Apple Watch SE 2023 này có thể đáp ứng được nhu cầu của bạn, bởi nó được trang bị đa dạng các loại bài tập khác nhau từ các bộ môn đơn giản ngoài trời như là đi bộ, đạp xe, đến bộ môn bơi lội nhờ có khả năng chống nước 5 ATM chuẩn ISO 22810:2010,...	https://cdn.tgdd.vn/Products/Images/7077/316007/apple-watch-se-2023-40mm-vien-nhom-day-silicone-bv-12.jpg	Luyện tập ngoài trời với khả năng định vị chuẩn xác	77
+645	Đồng hồ thông minh được trang bị công nghệ Bluetooth v5.3 hiện đại, nên khả năng đồng bộ thông báo vô cùng nhanh chóng khi được kết nối với điện thoại.  Không chỉ cho phép mình nhận thông báo của tin nhắn mặc định, Apple Watch còn hiển thị nhiều thông báo từ ứng dụng bên thứ ba đa dạng như Messenger, Line, Zalo,... Phông chữ hiển thị cũng rất rõ ràng với độ chi tiết cao, không bị rơi dòng.	https://cdn.tgdd.vn/Products/Images/7077/316007/apple-watch-se-2023-40mm-vien-nhom-day-silicone-bv-17.jpg	Nghe gọi thông qua Bluetooth	77
+646	Trải nghiệm sử dụng thực tế của mình trên chiếc SE 2023 này, mình đã sạc đầy 100% pin vào khoảng 4:00 chiều ngày 13 tháng 11 và thời điểm đồng hồ của mình hết pin là vào khoảng 8:30 tối của ngày 14 tháng 11.  Trong khoảng thời gian này mình đã sử dụng nhiều tác vụ khác nhau như là theo dõi giấc ngủ trong một đêm, bật thông báo tin nhắn ứng dụng và trả lời tin nhắn, đi bộ gần 1 tiếng và cũng không dùng chế độ Nguồn điện thấp, thì pin trên đồng hồ kéo dài chưa đến 1 ngày.	https://cdn.tgdd.vn/Products/Images/7077/316007/apple-watch-se-2023-40mm-vien-nhom-day-silicone-bv-16.jpg	Thời lượng pin không có quá nhiều cải tiến	77
+647	Nếu so sánh về ngoại hình giữa Apple Watch Ultra thế hệ đầu tiên với Apple Watch Ultra 2 thì không có quá nhiều sự khác biệt. Sở hữu mặt đồng hồ 49 mm lớn nhất trong các dòng Apple Watch trước giờ, mang đến cảm giác thể thao khi đeo. Khung viền Titanium vô cùng chắc chắn, bảo vệ tốt các bộ phận bên trong.  Dây Trail được làm từ sợi nylon dệt, có độ co giãn cao và khá nhẹ tạo cảm giác thoải mái khi đeo. Dây đeo có thể điều chỉnh độ rộng phù hợp với mọi kích cỡ cổ tay của người dùng.  Vị trí của nút Digital Crown trên đồng hồ vẫn được giữ nguyên như những thế hệ trước. Nút xoay hỗ trợ người dùng thực hiện nhanh các thao tác như quay về màn hình chính, mở ứng dụng, tăng/giảm âm lượng,... Một nâng cấp nhỏ ở phiên bản Apple Watch Ultra 2 là người dùng có thể tạm thời tăng gấp đôi độ sáng đèn pin bằng Digital Crown, tiện lợi hơn khi di chuyển trong bóng tối.  Nút Side Part được thiết kế chỉn chu tạo sự êm ái khi nhấn, nút bấm này sẽ hỗ trợ bạn ra - vào ứng dụng gần nhất, thực hiện cuộc gọi SOS và tắt/mở nguồn một cách nhanh chóng. Bộ đôi Side Part và Digital Crown sẽ được đặt trong một cái gờ không chỉ tạo điểm nhấn khi nhìn vào mà còn hạn chế hư hại khi có va chạm xảy.  Nút Hành động được đặt bên trái mặt đồng hồ có màu cam vô cùng nổi bật, người dùng có thể thiết lập một chức năng theo thói quen sử dụng, giúp việc điều hướng diễn ra dễ dàng hơn. Bạn cũng có thể bật còi báo động có âm thanh lên đến 86 dB khi nhấn giữ nút Hành động.  Apple Watch Ultra 2 đã vượt qua tất cả các bài kiểm tra của MIL-STD 810H nên có khả năng hoạt động trong môi trường khắc nghiệt. Bạn có thể an tâm đem theo đồng hồ tham gia các hoạt động ngoài trời như leo núi, đi bộ đường dài và chạy bộ.	https://cdn.tgdd.vn/Products/Images/7077/314714/apple-watch-ultra-2-lte-49mm-vien-titanium-day-trail-size-m-l-011023-054805.jpg	Đạt độ bền vượt trội, phong cách năng động	78
+648	Apple Watch Ultra 2 sử dụng màn hình OLED với kích thước 1.92 inch vô cùng rộng rãi để hiển thị các thông tin và người dùng thoải mái thực hiện các thao tác điều khiển không lo nhầm lẫn. Màn hình có độ phân giải 410 x 502 pixels mang đến cho người dùng những nội dung rõ nét.  Với độ sáng lên đến 3000 nits bạn có thể nhìn rõ các nội dung trên màn hình ngay cả khi ở ngoài trời ánh nắng gắt. Ngoài ra, độ sáng màn hình còn có thể giảm xuống 1 nit bạn có thể sử dụng đồng hồ ở những khu vực thiếu sáng mà không bị chói mắt, những người xung quanh cũng không bị ảnh hưởng.    Apple Watch Ultra 2 được tích hợp chế độ ban đêm, khi trong bóng tối màn hình sẽ chuyển sang màu đỏ giúp các thông tin được hiển thị rõ ràng, lượng ảnh sáng xanh cũng được giảm không gây mỏi mắt khi bạn nhìn lâu và chế độ này cũng sẽ tối ưu năng lượng tiêu thụ.	https://cdn.tgdd.vn/Products/Images/7077/314714/apple-watch-ultra-2-lte-49mm-vien-titanium-day-trail-size-m-l-20.jpg	Màn hình chất lượng cao, độ sáng cao hơn	78
+649	Sức mạnh của Apple Watch Ultra 2 chủ yếu đến từ con chip Apple S9 SiP với 5.6 tỷ bóng bán dẫn - nhiều hơn 60% so với S8 được ra mắt trước đó. Theo thông tin mà hãng cung cấp thì CPU sẽ có 4 lõi giúp đẩy nhanh tốc độ xử lý, mang đến cho người dùng những trải nghiệm mượt mà nhất.  Apple Watch Ultra thế hệ thứ hai sử dụng hệ điều hành WatchOS 10 (tại thời điểm ra mắt) với giao diện được thiết kế lại tạo sự thuận tiện cho người dùng. Các tính năng cũng được nâng cấp, người dùng có thể xem các thông tin nhanh chóng chỉ với thao tác cuộn nút Digital Crown thông qua tính năng Ngăn xếp thông minh.  Bạn có thể tương tác nhanh chóng với Apple Watch Ultra 2 mà không cần chạm vào màn hình thông qua tính năng Chạm hai lần (Double Tap), hỗ trợ bạn tốt hơn trong những lúc không rảnh tay. Phía tay đeo đồng hồ bạn chỉ cần chạm ngón trỏ và ngón cái với nhau 2 lần để: Nhận cuộc gọi, kết thúc cuộc gọi, tắt báo thức, tạm dừng/kết thúc bấm giờ,...   Lưu ý: Apple Watch Ultra 2 tương thích với dòng iPhone Xs trở lên và sử dụng hệ điều hành iOS 17 trở lên.	https://cdn.tgdd.vn/Products/Images/7077/314714/apple-watch-ultra-2-lte-49mm-vien-titanium-day-trail-size-m-l-011023-054809.jpg	Hiệu năng mạnh mẽ, giao diện được làm mới	78
+650	Đồng hồ có hỗ trợ eSIM nên có thể thực hiện nghe gọi mà không cần kết nối với điện thoại. Để sử dụng eSIM thì bạn cần đăng ký dịch vụ MultiSIM của nhà mạng Viettel hoặc Vinaphone. Apple Watch có thể dùng chung số thuê bao với điện thoại, gói dữ liệu 3G/4G đảm bảo các thông tin giữa hai thiết bị được đồng nhất.   Lưu ý: Bạn cần chuẩn bị một SIM vật lý hoặc eSIM để đăng ký dịch vụ MultiSIM. Đối với nhà mạng Vinaphone, hiện tại chỉ có thể thực hiện cuộc gọi đi, chưa thể nhận cuộc gọi đến do một số chính sách quyền riêng tư.	https://cdn.tgdd.vn/Products/Images/7077/314714/apple-watch-ultra-2-lte-49mm-vien-titanium-day-trail-size-m-l-011023-054807.jpg	Nghe gọi trực tiếp trên đồng hồ	78
+651	Apple Watch Ultra 2 là một người bạn đồng hành tuyệt vời cho những ai yêu thích thể thao khi đã trang bị đa dạng chế độ luyện tập từ trong nhà cho đến ngoài trời như: Chạy bộ, Yoga, đạp xe, đi bộ, bơi lội,... Người dùng có thể thay đổi nhiều chế độ để đạt hiệu quả cao hơn, không lo bị nhàm chán.  Ứng dụng bài tập trên Apple Watch Ultra 2 giúp người dùng theo dõi các chỉ số luyện tập một cách dễ dàng và hiệu quả. Các chỉ số này bao gồm nhịp tim, quãng đường, thời gian, lượng calo đốt cháy,... Nhờ đó, người dùng có thể hiểu rõ hơn về quá trình luyện tập của bản thân và điều chỉnh cường độ luyện tập phù hợp.  Ứng dụng La bàn trên Apple Watch giúp người dùng xác định phương vị và định hướng đường đi một cách chính xác. Ngoài ra, ứng dụng còn cho phép người dùng lưu các điểm tham chiếu hoặc đánh dấu cụ thể khi đến giúp tìm lại đường đi trước một cách dễ dàng.	https://cdn.tgdd.vn/Products/Images/7077/314714/apple-watch-ultra-2-lte-49mm-vien-titanium-day-trail-size-m-l-011023-054812.jpg	Đa dạng môn thể thao, hỗ trợ tập luyện hiệu quả	78
+652	Đồng hồ thông minh sử dụng GPS băng tần kép sử dụng tín hiệu L1 và L5, kết hợp cùng hệ thống vệ tinh Galileo, Beidou, GLONASS, GPS và QZSS cung cấp khả năng định vị trên phạm vi toàn cầu. Thông qua hệ thống định vị này người dùng có thể theo dõi lịch sử di chuyển, dễ dàng tìm kiếm khi thiết bị thất lạc,... giúp tập luyện ngoài trời hiệu quả và an toàn hơn.  Tính năng Phát hiện va chạm (Car Crash Detection) sử dụng các cảm biến gia tốc kế, con quay hồi chuyển và GPS trên Apple Watch để phát hiện các cú va chạm mạnh. Khi phát hiện một vụ tai nạn, đồng hồ sẽ phát âm báo và hiển thị cảnh báo trên màn hình. Người dùng có thể nhấn vào cảnh báo để gọi dịch vụ khẩn cấp hoặc Apple Watch sẽ tự động gọi cho số điện thoại được cài đặt nếu người dùng không thể phản hồi.	https://cdn.tgdd.vn/Products/Images/7077/314714/apple-watch-ultra-2-lte-49mm-vien-titanium-day-trail-size-m-l-161123-011828.jpg	Hệ thống định vị tân tiến, an tâm khi tập luyện ngoài trời	78
+653	Bạn có thể đo nhịp tim, nồng độ oxy trong máu bất cứ lúc nào thông qua chiếc Apple Watch này, trường hợp phát hiện nhịp tim của bạn cao hoặc thấp bất thường thì đồng hồ sẽ gửi cảnh bảo để bạn kịp thời xử lý. Ứng dụng ECG của sản phẩm này còn cho phép bạn chụp kết quả điện tâm đồ, thuận tiện cho việc theo dõi và cung cấp thông tin cho bác sĩ cần.  Cảm biến nhiệt độ có thể đo nhiệt độ cơ thể với độ chính xác cao giúp phát hiện các dấu hiệu của bệnh tật, chẳng hạn như sốt. Ngoài ra, cảm biến cũng có thể được sử dụng để theo dõi chu kỳ kinh nguyệt và dự đoán thời gian rụng trứng của phái nữ.	https://cdn.tgdd.vn/Products/Images/7077/314714/apple-watch-ultra-2-lte-49mm-vien-titanium-day-trail-size-m-l-011023-054810.jpg	Nắm bắt nhanh chóng các chỉ số của cơ thể	78
+654	Apple Watch Ultra 2 có chuẩn chống nước 10 ATM và đạt Chứng nhận EN13319 nên người dùng có thể thoải mái mang khi bơi hoặc lặn ở những khu vực nước nông mà không lo đồng hồ bị vào nước, ảnh hưởng đến độ bền.  Về thời lượng pin thì không có quá nhiều thay đổi so với thế hệ trước, bạn có thể sử dụng khoảng 36 giờ ở chế độ cơ bản hoặc 72 giờ khi sử dụng chế độ Năng lượng thấp. Tuy không quá dài nhưng vẫn có thể đồng hành cùng người dùng trong các hoạt động thể thao, theo dõi sức khỏe hơn một ngày. Đồng hồ có tích hợp sạc nhanh nên bạn sẽ không phải chờ đợi quá lâu.	https://cdn.tgdd.vn/Products/Images/7077/314714/apple-watch-ultra-2-lte-49mm-vien-titanium-day-trail-size-m-l-011023-054815.jpg	Thoải mái đeo đồng hồ khi đi bơi	78
+655	Phiên bản đồng hồ Samsung Galaxy Watch 4 này được thiết kế đơn giản với mặt đồng hồ dạng tròn có đường kính 40 mm thường thấy ở đồng hồ thông minh tạo nên phong cách năng động, cuốn hút. Khung viền đồng hồ được làm từ chất liệu nhôm bền chắc, khối lượng nhẹ. Bên cạnh đó dây đeo silicone êm ái, không gây khó chịu khi đeo suốt ngày dài, kể cả khi người dùng vận động, tập thể thao ra nhiều mồ hôi tay.	https://cdn.tgdd.vn/Products/Images/7077/248752/samsung-galaxy-watch-4-40mm-4-1.jpg	Phong cách năng động, thời thượng	79
+656	Đồng hồ được hãng trang bị màn hình Super AMOLED có độ phân giải 396 x 396 pixels cho khả năng hiển thị sắc nét, độ tương phản cao và đặc biệt là tiết kiệm năng lượng tốt. Màn hình được bảo vệ tốt hơn với tấm kính cường lực Gorilla Glass Dx+ cứng cáp, có độ bền cao, không lo tình trạng nứt vỡ khi bị va đập.	https://cdn.tgdd.vn/Products/Images/7077/248752/samsung-galaxy-watch-4-40mm-hong-2.jpg	Màn hình sắc nét, hiển thị rõ ràng	79
+657	Bạn có thể dễ dàng kết nối các thiết bị Android với chiếc đồng hồ Samsung này. Sau khi kết nối, bạn có thể kiểm tra thông báo tin nhắn, cuộc gọi trên đồng hồ nhanh chóng và tiện lợi, không lo bỏ lỡ thông báo nào trong lúc đang luyện tập thể thao.  Lưu ý: Đồng hồ không tương thích với các thiết bị iPhone.	https://cdn.tgdd.vn/Products/Images/7077/248752/samsung-galaxy-watch-4-40mm-hong-3.jpg	Dễ dàng kết nối với "dế yêu" thông qua Bluetooth v5.0	79
+658	Đồng hồ được trang bị chip Exynos W920 có tốc độ nhanh hơn 20% so với Exynos 9110 được trang bị ở chiếc Samsung Galaxy Watch 3. Bên cạnh đó, con chip Exynos W920 này còn giúp tiết kiệm pin, tăng thời lượng sử dụng.	https://cdn.tgdd.vn/Products/Images/7077/248752/samsung-galaxy-watch-4-40mm-hong-4-1.jpg	Cấu hình mạnh mẽ với con chip Exynos W920	79
+659	Thoải mái thay đổi hình nền đồng hồ với bộ sưu tập mặt đồng hồ đa dạng, bạn có thể lựa chọn các loại mặt đồng hồ khác nhau như mặt đồng hồ kim, mặt điện tử tùy theo sở thích của bạn. Với tính năng này, chiếc đồng hồ của bạn sẽ luôn được đổi mới, không lo nhàm chán khi sử dụng lâu ngày.	https://cdn.tgdd.vn/Products/Images/7077/248752/samsung-galaxy-watch-4-40mm-hong-5.jpg	Cá nhân hóa thiết bị với bộ sưu tập mặt đồng hồ đa dạng	79
+660	Với dung lượng pin 247 mAh, bạn có thể sử dụng đồng hồ trong khoảng 1.5 ngày, đồng hồ được sạc thông qua cổng sạc không dây tiện lợi. Lưu ý, thời gian sử dụng này có thể thay đổi tùy theo cách sử dụng của người dùng.	https://cdn.tgdd.vn/Products/Images/7077/248752/samsung-galaxy-watch-4-40mm-hong-6.jpg	Thời lượng pin 1.5 ngày	79
+661	Người dùng hoàn toàn có thể yên tâm đeo đồng hồ thông minh khi đi mưa, đi bơi ở vùng nước nông với chuẩn chống nước 5 ATM. Tuy nhiên, để đảm bảo được tuổi thọ của đồng hồ, người dùng không nên ngâm đồng hồ quá lâu dưới nước tránh tình trạng vào nước gây hỏng hóc.	https://cdn.tgdd.vn/Products/Images/7077/248752/samsung-galaxy-watch-4-40mm-hong-8-1.jpg	Chuẩn chống nước 5 ATM - ISO 22810:2010	79
+662	Đồng hồ được trang bị các cảm biến ánh sáng, địa từ, gia tốc kế,... đặc biệt là bộ cảm biến BioActive đột phá của Samsung. Nhờ bộ cảm biến hiện đại này, người dùng có thể nhận kết quả phân tích thành phần cơ thể (qua phương pháp đo BIA) theo thời gian thực mọi lúc, mọi nơi chỉ với hai ngón tay trong 15 giây. Cụ thể là các chỉ số như nồng độ oxy trong máu (SpO2), đo nhịp tim hay lượng calories mà bạn đã tiêu thụ, giúp bạn kiểm soát tốt các mục tiêu sức khoẻ của mình.	https://cdn.tgdd.vn/Products/Images/7077/248752/samsung-galaxy-watch-4-40mm-hong-10.jpg	Bộ cảm biến tiên tiến theo dõi sức khỏe người dùng	79
+663	Samsung Galaxy Watch 4 trang bị nhiều bài tập cho bạn lựa chọn như đạp xe, đi bộ, chạy bộ, leo núi,... Bên cạnh đó, thiết bị còn theo dõi và đưa ra báo cáo cụ thể về quá trình tập luyện, giúp việc rèn luyện sức khỏe của bạn đạt hiệu quả cao.	https://cdn.tgdd.vn/Products/Images/7077/248752/samsung-galaxy-watch-4-40mm-hong-11.jpg	Hỗ trợ luyện tập dễ dàng hơn	79
+664	Huawei Watch Fit 3 có thiết kế thời thượng, năng động với khối lượng mặt vô cùng nhẹ - chỉ 26 g, mang tới sự thoải mái cho cổ tay của bạn trong mọi hoạt động từ luyện tập đến sinh hoạt hằng ngày. Khung viền hợp kim nhôm và mặt kính cường lực cũng giúp bảo vệ đồng hồ tốt hơn khi xảy ra những va quẹt ngoài ý muốn.	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-2.jpg	Thiết kế thời thượng với màn hình lớn	80
+665	Điểm nâng cấp đáng giá nhất có thể kể đến là phần màn hình của thiết bị. Watch Fit 3 được trang bị màn hình AMOLED có kích thước lên đến 1.82 inch, lớn hơn thế hệ cũ là 1.47 inch, kết hợp độ phân giải 480 × 408 pixels và mật độ điểm ảnh 347 ppi, mang lại không gian trải nghiệm vô cùng lớn cùng chất lượng hình ảnh rõ nét, màu sắc sống động.  Chế độ Always On Display cũng được tích hợp, cho phép màn hình luôn hiển thị ngày tháng, giờ giấc cùng các thông báo quan trọng. Người dùng cũng có thể thỏa sức tùy biến giao diện đồng hồ theo phong cách cá nhân với nhiều lựa chọn mặt đồng hồ khác nhau trong kho ứng dụng, tăng tính cá nhân hóa cho chiếc smartwatch của mình.	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-bv-1.jpg	Chế độ Always On Display cũng được tích hợp	80
+666	Smartwatch Huawei hỗ trợ kết nối với thiết bị thông minh chạy trên hệ điều hành Android và cả iOS nhờ Bluetooth v5.2, thông qua ứng dụng quản lý Huawei Health.  Trên điện thoại iOS thì bạn có thể tải trực tiếp Huawei Health tại App Store, còn trên Android bạn cần tải AppGallery về điện thoại, sau đó mới tải được Huawei Health. Ứng dụng này giúp bạn dễ dàng quản lý dữ liệu sức khỏe, theo dõi hoạt động thể thao và đặt mục tiêu cá nhân cho việc rèn luyện thể lực.  Với Huawei Watch Fit 3, bạn không cần lúc nào cũng mang theo điện thoại bên mình. Với khả năng kết nối Bluetooth cùng loa và micro tích hợp trên đồng hồ, bạn có thể dễ dàng trả lời và từ chối các cuộc gọi đến. Bên cạnh đó, bạn cũng có thể nhận thông báo tin nhắn đến, xem nội dung tin nhắn và trả lời nhanh chóng chỉ với vài thao tác đơn giản.	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-4.jpg	Kết nối mượt mà, trải nghiệm liền mạch	80
+667	Đồng hồ thông minh được trang bị nhiều tính năng theo dõi sức khỏe hữu ích như theo dõi nhịp tim, đo nồng độ oxy trong máu SpO2, theo dõi giấc ngủ, mức độ căng thẳng,... cả khi bạn đang ngủ, từ đó đưa ra những dữ liệu chuyên sâu giúp đánh giá chất lượng giấc ngủ, gợi ý các mẹo để bạn điều chỉnh thói quen ngủ tốt hơn, hỗ trợ bạn cân bằng cuộc sống. Hơn thế nữa, tính năng Phân tích rối loạn nhịp tim sẽ luôn theo dõi sức khỏe tim mạch của bạn và đưa ra các cảnh báo kịp thời về nguy cơ rối loạn nhịp tim tiềm ẩn.  Bên cạnh đó, bạn cũng có thể xem chỉ số calories trên một màn hình chuyên dụng, với các số liệu như lượng calo nạp vào, lượng calo tiêu hao khi hoạt động và lượng calo tiêu hao khi nghỉ ngơi để giúp bạn đạt được mục tiêu.  Huawei Watch Fit 3 cũng sẽ là người bạn đồng hành thân thiết dành cho phái nữ, với khả năng theo dõi chu kỳ và ghi lại mọi chỉ số sức khỏe thông qua chế độ xem lịch hàng tháng, để bạn hiểu rõ hơn về cơ thể của mình. Đồng thời, bạn cũng sẽ nhận được lời nhắc kịp thời khi gần đến chu kỳ tiếp theo để bản thân luôn sẵn sàng.	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-5.jpg	Trợ lý sức khỏe hữu ích	80
+668	Đồng hồ thông minh Huawei Watch Fit được trang bị hơn 100 chế độ tập luyện tăng cường sức khỏe, với 6 bài tập được tự động phát hiện. Đồng hồ còn được trang bị chế độ Theo dõi đường chạy hoàn toàn mới, sử dụng hệ thống GPS độ chính xác cao để hiệu chỉnh khoảng cách vòng chạy và lộ trình chạy của bạn.  Tính năng gợi ý thông minh hoàn toàn mới sẽ đề xuất các môn thể thao và hoạt động phù hợp dựa trên thói quen tập luyện, mức tiêu thụ calo và điều kiện thời tiết, để bạn có thể tìm thấy niềm vui tập luyện của mình chỉ với một thao tác chạm.  Bạn cũng có thể tập luyện hiệu quả thông qua hướng dẫn của huấn luyện viên ảo để khởi động và giãn cơ với tám bài tập phổ biến như đạp xe, bơi lội chạy bộ,...   Với tính năng Vòng hoạt động 2.0, đồng hồ sẽ giúp bạn đặt mục tiêu hàng ngày cho Di chuyển, Tập luyện và Đứng, hướng đến một cuộc sống khỏe mạnh hơn. Bạn cũng sẽ được nhắc khi gần đạt được mục tiêu và nhận huy chương theo thời gian thực, giúp thúc đẩy quá trình hoàn thành mục tiêu.	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-6.jpg	Luyện tập không giới hạn với vô vàn chế độ thể thao	80
+669	Huawei Watch Fit 3 được trang bị viên pin 400 mAh, cho thời gian sử dụng tối đa lên đến 10 ngày, còn khi bật chế độ Always On Display, đồng hồ có thể hoạt động trong khoảng 4 ngày (theo thông tin công bố từ hãng). Tuy nhiên, thời gian sử dụng thực tế sẽ có chênh lệch, phụ thuộc vào cường độ sử dụng của mỗi người.  Smartwatch mang trong mình chuẩn chống nước 5 ATM ISO 22810:2010, cho phép bạn có thể sử dụng sản phẩm cho các hoạt động ở vùng nước nông trong bể bơi hoặc dọc theo bờ biển. Lưu ý, không đeo đồng hồ khi lặn, tắm nước nóng, ngâm mình trong suối nước nóng, phòng xông hơi, tham gia các hoạt động dưới nước sâu, hoặc các hoạt động liên quan đến áp suất dưới nước cao,... để đảm bảo khả năng hoạt động cho thiết bị.	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-7.jpg	Thời lượng pin và khả năng chống nước ấn tượng	80
+670	Đồng hồ thông minh Watch Fit 3 mang đến trải nghiệm âm nhạc tuyệt vời khi hỗ trợ phát nhạc độc lập. Bạn có thể dễ dàng truy cập, chọn bài hát, album hoặc danh sách phát yêu thích ngay trên màn hình đồng hồ.  Bên cạnh đó, bạn cũng có thể tạo danh sách phát yêu thích trong ứng dụng điện thoại, phù hợp với từng chế độ tập luyện khác nhau sau đó đồng bộ với đồng hồ. Tuy nhiên, khi kết nối với điện thoại dùng hệ điều hành iOS thì sẽ không hỗ trợ đồng bộ nhạc hoặc xem quản lý nhạc.  Huawei còn trang bị cho chiếc đồng hồ này nhiều tiện ích khác như: Đồng hồ bấm giờ, báo thức, tìm đồng hồ, điều khiển chụp ảnh, hẹn giờ,... hỗ trợ bạn tốt hơn trong các hoạt động thường ngày.	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-8.jpg	Nghe nhạc không giới hạn và nhiều tiện ích khác	80
 \.
 
 
@@ -1354,6 +1440,14 @@ COPY public.description (id, title, product_id) FROM stdin;
 70	Samsung Galaxy Tab S9 FE WiFi 128GB được Samsung cho ra mắt vào tháng 10/2023 và mang đến nhiều sự chú ý từ vẻ ngoài cho đến cấu hình bên trong. Những điểm nổi bật mà ta có thể chú ý như trang bị chip Exynos 1380, RAM 6 GB, pin lớn 8000 mAh cũng như có sạc nhanh 45 W.	samsung-galaxy-tab-s9-fe-wifi
 71	OPPO Pad Air 128GB là một máy tính bảng đáng chú ý, được thiết kế để đáp ứng nhu cầu đa dạng của người dùng. Với một số thông tin nổi bật như màn hình lớn và hiệu năng ổn định, OPPO Pad Air có thể là lựa chọn tuyệt vời cho những người dùng cần một máy tính bảng đa năng và tiện lợi.	oppo-pad-air-wifi
 72	Nhằm mang đến nhiều sự lựa chọn hơn cho dòng máy tính bảng của hãng thì mới đây Lenovo cũng đã cho ra mắt mẫu máy tính bảng Lenovo Tab M9. Máy sở hữu vẻ ngoài đơn giản tinh tế, màn hình lớn cùng một hiệu năng ổn định với các tác vụ.	lenovo-tab-m9-4g
+73	Được ra mắt trong năm 2023, TCL Tab 10L Gen 2 tạo được sự chú ý khi có giá bán hết sức cạnh tranh nhưng lại sở hữu khá nhiều đặc điểm nổi bật. Ưu điểm lớn nhất có thể kể đến là màn hình lớn, thiết kế mỏng và có cả mặt lưng kim loại.	tcl-tab-10l-gen-2-wifi
+74	So với chiếc iPad Air 5 M1 WiFi 64GB thì chiếc iPad Air 5 M1 WiFi Cellular 64GB đã có một điểm khác biệt đáng kể đó là phương thức kết nối khi bạn vừa có thể sử dụng Wifi và mạng di động một cách bình thường nhưng vẫn cho một trải nghiệm rất tuyệt vời.	ipad-air-5-m1-5g
+75	OPPO Pad Neo WiFi, một phiên bản mới từ OPPO mang đến sự khác biệt trong thị trường máy tính bảng. Với màn hình rộng 11.4 inch, con chip ổn định và RAM lớn giúp nó thu hút sự chú ý, mang đến cho người dùng trải nghiệm mượt mà và bền bỉ.	oppo-pad-neo-wifi
+76	Sau thành công của thế hệ Redmi Pad năm 2022, nhà Xiaomi đã cho ra mắt phiên bản nâng cấp với nhiều cải tiến về thiết kế lẫn hiệu năng mang tên Xiaomi Redmi Pad Pro, hứa hẹn mang đến cho người dùng trải nghiệm tối ưu từ phần cứng đến phần mềm bên trong. 	xiaomi-redmi-pad-pro
+77	Apple Watch SE 2023 GPS 40mm viền nhôm dây thể thao là chiếc smartwatch có mức giá dễ tiếp cận nhất nhà Táo, là lựa chọn tối ưu ngân sách cho người dùng nhưng vẫn đảm bảo một thiết kế đẹp mắt, hỗ trợ đa dạng tính năng cũng như tiện ích hằng ngày.	apple-watch-se-2023
+78	Apple Watch Ultra 2 GPS + Cellular 49mm viền Titanium dây Trail size M/L là chiếc đồng hồ thể thao chuyên nghiệp sở hữu thiết kế thời thượng, độ bền vượt trội và các tính năng thông minh hỗ trợ theo dõi sức khỏe, luyện tập. Đây sẽ là một lựa chọn hoàn hảo cho những người đam mê thể thao.	apple-watch-ultra-2
+79		samsung-galaxy-watch4
+80	Sau thành công của dòng Watch Fit 2, nhà Huawei đã trình làng phiên bản kế nhiệm của dòng sản phẩm này mang tên Huawei Watch Fit 3. Mang một ngoại hình ấn tượng với một màn hình lớn hơn, đi kèm nhiều tính năng sức khỏe được nâng cấp, đây hứa hẹn là chiếc smartwatch được nhiều người dùng săn đón trong thời gian tới.	huawei-watch-fit-3
 \.
 
 
@@ -1372,11 +1466,10 @@ COPY public.feature (id, os, battery, chip, made_time, screen, product_id) FROM 
 12	IOS	3110	Apple A13 Bionic	2017-12-30 17:00:00	IPS LCD, 6.1", Liquid Retina	điện-thoại-iphone-11-64gb
 18		0	EZVIZ	2023-01-05 17:00:00		ezviz-h6c-pro
 20		5000	Exynos 1480 8 nhân	2000-01-10 17:00:00	Super AMOLED, 6.6", Full HD+	samsung-galaxy-a55-5g
-38	Windows	0	Intel Core i7-1165G7	2023-01-05 17:00:00	15.6'' FHD (1920x1080), 60Hz	dell-latitude-3520
 6	Windows	50	Intel Core i5 12500H	2023-12-30 17:00:00	14" 2.8K (2880 x 1800) OLED	laptop-asus-vivobook-14-oled
 10	Windows	42	AMD Ryze 7 7730U	2020-12-30 17:00:00	16 inch WUXGA (1920 x 1200) 16:10	laptop-asus-vivobook-16
 13	Windows	75	Intel  i7-1360P 2.2 GHz	2022-12-30 17:00:00	14.0-inch, 2.8K (2880 x 1800) OLED 16:10, 90Hz 	laptop-asus-zenbook-flip-oled
-4		41	Intel Core i5-1334U	2022-12-30 17:00:00	14.0-inch FHD+ (1920 x 1200)	laptop-dell-inspiron-14-5440
+38	Windows	0	Intel Core i7-1165G7	2022-12-31 17:00:00	15.6'' FHD (1920x1080), 60Hz	dell-latitude-3520
 17	Windows	42	AMD Ryzen 7 5700U	2020-12-30 17:00:00	14" FHD (1920x1080) IPS	laptop-lenovo-ideapad-1
 2	Windows	47	15IAH8 i5 12450H	2022-12-30 17:00:00	15.6"Full HD (1920 x 1080) 60 Hz	laptop-lenovo-ideapad-slim-3
 19	Windows	47	Intel Core i5-1335U	2022-12-30 17:00:00	16" WUXGA (1920x1200) IPS 	laptop-lenovo-thinkpad-e16
@@ -1384,14 +1477,12 @@ COPY public.feature (id, os, battery, chip, made_time, screen, product_id) FROM 
 22	Windows	57	Intel Core Ultra 5 125H	2023-01-10 17:00:00	\t16" 2K (2048x1280) OLED	lenovo-ideapad-slim-5-16imh9
 9	Windows	42	Intel Core i3-1215U	2020-12-30 17:00:00	14.0-inch, FHD (1920 x 1080) 16:9	laptop-asus-expertbook-b1
 23	Android	5000	MediaTek Helio G99	2000-12-30 17:00:00	Super AMOLED, 6.5", Full HD+	samsung-galaxy-a24
-3	IOS	4422	Apple A17 Pro 6 nhân	2022-12-30 17:00:00	OLED 6.7", Super Retina XDR	iphone-15-pro-max
+58	Android	6000	MediaTek Dimensity 6100+	2023-05-31 17:00:00	Super AMOLED, 6.5", Full HD+	samsung-galaxy-m15-5g
 14	IOS	3240	Apple A15 Bionic	2020-01-10 17:00:00	OLED, 6.1", Super Retina XDR	điện-thoại-iphone-13-128gb
-7	IOS	3349	Apple A16 Bionic	2021-12-30 17:00:00	OLED, 6.1", Super Retina XDR	điện-thoại-iphone-15-128gb
-25	Android	4400	Snapdragon 8 Gen 2 for Galaxy	2023-01-05 17:00:00	Dynamic AMOLED 2X, Chính 7.6" & Phụ 6.2", Quad HD+ (2K+)	samsung-galaxy-z-fold5-5g
+3	IOS	4422	Apple A17 Pro 6 nhân	2023-12-31 17:00:00	OLED 6.7", Super Retina XDR	iphone-15-pro-max
 26	Android	5000	MediaTek Helio G85	2024-01-01 17:00:00	IPS LCD, 6.56", HD+	vivo-y03
 27	Android	6000	MediaTek Helio G85	2000-12-30 17:00:00	IPS LCD 6.68 " HD+	vivo-y28
 28	Android	4805	Snapdragon 8 Gen 2 8 nhân	2000-12-30 17:00:00	AMOLED, Chính 7.82" & Phụ 6.31", Quad HD+ (2K+)	oppo-find-n3-5g
-29	Android	5000	MediaTek Dimensity 7050 5G 8 nhân	2000-12-30 17:00:00	AMOLED, 6.7", Full HD+	oppo-reno11-5g
 30	MAC OS	0	Apple, M1	2020-01-01 17:00:00	13.3 inch IPS LCD LED Backlit, True Tone	macbook-air-13-inch-m1-2020
 31	MAC OS	35	Apple, M2, 8 - Core	2022-12-31 17:00:00	15.3 inch, 2960 x 1848, OLED, 60 Hz	macbook-air-15-inch-m2-2023
 32	MAC OS	40	Apple M3	2023-12-30 17:00:00	13.6 inches True Tone	macbook-air-m3-13-inch-2024
@@ -1401,37 +1492,48 @@ COPY public.feature (id, os, battery, chip, made_time, screen, product_id) FROM 
 39	Windows	50	Intel, Core i5, 12450H	2001-01-05 17:00:00	15.6 inch, 1920 x 1080 Pixels, IPS, 60 Hz	acer-aspire-7-gaming-a715
 40	Windows	47	Intel, Core i3, N305	2022-12-31 17:00:00	15.6 inch, 1920 x 1080 Pixels, IPS, 60	acer-aspire-3
 41	Windows	58	Intel, Core i7, 12700H	2022-01-01 17:00:00	15.6 inch, 1920 x 1080 Pixels, IPS, 144 Hz	acer-nitro-gaming-an515
-44	Android	5000	MediaTek Dimensity 7200 Ultra	2000-12-30 17:00:00	AMOLED, 6.67", 1.5K	xiaomi-redmi-note-13-pro+-5g
 45	Android	5000	 MediaTek Helio G85	2000-12-30 17:00:00	IPS LCD, 6.67", HD+	realme-c65
 46	Android	5000	Snapdragon 685 8 nhân	2000-12-30 17:00:00	IPS LCD, 6.72", Full HD+	realme-c67
 47	Android	5010	MediaTek Helio G88	2000-12-30 17:00:00	IPS LCD, 6.78", Full HD+	tcl-40-nxtpaper
 48	Android	5000	MediaTek MT6762 (Helio P22)	2000-12-30 17:00:00	IPS LCD 6.6 " HD+	tcl-406s
-49	Android	5000	 Snapdragon 8 Gen 3 for Galaxy	2000-12-30 17:00:00	Dynamic AMOLED 2X, 6.8", Quad HD+ (2K+)	samsung-galaxy-s24-ultra
-50	Android	5000	Exynos 1380 8 nhân	2000-12-30 17:00:00	Super AMOLED, 6.6", Full HD+	samsung-galaxy-a35
-51	IOS	4323	Apple A16 Bionic	2000-12-30 17:00:00	OLED 6.7", Super Retina XDR	iphone-14-pro-max
 52		0	Imou Life	2000-12-30 17:00:00		imou-cruiser-dual-s7xp-10m0wed
 43	Android	5000	MediaTek Helio G36 8 nhân	2000-01-10 17:00:00	IPS LCD, 6.71", HD+	xiaomi-redmi-a3
 53		0	Imou Life	2023-12-31 17:00:00		imou-cruiser-2-gs7ep-5m0we
 54	Windows	54	AMD, Ryzen 7, 6800H	2022-01-01 17:00:00	16.0 inch, 3840 x 2400 Pixels, OLED, 60 Hz	acer-swift-edge-sfa16
-55		4500	Exynos 2200 8 nhân	2000-12-30 17:00:00	Dynamic AMOLED 2X, 6.4", Full HD+	samsung-galaxy-s23-fe
 56	Windows	58	Intel, Core i5, 12500H	2022-01-06 17:00:00	15.6 inch, 1920 x 1080 Pixels, IPS, 144 Hz	acer-nitro-5-tiger-gaming-an515
 57		0	EZVIZ	2024-01-02 17:00:00		ezviz-h6
-58	Android	6000	MediaTek Dimensity 6100+	2000-12-30 17:00:00	Super AMOLED, 6.5", Full HD+	samsung-galaxy-m15-5g
 59	Windows	45	AMD, Ryzen 5, 7520U	2023-01-03 17:00:00	14 inch, 1920 x 1080 Pixels, IPS, 60  Hz	hp-245-g10
 60	Windows	43	 Intel, Core i5, 1235U	2022-01-04 17:00:00	14.0 inch, 1920 x 1080 Pixels, IPS, 60 Hz	hp-pavilion-14-dv2073tu
-61		1450	Unisoc T107	2000-12-30 17:00:00	2.8"	nokia-220-4g
-24	Android	3700	Snapdragon 8 Gen 2 for Galaxy	2023-01-10 17:00:00	Chính: Dynamic AMOLED 2X, Phụ: Super AMOLED, Chính 6.7" & Phụ 3.4", Full HD+	samsung-galaxy-z-flip5-5g
+25	Android	4400	Snapdragon 8 Gen 2 for Galaxy	2024-02-29 17:00:00	Dynamic AMOLED 2X, Chính 7.6" & Phụ 6.2", Quad HD+ (2K+)	samsung-galaxy-z-fold5-5g
+4	Windows	41	Intel Core i5-1334U	2022-11-30 17:00:00	14.0-inch FHD+ (1920 x 1200)	laptop-dell-inspiron-14-5440
+61	S30+	1450	Unisoc T107	2021-05-31 17:00:00	2.8"	nokia-220-4g
+29	Android	5000	MediaTek Dimensity 7050 5G 8 nhân	2024-01-31 17:00:00	AMOLED, 6.7", Full HD+	oppo-reno11-5g
+55		4500	Exynos 2200 8 nhân	2023-11-30 17:00:00	Dynamic AMOLED 2X, 6.4", Full HD+	samsung-galaxy-s23-fe
+49	Android	5000	 Snapdragon 8 Gen 3 for Galaxy	2024-02-29 17:00:00	Dynamic AMOLED 2X, 6.8", Quad HD+ (2K+)	samsung-galaxy-s24-ultra
+24	Android 13	3700	Snapdragon 8 Gen 2 for Galaxy	2024-03-31 17:00:00	Chính: Dynamic AMOLED 2X, Phụ: Super AMOLED, Chính 6.7" & Phụ 3.4", Full HD+	samsung-galaxy-z-flip5-5g
+44	Android	5000	MediaTek Dimensity 7200 Ultra	2023-08-31 17:00:00	AMOLED, 6.67", 1.5K	xiaomi-redmi-note-13-pro+-5g
+51	IOS	4323	Apple A16 Bionic	2023-01-31 17:00:00	OLED 6.7", Super Retina XDR	iphone-14-pro-max
+50	Android	5000	Exynos 1380 8 nhân	2023-10-31 17:00:00	Super AMOLED, 6.6", Full HD+	samsung-galaxy-a35
+7	IOS	3349	Apple A16 Bionic	2023-09-30 17:00:00	OLED, 6.1", Super Retina XDR	điện-thoại-iphone-15-128gb
 62	Windows	51	Intel, Core i5, 1340P	2023-01-05 17:00:00	14.0 inch, 1920 x 1080 Pixels, IPS, 60 Hz	hp-probook-440-g10
 63	Windows	50	AMD, Ryzen 5, 7640HS	2022-12-31 17:00:00	16.0 inch, 1920 x 1080 Pixels, WVA, 60 Hz	hp-gaming-victus-16-s0078ax
-64	Android	5000	Snapdragon 7 Gen 3 8 nhân	2000-12-30 17:00:00	AMOLED, 6.78", 1.5K	vivo-v30-5g
 65	Windows	47	AMD, Ryzen 3, 7320U	2022-12-31 17:00:00	14.0 inch, 1920 x 1080 Pixels, SVA, 60 Hz	hp-14s-em0080au
-15	IOS	4383	Apple A16 Bionic	1999-12-30 17:00:00	OLED, 6.7", Super Retina XDR	điện-thoại-iphone-15-plus-256gb
-66	IOS	4325	Apple A15 Bionic	2000-12-30 17:00:00	OLED 6.7", Super Retina XDR	iphone-14-plus-128gb
 67		3899	Apple M4 9 nhân	2024-04-30 17:00:00	13", Ultra Retina XDR	ipad-pro-m4-13-inch-wifi-256gb
 69		10090	Snapdragon 8 Gen 2 for Galaxy	2023-06-30 17:00:00	12.4", Dynamic AMOLED 2X	samsung-galaxy-tab-s9+-wifi
 70		8000	 Exynos 1380 8 nhân	2023-09-30 17:00:00	TFT LCD, 10.9'', Tần số quét 90 Hz	samsung-galaxy-tab-s9-fe-wifi
-71		7100	Snapdragon 680 8 nhân	2023-03-31 17:00:00	10.36", IPS LCD	oppo-pad-air-wifi
 72		5100	 MediaTek Helio G80	2023-04-30 17:00:00	9", IPS LCD	lenovo-tab-m9-4g
+73	Android 13	6000	MediaTek MT8766	2023-07-31 17:00:00	10.1", IPS LCD	tcl-tab-10l-gen-2-wifi
+74	iPadOS 15	7587	 Apple M1	2022-02-28 17:00:00	10.9"", Retina IPS LCD	ipad-air-5-m1-5g
+75	Android 13	8000	MediaTek Helio G99	2023-12-31 17:00:00	11.4", IPS LCD	oppo-pad-neo-wifi
+71	Android 12	7100	Snapdragon 680 8 nhân	2023-03-31 17:00:00	10.36", IPS LCD	oppo-pad-air-wifi
+76	Xiaomi HyperOS (Android 14)	10000	Snapdragon 7s Gen 2 8 nhân	2024-03-31 17:00:00	12.1", IPS LCD	xiaomi-redmi-pad-pro
+64	Android	5000	Snapdragon 7 Gen 3 8 nhân	2023-02-28 17:00:00	AMOLED, 6.78", 1.5K	vivo-v30-5g
+66	IOS	4325	Apple A15 Bionic	2023-09-30 17:00:00	OLED 6.7", Super Retina XDR	iphone-14-plus-128gb
+15	IOS	4383	Apple A16 Bionic	2023-10-31 17:00:00	OLED, 6.7", Super Retina XDR	điện-thoại-iphone-15-plus-256gb
+77	WatchOS	1000	Apple S8	2023-08-31 17:00:00	OLED 40 mm, 324 x 394 pixels	apple-watch-se-2023
+78	WatchOS 	1200	Apple S9	2023-08-31 17:00:00	OLED, 1.92'', 410 x 502 pixels	apple-watch-ultra-2
+79	Wear OS	247	Exynos W920	2021-07-31 17:00:00	SUPER AMOLED, 1.2 inch, 396 x 396 pixels	samsung-galaxy-watch4
+80	Harmony OS	400	Kirin 1200 OS	2024-04-30 17:00:00	AMOLED,1.82 inch, 480 × 408 pixels	huawei-watch-fit-3
 \.
 
 
@@ -1449,7 +1551,6 @@ COPY public.feature_front_camera (feature_id, front_camera) FROM stdin;
 6	720
 10	720
 13	720
-4	720
 17	720
 2	1080
 19	1080
@@ -1457,60 +1558,66 @@ COPY public.feature_front_camera (feature_id, front_camera) FROM stdin;
 22	1080
 9	720
 23	13
-3	12
 14	12
-25	10
-25	4
 26	5
 27	8
 28	20
 28	32
-29	32
 30	720
 32	1080
 33	1080
 34	1080
 35	720
 36	720
-37	720
-38	1080
 39	720
 40	720
 41	720
-44	16
 45	8
 46	8
 47	32
 48	5
-49	12
-50	13
-51	12
 52	5
 43	5
 53	20
 54	1080
-55	10
 56	720
 57	20
-58	13
 59	720
 60	720
-61	2
 62	720
 63	1080
-64	50
 65	720
-15	12
-66	12
 42	720
 12	12
-7	12
-24	10
 67	12
 69	12
 70	12
-71	5
 72	2
+73	2
+74	12
+71	5
+75	8
+4	720
+37	720
+38	1080
+31	1080
+76	8
+61	2
+25	10
+25	4
+29	32
+55	10
+49	12
+64	50
+44	16
+51	12
+66	12
+58	13
+50	13
+7	12
+15	12
+24	10
+3	12
 \.
 
 
@@ -1519,20 +1626,30 @@ COPY public.feature_front_camera (feature_id, front_camera) FROM stdin;
 --
 
 COPY public.feature_rear_camera (feature_id, rear_camera) FROM stdin;
+66	12
+66	12
+58	50
+58	5
+58	2
+50	50
+50	8
+50	5
+7	48
+7	12
+15	48
+15	12
 20	50
 20	12
 20	5
 23	50
 23	5
 23	2
+14	12
+14	12
+24	12
+24	12
 3	48
 3	12
-3	8
-14	12
-14	12
-25	50
-25	12
-25	10
 26	13
 26	0
 27	50
@@ -1540,12 +1657,7 @@ COPY public.feature_rear_camera (feature_id, rear_camera) FROM stdin;
 28	48
 28	48
 28	64
-29	50
-29	8
-29	2
-44	200
-44	8
-44	2
+3	8
 45	50
 46	108
 46	2
@@ -1554,42 +1666,41 @@ COPY public.feature_rear_camera (feature_id, rear_camera) FROM stdin;
 47	2
 48	13
 48	2
-49	200
-49	50
-49	12
-49	10
-50	50
-50	8
-50	5
-51	48
-51	12
-51	12
 43	8
 43	0
-55	50
-55	12
-55	8
-58	50
-58	5
-58	2
-64	50
-64	50
-15	48
-15	12
-66	12
-66	12
 12	12
 12	12
-7	48
-7	12
-24	12
-24	12
 67	12
 69	13
 69	8
 70	8
-71	8
 72	8
+73	2
+74	12
+71	8
+75	8
+76	8
+25	50
+25	12
+25	10
+29	50
+29	8
+29	2
+55	50
+55	12
+55	8
+49	200
+49	50
+49	12
+49	10
+64	50
+64	50
+44	200
+44	8
+44	2
+51	48
+51	12
+51	12
 \.
 
 
@@ -1608,6 +1719,18 @@ ogvuChNUKj	f	jisooconan@gmail.com	0353795729	2024-06-27 12:09:41.76	ipad-pro-m4-
 sxttxe5xx6	f	jisooconan@gmail.com	0353795729	2024-06-27 13:22:44.639	vivo-y28
 GFFFZ6XWHs	f	jisooconan@gmail.com	0353795729	2024-06-27 13:40:18.917	samsung-galaxy-s24-ultra
 lgV5WbWm0b	f	jisooconan@gmail.com	0353795729	2024-06-27 13:49:43.725	điện-thoại-iphone-13-128gb
+vuTQ7DTuIY	f	jisooconan@gmail.com	0353795729	2024-06-27 16:29:43.282	oppo-pad-air-wifi
+EM64JkWbIQ	f	tieulachan2203@gmail.com	0865034796	2024-06-27 16:42:52.245	ipad-pro-m4-13-inch-wifi-256gb
+3g00XXzx0y	f	jisooconan@gmail.com	0353795729	2024-06-27 16:56:40.188	ipad-air-5-m1-5g
+j5sNXmzV1F	f	vnq2k3@gmail.com	0349983663	2024-06-27 17:22:02.309	samsung-galaxy-z-flip5-5g
+iVyZ2CIQAZ	f	jisooconan@gmail.com	0353795729	2024-06-28 07:26:00.283	hp-probook-440-g10
+9T9AVUTFGD	f	jisooconan@gmail.com	0353795729	2024-06-28 10:23:36.986	samsung-galaxy-z-flip5-5g
+AzDhIxDFQd	f	jisooconan@gmail.com	0353795729	2024-06-28 16:31:20.371	xiaomi-redmi-note-13-pro+-5g
+0AHFjGfobu	f	jisooconan@gmail.com	0353795729	2024-06-28 17:12:51.856	xiaomi-redmi-note-13-pro+-5g
+iZWL2h7P1t	f	jisooconan@gmail.com	0353795729	2024-06-28 17:26:34.392	apple-watch-se-2023
+hTDxe6aWfl	t	jisooconan@gmail.com	0353795729	2024-06-28 17:11:18.128	xiaomi-redmi-note-13-pro+-5g
+GyOONl7aCH	t	jisooconan@gmail.com	0353795729	2024-06-28 06:06:24.277	ipad-air-5-m1-5g
+2TBXnhvw9j	f	jisooconan@gmail.com	0353795729	2024-06-29 00:09:41.474	apple-watch-se-2023
 \.
 
 
@@ -1619,7 +1742,6 @@ COPY public.price (id, current_price, previous_price, ram, rom, feature_id, prod
 2	390000	590000	2	512	1	tiandy-tc-h322n
 4	13890000	15990000	16	512	2	laptop-lenovo-ideapad-slim-3
 6	29690000	34600000	8	256	3	iphone-15-pro-max
-8	18890000	20490000	0	-1	4	laptop-dell-inspiron-14-5440
 10	410000	650000	2	256	5	tp-link-tapo-tc70
 12	17990000	18990000	16	512	6	laptop-asus-vivobook-14-oled
 14	19290000	22990000	6	128	7	điện-thoại-iphone-15-128gb
@@ -1651,8 +1773,6 @@ COPY public.price (id, current_price, previous_price, ram, rom, feature_id, prod
 58	62990000	64990000	18	512	34	macbook-pro-16-2023-m3-pro
 59	20990000	24990000	16	512	35	asus-tuf-gaming-fx507zc4
 60	16490000	17290000	16	512	36	dell-vostro-v3520
-61	19990000	22090000	0	512	37	dell-inspiron-15-n3530
-62	19990000	24990000	0	256	38	dell-latitude-3520
 63	11990000	16990000	8	512	39	acer-aspire-7-gaming-a715
 64	9290000	10990000	8	512	40	acer-aspire-3
 65	21990000	29900000	8	512	41	acer-nitro-gaming-an515
@@ -1686,6 +1806,17 @@ COPY public.price (id, current_price, previous_price, ram, rom, feature_id, prod
 94	9990000	10990000	6	128	70	samsung-galaxy-tab-s9-fe-wifi
 95	5490000	6490000	4	128	71	oppo-pad-air-wifi
 96	3490000	43990000	4	64	72	lenovo-tab-m9-4g
+97	2000000	2290000	3	32	73	tcl-tab-10l-gen-2-wifi
+98	17690000	19490000	8	64	74	ipad-air-5-m1-5g
+99	6490000	6990000	6	128	75	oppo-pad-neo-wifi
+8	18890000	20490000	16	512	4	laptop-dell-inspiron-14-5440
+61	19990000	22090000	16	512	37	dell-inspiron-15-n3530
+62	19990000	24990000	8	256	38	dell-latitude-3520
+100	6790000	7290000	6	128	76	xiaomi-redmi-pad-pro
+101	6190000	6390000	1	32	77	apple-watch-se-2023
+102	21290000	21990000	1	64	78	apple-watch-ultra-2
+103	2990000	3990000	2	32	79	samsung-galaxy-watch4
+104	2790000	2990000	1	32	80	huawei-watch-fit-3
 \.
 
 
@@ -1714,6 +1845,7 @@ COPY public.producer (id, name) FROM stdin;
 19	HP
 20	Nokia
 21	IPad
+22	Huawei
 \.
 
 
@@ -1745,6 +1877,11 @@ IPad	Tablet
 Samsung	Tablet
 Oppo	Tablet
 Lenovo	Tablet
+TCL	Tablet
+Xiaomi	Tablet
+Apple	Smartwatch
+Samsung	Smartwatch
+Huawei	Smartwatch
 \.
 
 
@@ -1757,6 +1894,7 @@ tp-link-tapo-tc70	560	TP-Link Tapo TC70	0	1000	Camera	Ezviz
 imou-ranger-rc-gk2cp-3c0wr	560	IMOU RANGER RC GK2CP-3C0WR	0	1000	Camera	IMOU
 botslab-c212	560	BOTSLAB C212	0	1000	Camera	BOTSLAB
 điện-thoại-iphone-11-64gb	87	iPhone 11 64GB	0	100	Phone	IPhone
+tcl-tab-10l-gen-2-wifi	6	TCL Tab 10L Gen 2 WiFi 	0	11	Tablet	TCL
 điện-thoại-iphone-15-plus-256gb	76	iPhone 15 Plus 256GB	0	99	Phone	IPhone
 điện-thoại-iphone-15-128gb	301	iPhone 15 128GB	0	450	Phone	IPhone
 ezviz-h6c-pro	234	EZVIZ H6C Pro	0	765	Camera	Ezviz
@@ -1789,7 +1927,6 @@ acer-aspire-7-gaming-a715	149	Acer Aspire 7 Gaming A715	0	150	Laptop	Acer
 acer-aspire-3	99	Acer Aspire 3	0	100	Laptop	Acer
 acer-nitro-gaming-an515	99	Acer Nitro Gaming AN515	0	100	Laptop	Acer
 laptop-acer-swift-go-sfg14	149	Laptop Acer Swift Go SFG14	0	150	Laptop	Acer
-xiaomi-redmi-note-13-pro+-5g	45	Xiaomi Redmi Note 13 Pro+ 5G	0	77	Phone	Xiaomi
 realme-c65	11	realme C65	0	23	Phone	Realme
 realme-c67	66	 realme C67	0	90	Phone	Realme
 tcl-40-nxtpaper	8	TCL 40 NXTPAPER	0	15	Phone	TCL
@@ -1804,7 +1941,6 @@ samsung-galaxy-m15-5g	4	Samsung Galaxy M15 5G	0	5	Phone	Samsung
 hp-245-g10	99	HP 245 G10	0	100	Laptop	HP
 hp-pavilion-14-dv2073tu	149	HP Pavilion 14-dv2073TU	0	150	Laptop	HP
 nokia-220-4g	4	 Nokia 220 4G	0	10	Phone	Nokia
-hp-probook-440-g10	99	HP ProBook 440 G10	0	100	Laptop	HP
 hp-gaming-victus-16-s0078ax	99	HP Gaming Victus 16-s0078AX	0	100	Laptop	HP
 vivo-v30-5g	15	 vivo V30 5G	0	23	Phone	Vivo
 hp-14s-em0080au	99	HP 14s-em0080AU	0	100	Laptop	HP
@@ -1813,16 +1949,25 @@ xiaomi-redmi-a3	100	Xiaomi Redmi A3	0	33	Phone	Xiaomi
 acer-nitro-5-tiger-gaming-an515	198	Acer Nitro 5 Tiger Gaming AN515	0	200	Laptop	Acer
 samsung-galaxy-z-fold5-5g	50	Samsung Galaxy Z Fold5 5G	1	70	Phone	Samsung
 iphone-15-pro-max	16	iPhone 15 Pro Max	1	30	Phone	IPhone
+oppo-pad-air-wifi	7	OPPO Pad Air WiFi	1	13	Tablet	Oppo
 tiandy-tc-h322n	100	TIANDY TC-H322N	1	360	Camera	TIANDY
 samsung-galaxy-tab-s9+-wifi	23	Samsung Galaxy Tab S9+ WiFi	0	66	Tablet	Samsung
 samsung-galaxy-tab-s9-fe-wifi	98	Samsung Galaxy Tab S9 FE WiFi	0	109	Tablet	Samsung
-oppo-pad-air-wifi	7	OPPO Pad Air WiFi	0	13	Tablet	Oppo
 lenovo-tab-m9-4g	12	Lenovo Tab M9 4G	0	34	Tablet	Lenovo
-samsung-galaxy-z-flip5-5g	100	Samsung Galaxy Z Flip5 5G	1	140	Phone	Samsung
-ipad-pro-m4-13-inch-wifi-256gb	23	iPad Pro M4 13 inch WiFi 256GB	2	55	Tablet	IPad
+xiaomi-redmi-pad-pro	12	Xiaomi Redmi Pad Pro	0	45	Tablet	Xiaomi
+oppo-pad-neo-wifi	59	OPPO Pad Neo WiFi	0	80	Tablet	Oppo
 samsung-galaxy-s24-ultra	33	Samsung Galaxy S24 Ultra 	1	45	Phone	Samsung
 imou-cruiser-2-gs7ep-5m0we	560	IMOU Cruiser 2 GS7EP-5M0WE	0	1000	Camera	IMOU
 điện-thoại-iphone-13-128gb	48	iPhone 13 128GB 	1	90	Phone	IPhone
+ipad-pro-m4-13-inch-wifi-256gb	23	iPad Pro M4 13 inch WiFi 256GB	3	55	Tablet	IPad
+hp-probook-440-g10	99	HP ProBook 440 G10	1	100	Laptop	HP
+apple-watch-se-2023	560	Apple Watch SE 2023	2	1000	Smartwatch	Apple
+samsung-galaxy-z-flip5-5g	100	Samsung Galaxy Z Flip5 5G	3	140	Phone	Samsung
+ipad-air-5-m1-5g	11	iPad Air 5 M1 5G	1	15	Tablet	IPad
+apple-watch-ultra-2	560	Apple Watch Ultra 2	0	1000	Smartwatch	Apple
+xiaomi-redmi-note-13-pro+-5g	44	Xiaomi Redmi Note 13 Pro+ 5G	2	77	Phone	Xiaomi
+samsung-galaxy-watch4	400	Samsung Galaxy Watch4	0	450	Smartwatch	Samsung
+huawei-watch-fit-3	56	Huawei Watch Fit 3	0	200	Smartwatch	Huawei
 \.
 
 
@@ -1846,6 +1991,8 @@ lenovo-ideapad-slim-5-16imh9	https://product.hstatic.net/200000722513/product/id
 lenovo-ideapad-slim-5-16imh9	https://product.hstatic.net/200000722513/product/ideapad_slim_5_16imh9_ct2_09_2639b05f6b0c414bb0215fa61957f0c8_grande.png
 lenovo-ideapad-slim-5-16imh9	https://product.hstatic.net/200000722513/product/ideapad_slim_5_16imh9_ct2_06_cc2b540369094a7aa322a47c92ea726a_grande.png
 lenovo-ideapad-slim-5-16imh9	https://product.hstatic.net/200000722513/product/ideapad_slim_5_16imh9_ct2_07_f5d02b05367541bca31e3aac024e6cc2_grande.png
+samsung-galaxy-z-fold5-5g	https://cdn.tgdd.vn/Products/Images/42/301608/samsung-galaxy-z-fold5-blue-thumbnew-600x600.jpg
+samsung-galaxy-z-fold5-5g	https://cdn.tgdd.vn/Products/Images/42/301608/Slider/vi-vn-samsung-galaxy-z-fold5-256-(1).jpg
 lenovo-ideapad-slim-5-16imh9	https://product.hstatic.net/200000722513/product/ideapad_slim_5_16imh9_ct2_12_d9aa6f2a0be945328969043be08d7fc3_grande.png
 điện-thoại-iphone-13-128gb	https://cdn.tgdd.vn/Products/Images/42/223602/iphone-13-xanh-la-thumb-new-600x600.jpg
 điện-thoại-iphone-13-128gb	https://cdn.tgdd.vn/Products/Images/42/223602/Slider/vi-vn-iphone-13-up-2.jpeg
@@ -1866,9 +2013,8 @@ vivo-y28	https://cdn.tgdd.vn/Products/Images/42/326016/vivo-y28-vang-thumb-600x6
 vivo-y28	https://cellphones.com.vn/sforum/_next/image?url=https%3A%2F%2Fcdn-media.sforum.vn%2Fstorage%2Fapp%2Fmedia%2Ftrannghia%2Fvivo-y28-4g-ra-mat-2.jpeg&w=1920&q=75
 vivo-y28	https://asia-exstatic-vivofs.vivo.com/PSee2l50xoirPK7y/product/1717153527470/zip/img/webp/vivo-y28-in-agate-green-mobile.jpg.webp
 vivo-y28	https://asia-exstatic-vivofs.vivo.com/PSee2l50xoirPK7y/product/1717153527470/zip/img/webp/vivo-y28-in-gleaming-orange-mobile.jpg.webp
-macbook-air-15-inch-m2-2023	https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/macbook-air-15-inch-m2-2023-8.jpg
-macbook-air-15-inch-m2-2023	https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/macbook-air-15-inch-m2-2023-9.jpg
-macbook-air-15-inch-m2-2023	https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/macbook-air-15-inch-m2-2023-11.jpg
+samsung-galaxy-z-fold5-5g	https://cdn.tgdd.vn/Products/Images/42/301608/Slider/vi-vn-samsung-galaxy-z-fold5-256-(2).jpg
+samsung-galaxy-z-fold5-5g	https://cdn.tgdd.vn/Products/Images/42/301608/Slider/vi-vn-samsung-galaxy-z-fold5-256-(3).jpg
 macbook-air-m3-13-inch-2024	https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/b/mba13-m3-spacegray-gallery1-202402_6.jpg
 imou-ranger-rc-gk2cp-3c0wr	https://cdn.tgdd.vn/Products/Images/4728/321919/camera-ip-360-do-3mp-imou-ranger-rc-gk2cp-3c0wr-media-4.jpg
 imou-ranger-rc-gk2cp-3c0wr	https://cdn.tgdd.vn/Products/Images/4728/321919/camera-ip-360-do-3mp-imou-ranger-rc-gk2cp-3c0wr-media-5.jpg
@@ -1887,6 +2033,9 @@ laptop-asus-expertbook-b1	https://product.hstatic.net/200000722513/product/lapto
 laptop-asus-expertbook-b1	https://product.hstatic.net/200000722513/product/rtbook-b1-b1402cba-eb1814w-i3-1215u_5_fea24838b6584e529ddd0c46ffa81662_bbbf6ff275924a50a2e50d2ff3bba9a0_grande.png
 laptop-asus-expertbook-b1	https://product.hstatic.net/200000722513/product/rtbook-b1-b1402cba-eb1814w-i3-1215u_2_635fb6f360ec4ed4bfd9aa462b9f3558_2dacfb54aa93494091473b6b057b7353_grande.png
 laptop-asus-expertbook-b1	https://product.hstatic.net/200000722513/product/rtbook-b1-b1402cba-eb1814w-i3-1215u_3_c5d1028874094f09b982896011cf2878_dbce89b250cf4621a5538f11d18edf0c_grande.png
+samsung-galaxy-z-fold5-5g	https://cdn.tgdd.vn/Products/Images/42/301608/Slider/vi-vn-samsung-galaxy-z-fold5-256-(4).jpg
+samsung-galaxy-z-fold5-5g	https://cdn.tgdd.vn/Products/Images/42/301608/Slider/vi-vn-samsung-galaxy-z-fold5-256-(5).jpg
+samsung-galaxy-z-fold5-5g	https://cdn.tgdd.vn/Products/Images/42/301608/Slider/sam-sung-galaxy-zfold-5-slider-9-1020x570-1.jpg
 botslab-c212	https://cdn.tgdd.vn/Products/Images/4728/319451/camera-ip-360-do-3mp-botslab-c212-1-1.jpg
 botslab-c212	https://cdn.tgdd.vn/Products/Images/4728/319451/camera-ip-360-do-3mp-botslab-c212-4-1.jpg
 botslab-c212	https://cdn.tgdd.vn/Products/Images/4728/319451/camera-ip-360-do-3mp-botslab-c212-5-1.jpg
@@ -1922,12 +2071,24 @@ samsung-galaxy-a24	https://cdn.tgdd.vn/Products/Images/42/274018/samsung-galaxy-
 samsung-galaxy-a24	https://cdn.tgdd.vn/Products/Images/42/274018/Slider/vi-vn-samsung-galaxy-a24-6gb--(6).jpg
 samsung-galaxy-a24	https://cdn.tgdd.vn/Products/Images/42/274018/Slider/vi-vn-samsung-galaxy-a24-6gb--(4).jpg
 samsung-galaxy-a24	https://cdn.tgdd.vn/Products/Images/42/274018/Slider/vi-vn-samsung-galaxy-a24-6gb--33--2048x1144.jpg
+oppo-reno11-5g	https://cdn.tgdd.vn/Products/Images/42/314209/oppo-reno-11-xanh-thumb-600x600.jpg
+oppo-reno11-5g	https://cdn.tgdd.vn/Products/Images/42/314209/Slider/oppo-reno11638415159518249716.jpg
+oppo-reno11-5g	https://cdn.tgdd.vn/Products/Images/42/314209/Slider/oppo-reno11638415159519269668.jpg
+oppo-reno11-5g	https://cdn.tgdd.vn/Products/Images/42/314209/Slider/oppo-reno11638415159522799751.jpg
+oppo-reno11-5g	https://cdn.tgdd.vn/Products/Images/42/314209/Slider/oppo-reno11638415159524119704.jpg
+oppo-reno11-5g	https://cdn.tgdd.vn/Products/Images/42/314209/Slider/oppo-reno11638415159520759726.jpg
+oppo-reno11-5g	https://cdn.tgdd.vn/Products/Images/42/314209/Slider/oppo-reno11638415159521859739.jpg
+samsung-galaxy-z-flip5-5g	https://cdn.tgdd.vn/Products/Images/42/299250/samsung-galaxy-z-flip5-mint-thumbnew-600x600.jpg
+samsung-galaxy-z-flip5-5g	https://cdn.tgdd.vn/Products/Images/42/299250/Slider/samsung-galaxy-z-flip5-5g-sld-1021x570.jpg
+samsung-galaxy-z-flip5-5g	https://cdn.tgdd.vn/Products/Images/42/299250/Slider/vi-vn-samsung-galaxy-z-flip5-256gb-(2).jpg
+samsung-galaxy-z-flip5-5g	https://cdn.tgdd.vn/Products/Images/42/299250/Slider/vi-vn-samsung-galaxy-z-flip5-256gb-(4).jpg
+samsung-galaxy-z-flip5-5g	https://cdn.tgdd.vn/Products/Images/42/299250/Slider/vi-vn-samsung-galaxy-z-flip5-256gb-(5).jpg
+samsung-galaxy-z-flip5-5g	https://cdn.tgdd.vn/Products/Images/42/299250/Slider/vi-vn-samsung-galaxy-z-flip5-256gb-(3).jpg
+samsung-galaxy-z-flip5-5g	https://cdn.tgdd.vn/Products/Images/42/299250/Slider/vi-vn-samsung-galaxy-z-flip5-256gb-(6).jpg
+samsung-galaxy-z-flip5-5g	https://cdn.tgdd.vn/Products/Images/42/299250/Slider/vi-vn-samsung-galaxy-z-flip5-256gb-(7).jpg
 samsung-galaxy-a24	https://cdn.tgdd.vn/Products/Images/42/274018/Slider/vi-vn-samsung-galaxy-a24-6gb--(1).jpg
 samsung-galaxy-a24	https://cdn.tgdd.vn/Products/Images/42/274018/Slider/22-2048x1144.jpg
 samsung-galaxy-a24	https://cdn.tgdd.vn/Products/Images/42/274018/Slider/vi-vn-samsung-galaxy-a24-6gb--(5).jpg
-samsung-galaxy-z-fold5-5g	https://cdn.tgdd.vn/Products/Images/42/301608/samsung-galaxy-z-fold5-blue-thumbnew-600x600.jpg
-samsung-galaxy-z-fold5-5g	https://cdn.tgdd.vn/Products/Images/42/301608/Slider/vi-vn-samsung-galaxy-z-fold5-256-(1).jpg
-samsung-galaxy-z-fold5-5g	https://cdn.tgdd.vn/Products/Images/42/301608/Slider/vi-vn-samsung-galaxy-z-fold5-256-(2).jpg
 ezviz-h6c-pro	https://cdn.tgdd.vn/Products/Images/4728/323199/camera-ip-360-do-4mp-ezviz-h6c-pro-0.jpg
 ezviz-h6c-pro	https://cdn.tgdd.vn/Products/Images/4728/323199/camera-ip-360-do-4mp-ezviz-h6c-pro-2.jpg
 ezviz-h6c-pro	https://cdn.tgdd.vn/Products/Images/4728/323199/camera-ip-360-do-4mp-ezviz-h6c-pro-5.jpg
@@ -1936,16 +2097,6 @@ ezviz-h6c-pro	https://cdn.tgdd.vn/Products/Images/4728/323199/camera-ip-360-do-4
 ezviz-h6c-pro	https://cdn.tgdd.vn/Products/Images/4728/323199/camera-ip-360-do-4mp-ezviz-h6c-pro-8.jpg
 ezviz-h6c-pro	https://cdn.tgdd.vn/Products/Images/4728/323199/camera-ip-360-do-4mp-ezviz-h6c-pro-9.jpg
 ezviz-h6c-pro	https://cdn.tgdd.vn/Products/Images/4728/323199/camera-ip-360-do-4mp-ezviz-h6c-pro-99.jpg
-samsung-galaxy-z-fold5-5g	https://cdn.tgdd.vn/Products/Images/42/301608/Slider/vi-vn-samsung-galaxy-z-fold5-256-(3).jpg
-samsung-galaxy-z-fold5-5g	https://cdn.tgdd.vn/Products/Images/42/301608/Slider/vi-vn-samsung-galaxy-z-fold5-256-(4).jpg
-samsung-galaxy-z-fold5-5g	https://cdn.tgdd.vn/Products/Images/42/301608/Slider/vi-vn-samsung-galaxy-z-fold5-256-(5).jpg
-oppo-reno11-5g	https://cdn.tgdd.vn/Products/Images/42/314209/oppo-reno-11-xanh-thumb-600x600.jpg
-oppo-reno11-5g	https://cdn.tgdd.vn/Products/Images/42/314209/Slider/oppo-reno11638415159518249716.jpg
-oppo-reno11-5g	https://cdn.tgdd.vn/Products/Images/42/314209/Slider/oppo-reno11638415159519269668.jpg
-oppo-reno11-5g	https://cdn.tgdd.vn/Products/Images/42/314209/Slider/oppo-reno11638415159522799751.jpg
-oppo-reno11-5g	https://cdn.tgdd.vn/Products/Images/42/314209/Slider/oppo-reno11638415159524119704.jpg
-oppo-reno11-5g	https://cdn.tgdd.vn/Products/Images/42/314209/Slider/oppo-reno11638415159520759726.jpg
-oppo-reno11-5g	https://cdn.tgdd.vn/Products/Images/42/314209/Slider/oppo-reno11638415159521859739.jpg
 realme-c65	https://cdn.tgdd.vn/Products/Images/42/323002/realme-c65-thumb-1-600x600.jpg
 realme-c65	https://cdn.tgdd.vn/Products/Images/42/323002/Slider/realme-c65-6g-2-1020x570.jpg
 realme-c65	https://cdn.tgdd.vn/Products/Images/42/323002/Slider/vi-vn-realme-c65-6g-3.jpg
@@ -1964,7 +2115,15 @@ tcl-40-nxtpaper	https://cdn.tgdd.vn/Products/Images/42/324995/Slider/vi-vn-tcl-4
 tcl-40-nxtpaper	https://cdn.tgdd.vn/Products/Images/42/324995/Slider/vi-vn-tcl-40-nxtpaper-loa-4.jpg
 tcl-40-nxtpaper	https://cdn.tgdd.vn/Products/Images/42/324995/Slider/vi-vn-tcl-40-nxtpaper-hieu-nang-5.jpg
 tcl-40-nxtpaper	https://cdn.tgdd.vn/Products/Images/42/324995/Slider/vi-vn-tcl-40-nxtpaper-camera-6.jpg
-samsung-galaxy-z-fold5-5g	https://cdn.tgdd.vn/Products/Images/42/301608/Slider/sam-sung-galaxy-zfold-5-slider-9-1020x570-1.jpg
+samsung-galaxy-s23-fe	https://cdn.tgdd.vn/Products/Images/42/306994/samsung-galaxy-s23-fe-mint-thumbnew-600x600.jpg
+samsung-galaxy-s23-fe	https://cdn.tgdd.vn/Products/Images/42/306994/samsung-galaxy-s23-fe-kem-4.jpg
+samsung-galaxy-s23-fe	https://cdn.tgdd.vn/Products/Images/42/306994/samsung-galaxy-s23-fe-kem-7.jpg
+samsung-galaxy-s23-fe	https://cdn.tgdd.vn/Products/Images/42/306994/Slider/vi-vn-samsung-galaxy-s23-fe-slider--(2).jpg
+samsung-galaxy-s23-fe	https://cdn.tgdd.vn/Products/Images/42/306994/Slider/vi-vn-samsung-galaxy-s23-fe-slider--(7).jpg
+samsung-galaxy-s23-fe	https://cdn.tgdd.vn/Products/Images/42/306994/Slider/vi-vn-samsung-galaxy-s23-fe-slider--(3).jpg
+samsung-galaxy-s23-fe	https://cdn.tgdd.vn/Products/Images/42/306994/Slider/vi-vn-samsung-galaxy-s23-fe-slider--(5).jpg
+apple-watch-ultra-2	https://cdn.tgdd.vn/Products/Images/7077/314714/apple-watch-ultra-lte-49mm-vien-titanium-day-trail-size-m-l-den-101.jpg
+apple-watch-ultra-2	https://cdn.tgdd.vn/Products/Images/7077/314714/apple-watch-ultra-lte-49mm-vien-titanium-day-trail-size-m-l-den-102.jpg
 macbook-air-13-inch-m1-2020	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2022/7/21/637939946171340515_Macbook%20Air%20M1%20(13).jpg
 macbook-air-13-inch-m1-2020	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2022/7/21/637939946171184285_Macbook%20Air%20M1%20(7).jpg
 macbook-air-13-inch-m1-2020	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2022/7/21/637939946171340515_Macbook%20Air%20M1%20(2).jpg
@@ -1973,6 +2132,8 @@ macbook-air-13-inch-m1-2020	https://images.fpt.shop/unsafe/fit-in/960x640/filter
 macbook-air-13-inch-m1-2020	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2022/7/21/637939946170403099_Macbook%20Air%20M1%20(16).jpg
 macbook-air-13-inch-m1-2020	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2022/7/21/637939946170090821_Macbook%20Air%20M1%20(3).jpg
 macbook-air-13-inch-m1-2020	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2022/7/21/637939946168528051_Macbook%20Air%20M1%20(14).jpg
+apple-watch-ultra-2	https://cdn.tgdd.vn/Products/Images/7077/314714/apple-watch-ultra-lte-49mm-vien-titanium-day-trail-size-m-l-den-103.jpg
+apple-watch-ultra-2	https://cdn.tgdd.vn/Products/Images/7077/314714/apple-watch-ultra-2-lte-49mm-vien-titanium-day-trai-m-l-20-2.jpg
 macbook-pro-14-2023-m3	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/11/1/638344439733701079_macbook-pro-14-2023-m3-8-cpu-10-gpu-bac%20(1).jpg
 macbook-pro-14-2023-m3	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/11/1/638344439735692453_macbook-pro-14-2023-m3-8-cpu-10-gpu-bac%20(2).jpg
 macbook-pro-14-2023-m3	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/11/1/638344439736042256_macbook-pro-14-2023-m3-8-cpu-10-gpu-bac%20(3).jpg
@@ -1986,19 +2147,25 @@ asus-tuf-gaming-fx507zc4	https://images.fpt.shop/unsafe/fit-in/585x390/filters:q
 asus-tuf-gaming-fx507zc4	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/7/4/638240754677083179_asus-tuf-gaming-fx507-xam-4.jpg
 asus-tuf-gaming-fx507zc4	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/7/4/638240754676290025_asus-tuf-gaming-fx507-xam-5.jpg
 asus-tuf-gaming-fx507zc4	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/7/4/638240754676126458_asus-tuf-gaming-fx507-xam-6.jpg
-dell-inspiron-15-n3530	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/9/9/638298600173027154_dell-inspiron-15-n3530-bac-1.jpg
-dell-inspiron-15-n3530	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/11/17/638358356818385395_note.jpg
-dell-inspiron-15-n3530	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/9/9/638298600173027154_dell-inspiron-15-n3530-bac-4.jpg
-dell-inspiron-15-n3530	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/9/9/638298600173183412_dell-inspiron-15-n3530-bac-2.jpg
-dell-inspiron-15-n3530	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/9/9/638298600173027154_dell-inspiron-15-n3530-bac-3.jpg
-dell-inspiron-15-n3530	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/9/9/638298600173027154_dell-inspiron-15-n3530-bac-5.jpg
-dell-latitude-3520	https://product.hstatic.net/200000722513/product/latitude-3520-p108f001-70280538-fix_83b4c85f06d145199d87d838dc9eca04_grande.png
+samsung-galaxy-s24-ultra	https://cdn.tgdd.vn/Products/Images/42/307174/samsung-galaxy-s24-ultra-grey-thumb-600x600.jpg
+samsung-galaxy-s24-ultra	https://cdn.tgdd.vn/Products/Images/42/307174/Slider/samsung-galaxy-s24-ultra-5g-77-1020x570.jpg
+samsung-galaxy-s24-ultra	https://cdn.tgdd.vn/Products/Images/42/307174/Slider/samsung-galaxy-s24-ultra-5g638417948922989679.jpg
+samsung-galaxy-s24-ultra	https://cdn.tgdd.vn/Products/Images/42/307174/Slider/samsung-galaxy-s24-ultra-sliderr---2--1020x570.jpg
+samsung-galaxy-s24-ultra	https://cdn.tgdd.vn/Products/Images/42/307174/Slider/samsung-galaxy-s24-ultra-sliderr---1--1020x570.jpg
+samsung-galaxy-s24-ultra	https://cdn.tgdd.vn/Products/Images/42/307174/Slider/samsung-galaxy-s24-ultra-5g-66-1020x570.jpg
+samsung-galaxy-s24-ultra	https://cdn.tgdd.vn/Products/Images/42/307174/Slider/samsung-galaxy-s24-ultra-5g638417948928059705.jpg
 samsung-galaxy-a55-5g	https://cdn.tgdd.vn/Products/Images/42/322096/samsung-galaxy-a55-5g-xanh-thumb-1-600x600.jpg
 samsung-galaxy-a55-5g	https://cdn.tgdd.vn/Products/Images/42/322096/Slider/samsung-galaxy-a55-5g-thiet-ke-1020x570.jpg
 samsung-galaxy-a55-5g	https://cdn.tgdd.vn/Products/Images/42/322096/Slider/vi-vn-samsung-galaxy-a55-5g-3.jpg
 samsung-galaxy-a55-5g	https://cdn.tgdd.vn/Products/Images/42/322096/Slider/vi-vn-samsung-galaxy-a55-5g-4.jpg
 samsung-galaxy-a55-5g	https://cdn.tgdd.vn/Products/Images/42/322096/Slider/samsung-galaxy-a55-5g-5aoptimized-2048x1144.jpg
 samsung-galaxy-a55-5g	https://cdn.tgdd.vn/Products/Images/42/322096/Slider/vi-vn-samsung-galaxy-a55-5g-6.jpg
+samsung-galaxy-s24-ultra	https://cdn.tgdd.vn/Products/Images/42/307174/Slider/samsung-galaxy-s24-ultra-5g638417948934759756.jpg
+samsung-galaxy-watch4	https://cdn.tgdd.vn/Products/Images/7077/248752/smartwatch-samsung-galaxy-watch-4-vang-hong-1.jpg
+samsung-galaxy-watch4	https://cdn.tgdd.vn/Products/Images/7077/248752/smartwatch-samsung-galaxy-watch-4-vang-hong-2.jpg
+samsung-galaxy-watch4	https://cdn.tgdd.vn/Products/Images/7077/248752/smartwatch-samsung-galaxy-watch-4-vang-hong-3.jpg
+samsung-galaxy-watch4	https://cdn.tgdd.vn/Products/Images/7077/248752/smartwatch-samsung-galaxy-watch-4-vang-hong-4.jpg
+samsung-galaxy-watch4	https://cdn.tgdd.vn/Products/Images/7077/248752/smartwatch-samsung-galaxy-watch-4-1.jpg
 laptop-asus-vivobook-14-oled	https://product.hstatic.net/200000722513/product/vobook_14_oled_x1405v_m1405y_cool_silver_black_keyboard_07_fingerprint_22ac6f3f14e94f99bee84eca3aac2474_grande.png
 laptop-asus-vivobook-14-oled	https://product.hstatic.net/200000722513/product/vobook_14_oled_x1405v_m1405y_cool_silver_black_keyboard_08_fingerprint_9443487a7b16401f8aee83be5087301f_grande.png
 laptop-asus-vivobook-14-oled	https://product.hstatic.net/200000722513/product/vobook_14_oled_x1405v_m1405y_cool_silver_black_keyboard_05_fingerprint_49d517d22adc445ebb63276de03fb2d1_grande.png
@@ -2019,12 +2186,9 @@ laptop-asus-zenbook-flip-oled	https://product.hstatic.net/200000722513/product/s
 laptop-asus-zenbook-flip-oled	https://product.hstatic.net/200000722513/product/s-zenbook-flip-oled-up3404va-kn039w-8_12572fbea3f949ebaa83938ff9fd34d3_ca691731dee7435b80f5a046d0da99c4_grande.png
 laptop-asus-zenbook-flip-oled	https://product.hstatic.net/200000722513/product/s-zenbook-flip-oled-up3404va-kn039w-9_e333de1ac5ef41e9b1a69a1d16662668_41639b8e470e4671887b0b43bdccc6e2_grande.png
 laptop-asus-zenbook-flip-oled	https://product.hstatic.net/200000722513/product/-zenbook-flip-oled-up3404va-kn039w-10_fc55a411f7794ab081a260be0ef6a3f8_288c445064fe4c9ba5dbd96b51dc959b_grande.png
-laptop-dell-inspiron-14-5440	https://product.hstatic.net/200000722513/product/dell-inspiron-14-5440-core-7-n4i7204w1-3_063513a1ddad4a4ca9f563a17aa02dfc_grande.jpg
-laptop-dell-inspiron-14-5440	https://product.hstatic.net/200000722513/product/dell-inspiron-14-5440-core-7-n4i7204w1-5_428e680b95d84373b93c7565771c5083_grande.jpg
-laptop-dell-inspiron-14-5440	https://product.hstatic.net/200000722513/product/dell-inspiron-14-5440-core-7-n4i7204w1-4_baac40d07b634d1ba54ca6c30f850758_grande.jpg
-laptop-dell-inspiron-14-5440	https://product.hstatic.net/200000722513/product/dell-inspiron-14-5440-core-7-n4i7204w1-2_0e8e35662f76471ba3c36cd65befe186_grande.jpg
-laptop-dell-inspiron-14-5440	https://product.hstatic.net/200000722513/product/dell-inspiron-14-5440-core-7-n4i7204w1-6_6df8c06d7aa04aaab5dcec1f9e8cbeca_grande.jpg
-laptop-dell-inspiron-14-5440	https://product.hstatic.net/200000722513/product/dell-inspiron-14-5440-core-7-n4i7204w1-7_32a9dd2071fe431e919214f9cdec7f3d_grande.jpg
+samsung-galaxy-watch4	https://cdn.tgdd.vn/Products/Images/7077/248752/smartwatch-samsung-galaxy-watch-4-2.jpg
+samsung-galaxy-watch4	https://cdn.tgdd.vn/Products/Images/7077/248752/smartwatch-samsung-galaxy-watch-4-3.jpg
+samsung-galaxy-watch4	https://cdn.tgdd.vn/Products/Images/7077/248752/smartwatch-samsung-galaxy-watch-4-4.jpg
 laptop-lenovo-ideapad-1	https://product.hstatic.net/200000722513/product/gearvn-laptop-lenovo-ideapad-1-14alc7-82r30077vn-1_490fbf557bd44f4fa6f1385c20fa2517_grande.png
 laptop-lenovo-ideapad-1	https://product.hstatic.net/200000722513/product/gearvn-laptop-lenovo-ideapad-1-14alc7-82r30077vn-2_4cf2ecd4c83046a4bea2552e6471d470_grande.png
 laptop-lenovo-ideapad-1	https://product.hstatic.net/200000722513/product/gearvn-laptop-lenovo-ideapad-1-14alc7-82r30077vn-3_089872f4ff064ed6bcbde89eb064c7c9_grande.png
@@ -2054,13 +2218,13 @@ laptop-lenovo-yoga-slim-7	https://product.hstatic.net/200000722513/product/gearv
 laptop-lenovo-yoga-slim-7	https://product.hstatic.net/200000722513/product/gearvn-laptop-lenovo-yoga-sim-7-14imh9-83cv001uvn-8_44364540115e438498e44fd1a98fb810_grande.png
 laptop-lenovo-yoga-slim-7	https://product.hstatic.net/200000722513/product/gearvn-laptop-lenovo-yoga-sim-7-14imh9-83cv001uvn-9_6bed3fa75a0c44898db99d402721c469_grande.png
 laptop-lenovo-yoga-slim-7	https://product.hstatic.net/200000722513/product/gearvn-laptop-lenovo-yoga-sim-7-14imh9-83cv001uvn-10_330d9ca212fa43c08413415b2c788fee_grande.png
-iphone-15-pro-max	https://cdn.tgdd.vn/Products/Images/42/305658/iphone-15-pro-max-blue-thumbnew-600x600.jpg
-iphone-15-pro-max	https://cdn.tgdd.vn/Products/Images/42/305658/Slider/iphone-15-pro-max-256gb---10--1020x570.jpg
-iphone-15-pro-max	https://cdn.tgdd.vn/Products/Images/42/305658/Slider/vi-vn-iphone-15-pro-max-256gb--(4).jpg
-iphone-15-pro-max	https://cdn.tgdd.vn/Products/Images/42/305658/Slider/vi-vn-iphone-15-pro-max-256gb--(5).jpg
-iphone-15-pro-max	https://cdn.tgdd.vn/Products/Images/42/305658/Slider/vi-vn-iphone-15-pro-max-256gb--(3).jpg
-iphone-15-pro-max	https://cdn.tgdd.vn/Products/Images/42/305658/Slider/vi-vn-iphone-15-pro-max-256gb--(6).jpg
-iphone-15-pro-max	https://cdn.tgdd.vn/Products/Images/42/305658/Slider/vi-vn-iphone-15-pro-max-256gb--(7).jpg
+huawei-watch-fit-3	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-hong-hc-1.jpg
+huawei-watch-fit-3	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-xanh-hc-6.jpg
+huawei-watch-fit-3	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-xanh-hc-8.jpg
+huawei-watch-fit-3	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-den-hc-2.jpg
+huawei-watch-fit-3	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-white-3.jpg
+huawei-watch-fit-3	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-xanh-hc-4.jpg
+huawei-watch-fit-3	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-xanh-hc-9.jpg
 vivo-y03	https://cdn.tgdd.vn/Products/Images/42/322996/vivo-y03-xanh-thumb-1-600x600.jpg
 vivo-y03	https://cdn.tgdd.vn/Products/Images/42/322996/Slider/vi-vn-vivo-y03-2.png
 vivo-y03	https://cdn.tgdd.vn/Products/Images/42/322996/Slider/vi-vn-vivo-y03-3-1020x570.jpg
@@ -2068,16 +2232,12 @@ vivo-y03	https://cdn.tgdd.vn/Products/Images/42/322996/Slider/vi-vn-vivo-y03-4.p
 vivo-y03	https://cdn.tgdd.vn/Products/Images/42/322996/Slider/vi-vn-vivo-y03-5.png
 vivo-y03	https://cdn.tgdd.vn/Products/Images/42/322996/Slider/vi-vn-vivo-y03-6-1020x570.jpg
 vivo-y03	https://cdn.tgdd.vn/Products/Images/42/322996/Slider/vi-vn-vivo-y03-7.png
-macbook-air-15-inch-m2-2023	https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/macbook-air-15-inch-m2-2023-1.jpg
-macbook-air-15-inch-m2-2023	https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/macbook-air-15-inch-m2-2023-2.jpg
-macbook-air-15-inch-m2-2023	https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/macbook-air-15-inch-m2-2023-3.jpg
-macbook-air-15-inch-m2-2023	https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/macbook-air-15-inch-m2-2023-6.jpg
-macbook-air-15-inch-m2-2023	https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/macbook-air-15-inch-m2-2023-7.jpg
-dell-latitude-3520	https://product.hstatic.net/200000722513/product/pherals_latop_latitude_3520_gallery_5_ce328dd2d885438db9a3b46fff39cc48_211cb71c3c384326b0b8ac43943f0b89_grande.png
-dell-latitude-3520	https://product.hstatic.net/200000722513/product/pherals_latop_latitude_3520_gallery_4_6dd20f9ad6dc458e88a5716967e2cf98_c897e822f9784612b8d05d0c09055c7c_grande.png
-dell-latitude-3520	https://product.hstatic.net/200000722513/product/pherals_latop_latitude_3520_gallery_6_b7031c43f13749deaba8e5c24ea9df6e_49fa4efa91ca49c9b9585f1437a7c109_grande.png
-dell-latitude-3520	https://product.hstatic.net/200000722513/product/pherals_latop_latitude_3520_gallery_7_40ed5e9d4d4d4893a983c8453efc02c8_9582e5412b6e417dbdecf0bc3fdef6b4_grande.png
-dell-latitude-3520	https://product.hstatic.net/200000722513/product/pherals_latop_latitude_3520_gallery_1_d106f7b8a4704936ad0a273fea72c191_5d8e853dc9934cf8abddad9953ace90a_grande.png
+huawei-watch-fit-3	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-xanh-hc-11.jpg
+vivo-v30-5g	https://cdn.tgdd.vn/Products/Images/42/319214/vivo-v30-5g-xanh-thumb-600x600.jpg
+vivo-v30-5g	https://cdn.tgdd.vn/Products/Images/42/319214/vivo-v30-blue-5.jpg
+vivo-v30-5g	https://cdn.tgdd.vn/Products/Images/42/319214/vivo-v30-blue-11.jpg
+vivo-v30-5g	https://cdn.tgdd.vn/Products/Images/42/319214/Slider/vivo-v30638534612533541648.jpg
+vivo-v30-5g	https://cdn.tgdd.vn/Products/Images/42/319214/Slider/vivo-v30638534612528371619.jpg
 acer-aspire-7-gaming-a715	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2023/6/27/638234717709656138_Acer%20Aspire%207%20Gaming%20A715%20(1).jpg
 acer-aspire-7-gaming-a715	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2023/6/27/638234717709256137_Acer%20Aspire%207%20Gaming%20A715%20(6).jpg
 acer-aspire-7-gaming-a715	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2023/6/27/638234717713737525_Acer%20Aspire%207%20Gaming%20A715%20(4).jpg
@@ -2102,6 +2262,16 @@ acer-nitro-gaming-an515	https://images.fpt.shop/unsafe/fit-in/960x640/filters:qu
 acer-nitro-gaming-an515	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2022/3/1/637817522529252592_Acer-Nitro%205-AN515-58-52SP-11.jpg
 acer-nitro-gaming-an515	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2022/3/1/637817522398626657_Acer-Nitro%205-AN515-58-52SP-2.jpg
 acer-nitro-gaming-an515	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2022/3/1/637817522653004001_Acer-Nitro%205-AN515-58-52SP-18.jpg
+vivo-v30-5g	https://cdn.tgdd.vn/Products/Images/42/319214/Slider/vivo-v30638534612538901705.jpg
+vivo-v30-5g	https://cdn.tgdd.vn/Products/Images/42/319214/Slider/vivo-30-manhinh-1020x570.jpg
+vivo-v30-5g	https://cdn.tgdd.vn/Products/Images/42/319214/Slider/vivo-v30638534612530461629.jpg
+iphone-15-pro-max	https://cdn.tgdd.vn/Products/Images/42/305658/iphone-15-pro-max-blue-thumbnew-600x600.jpg
+iphone-15-pro-max	https://cdn.tgdd.vn/Products/Images/42/305658/Slider/iphone-15-pro-max-256gb---10--1020x570.jpg
+iphone-15-pro-max	https://cdn.tgdd.vn/Products/Images/42/305658/Slider/vi-vn-iphone-15-pro-max-256gb--(4).jpg
+iphone-15-pro-max	https://cdn.tgdd.vn/Products/Images/42/305658/Slider/vi-vn-iphone-15-pro-max-256gb--(5).jpg
+iphone-15-pro-max	https://cdn.tgdd.vn/Products/Images/42/305658/Slider/vi-vn-iphone-15-pro-max-256gb--(3).jpg
+iphone-15-pro-max	https://cdn.tgdd.vn/Products/Images/42/305658/Slider/vi-vn-iphone-15-pro-max-256gb--(6).jpg
+iphone-15-pro-max	https://cdn.tgdd.vn/Products/Images/42/305658/Slider/vi-vn-iphone-15-pro-max-256gb--(7).jpg
 xiaomi-redmi-note-13-pro+-5g	https://cdn.tgdd.vn/Products/Images/42/312965/xiaomi-redmi-note-13-pro-plus-black-thumb-600x600.jpg
 xiaomi-redmi-note-13-pro+-5g	https://cdn.tgdd.vn/Products/Images/42/312965/Slider/vi-vn-xiaomi-redmi-note-13-pro-plus--(7).jpg
 xiaomi-redmi-note-13-pro+-5g	https://cdn.tgdd.vn/Products/Images/42/312965/Slider/vi-vn-xiaomi-redmi-note-13-pro-plus--(8).jpg
@@ -2109,30 +2279,6 @@ xiaomi-redmi-note-13-pro+-5g	https://cdn.tgdd.vn/Products/Images/42/312965/Slide
 xiaomi-redmi-note-13-pro+-5g	https://cdn.tgdd.vn/Products/Images/42/312965/Slider/vi-vn-xiaomi-redmi-note-13-pro-plus--(4).jpg
 xiaomi-redmi-note-13-pro+-5g	https://cdn.tgdd.vn/Products/Images/42/312965/Slider/vi-vn-xiaomi-redmi-note-13-pro-plus--(3).jpg
 xiaomi-redmi-note-13-pro+-5g	https://cdn.tgdd.vn/Products/Images/42/312965/Slider/vi-vn-xiaomi-redmi-note-13-pro-plus--(2).jpg
-tcl-40-nxtpaper	https://cdn.tgdd.vn/Products/Images/42/324995/Slider/vi-vn-tcl-40-nxtpaper-pin-7.jpg
-tcl-406s	https://cdn.tgdd.vn/Products/Images/42/324994/tcl-406s-blue-thumb-600x600.jpg
-tcl-406s	https://cdn.tgdd.vn/Products/Images/42/324994/Slider/vi-vn-tcl-406s-thiet-ke-2.jpg
-tcl-406s	https://cdn.tgdd.vn/Products/Images/42/324994/Slider/vi-vn-tcl-406s-man-hinh-3.jpg
-tcl-406s	https://cdn.tgdd.vn/Products/Images/42/324994/Slider/vi-vn-tcl-406s-loa-4.jpg
-tcl-406s	https://cdn.tgdd.vn/Products/Images/42/324994/Slider/vi-vn-tcl-406s-hieu-nang-5.jpg
-tcl-406s	https://cdn.tgdd.vn/Products/Images/42/324994/Slider/vi-vn-tcl-406s-camera-6.jpg
-tcl-406s	https://cdn.tgdd.vn/Products/Images/42/324994/Slider/vi-vn-tcl-406s-pin-7.jpg
-samsung-galaxy-s24-ultra	https://cdn.tgdd.vn/Products/Images/42/307174/samsung-galaxy-s24-ultra-grey-thumb-600x600.jpg
-samsung-galaxy-s24-ultra	https://cdn.tgdd.vn/Products/Images/42/307174/Slider/samsung-galaxy-s24-ultra-5g-77-1020x570.jpg
-samsung-galaxy-s24-ultra	https://cdn.tgdd.vn/Products/Images/42/307174/Slider/samsung-galaxy-s24-ultra-5g638417948922989679.jpg
-samsung-galaxy-s24-ultra	https://cdn.tgdd.vn/Products/Images/42/307174/Slider/samsung-galaxy-s24-ultra-sliderr---2--1020x570.jpg
-samsung-galaxy-s24-ultra	https://cdn.tgdd.vn/Products/Images/42/307174/Slider/samsung-galaxy-s24-ultra-sliderr---1--1020x570.jpg
-samsung-galaxy-s24-ultra	https://cdn.tgdd.vn/Products/Images/42/307174/Slider/samsung-galaxy-s24-ultra-5g-66-1020x570.jpg
-samsung-galaxy-s24-ultra	https://cdn.tgdd.vn/Products/Images/42/307174/Slider/samsung-galaxy-s24-ultra-5g638417948928059705.jpg
-samsung-galaxy-s24-ultra	https://cdn.tgdd.vn/Products/Images/42/307174/Slider/samsung-galaxy-s24-ultra-5g638417948934759756.jpg
-samsung-galaxy-a35	https://cdn.tgdd.vn/Products/Images/42/321772/samsung-galaxy-a35-5g-xanh-thumb-1-600x600.jpg
-samsung-galaxy-a35	https://cdn.tgdd.vn/Products/Images/42/321772/Slider/vi-vn-samsung-galaxy-a35-5g-2.jpg
-samsung-galaxy-a35	https://cdn.tgdd.vn/Products/Images/42/321772/Slider/vi-vn-samsung-galaxy-a35-5g-3.jpg
-samsung-galaxy-a35	https://cdn.tgdd.vn/Products/Images/42/321772/Slider/samsung-galaxy-a35-camera-1920x1080.jpg
-samsung-galaxy-a35	https://cdn.tgdd.vn/Products/Images/42/321772/Slider/vi-vn-samsung-galaxy-a35-5g-5.jpg
-samsung-galaxy-a35	https://cdn.tgdd.vn/Products/Images/42/321772/Slider/vi-vn-samsung-galaxy-a35-5g-6.jpg
-samsung-galaxy-a35	https://cdn.tgdd.vn/Products/Images/42/321772/Slider/vi-vn-samsung-galaxy-a35-5g-7.jpg
-samsung-galaxy-a35	https://cdn.tgdd.vn/Products/Images/42/321772/Slider/vi-vn-samsung-galaxy-a35-5g-8.jpg
 iphone-14-pro-max	https://cdn.tgdd.vn/Products/Images/42/289705/iphone-14-pro-max-tim-thumb-600x600.jpg
 iphone-14-pro-max	https://cdn.tgdd.vn/Products/Images/42/289705/Slider/iphone-14-pro-max-tong-quan-1020x570.jpg
 iphone-14-pro-max	https://cdn.tgdd.vn/Products/Images/42/289705/Slider/iphone-14-pro-max-up-3-new-1020x570.jpg
@@ -2141,6 +2287,14 @@ iphone-14-pro-max	https://cdn.tgdd.vn/Products/Images/42/289705/Slider/iphone-14
 iphone-14-pro-max	https://cdn.tgdd.vn/Products/Images/42/289705/Slider/iphone-14-pro-max-1tb638173240853208169.jpg
 iphone-14-pro-max	https://cdn.tgdd.vn/Products/Images/42/289705/Slider/iphone-14-pro-max-1tb638173240854448132.jpg
 iphone-14-pro-max	https://cdn.tgdd.vn/Products/Images/42/289705/Slider/iphone-14-pro-max-1tb638173240855638153.jpg
+tcl-40-nxtpaper	https://cdn.tgdd.vn/Products/Images/42/324995/Slider/vi-vn-tcl-40-nxtpaper-pin-7.jpg
+tcl-406s	https://cdn.tgdd.vn/Products/Images/42/324994/tcl-406s-blue-thumb-600x600.jpg
+tcl-406s	https://cdn.tgdd.vn/Products/Images/42/324994/Slider/vi-vn-tcl-406s-thiet-ke-2.jpg
+tcl-406s	https://cdn.tgdd.vn/Products/Images/42/324994/Slider/vi-vn-tcl-406s-man-hinh-3.jpg
+tcl-406s	https://cdn.tgdd.vn/Products/Images/42/324994/Slider/vi-vn-tcl-406s-loa-4.jpg
+tcl-406s	https://cdn.tgdd.vn/Products/Images/42/324994/Slider/vi-vn-tcl-406s-hieu-nang-5.jpg
+tcl-406s	https://cdn.tgdd.vn/Products/Images/42/324994/Slider/vi-vn-tcl-406s-camera-6.jpg
+tcl-406s	https://cdn.tgdd.vn/Products/Images/42/324994/Slider/vi-vn-tcl-406s-pin-7.jpg
 imou-cruiser-dual-s7xp-10m0wed	https://cdn.tgdd.vn/Products/Images/4728/326586/camera-ip-ngoai-troi-360-do-5mp-imou-cruiser-dual-s7xp-10m0wed-thumb-600x600.jpg
 imou-cruiser-dual-s7xp-10m0wed	https://cdn.tgdd.vn/Products/Images/4728/326586/camera-ip-ngoai-troi-360-do-5mp-imou-cruiser-dual-s7xp-10m0wed-2.jpg
 imou-cruiser-dual-s7xp-10m0wed	https://cdn.tgdd.vn/Products/Images/4728/326586/camera-ip-ngoai-troi-360-do-5mp-imou-cruiser-dual-s7xp-10m0wed-3.jpg
@@ -2161,21 +2315,19 @@ imou-cruiser-2-gs7ep-5m0we	https://cdn.tgdd.vn/Products/Images/4728/326579/camer
 imou-cruiser-2-gs7ep-5m0we	https://cdn.tgdd.vn/Products/Images/4728/326579/camera-ip-ngoai-troi-360-do-5mp-imou-cruiser-2-gs7ep-5m0we-11.jpg
 acer-swift-edge-sfa16	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/7/13/638248692638800080_acer-swift-edge-sfa16-41-r3l6-r7-6800u-xanh-1.jpg
 acer-swift-edge-sfa16	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/7/13/638248692636289248_acer-swift-edge-sfa16-41-r3l6-r7-6800u-xanh-4.jpg
-nokia-220-4g	https://cdn.tgdd.vn/Products/Images/42/207956/nokia-220-4g-cam-4.jpg
-nokia-220-4g	https://cdn.tgdd.vn/Products/Images/42/207956/nokia-220-4g-cam-7.jpg
+điện-thoại-iphone-15-plus-256gb	https://cdn.tgdd.vn/Products/Images/42/303823/iphone-15-plus-hong-256gb-thumb-600x600.jpg
+điện-thoại-iphone-15-plus-256gb	https://cdn.tgdd.vn/Products/Images/42/303823/iphone-15-plus-256gb-hong-2.jpg
+điện-thoại-iphone-15-plus-256gb	https://cdn.tgdd.vn/Products/Images/42/303823/Slider/iphone-15-plus-256gb638315389049622358.jpg
+điện-thoại-iphone-15-plus-256gb	https://cdn.tgdd.vn/Products/Images/42/303823/Slider/iphone-15-plus-256gb638315389048582287.jpg
+điện-thoại-iphone-15-plus-256gb	https://cdn.tgdd.vn/Products/Images/42/303823/Slider/iphone-15-plus-256gb638315389046552237.jpg
+điện-thoại-iphone-15-plus-256gb	https://cdn.tgdd.vn/Products/Images/42/303823/Slider/iphone-15-plus-256gb638315389040882255.jpg
+điện-thoại-iphone-15-plus-256gb	https://cdn.tgdd.vn/Products/Images/42/303823/Slider/iphone-15-plus-256gb638315389041842287.jpg
 acer-swift-edge-sfa16	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/7/13/638248692635825357_acer-swift-edge-sfa16-41-r3l6-r7-6800u-xanh-2.jpg
 acer-swift-edge-sfa16	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/7/13/638248692635624370_acer-swift-edge-sfa16-41-r3l6-r7-6800u-xanh-5.jpg
 acer-swift-edge-sfa16	https://images.fpt.shop/unsafe/fit-in/665x374/filters:quality(100):fill(white)/fptshop.com.vn/Uploads/Originals/2023/11/7/638349747780009705_acer-swift-edge-sfa16-41-r3l6-r7-6800u-1.jpg
 acer-swift-edge-sfa16	https://images.fpt.shop/unsafe/fit-in/665x374/filters:quality(100):fill(white)/fptshop.com.vn/Uploads/Originals/2023/11/7/638349747972925107_acer-swift-edge-sfa16-41-r3l6-r7-6800u-3.jpg
 acer-swift-edge-sfa16	https://images.fpt.shop/unsafe/fit-in/665x374/filters:quality(100):fill(white)/fptshop.com.vn/Uploads/Originals/2023/11/7/638349748411348529_acer-swift-edge-sfa16-41-r3l6-r7-6800u-2.jpg
 acer-swift-edge-sfa16	https://images.fpt.shop/unsafe/fit-in/665x374/filters:quality(100):fill(white)/fptshop.com.vn/Uploads/Originals/2023/11/7/638349748414950958_acer-swift-edge-sfa16-41-r3l6-r7-6800u-4.jpg
-samsung-galaxy-s23-fe	https://cdn.tgdd.vn/Products/Images/42/306994/samsung-galaxy-s23-fe-mint-thumbnew-600x600.jpg
-samsung-galaxy-s23-fe	https://cdn.tgdd.vn/Products/Images/42/306994/samsung-galaxy-s23-fe-kem-4.jpg
-samsung-galaxy-s23-fe	https://cdn.tgdd.vn/Products/Images/42/306994/samsung-galaxy-s23-fe-kem-7.jpg
-samsung-galaxy-s23-fe	https://cdn.tgdd.vn/Products/Images/42/306994/Slider/vi-vn-samsung-galaxy-s23-fe-slider--(2).jpg
-samsung-galaxy-s23-fe	https://cdn.tgdd.vn/Products/Images/42/306994/Slider/vi-vn-samsung-galaxy-s23-fe-slider--(7).jpg
-samsung-galaxy-s23-fe	https://cdn.tgdd.vn/Products/Images/42/306994/Slider/vi-vn-samsung-galaxy-s23-fe-slider--(3).jpg
-samsung-galaxy-s23-fe	https://cdn.tgdd.vn/Products/Images/42/306994/Slider/vi-vn-samsung-galaxy-s23-fe-slider--(5).jpg
 acer-nitro-5-tiger-gaming-an515	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2022/3/1/637817435466475076_acer-nitro-gaming-an515-58-den-1.jpg
 acer-nitro-5-tiger-gaming-an515	https://fptshop.com.vn/Uploads/images/2015/TSKT-ASUS-AN515-58-52SP.jpg
 acer-nitro-5-tiger-gaming-an515	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2022/3/1/637817522653004001_Acer-Nitro%205-AN515-58-52SP-18.jpg
@@ -2189,13 +2341,6 @@ ezviz-h6	https://cdn.tgdd.vn/Products/Images/4728/323202/camera-ip-360-do-5mp-ez
 ezviz-h6	https://cdn.tgdd.vn/Products/Images/4728/323202/camera-ip-360-do-5mp-ezviz-h6-5.jpg
 ezviz-h6	https://cdn.tgdd.vn/Products/Images/4728/323202/camera-ip-360-do-5mp-ezviz-h6-6.jpg
 ezviz-h6	https://cdn.tgdd.vn/Products/Images/4728/323202/camera-ip-360-do-5mp-ezviz-h6--9.jpg
-samsung-galaxy-m15-5g	https://cdn.tgdd.vn/Products/Images/42/325073/samsung-galaxy-m15-5g-blue-thumb-1-600x600.jpg
-samsung-galaxy-m15-5g	https://cdn.tgdd.vn/Products/Images/42/325073/samsung-galaxy-m15-xanh-4.jpg
-samsung-galaxy-m15-5g	https://cdn.tgdd.vn/Products/Images/42/325073/samsung-galaxy-m15-xanh-11.jpg
-samsung-galaxy-m15-5g	https://cdn.tgdd.vn/Products/Images/42/325073/samsung-galaxy-m15-xanh-9.jpg
-samsung-galaxy-m15-5g	https://cdn.tgdd.vn/Products/Images/42/325073/Slider/samsung-galaxy-m15-5g-4gb638537105708405995.jpg
-samsung-galaxy-m15-5g	https://cdn.tgdd.vn/Products/Images/42/325073/Slider/samsung-galaxy-m15-5g-4gb638537105703096009.jpg
-samsung-galaxy-m15-5g	https://cdn.tgdd.vn/Products/Images/42/325073/Slider/samsung-galaxy-m15-5g-4gb638537105706055955.jpg
 hp-245-g10	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/8/22/638283012469903137_hp-245-g10-bac-1.jpg
 hp-245-g10	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/11/8/638350603984058773_note.jpg
 hp-245-g10	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/8/22/638283012469903137_hp-245-g10-bac-3.jpg
@@ -2205,7 +2350,13 @@ hp-245-g10	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fil
 hp-245-g10	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2023/11/6/638348843084842488_Laptop%20HP%20245%20G10-14.jpg
 hp-245-g10	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2023/11/6/638348843078324581_Laptop%20HP%20245%20G10-16.jpg
 hp-pavilion-14-dv2073tu	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/4/11/638168307037428356_hp-pavilion-14-dv2073tu-i5-1235u-vang-4.jpg
-nokia-220-4g	https://cdn.tgdd.vn/Products/Images/42/207956/nokia-220-4g-cam-thumb-600x600.jpg
+điện-thoại-iphone-15-128gb	https://cdn.tgdd.vn/Products/Images/42/281570/iphone-15-xanh-la-thumb-600x600.jpg
+điện-thoại-iphone-15-128gb	https://cdn.tgdd.vn/Products/Images/42/281570/iphone-15-128gb-xanh-la-2.jpg
+điện-thoại-iphone-15-128gb	https://cdn.tgdd.vn/Products/Images/42/281570/Slider/vi-vn-iphone-15-slider--(5).jpg
+điện-thoại-iphone-15-128gb	https://cdn.tgdd.vn/Products/Images/42/281570/Slider/vi-vn-iphone-15-slider--(3).jpg
+điện-thoại-iphone-15-128gb	https://cdn.tgdd.vn/Products/Images/42/281570/Slider/vi-vn-iphone-15-slider--(2).jpg
+điện-thoại-iphone-15-128gb	https://cdn.tgdd.vn/Products/Images/42/281570/Slider/vi-vn-iphone-15-slider--(6).jpg
+điện-thoại-iphone-15-128gb	https://cdn.tgdd.vn/Products/Images/42/281570/Slider/vi-vn-iphone-15-slider--(1).jpg
 hp-pavilion-14-dv2073tu	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/4/11/638168307038066944_hp-pavilion-14-dv2073tu-i5-1235u-vang-5.jpg
 hp-pavilion-14-dv2073tu	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/4/11/638168307036109658_hp-pavilion-14-dv2073tu-i5-1235u-vang-1.jpg
 hp-pavilion-14-dv2073tu	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2023/5/15/638197620166625693_Laptop%20HP%20Pavilion%2014-dv2073TU%20(2).JPG
@@ -2213,7 +2364,29 @@ hp-pavilion-14-dv2073tu	https://images.fpt.shop/unsafe/fit-in/960x640/filters:qu
 hp-pavilion-14-dv2073tu	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2023/5/15/638197620303544502_Laptop%20HP%20Pavilion%2014-dv2073TU%20(12).JPG
 hp-pavilion-14-dv2073tu	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2023/5/15/638197620435893001_Laptop%20HP%20Pavilion%2014-dv2073TU%20(18).JPG
 hp-pavilion-14-dv2073tu	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2023/5/15/638197620514611074_Laptop%20HP%20Pavilion%2014-dv2073TU%20(20).JPG
-nokia-220-4g	https://cdn.tgdd.vn/Products/Images/42/207956/Slider/nokia-220-4g638545759432734084.jpg
+iphone-14-plus-128gb	https://cdn.tgdd.vn/Products/Images/42/245545/iPhone-14-plus-thumb-xanh-1-600x600.jpg
+iphone-14-plus-128gb	https://cdn.tgdd.vn/Products/Images/42/245545/iphone-14-plus-xanh-7.jpg
+iphone-14-plus-128gb	https://cdn.tgdd.vn/Products/Images/42/245545/iphone-14-plus-xanh-11.jpg
+iphone-14-plus-128gb	https://cdn.tgdd.vn/Products/Images/42/245545/Slider/iphone-14-plus-up-3-new-1933x982.jpg
+iphone-14-plus-128gb	https://cdn.tgdd.vn/Products/Images/42/245545/Slider/iphone-14-plus-up-4-1933x982.jpg
+iphone-14-plus-128gb	https://cdn.tgdd.vn/Products/Images/42/245545/Slider/iphone-14-plus-up-5-1933x982.jpg
+iphone-14-plus-128gb	https://cdn.tgdd.vn/Products/Images/42/245545/Slider/vi-vn-iphone-14-plus-up-6.jpg
+samsung-galaxy-m15-5g	https://cdn.tgdd.vn/Products/Images/42/325073/samsung-galaxy-m15-5g-blue-thumb-1-600x600.jpg
+samsung-galaxy-m15-5g	https://cdn.tgdd.vn/Products/Images/42/325073/samsung-galaxy-m15-xanh-4.jpg
+samsung-galaxy-m15-5g	https://cdn.tgdd.vn/Products/Images/42/325073/samsung-galaxy-m15-xanh-11.jpg
+samsung-galaxy-m15-5g	https://cdn.tgdd.vn/Products/Images/42/325073/samsung-galaxy-m15-xanh-9.jpg
+samsung-galaxy-m15-5g	https://cdn.tgdd.vn/Products/Images/42/325073/Slider/samsung-galaxy-m15-5g-4gb638537105708405995.jpg
+samsung-galaxy-m15-5g	https://cdn.tgdd.vn/Products/Images/42/325073/Slider/samsung-galaxy-m15-5g-4gb638537105703096009.jpg
+samsung-galaxy-m15-5g	https://cdn.tgdd.vn/Products/Images/42/325073/Slider/samsung-galaxy-m15-5g-4gb638537105706055955.jpg
+samsung-galaxy-a35	https://cdn.tgdd.vn/Products/Images/42/321772/samsung-galaxy-a35-5g-xanh-thumb-1-600x600.jpg
+samsung-galaxy-a35	https://cdn.tgdd.vn/Products/Images/42/321772/Slider/vi-vn-samsung-galaxy-a35-5g-2.jpg
+samsung-galaxy-a35	https://cdn.tgdd.vn/Products/Images/42/321772/Slider/vi-vn-samsung-galaxy-a35-5g-3.jpg
+samsung-galaxy-a35	https://cdn.tgdd.vn/Products/Images/42/321772/Slider/samsung-galaxy-a35-camera-1920x1080.jpg
+samsung-galaxy-a35	https://cdn.tgdd.vn/Products/Images/42/321772/Slider/vi-vn-samsung-galaxy-a35-5g-5.jpg
+samsung-galaxy-a35	https://cdn.tgdd.vn/Products/Images/42/321772/Slider/vi-vn-samsung-galaxy-a35-5g-6.jpg
+samsung-galaxy-a35	https://cdn.tgdd.vn/Products/Images/42/321772/Slider/vi-vn-samsung-galaxy-a35-5g-7.jpg
+samsung-galaxy-a35	https://cdn.tgdd.vn/Products/Images/42/321772/Slider/vi-vn-samsung-galaxy-a35-5g-8.jpg
+điện-thoại-iphone-15-plus-256gb	https://cdn.tgdd.vn/Products/Images/42/303823/Slider/iphone-15-plus-12-1020x570.png
 hp-probook-440-g10	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/7/31/638264226474075730_hp-probook-440-g10-bac-1.jpg
 hp-probook-440-g10	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2024/1/16/638410309104612437_note.jpg
 hp-probook-440-g10	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/7/31/638264226472842775_hp-probook-440-g10-bac-4.jpg
@@ -2230,14 +2403,6 @@ hp-gaming-victus-16-s0078ax	https://images.fpt.shop/unsafe/fit-in/960x640/filter
 hp-gaming-victus-16-s0078ax	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2024/6/12/638537883333963592_Laptop%20HP%20Victus%2016-13.jpg
 hp-gaming-victus-16-s0078ax	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2024/6/12/638537883330536912_Laptop%20HP%20Victus%2016-15.jpg
 hp-gaming-victus-16-s0078ax	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2024/6/12/638537883330536912_Laptop%20HP%20Victus%2016-18.jpg
-vivo-v30-5g	https://cdn.tgdd.vn/Products/Images/42/319214/vivo-v30-5g-xanh-thumb-600x600.jpg
-vivo-v30-5g	https://cdn.tgdd.vn/Products/Images/42/319214/vivo-v30-blue-5.jpg
-vivo-v30-5g	https://cdn.tgdd.vn/Products/Images/42/319214/vivo-v30-blue-11.jpg
-vivo-v30-5g	https://cdn.tgdd.vn/Products/Images/42/319214/Slider/vivo-v30638534612533541648.jpg
-vivo-v30-5g	https://cdn.tgdd.vn/Products/Images/42/319214/Slider/vivo-v30638534612528371619.jpg
-vivo-v30-5g	https://cdn.tgdd.vn/Products/Images/42/319214/Slider/vivo-v30638534612538901705.jpg
-vivo-v30-5g	https://cdn.tgdd.vn/Products/Images/42/319214/Slider/vivo-30-manhinh-1020x570.jpg
-vivo-v30-5g	https://cdn.tgdd.vn/Products/Images/42/319214/Slider/vivo-v30638534612530461629.jpg
 hp-14s-em0080au	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/4/11/638168318098594588_hp-14s-em0080au-r3-7320u-bac-1.jpg
 hp-14s-em0080au	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/4/11/638168318098594588_hp-14s-em0080au-r3-7320u-bac-3.jpg
 hp-14s-em0080au	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/4/11/638168318096894048_hp-14s-em0080au-r3-7320u-bac-4.jpg
@@ -2246,21 +2411,6 @@ hp-14s-em0080au	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90
 hp-14s-em0080au	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2023/4/19/638175136831335634_DSC09091.JPG
 hp-14s-em0080au	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2023/4/19/638175136710478057_DSC09086.JPG
 hp-14s-em0080au	https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2023/4/19/638175136832275174_DSC09095.JPG
-điện-thoại-iphone-15-plus-256gb	https://cdn.tgdd.vn/Products/Images/42/303823/iphone-15-plus-hong-256gb-thumb-600x600.jpg
-điện-thoại-iphone-15-plus-256gb	https://cdn.tgdd.vn/Products/Images/42/303823/iphone-15-plus-256gb-hong-2.jpg
-điện-thoại-iphone-15-plus-256gb	https://cdn.tgdd.vn/Products/Images/42/303823/Slider/iphone-15-plus-256gb638315389049622358.jpg
-điện-thoại-iphone-15-plus-256gb	https://cdn.tgdd.vn/Products/Images/42/303823/Slider/iphone-15-plus-256gb638315389048582287.jpg
-điện-thoại-iphone-15-plus-256gb	https://cdn.tgdd.vn/Products/Images/42/303823/Slider/iphone-15-plus-256gb638315389046552237.jpg
-điện-thoại-iphone-15-plus-256gb	https://cdn.tgdd.vn/Products/Images/42/303823/Slider/iphone-15-plus-256gb638315389040882255.jpg
-điện-thoại-iphone-15-plus-256gb	https://cdn.tgdd.vn/Products/Images/42/303823/Slider/iphone-15-plus-256gb638315389041842287.jpg
-điện-thoại-iphone-15-plus-256gb	https://cdn.tgdd.vn/Products/Images/42/303823/Slider/iphone-15-plus-12-1020x570.png
-iphone-14-plus-128gb	https://cdn.tgdd.vn/Products/Images/42/245545/iPhone-14-plus-thumb-xanh-1-600x600.jpg
-iphone-14-plus-128gb	https://cdn.tgdd.vn/Products/Images/42/245545/iphone-14-plus-xanh-7.jpg
-iphone-14-plus-128gb	https://cdn.tgdd.vn/Products/Images/42/245545/iphone-14-plus-xanh-11.jpg
-iphone-14-plus-128gb	https://cdn.tgdd.vn/Products/Images/42/245545/Slider/iphone-14-plus-up-3-new-1933x982.jpg
-iphone-14-plus-128gb	https://cdn.tgdd.vn/Products/Images/42/245545/Slider/iphone-14-plus-up-4-1933x982.jpg
-iphone-14-plus-128gb	https://cdn.tgdd.vn/Products/Images/42/245545/Slider/iphone-14-plus-up-5-1933x982.jpg
-iphone-14-plus-128gb	https://cdn.tgdd.vn/Products/Images/42/245545/Slider/vi-vn-iphone-14-plus-up-6.jpg
 laptop-acer-swift-go-sfg14	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/9/30/638316665596903924_acer-swift-go-sfg14-41-r19z-r5-7530u-5.jpg
 laptop-acer-swift-go-sfg14	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/12/14/638381739954387939_note.jpg
 laptop-acer-swift-go-sfg14	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/9/30/638316665596450980_acer-swift-go-sfg14-41-r19z-r5-7530u-2.jpg
@@ -2276,21 +2426,13 @@ laptop-acer-swift-go-sfg14	https://images.fpt.shop/unsafe/fit-in/960x640/filters
 điện-thoại-iphone-11-64gb	https://cdn.tgdd.vn/Products/Images/42/153856/Slider/vi-vn-iphone-11-up-7.jpg
 điện-thoại-iphone-11-64gb	https://cdn.tgdd.vn/Products/Images/42/153856/Slider/vi-vn-iphone-11-up-8.jpg
 điện-thoại-iphone-11-64gb	https://cdn.tgdd.vn/Products/Images/42/153856/Slider/vi-vn-iphone-11-up-9.jpg
-điện-thoại-iphone-15-128gb	https://cdn.tgdd.vn/Products/Images/42/281570/iphone-15-xanh-la-thumb-600x600.jpg
-điện-thoại-iphone-15-128gb	https://cdn.tgdd.vn/Products/Images/42/281570/iphone-15-128gb-xanh-la-2.jpg
-điện-thoại-iphone-15-128gb	https://cdn.tgdd.vn/Products/Images/42/281570/Slider/vi-vn-iphone-15-slider--(5).jpg
-điện-thoại-iphone-15-128gb	https://cdn.tgdd.vn/Products/Images/42/281570/Slider/vi-vn-iphone-15-slider--(3).jpg
-điện-thoại-iphone-15-128gb	https://cdn.tgdd.vn/Products/Images/42/281570/Slider/vi-vn-iphone-15-slider--(2).jpg
-điện-thoại-iphone-15-128gb	https://cdn.tgdd.vn/Products/Images/42/281570/Slider/vi-vn-iphone-15-slider--(6).jpg
-điện-thoại-iphone-15-128gb	https://cdn.tgdd.vn/Products/Images/42/281570/Slider/vi-vn-iphone-15-slider--(1).jpg
-samsung-galaxy-z-flip5-5g	https://cdn.tgdd.vn/Products/Images/42/299250/samsung-galaxy-z-flip5-mint-thumbnew-600x600.jpg
-samsung-galaxy-z-flip5-5g	https://cdn.tgdd.vn/Products/Images/42/299250/Slider/samsung-galaxy-z-flip5-5g-sld-1021x570.jpg
-samsung-galaxy-z-flip5-5g	https://cdn.tgdd.vn/Products/Images/42/299250/Slider/vi-vn-samsung-galaxy-z-flip5-256gb-(2).jpg
-samsung-galaxy-z-flip5-5g	https://cdn.tgdd.vn/Products/Images/42/299250/Slider/vi-vn-samsung-galaxy-z-flip5-256gb-(4).jpg
-samsung-galaxy-z-flip5-5g	https://cdn.tgdd.vn/Products/Images/42/299250/Slider/vi-vn-samsung-galaxy-z-flip5-256gb-(5).jpg
-samsung-galaxy-z-flip5-5g	https://cdn.tgdd.vn/Products/Images/42/299250/Slider/vi-vn-samsung-galaxy-z-flip5-256gb-(3).jpg
-samsung-galaxy-z-flip5-5g	https://cdn.tgdd.vn/Products/Images/42/299250/Slider/vi-vn-samsung-galaxy-z-flip5-256gb-(6).jpg
-samsung-galaxy-z-flip5-5g	https://cdn.tgdd.vn/Products/Images/42/299250/Slider/vi-vn-samsung-galaxy-z-flip5-256gb-(7).jpg
+apple-watch-se-2023	https://cdn.tgdd.vn/Products/Images/7077/316007/apple-watch-se-2023-40mm-vien-nhom-day-silicone-trang-starlight-1.jpg
+apple-watch-se-2023	https://cdn.tgdd.vn/Products/Images/7077/316007/apple-watch-se-2023-40mm-vien-nhom-day-silicone-trang-starlight-2.jpg
+apple-watch-se-2023	https://cdn.tgdd.vn/Products/Images/7077/316007/apple-watch-se-2023-40mm-vien-nhom-day-silicone-xanh-duong-nhat-3-1.jpg
+apple-watch-se-2023	https://cdn.tgdd.vn/Products/Images/7077/316007/apple-watch-se-2023-40mm-vien-nhom-day-silicone-xanh-den-1.jpg
+apple-watch-se-2023	https://cdn.tgdd.vn/Products/Images/7077/316007/apple-watch-se-2023-40mm-vien-nhom-day-silicone-xanh-duong-nhat-1-1.jpg
+apple-watch-se-2023	https://cdn.tgdd.vn/Products/Images/7077/316007/2apple-watch-se-2023-40mm-vien-nhom-day-silicone-xanh-den-2.jpg
+apple-watch-se-2023	https://cdn.tgdd.vn/Products/Images/7077/316007/apple-watch-se-2023-40mm-20-4.jpg
 ipad-pro-m4-13-inch-wifi-256gb	https://cdn.tgdd.vn/Products/Images/522/325517/ipad-pro-13-inch-m4-wifi-sliver-thumb-200x200.jpg
 ipad-pro-m4-13-inch-wifi-256gb	https://cdn.tgdd.vn/Products/Images/522/325517/ipad-pro-13-inch-m4-wifi-sliver-3.jpg
 ipad-pro-m4-13-inch-wifi-256gb	https://cdn.tgdd.vn/Products/Images/522/325517/Slider/ipad-pro-m4-13-inch-wifi-256gb638527735344404947.jpg
@@ -2315,6 +2457,28 @@ samsung-galaxy-tab-s9-fe-wifi	https://cdn.tgdd.vn/Products/Images/522/309818/Sli
 samsung-galaxy-tab-s9-fe-wifi	https://cdn.tgdd.vn/Products/Images/522/309818/Slider/vi-vn-samsung-galaxy-tab-s9-fe--(2).jpg
 samsung-galaxy-tab-s9-fe-wifi	https://cdn.tgdd.vn/Products/Images/522/309818/Slider/vi-vn-samsung-galaxy-tab-s9-fe--(3).jpg
 samsung-galaxy-tab-s9-fe-wifi	https://cdn.tgdd.vn/Products/Images/522/309818/Slider/vi-vn-samsung-galaxy-tab-s9-fe--(5).jpg
+lenovo-tab-m9-4g	https://cdn.tgdd.vn/Products/Images/522/306923/lenovo-tab-m8-xanh-thumb-1-600x600.jpg
+lenovo-tab-m9-4g	https://cdn.tgdd.vn/Products/Images/522/306923/Slider/lenovo-tab-m9-slider---6--1020x570.png
+lenovo-tab-m9-4g	https://cdn.tgdd.vn/Products/Images/522/306923/Slider/lenove-tab-m9-slider---5--1020x570-1.png
+lenovo-tab-m9-4g	https://cdn.tgdd.vn/Products/Images/522/306923/Slider/vi-vn-lenovo-tab-m9-slider--(4).jpg
+lenovo-tab-m9-4g	https://cdn.tgdd.vn/Products/Images/522/306923/Slider/lenovo-tab-m9-slider---3--1020x570.png
+lenovo-tab-m9-4g	https://cdn.tgdd.vn/Products/Images/522/306923/Slider/lenove-tab-m9-slider---2--1020x570.png
+tcl-tab-10l-gen-2-wifi	https://cdn.tgdd.vn/Products/Images/522/320989/tcl-tab-10l-gen-2-black-thumb-600x600.jpg
+tcl-tab-10l-gen-2-wifi	https://cdn.tgdd.vn/Products/Images/522/320989/tcl-tab-10l-gen2-den-4.jpg
+tcl-tab-10l-gen-2-wifi	https://cdn.tgdd.vn/Products/Images/522/320989/tcl-tab-10l-gen2-den-5.jpg
+tcl-tab-10l-gen-2-wifi	https://cdn.tgdd.vn/Products/Images/522/320989/tcl-tab-10l-gen2-den-7.jpg
+tcl-tab-10l-gen-2-wifi	https://cdn.tgdd.vn/Products/Images/522/320989/Slider/tcl-tab-10l-gen-2638406729413899743.jpg
+tcl-tab-10l-gen-2-wifi	https://cdn.tgdd.vn/Products/Images/522/320989/Slider/tcl-tab-10l-gen-2638406729415049826.jpg
+tcl-tab-10l-gen-2-wifi	https://cdn.tgdd.vn/Products/Images/522/320989/Slider/tcl-tab-10l-gen-2638406729417639861.jpg
+tcl-tab-10l-gen-2-wifi	https://cdn.tgdd.vn/Products/Images/522/320989/Slider/tcl-tab-10l-gen-2638406729418679837.jpg
+ipad-air-5-m1-5g	https://cdn.tgdd.vn/Products/Images/522/274155/ipad-air-5-wifi-cellular-blue-thumb-600x600.jpg
+ipad-air-5-m1-5g	https://cdn.tgdd.vn/Products/Images/522/274155/ipad-air-5-m1-wifi-cellular-xanh-duong-2.jpg
+ipad-air-5-m1-5g	https://cdn.tgdd.vn/Products/Images/522/274155/Slider/ipad-air-5-m1-wifi-cellular-64gb637867631883673363.jpg
+ipad-air-5-m1-5g	https://cdn.tgdd.vn/Products/Images/522/274155/Slider/ipad-air-5-m1-wifi-cellular-64gb637867631884683378.jpg
+ipad-air-5-m1-5g	https://cdn.tgdd.vn/Products/Images/522/274155/Slider/ipad-air-5-m1-wifi-cellular-64gb-22-1020x570.jpg
+ipad-air-5-m1-5g	https://cdn.tgdd.vn/Products/Images/522/274155/Slider/ipad-air-5-m1-wifi-cellular-64gb637867631885813395.jpg
+ipad-air-5-m1-5g	https://cdn.tgdd.vn/Products/Images/522/274155/Slider/ipad-air-5-m1-wifi-cellular-64gb637867631887773489.jpg
+ipad-air-5-m1-5g	https://cdn.tgdd.vn/Products/Images/522/274155/Slider/ipad-air-5-m1-wifi-cellular-64gb-32-1020x570.jpg
 oppo-pad-air-wifi	https://cdn.tgdd.vn/Products/Images/522/305838/oppo-pad-air-128gb-thumbnew-600x600.jpeg
 oppo-pad-air-wifi	https://cdn.tgdd.vn/Products/Images/522/305838/oppo-pad-air-128gb-tim-1.jpg
 oppo-pad-air-wifi	https://cdn.tgdd.vn/Products/Images/522/305838/Slider/vi-vn-oppo-pad-air-128gb--(1).jpg
@@ -2323,12 +2487,49 @@ oppo-pad-air-wifi	https://cdn.tgdd.vn/Products/Images/522/305838/Slider/vi-vn-op
 oppo-pad-air-wifi	https://cdn.tgdd.vn/Products/Images/522/305838/Slider/vi-vn-oppo-pad-air-128gb-33-1020x570.jpg
 oppo-pad-air-wifi	https://cdn.tgdd.vn/Products/Images/522/305838/Slider/vi-vn-oppo-pad-air-128gb--(5).jpg
 oppo-pad-air-wifi	https://cdn.tgdd.vn/Products/Images/522/305838/Slider/vi-vn-oppo-pad-air-128gb--(6).jpg
-lenovo-tab-m9-4g	https://cdn.tgdd.vn/Products/Images/522/306923/lenovo-tab-m8-xanh-thumb-1-600x600.jpg
-lenovo-tab-m9-4g	https://cdn.tgdd.vn/Products/Images/522/306923/Slider/lenovo-tab-m9-slider---6--1020x570.png
-lenovo-tab-m9-4g	https://cdn.tgdd.vn/Products/Images/522/306923/Slider/lenove-tab-m9-slider---5--1020x570-1.png
-lenovo-tab-m9-4g	https://cdn.tgdd.vn/Products/Images/522/306923/Slider/vi-vn-lenovo-tab-m9-slider--(4).jpg
-lenovo-tab-m9-4g	https://cdn.tgdd.vn/Products/Images/522/306923/Slider/lenovo-tab-m9-slider---3--1020x570.png
-lenovo-tab-m9-4g	https://cdn.tgdd.vn/Products/Images/522/306923/Slider/lenove-tab-m9-slider---2--1020x570.png
+oppo-pad-neo-wifi	https://cdn.tgdd.vn/Products/Images/522/322613/oppo-pad-neo-6gb-thumb-1-600x600.jpg
+oppo-pad-neo-wifi	https://cdn.tgdd.vn/Products/Images/522/322613/oppo-pad-neo-xam-5.jpg
+oppo-pad-neo-wifi	https://cdn.tgdd.vn/Products/Images/522/322613/oppo-pad-neo-xam-11.jpg
+oppo-pad-neo-wifi	https://cdn.tgdd.vn/Products/Images/522/322613/Slider/vi-vn-oppo-pad-neo-slider---3--1020x570.jpg
+oppo-pad-neo-wifi	https://cdn.tgdd.vn/Products/Images/522/322613/Slider/oppo-pad-neo-6gb638452464212953627.jpg
+oppo-pad-neo-wifi	https://cdn.tgdd.vn/Products/Images/522/322613/Slider/oppo-pad-neo-6gb638452464215999716.jpg
+oppo-pad-neo-wifi	https://cdn.tgdd.vn/Products/Images/522/322613/Slider/vi-vn-oppo-pad-neo-slider---4--1020x570.jpg
+oppo-pad-neo-wifi	https://cdn.tgdd.vn/Products/Images/522/322613/Slider/oppo-pad-neo-6gb638452464217669696.jpg
+laptop-dell-inspiron-14-5440	https://product.hstatic.net/200000722513/product/dell-inspiron-14-5440-core-7-n4i7204w1-3_063513a1ddad4a4ca9f563a17aa02dfc_grande.jpg
+laptop-dell-inspiron-14-5440	https://product.hstatic.net/200000722513/product/dell-inspiron-14-5440-core-7-n4i7204w1-5_428e680b95d84373b93c7565771c5083_grande.jpg
+laptop-dell-inspiron-14-5440	https://product.hstatic.net/200000722513/product/dell-inspiron-14-5440-core-7-n4i7204w1-4_baac40d07b634d1ba54ca6c30f850758_grande.jpg
+laptop-dell-inspiron-14-5440	https://product.hstatic.net/200000722513/product/dell-inspiron-14-5440-core-7-n4i7204w1-2_0e8e35662f76471ba3c36cd65befe186_grande.jpg
+laptop-dell-inspiron-14-5440	https://product.hstatic.net/200000722513/product/dell-inspiron-14-5440-core-7-n4i7204w1-6_6df8c06d7aa04aaab5dcec1f9e8cbeca_grande.jpg
+laptop-dell-inspiron-14-5440	https://product.hstatic.net/200000722513/product/dell-inspiron-14-5440-core-7-n4i7204w1-7_32a9dd2071fe431e919214f9cdec7f3d_grande.jpg
+dell-inspiron-15-n3530	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/9/9/638298600173027154_dell-inspiron-15-n3530-bac-1.jpg
+dell-inspiron-15-n3530	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/11/17/638358356818385395_note.jpg
+dell-inspiron-15-n3530	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/9/9/638298600173027154_dell-inspiron-15-n3530-bac-4.jpg
+dell-inspiron-15-n3530	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/9/9/638298600173183412_dell-inspiron-15-n3530-bac-2.jpg
+dell-inspiron-15-n3530	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/9/9/638298600173027154_dell-inspiron-15-n3530-bac-3.jpg
+dell-inspiron-15-n3530	https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/9/9/638298600173027154_dell-inspiron-15-n3530-bac-5.jpg
+dell-latitude-3520	https://product.hstatic.net/200000722513/product/latitude-3520-p108f001-70280538-fix_83b4c85f06d145199d87d838dc9eca04_grande.png
+dell-latitude-3520	https://product.hstatic.net/200000722513/product/pherals_latop_latitude_3520_gallery_5_ce328dd2d885438db9a3b46fff39cc48_211cb71c3c384326b0b8ac43943f0b89_grande.png
+dell-latitude-3520	https://product.hstatic.net/200000722513/product/pherals_latop_latitude_3520_gallery_4_6dd20f9ad6dc458e88a5716967e2cf98_c897e822f9784612b8d05d0c09055c7c_grande.png
+dell-latitude-3520	https://product.hstatic.net/200000722513/product/pherals_latop_latitude_3520_gallery_6_b7031c43f13749deaba8e5c24ea9df6e_49fa4efa91ca49c9b9585f1437a7c109_grande.png
+dell-latitude-3520	https://product.hstatic.net/200000722513/product/pherals_latop_latitude_3520_gallery_7_40ed5e9d4d4d4893a983c8453efc02c8_9582e5412b6e417dbdecf0bc3fdef6b4_grande.png
+dell-latitude-3520	https://product.hstatic.net/200000722513/product/pherals_latop_latitude_3520_gallery_1_d106f7b8a4704936ad0a273fea72c191_5d8e853dc9934cf8abddad9953ace90a_grande.png
+macbook-air-15-inch-m2-2023	https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/macbook-air-15-inch-m2-2023-1.jpg
+macbook-air-15-inch-m2-2023	https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/macbook-air-15-inch-m2-2023-2.jpg
+macbook-air-15-inch-m2-2023	https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/macbook-air-15-inch-m2-2023-3.jpg
+macbook-air-15-inch-m2-2023	https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/macbook-air-15-inch-m2-2023-6.jpg
+macbook-air-15-inch-m2-2023	https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/macbook-air-15-inch-m2-2023-7.jpg
+macbook-air-15-inch-m2-2023	https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/macbook-air-15-inch-m2-2023-8.jpg
+macbook-air-15-inch-m2-2023	https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/macbook-air-15-inch-m2-2023-9.jpg
+macbook-air-15-inch-m2-2023	https://cdn2.cellphones.com.vn/x/media/catalog/product/m/a/macbook-air-15-inch-m2-2023-11.jpg
+xiaomi-redmi-pad-pro	https://cdn.tgdd.vn/Products/Images/522/325988/redmi-pad-pro-grey-thumb-1-600x600.jpg
+xiaomi-redmi-pad-pro	https://cdn.tgdd.vn/2024/06/campaign/NTK5012-copy-2-1920x1080-2.jpg
+xiaomi-redmi-pad-pro	https://cdn.tgdd.vn/2024/06/campaign/NTK5005-copy-2-800x450-1.jpg
+xiaomi-redmi-pad-pro	https://cdn.tgdd.vn/2024/06/campaign/7-copy-3-800x450-1.jpg
+xiaomi-redmi-pad-pro	https://cdn.tgdd.vn/2024/06/campaign/10-copy-2-800x450-1.jpg
+nokia-220-4g	https://cdn.tgdd.vn/Products/Images/42/207956/nokia-220-4g-cam-thumb-600x600.jpg
+nokia-220-4g	https://cdn.tgdd.vn/Products/Images/42/207956/nokia-220-4g-cam-4.jpg
+nokia-220-4g	https://cdn.tgdd.vn/Products/Images/42/207956/nokia-220-4g-cam-7.jpg
+nokia-220-4g	https://cdn.tgdd.vn/Products/Images/42/207956/Slider/nokia-220-4g638545759432734084.jpg
 \.
 
 
@@ -2358,7 +2559,7 @@ COPY public.rating (id, average, five_starts, four_starts, one_start, three_star
 21	0	0	0	0	0	0	laptop-lenovo-yoga-slim-7
 22	0	0	0	0	0	0	lenovo-ideapad-slim-5-16imh9
 23	0	0	0	0	0	0	samsung-galaxy-a24
-24	5	1	0	0	0	0	samsung-galaxy-z-flip5-5g
+78	0	0	0	0	0	0	apple-watch-ultra-2
 26	0	0	0	0	0	0	vivo-y03
 27	0	0	0	0	0	0	vivo-y28
 28	0	0	0	0	0	0	oppo-find-n3-5g
@@ -2407,6 +2608,14 @@ COPY public.rating (id, average, five_starts, four_starts, one_start, three_star
 70	0	0	0	0	0	0	samsung-galaxy-tab-s9-fe-wifi
 71	0	0	0	0	0	0	oppo-pad-air-wifi
 72	0	0	0	0	0	0	lenovo-tab-m9-4g
+73	0	0	0	0	0	0	tcl-tab-10l-gen-2-wifi
+74	0	0	0	0	0	0	ipad-air-5-m1-5g
+75	0	0	0	0	0	0	oppo-pad-neo-wifi
+76	0	0	0	0	0	0	xiaomi-redmi-pad-pro
+77	5	1	0	0	0	0	apple-watch-se-2023
+24	5	2	0	0	0	0	samsung-galaxy-z-flip5-5g
+79	0	0	0	0	0	0	samsung-galaxy-watch4
+80	4	0	1	0	0	0	huawei-watch-fit-3
 \.
 
 
@@ -2417,9 +2626,10 @@ COPY public.rating (id, average, five_starts, four_starts, one_start, three_star
 COPY public.staff_user (staffid, active_state, email, full_name, password, phone, role) FROM stdin;
 1	t	admin@gmail.com	Admin	$2a$10$uyRwMB1mSsuaSfOS05e2quy.mz/nyrOTU07iCincYw/aX3YUGrxHG	012345678	ADMIN
 2	t	kienluu@gmail.com	Kien Luu	$2a$10$1RLtaUi5RNffeXTgQRifQuZMHzp1/DNCZb1SC.tv84Ctjg1EK5qK6	012345678	USER
-3	t	thuynga@gmail.com	Thuy Nga	$2a$10$rYJoypKmSVdbaeCpI9Et.ebcvvFM9FXfrq8rZip5gfk5AOPBzwV.W	012345678	USER
 4	t	ngovuong@gmail.com	Ngo Vuong	$2a$10$nBKwui.tVJfNHXfzj6mMW.tZwljcoQRY3M06EpYh0TJvbwI0K5kU.	012345678	USER
-5	t	jisooconan@gmail.com	Dinh kien	$2a$10$4TkxMQ.5PCRktxJQ2h0X2uXUKcuqhIAvJPmHJhrMrWSPsiwtxTabe	0353795729	USER
+5	t	jisooconan@gmail.com	Dinh kien	$2a$10$/sPBC6ENwtRRb2XJxVsqo.QQxkqpLYFzUD0g/W0XzmFRAzIGlJ.Im	0353795729	USER
+6	t	tieulachan2203@gmail.com	Nga Dao	$2a$10$wRqMWLgCSpYLmjkNBvhDDuWJ6U658Nnkp5U4/47mPDKnTTZye16vS	0123456789	USER
+3	t	thuynga@gmail.com	Thuy Nga	$2a$10$rYJoypKmSVdbaeCpI9Et.ebcvvFM9FXfrq8rZip5gfk5AOPBzwV.W	012345678	USER
 \.
 
 
@@ -2434,63 +2644,63 @@ SELECT pg_catalog.setval('public.carousel_id_seq', 19, true);
 -- Name: category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.category_id_seq', 4, true);
+SELECT pg_catalog.setval('public.category_id_seq', 5, true);
 
 
 --
 -- Name: color_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.color_id_seq', 138, true);
+SELECT pg_catalog.setval('public.color_id_seq', 165, true);
 
 
 --
 -- Name: content_children_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.content_children_id_seq', 602, true);
+SELECT pg_catalog.setval('public.content_children_id_seq', 670, true);
 
 
 --
 -- Name: description_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.description_id_seq', 72, true);
+SELECT pg_catalog.setval('public.description_id_seq', 80, true);
 
 
 --
 -- Name: feature_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.feature_id_seq', 72, true);
+SELECT pg_catalog.setval('public.feature_id_seq', 80, true);
 
 
 --
 -- Name: price_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.price_id_seq', 96, true);
+SELECT pg_catalog.setval('public.price_id_seq', 104, true);
 
 
 --
 -- Name: producer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.producer_id_seq', 21, true);
+SELECT pg_catalog.setval('public.producer_id_seq', 22, true);
 
 
 --
 -- Name: rating_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.rating_id_seq', 72, true);
+SELECT pg_catalog.setval('public.rating_id_seq', 80, true);
 
 
 --
 -- Name: staff_user_staffid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.staff_user_staffid_seq', 5, true);
+SELECT pg_catalog.setval('public.staff_user_staffid_seq', 6, true);
 
 
 --

@@ -103,6 +103,15 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/list")
+    public ResponseEntity<?> getProductsByIds(@RequestParam(name = "ids") List<String> ids ){
+        try{
+            var products = productService.findProductByIds(ids);
+            return ResponseEntity.ok(products);
+        }catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
 
     @GetMapping("/home")
     public ResponseEntity<?> getConnection() {

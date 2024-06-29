@@ -70,6 +70,11 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    public List<ProductEntity> findProductByIds(List<String> ids) {
+        return ids.stream().map(s -> findProductById(s.toLowerCase())).toList();
+    }
+
+    @Override
     public void updateProduct(ProductDTO product, String productId) {
         var existProduct = productRepository.findAllById(productId)
                 .orElseThrow(() -> new RuntimeException(NOT_EXIST));

@@ -12,6 +12,7 @@ public interface IProductService {
     void saveNewProduct(ProductDTO item);
     void saveProducts(List<ProductEntity> item);
     List<ProductEntity> findAllByName(String name);
+    List<ProductEntity> findProductByIds(List<String> id);
     void updateProduct(ProductDTO product,String productId );
     void deleteProduct(String productId);
     ProductEntity findProductById(String id);

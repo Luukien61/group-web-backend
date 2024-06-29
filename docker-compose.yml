@@ -1,6 +1,6 @@
 services:
   db:
-    image: luukien/postgres-data:v4
+    image: luukien/postgres-data:v5
 #    volumes:
 #      - postgres-groupweb:/var/lib/postgresql/data/ #(1)
     restart: always
@@ -42,7 +42,7 @@ services:
     container_name: frontend
 
   mail-sever:
-    image: luukien/mail-server:v3
+    image: luukien/mail-server:v4
     restart: always
     networks:
       - my-web-network
