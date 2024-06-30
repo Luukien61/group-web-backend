@@ -61,6 +61,8 @@ public class SecurityConfiguration {
                         .accessDeniedHandler(accessDeniedHandler)
                         .authenticationEntryPoint(authenticationEntryPoint)
                 )
+                .logout(AbstractHttpConfigurer::disable)
+
         ;
 
         return http.build();

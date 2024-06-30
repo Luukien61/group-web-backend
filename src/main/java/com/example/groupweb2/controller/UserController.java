@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,6 +35,7 @@ public class UserController {
         return ResponseEntity.ok(userService.findAllUserByStaffId(userId));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/all")
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         List<UserDTO> userDTOS = userService.findAllUsers();
@@ -43,6 +45,8 @@ public class UserController {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("")
     public ResponseEntity<List<UserDTO>> getAllUsersByRole(@RequestParam("role") String role) {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+
         List<UserDTO> userDTOS = userService.findAllUsersByRole(role);
         return new ResponseEntity<>(userDTOS, HttpStatus.OK);
     }
@@ -52,6 +56,7 @@ public class UserController {
         return ResponseEntity.ok(userService.updateUser(userDTO, userId));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PatchMapping("/active/{userId}")
     public ResponseEntity<UserDTO> activeUser(@PathVariable Long userId) {
         return ResponseEntity.ok(userService.activeUser(userId));

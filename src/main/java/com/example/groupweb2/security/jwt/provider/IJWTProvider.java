@@ -17,4 +17,5 @@ public interface IJWTProvider {
     String generateAccessToken(UserDetails userDetails, Collection<? extends GrantedAuthority> claims);
     boolean isTokenValid(String token,UserDetails userDetails);
     String exactUserName(String token);
+    void inValidToken(String accessToken, String refreshToken);
 }

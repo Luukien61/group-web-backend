@@ -6,6 +6,7 @@ import com.example.groupweb2.mapper.MapStruct;
 import com.example.groupweb2.model.*;
 import com.example.groupweb2.repository.UserRepository;
 import com.example.groupweb2.security.jwt.provider.IJWTProvider;
+import com.example.groupweb2.service.IRedisService;
 import com.example.groupweb2.service.IUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,6 +29,7 @@ public class UserService implements IUserService, UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final MapStruct mapper;
     private final IJWTProvider jwtProvider;
+
 
 
     @Override
@@ -190,5 +192,10 @@ public class UserService implements IUserService, UserDetailsService {
                 .message("Login successfully")
                 .user(mapper.toUserResponse(existUser))
                 .build();
+    }
+
+    @Override
+    public void logOut(String accessToken, String refreshToken) {
+        jwtProvider.inValidToken(accessToken, refreshToken);
     }
 }

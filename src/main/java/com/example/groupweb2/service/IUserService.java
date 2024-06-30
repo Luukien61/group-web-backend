@@ -40,4 +40,6 @@ public interface IUserService {
 
     LoginResponse resetPassword(LoginUser user);
 
+    void logOut(String accessToken, String refreshToken);
+
 }

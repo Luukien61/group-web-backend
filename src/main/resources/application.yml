@@ -17,6 +17,18 @@ spring:
         event:
           merge:
             entity_copy_observer: allow
+  data:
+    redis:
+      database: ${REDIS_DATABASE}
+      host: ${REDIS_HOST}
+      port: 6390
+      password: ${REDIS_PASSWORD}
+      jedis:
+        pool:
+          enabled: true
+          max-active: 8
+          max-idle: 8
+
 
   jackson:
     date-format: yyyy-MM-dd

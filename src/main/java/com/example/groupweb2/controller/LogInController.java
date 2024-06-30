@@ -2,11 +2,13 @@ package com.example.groupweb2.controller;
 
 import com.example.groupweb2.dto.UserDTO;
 import com.example.groupweb2.model.LoginUser;
+import com.example.groupweb2.model.LogoutRequest;
 import com.example.groupweb2.service.implement.UserService;
 import com.example.groupweb2.util.ControllerUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,4 +45,15 @@ public class LogInController {
             return ControllerUtil.response(e.getMessage(),HttpStatus.NOT_FOUND.value());
         }
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(@RequestBody LogoutRequest logoutRequest){
+        try{
+            userService.logOut(logoutRequest.getAccessToken(),logoutRequest.getRefreshToken());
+            return ResponseEntity.ok("Logged out");
+        }catch (Exception e){
+            return ControllerUtil.response(e.getMessage(),HttpStatus.BAD_REQUEST.value());
+        }
+    }
+
 }

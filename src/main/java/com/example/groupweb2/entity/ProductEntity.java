@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
-@Table(name = "Product")
+@Table(name = "product")
 public class ProductEntity {
     @Id
     String id;

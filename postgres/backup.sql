@@ -711,6 +711,7 @@ COPY public.color (id, color, link, product_id) FROM stdin;
 163	Green	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-xanh-hc-1.jpg	huawei-watch-fit-3
 164	Pink	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-hong-hc-1.jpg	huawei-watch-fit-3
 165	Titan trắng	https://cdn.viettelstore.vn/Images/Product/ProductImage/1941091074.jpeg	iphone-15-pro-max
+166	Xanh	https://cdn.tgdd.vn/Products/Images/7077/324079/huawei-watch-gt4-46-day-woven-1.jpg	huawei-watch-gt-4
 \.
 
 
@@ -1362,6 +1363,13 @@ COPY public.content_children (id, content, image, title, description_id) FROM st
 668	Đồng hồ thông minh Huawei Watch Fit được trang bị hơn 100 chế độ tập luyện tăng cường sức khỏe, với 6 bài tập được tự động phát hiện. Đồng hồ còn được trang bị chế độ Theo dõi đường chạy hoàn toàn mới, sử dụng hệ thống GPS độ chính xác cao để hiệu chỉnh khoảng cách vòng chạy và lộ trình chạy của bạn.  Tính năng gợi ý thông minh hoàn toàn mới sẽ đề xuất các môn thể thao và hoạt động phù hợp dựa trên thói quen tập luyện, mức tiêu thụ calo và điều kiện thời tiết, để bạn có thể tìm thấy niềm vui tập luyện của mình chỉ với một thao tác chạm.  Bạn cũng có thể tập luyện hiệu quả thông qua hướng dẫn của huấn luyện viên ảo để khởi động và giãn cơ với tám bài tập phổ biến như đạp xe, bơi lội chạy bộ,...   Với tính năng Vòng hoạt động 2.0, đồng hồ sẽ giúp bạn đặt mục tiêu hàng ngày cho Di chuyển, Tập luyện và Đứng, hướng đến một cuộc sống khỏe mạnh hơn. Bạn cũng sẽ được nhắc khi gần đạt được mục tiêu và nhận huy chương theo thời gian thực, giúp thúc đẩy quá trình hoàn thành mục tiêu.	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-6.jpg	Luyện tập không giới hạn với vô vàn chế độ thể thao	80
 669	Huawei Watch Fit 3 được trang bị viên pin 400 mAh, cho thời gian sử dụng tối đa lên đến 10 ngày, còn khi bật chế độ Always On Display, đồng hồ có thể hoạt động trong khoảng 4 ngày (theo thông tin công bố từ hãng). Tuy nhiên, thời gian sử dụng thực tế sẽ có chênh lệch, phụ thuộc vào cường độ sử dụng của mỗi người.  Smartwatch mang trong mình chuẩn chống nước 5 ATM ISO 22810:2010, cho phép bạn có thể sử dụng sản phẩm cho các hoạt động ở vùng nước nông trong bể bơi hoặc dọc theo bờ biển. Lưu ý, không đeo đồng hồ khi lặn, tắm nước nóng, ngâm mình trong suối nước nóng, phòng xông hơi, tham gia các hoạt động dưới nước sâu, hoặc các hoạt động liên quan đến áp suất dưới nước cao,... để đảm bảo khả năng hoạt động cho thiết bị.	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-7.jpg	Thời lượng pin và khả năng chống nước ấn tượng	80
 670	Đồng hồ thông minh Watch Fit 3 mang đến trải nghiệm âm nhạc tuyệt vời khi hỗ trợ phát nhạc độc lập. Bạn có thể dễ dàng truy cập, chọn bài hát, album hoặc danh sách phát yêu thích ngay trên màn hình đồng hồ.  Bên cạnh đó, bạn cũng có thể tạo danh sách phát yêu thích trong ứng dụng điện thoại, phù hợp với từng chế độ tập luyện khác nhau sau đó đồng bộ với đồng hồ. Tuy nhiên, khi kết nối với điện thoại dùng hệ điều hành iOS thì sẽ không hỗ trợ đồng bộ nhạc hoặc xem quản lý nhạc.  Huawei còn trang bị cho chiếc đồng hồ này nhiều tiện ích khác như: Đồng hồ bấm giờ, báo thức, tìm đồng hồ, điều khiển chụp ảnh, hẹn giờ,... hỗ trợ bạn tốt hơn trong các hoạt động thường ngày.	https://cdn.tgdd.vn/Products/Images/7077/325375/huawei-watch-fit-3-8.jpg	Nghe nhạc không giới hạn và nhiều tiện ích khác	80
+671	Đồng hồ thông minh Huawei với thiết kế mặt tròn cổ điển tạo sự thanh lịch khi đeo trên tay, bề mặt phủ lớp kính cường lực cứng cáp, kết hợp cùng khung viền thép không gỉ giúp giữ được sự sáng bóng theo thời gian, khả năng chịu lực tốt hạn chế móp méo trong quá trình sử dụng. Bên cạnh đó cũng tạo nên một tổng thể cao cấp, sang trọng.  Màn hình AMOLED có kích thước 1.43 inch cho không gian hiển thị rộng. Độ phân giải 466 x 466 pixels cùng mật độ điểm ảnh lên đến 352 ppi cung cấp cho người dùng những nội dung rõ nét đến từng chi tiết, độ tương phản cao, dễ dàng nhìn rõ mọi thông tin ngay cả dưới trời nắng.   Dây đeo Hybrid Woven làm từ chất liệu composite có độ bền cao, bề mặt êm ái, hạn chế vết hằn trên da tạo sự dễ chịu khi sử dụng. Dây đeo có khả năng chống thấm khá tốt, giúp nhanh thoáng mồ hôi trong trường hợp vận động nhiều.	https://cdn.tgdd.vn/Products/Images/7077/324079/huawei-watch-gt4-46-day-woven-sld-2.jpg	Kiểu dáng gọn gàng, phong cách sang trọng	81
+672	Đồng hồ được trang bị loa và mic, cùng công nghệ Bluetooth v5.2 mượt mà. Khi được kết nối với điện thoại sử dụng hệ điều hành Android 8.0 trở lên và iOS 13.0 trở lên thông qua ứng dụng Huawei Health, bạn có thể nhận cuộc gọi và đàm thoại ngay trên đồng hồ một cách tiện lợi.  Các tin nhắn và thông báo ứng dụng cũng sẽ hiển thị trên đồng hồ một cách nhanh chóng, đảm bảo không bỏ lỡ bất kỳ thông tin nào cả khi tập luyện hay làm việc. 	https://cdn.tgdd.vn/Products/Images/7077/324079/huawei-watch-gt4-46-day-woven-sld-5.jpg	Kết nối liền mạch, không lo bỏ lỡ	81
+673	Đồng hồ thông minh được trang bị các tính năng sức khỏe như: Theo dõi giấc ngủ, đo nhịp tim, mức độ căng thẳng, tính lượng calories tiêu thụ, đo nồng độ oxy trong máu (SpO2),... giúp người dùng hiểu rõ hơn tình trạng sức khỏe của bản thân. Các dữ liệu sức khỏe được ghi lại và thống kê đầy đủ, người dùng có thể xem lại trên điện thoại một cách dễ dàng thông qua ứng dụng Huawei Health.	https://cdn.tgdd.vn/Products/Images/7077/324079/huawei-watch-gt4-46-day-woven-sld-3.jpg	Trợ lý sức khỏe ngay trên cổ tay	81
+674	Huawei Watch GT4 sở hữu hơn 100 chế độ luyện tập từ trong nhà đến ngoài trời như chạy bộ, nhảy dây, bơi, đạp xe, leo núi, quần vợt,... đáp ứng mọi nhu cầu và sở thích tập luyện của người dùng. Thiết bị sẽ giúp bạn luyện tập một cách hiệu quả, đo lường chính xác và thiết lập mục tiêu phù hợp, tránh tình trạng kiệt sức hoặc chấn thương.	https://cdn.tgdd.vn/Products/Images/7077/324079/huawei-watch-gt4-46-day-woven-sld-4.jpg	Chế độ luyện tập vô cùng đa dạng, hệ thống định vị hiện đại	81
+675	Với hệ thống định vị hiện đại gồm GPS, GLONASS, Galileo, QZSS, Beidou được trang bị, Huawei Watch GT 4 có khả năng thu được tín hiệu vệ tinh trên phạm vi toàn cầu, cung cấp khả năng theo dõi vị trí ít sai số nhất, dù bạn đang ở trong những môi trường khó định vị như thành phố nhiều nhà cao tầng hay rừng núi nhiều cây cao.	https://cdn.tgdd.vn/Products/Images/7077/324079/huawei-watch-gt4-46-day-woven-sld-6.jpg	Hệ thống định vị hiện đại	81
+676	Theo thông tin từ hãng, đồng hồ thông minh Huawei Watch GT 4 cung cấp thời gian sử dụng khoảng 14 ngày ở chế độ cơ bản hoặc khoảng 4 ngày ở chế độ Always On Display. Đồng hành cùng người dùng mọi lúc mọi nơi, phục vụ trọn vẹn trong những chuyến đi mà không lo bị gián đoạn.  Bạn có thể thoải mái đeo đồng hồ thông minh cả khi tắm, đi mưa, bơi ở vùng nước nông,... mà không phải lo lắng nước xâm nhập vào bên trong nhờ chuẩn chống nước 5 ATM ISO 22810:2010. Tuy nhiên, người dùng cần lưu ý không đeo đồng hồ khi tiếp xúc với nước nóng, hóa chất, không đem vào phòng xông hơi,...	https://cdn.tgdd.vn/Products/Images/7077/324079/huawei-watch-gt4-46-day-woven-sld-7-fix.jpg	Thời gian sử dụng dài, có thể mang đi bơi ở vùng nước nông	81
+677	Bên cạnh các chức năng chính, đồng hồ thông minh còn được trang bị thêm nhiều tiện ích khác như: Lịch, dự báo thời tiết, nghe nhạc, trả lời nhanh bằng tin nhắn soạn sẵn (chỉ với Android),... hỗ trợ người dùng tốt hơn trong công việc và cuộc sống.	https://cdn.tgdd.vn/Products/Images/7077/324079/huawei-watch-gt4-46-day-woven-sld-8.jpg	Thêm nhiều tiện ích thông minh hơn nữa	81
 \.
 
 
@@ -1448,6 +1456,7 @@ COPY public.description (id, title, product_id) FROM stdin;
 78	Apple Watch Ultra 2 GPS + Cellular 49mm viền Titanium dây Trail size M/L là chiếc đồng hồ thể thao chuyên nghiệp sở hữu thiết kế thời thượng, độ bền vượt trội và các tính năng thông minh hỗ trợ theo dõi sức khỏe, luyện tập. Đây sẽ là một lựa chọn hoàn hảo cho những người đam mê thể thao.	apple-watch-ultra-2
 79		samsung-galaxy-watch4
 80	Sau thành công của dòng Watch Fit 2, nhà Huawei đã trình làng phiên bản kế nhiệm của dòng sản phẩm này mang tên Huawei Watch Fit 3. Mang một ngoại hình ấn tượng với một màn hình lớn hơn, đi kèm nhiều tính năng sức khỏe được nâng cấp, đây hứa hẹn là chiếc smartwatch được nhiều người dùng săn đón trong thời gian tới.	huawei-watch-fit-3
+81	Huawei Watch GT 4 46mm dây Hybrid Woven là sự kết hợp hoàn hảo giữa thiết kế lịch lãm, tính năng theo dõi sức khỏe toàn diện và trải nghiệm thông minh mượt mà. Đây là lựa chọn lý tưởng cho những ai đang tìm kiếm một chiếc smartwatch thời thượng để nâng tầm trải nghiệm công nghệ và phong cách cá nhân.	huawei-watch-gt-4
 \.
 
 
@@ -1534,6 +1543,7 @@ COPY public.feature (id, os, battery, chip, made_time, screen, product_id) FROM 
 78	WatchOS 	1200	Apple S9	2023-08-31 17:00:00	OLED, 1.92'', 410 x 502 pixels	apple-watch-ultra-2
 79	Wear OS	247	Exynos W920	2021-07-31 17:00:00	SUPER AMOLED, 1.2 inch, 396 x 396 pixels	samsung-galaxy-watch4
 80	Harmony OS	400	Kirin 1200 OS	2024-04-30 17:00:00	AMOLED,1.82 inch, 480 × 408 pixels	huawei-watch-fit-3
+81	Harmony OS	400	Kirin 1200 OS	2023-11-30 17:00:00	AMOLED, 1.43 inch,  466 x 466 pixels	huawei-watch-gt-4
 \.
 
 
@@ -1731,6 +1741,13 @@ iZWL2h7P1t	f	jisooconan@gmail.com	0353795729	2024-06-28 17:26:34.392	apple-watch
 hTDxe6aWfl	t	jisooconan@gmail.com	0353795729	2024-06-28 17:11:18.128	xiaomi-redmi-note-13-pro+-5g
 GyOONl7aCH	t	jisooconan@gmail.com	0353795729	2024-06-28 06:06:24.277	ipad-air-5-m1-5g
 2TBXnhvw9j	f	jisooconan@gmail.com	0353795729	2024-06-29 00:09:41.474	apple-watch-se-2023
+5P2vGjJ0P6	f	jisooconan@gmail.com	0353795729	2024-06-29 07:42:33.372	huawei-watch-gt-4
+HBqBHjSTzf	f	jisooconan@gmail.com	0353795729	2024-06-29 07:45:38.94	huawei-watch-gt-4
+Vv3DPgAoLs	f	jisooconan@gmail.com	0353795729	2024-06-29 07:49:34.116	samsung-galaxy-z-flip5-5g
+98c2SZsB2v	f	jisooconan@gmail.com	0353795729	2024-06-29 08:12:51.026	huawei-watch-gt-4
+Tm3tAouz0e	f	jisooconan@gmail.com	0353795729	2024-06-29 08:13:22.266	oppo-reno11-5g
+IxkbJfVXTn	f	jisooconan@gmail.com	0353795729	2024-06-29 08:59:21.477	huawei-watch-gt-4
+nC7dyNDzVd	f	jisooconan@gmail.com	0353795729	2024-06-29 09:13:45.432	huawei-watch-gt-4
 \.
 
 
@@ -1817,6 +1834,7 @@ COPY public.price (id, current_price, previous_price, ram, rom, feature_id, prod
 102	21290000	21990000	1	64	78	apple-watch-ultra-2
 103	2990000	3990000	2	32	79	samsung-galaxy-watch4
 104	2790000	2990000	1	32	80	huawei-watch-fit-3
+105	4790000	6490000	1	32	81	huawei-watch-gt-4
 \.
 
 
@@ -1913,7 +1931,6 @@ laptop-asus-expertbook-b1	99	ASUS Expertbook B1	0	100	Laptop	Asus
 samsung-galaxy-a24	20	Samsung Galaxy A24	0	22	Phone	Samsung
 vivo-y03	44	Vivo Y03	0	56	Phone	Vivo
 oppo-find-n3-5g	16	OPPO Find N3 5G	0	22	Phone	Oppo
-oppo-reno11-5g	6	OPPO Reno11 5G	0	10	Phone	Oppo
 macbook-air-13-inch-m1-2020	1	MacBook Air 13 inch M1 2020	0	200	Laptop	Apple
 macbook-air-15-inch-m2-2023	199	MacBook Air 15 inch M2 2023	0	200	Laptop	Apple
 macbook-air-m3-13-inch-2024	199	Macbook Air M3 13 inch 2024	0	200	Laptop	Apple
@@ -1962,12 +1979,14 @@ imou-cruiser-2-gs7ep-5m0we	560	IMOU Cruiser 2 GS7EP-5M0WE	0	1000	Camera	IMOU
 ipad-pro-m4-13-inch-wifi-256gb	23	iPad Pro M4 13 inch WiFi 256GB	3	55	Tablet	IPad
 hp-probook-440-g10	99	HP ProBook 440 G10	1	100	Laptop	HP
 apple-watch-se-2023	560	Apple Watch SE 2023	2	1000	Smartwatch	Apple
-samsung-galaxy-z-flip5-5g	100	Samsung Galaxy Z Flip5 5G	3	140	Phone	Samsung
+oppo-reno11-5g	6	OPPO Reno11 5G	1	10	Phone	Oppo
 ipad-air-5-m1-5g	11	iPad Air 5 M1 5G	1	15	Tablet	IPad
 apple-watch-ultra-2	560	Apple Watch Ultra 2	0	1000	Smartwatch	Apple
 xiaomi-redmi-note-13-pro+-5g	44	Xiaomi Redmi Note 13 Pro+ 5G	2	77	Phone	Xiaomi
 samsung-galaxy-watch4	400	Samsung Galaxy Watch4	0	450	Smartwatch	Samsung
 huawei-watch-fit-3	56	Huawei Watch Fit 3	0	200	Smartwatch	Huawei
+samsung-galaxy-z-flip5-5g	100	Samsung Galaxy Z Flip5 5G	4	140	Phone	Samsung
+huawei-watch-gt-4	56	Huawei Watch GT 4	5	200	Smartwatch	Huawei
 \.
 
 
@@ -2281,6 +2300,11 @@ xiaomi-redmi-note-13-pro+-5g	https://cdn.tgdd.vn/Products/Images/42/312965/Slide
 xiaomi-redmi-note-13-pro+-5g	https://cdn.tgdd.vn/Products/Images/42/312965/Slider/vi-vn-xiaomi-redmi-note-13-pro-plus--(2).jpg
 iphone-14-pro-max	https://cdn.tgdd.vn/Products/Images/42/289705/iphone-14-pro-max-tim-thumb-600x600.jpg
 iphone-14-pro-max	https://cdn.tgdd.vn/Products/Images/42/289705/Slider/iphone-14-pro-max-tong-quan-1020x570.jpg
+huawei-watch-gt-4	https://cdn.tgdd.vn/Products/Images/7077/324079/huawei-watch-gt4-46-day-woven-1.jpg
+huawei-watch-gt-4	https://cdn.tgdd.vn/Products/Images/7077/324079/huawei-watch-gt4-46-day-woven-2.jpg
+huawei-watch-gt-4	https://cdn.tgdd.vn/Products/Images/7077/324079/huawei-watch-gt4-46-day-woven-3.jpg
+huawei-watch-gt-4	https://cdn.tgdd.vn/Products/Images/7077/324079/huawei-watch-gt4-46-day-woven-4.jpg
+huawei-watch-gt-4	https://cdn.tgdd.vn/Products/Images/7077/324079/huawei-watch-gt4-50.jpg
 iphone-14-pro-max	https://cdn.tgdd.vn/Products/Images/42/289705/Slider/iphone-14-pro-max-up-3-new-1020x570.jpg
 iphone-14-pro-max	https://cdn.tgdd.vn/Products/Images/42/289705/Slider/iphone-14-pro-max-1tb638173240851428157.jpg
 iphone-14-pro-max	https://cdn.tgdd.vn/Products/Images/42/289705/Slider/iphone-14-pro-max-1tb638173240848348184.jpg
@@ -2616,6 +2640,7 @@ COPY public.rating (id, average, five_starts, four_starts, one_start, three_star
 24	5	2	0	0	0	0	samsung-galaxy-z-flip5-5g
 79	0	0	0	0	0	0	samsung-galaxy-watch4
 80	4	0	1	0	0	0	huawei-watch-fit-3
+81	4	0	1	0	0	0	huawei-watch-gt-4
 \.
 
 
@@ -2651,35 +2676,35 @@ SELECT pg_catalog.setval('public.category_id_seq', 5, true);
 -- Name: color_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.color_id_seq', 165, true);
+SELECT pg_catalog.setval('public.color_id_seq', 166, true);
 
 
 --
 -- Name: content_children_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.content_children_id_seq', 670, true);
+SELECT pg_catalog.setval('public.content_children_id_seq', 677, true);
 
 
 --
 -- Name: description_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.description_id_seq', 80, true);
+SELECT pg_catalog.setval('public.description_id_seq', 81, true);
 
 
 --
 -- Name: feature_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.feature_id_seq', 80, true);
+SELECT pg_catalog.setval('public.feature_id_seq', 81, true);
 
 
 --
 -- Name: price_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.price_id_seq', 104, true);
+SELECT pg_catalog.setval('public.price_id_seq', 105, true);
 
 
 --
@@ -2693,7 +2718,7 @@ SELECT pg_catalog.setval('public.producer_id_seq', 22, true);
 -- Name: rating_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.rating_id_seq', 80, true);
+SELECT pg_catalog.setval('public.rating_id_seq', 81, true);
 
 
 --

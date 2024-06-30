@@ -5,6 +5,7 @@ import com.example.groupweb2.security.jwt.algorithm.HS256AlgorithmProvider;
 import com.example.groupweb2.security.jwt.algorithm.SecretAlgorithm;
 import com.example.groupweb2.security.jwt.secret.BaseSecretProvider;
 import com.example.groupweb2.security.jwt.secret.HS256Provider;
+import com.example.groupweb2.service.IRedisService;
 import com.example.groupweb2.util.AppConst;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -25,6 +26,7 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class JWTProvider implements IJWTProvider {
     private final SecretAlgorithm algorithm;
+    private final IRedisService redisService;
     private final Key secretKey;
     private long accessTokenExpire;
     private long refreshTokenExpire;
@@ -45,9 +47,11 @@ public class JWTProvider implements IJWTProvider {
             HS256AlgorithmProvider hs256AlgorithmProvider,
             @Value("${secret.accessTokenExpireTime}") long expiredTime,
             @Value("${secret.refreshTokenExpireTime}") long refreshTime,
-            @Value("${secret.secretPath}") String path) {
+            @Value("${secret.secretPath}") String path,
+            IRedisService redisService) {
         this.accessTokenExpire = expiredTime;
         this.refreshTokenExpire = refreshTime;
+        this.redisService = redisService;
         BaseSecretProvider provider = new HS256Provider(path, hs256AlgorithmProvider);
         this.algorithm = provider.getProvider().getAlgorithm();
         this.secretKey = provider.getKey().get(0);
@@ -101,7 +105,7 @@ public class JWTProvider implements IJWTProvider {
         String accessToken = generateAccessToken(userDetails);
         var localDate = expireDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
         String refreshToken = generateRefreshToken(userDetails);
-        return createTokenResponse(accessToken,refreshToken,localDate);
+        return createTokenResponse(accessToken, refreshToken, localDate);
     }
 
     private TokenResponse createTokenResponse(
@@ -120,7 +124,7 @@ public class JWTProvider implements IJWTProvider {
     public TokenResponse generateTokenResponse(UserDetails userDetails, String refreshToken) {
         String accessToken = generateAccessToken(userDetails);
         var localDate = expireDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-        return createTokenResponse(accessToken,refreshToken,localDate);
+        return createTokenResponse(accessToken, refreshToken, localDate);
     }
 
     @Override
@@ -132,7 +136,7 @@ public class JWTProvider implements IJWTProvider {
     public boolean isTokenValid(String token, UserDetails userDetails) {
         Date expireDate = exactClaim(token, Claims::getExpiration);
         var isNotExpiredToken = expireDate.after(new Date());
-        return (userDetails.getUsername().equals(exactUserName(token)) && isNotExpiredToken);
+        return (userDetails.getUsername().equals(exactUserName(token)) && isNotExpiredToken && !isLogOutToken(token));
     }
 
     @Override
@@ -159,5 +163,15 @@ public class JWTProvider implements IJWTProvider {
         authorityNames = !authorityNames.isEmpty() ? authorityNames : new ArrayList<>();
         authorities.put("role", authorityNames);
         return authorities;
+    }
+
+    @Override
+    public void inValidToken(String accessToken, String refreshToken) {
+        redisService.setItem(accessToken, "Access_Token_Expire");
+        redisService.setItem(refreshToken, "Refresh_Token_Expire");
+    }
+
+    private boolean isLogOutToken(String token){
+        return redisService.isItemSet(token);
     }
 }
