@@ -27,7 +27,7 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     private UserRole role;
     private String phone;
-    private Boolean activeState = true;
+    private Boolean activeState ;
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_"+this.role.getRole()));

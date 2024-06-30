@@ -1,5 +1,6 @@
 package com.example.groupweb2.model;
 
+import com.example.groupweb2.dto.UserDTO;
 import com.example.groupweb2.entity.UserEntity;
 import lombok.Getter;
 import lombok.Setter;

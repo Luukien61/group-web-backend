@@ -4,11 +4,12 @@ import com.example.groupweb2.dto.UserDTO;
 import com.example.groupweb2.entity.UserEntity;
 import com.example.groupweb2.model.*;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 public interface IUserService {
-    void saveNewUser(UserDTO userDTO);
+    UserResponse saveNewUser(UserDTO userDTO);
 
     UserResponse findAllUserByStaffId(Long id);
 

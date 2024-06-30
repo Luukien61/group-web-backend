@@ -6,7 +6,6 @@ import com.example.groupweb2.mapper.MapStruct;
 import com.example.groupweb2.model.*;
 import com.example.groupweb2.repository.UserRepository;
 import com.example.groupweb2.security.jwt.provider.IJWTProvider;
-import com.example.groupweb2.service.IRedisService;
 import com.example.groupweb2.service.IUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,7 +32,7 @@ public class UserService implements IUserService, UserDetailsService {
 
 
     @Override
-    public void saveNewUser(UserDTO userDTO) {
+    public UserResponse saveNewUser(UserDTO userDTO) {
         var existUser = userRepository.findByEmail(userDTO.getEmail());
         if (existUser.isPresent()) {
             throw new RuntimeException(ALREADY_EXIST);
@@ -41,9 +40,8 @@ public class UserService implements IUserService, UserDetailsService {
         String encodePass = passwordEncoder.encode(userDTO.getPassword().trim());
         userDTO.setPassword(encodePass);
         UserEntity user = mapper.toUserEntity(userDTO);
-        userRepository.save(user);
-//        var userPrincipal = UserPrincipal.create(user);
-//        return jwtProvider.generateTokenResponse(userPrincipal);
+        var userEntity =  userRepository.save(user);
+        return mapper.toUserResponse(userEntity);
     }
 
     @Override

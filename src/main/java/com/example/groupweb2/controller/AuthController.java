@@ -1,7 +1,7 @@
 package com.example.groupweb2.controller;
 
 import com.example.groupweb2.model.RefreshTokenRequest;
-import com.example.groupweb2.service.implement.UserService;
+import com.example.groupweb2.service.IUserService;
 import com.example.groupweb2.util.ControllerUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class AuthController {
 
-    private final UserService userService;
+    private final IUserService userService;
 
     @GetMapping("/authenticate")
     public ResponseEntity<?> authenticate(){

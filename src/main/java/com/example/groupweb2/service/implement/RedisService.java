@@ -11,8 +11,8 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class RedisService implements IRedisService {
     private final StringRedisTemplate stringRedisTemplate;
-    private final String LOGOUT_KEY= "logout:";
-    private final String DEFAULT_KEY ="key:";
+    private static final String LOGOUT_KEY= "logout:";
+    private static final String DEFAULT_KEY ="key:";
 
     @Override
     public void setItem(String key, String value) {

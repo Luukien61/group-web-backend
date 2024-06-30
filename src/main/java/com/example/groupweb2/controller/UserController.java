@@ -5,6 +5,7 @@ import com.example.groupweb2.model.LoginUser;
 import com.example.groupweb2.service.IUserService;
 import com.example.groupweb2.util.ControllerUtil;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/user")
+@Slf4j
 public class UserController {
     private final IUserService userService;
 
@@ -23,8 +25,9 @@ public class UserController {
     @PostMapping
     public  ResponseEntity<?> createUser(@RequestBody UserDTO userDTO) {
         try {
-            userService.saveNewUser(userDTO);
-            return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
+            var userResponse = userService.saveNewUser(userDTO);
+            log.info("User controller: {}",userResponse.getFullName());
+            return new ResponseEntity<>(userResponse, HttpStatus.CREATED);
         }catch (Exception e){
             return ControllerUtil.response(e.getMessage(),HttpStatus.BAD_REQUEST.value());
         }

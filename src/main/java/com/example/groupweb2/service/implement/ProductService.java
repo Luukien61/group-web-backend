@@ -3,14 +3,12 @@ package com.example.groupweb2.service.implement;
 import com.example.groupweb2.dto.ProductDTO;
 import com.example.groupweb2.entity.*;
 import com.example.groupweb2.mapper.MapStruct;
-import com.example.groupweb2.repository.ContentChildRepository;
 import com.example.groupweb2.repository.ProductRepository;
 import com.example.groupweb2.service.ICategoryService;
 import com.example.groupweb2.service.IProducerService;
 import com.example.groupweb2.service.IProductService;
 import com.example.groupweb2.util.UppercaseUtil;
 import jakarta.annotation.Nullable;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +25,16 @@ import java.util.*;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class ProductService implements IProductService {
-    @Autowired
+
     private MapStruct mapper;
-    @Autowired
+
     private ProductRepository productRepository;
-    @Autowired
+
     private ICategoryService categoryService;
-    @Autowired
+
     private IProducerService producerService;
-    private final String NOT_EXIST = "The product does not exist";
-    private final String EXISTED = "The product already exists";
+    private static final String NOT_EXIST = "The product does not exist";
+    private static final String EXISTED = "The product already exists";
 
 
     @Override
@@ -61,7 +59,7 @@ public class ProductService implements IProductService {
 
     @Override
     public void saveProducts(List<ProductEntity> item) {
-
+        //  only save one product
     }
 
     @Override

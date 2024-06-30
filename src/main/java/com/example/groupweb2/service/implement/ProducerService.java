@@ -22,8 +22,8 @@ public class ProducerService implements IProducerService {
     private ProducerRepository producerRepository;
     private ICategoryService categoryService;
     private ProductRepository productRepository;
-    private final String NOT_EXIST = "The producer does not exist";
-    private final String EXISTED = "The producer already exists";
+    private static final String NOT_EXIST = "The producer does not exist";
+    private static final String EXISTED = "The producer already exists";
     private MapStruct mapper;
 
 
