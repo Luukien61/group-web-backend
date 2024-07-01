@@ -136,7 +136,8 @@ public class JWTProvider implements IJWTProvider {
     public boolean isTokenValid(String token, UserDetails userDetails) {
         Date expireDate = exactClaim(token, Claims::getExpiration);
         var isNotExpiredToken = expireDate.after(new Date());
-        return (userDetails.getUsername().equals(exactUserName(token)) && isNotExpiredToken && !isLogOutToken(token));
+        if(isLogOutToken(token)) return false;
+        return (userDetails.getUsername().equals(exactUserName(token)) && isNotExpiredToken);
     }
 
     @Override
