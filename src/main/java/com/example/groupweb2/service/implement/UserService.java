@@ -72,7 +72,7 @@ public class UserService implements IUserService, UserDetailsService {
 
     @Override
     public UserResponse findUserByEmail(String email) {
-        return mapper.toUserResponse(userRepository.findByEmail(email.trim())
+        return mapper.toUserResponse(userRepository.findByEmailAndActiveState(email.trim())
                 .orElseThrow(() -> new RuntimeException(DOESNT_EXIST)));
     }
 
@@ -129,7 +129,7 @@ public class UserService implements IUserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var userOptional = userRepository.findByEmail(username);
+        var userOptional = userRepository.findByEmailAndActiveState(username);
         if (userOptional.isEmpty()) throw new UsernameNotFoundException("This email hasn't been registered yet");
         var user = userOptional.get();
         return UserPrincipal.create(user);

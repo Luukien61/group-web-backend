@@ -26,6 +26,7 @@ public class ProductController {
     private IProductService productService;
 
     @PostMapping()
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> insertNewProduct(@Valid @RequestBody ProductDTO item) {
         try {
             productService.saveNewProduct(item);

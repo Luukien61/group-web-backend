@@ -22,17 +22,16 @@ import java.security.InvalidParameterException;
 import java.util.*;
 
 @Service
-@AllArgsConstructor
 @RequiredArgsConstructor
 public class ProductService implements IProductService {
 
-    private MapStruct mapper;
+    private final MapStruct mapper;
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
-    private ICategoryService categoryService;
+    private final ICategoryService categoryService;
 
-    private IProducerService producerService;
+    private final IProducerService producerService;
     private static final String NOT_EXIST = "The product does not exist";
     private static final String EXISTED = "The product already exists";
 
